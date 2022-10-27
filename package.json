@@ -1,0 +1,26 @@
+{
+  "name": "whatsapp-sdk",
+  "version": "1.0.0",
+  "description": "an sdk to develop discord bot for whatsapp business platform",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Sarthak Jain",
+    "email": "contact.sarthakjain@gmail.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.7",
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "typescript": "^4.8.4",
+    "winston": "^3.8.2"
+  }
+}

@@ -1,0 +1,23 @@
+name: Ideas
+description: Have a new idea or feature request
+title: "[FEATURE REQUEST] <description here>"
+labels: [ideas]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of feature request, idea
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Add (multiple) screenshot links (if applicable)
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Add any other context about the feature request here
+    validations:
+      required: false

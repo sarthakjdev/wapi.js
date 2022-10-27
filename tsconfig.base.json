@@ -1,0 +1,37 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "declaration": true,
+        "alwaysStrict": true,
+        "charset": "UTF-8",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "newLine": "lf",
+        "preserveConstEnums": true,
+        "removeComments": false,
+        "target": "ES2021",
+        "incremental": true,
+        "baseUrl": "./",
+        "pretty": true,
+        "resolveJsonModule": true,
+        "paths": {
+            "@controllers/*": ["./src/controllers/*"],
+            "@constants/*": ["./src/constants/*"],
+            "@routes/*":["./src/routes/*"],
+            "@configs/*": ["./src/configs/*"],
+            "@utils/*": ["./src/utils/*"],
+            "@lib/*": ["./src/lib/*"],
+            "@factory/*": ["./src/models/factory/*"],
+            "@api/*": ["./src/models/api/*"],
+            "@helpers/*": ["./src/helpers/*"]
+
+        },
+        "typeRoots": ["./global.d.ts"]
+    },
+    "ts-node": {
+        "files": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "lib"]
+}
