@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint ./",
-    "lint:fix": "eslint ./ --fix"
+    "lint:fix": "eslint ./ --fix",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": {
