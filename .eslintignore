@@ -1,8 +1,4 @@
 node_modules
-
-.env
-
-dist
-
-.eslintrc.js
-
+*.env
+lib/*
+./.eslintrc.json

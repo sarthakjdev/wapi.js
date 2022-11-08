@@ -16,9 +16,7 @@
         "pretty": true,
         "resolveJsonModule": true,
         "paths": {
-            "@controllers/*": ["./src/controllers/*"],
             "@constants/*": ["./src/constants/*"],
-            "@routes/*":["./src/routes/*"],
             "@configs/*": ["./src/configs/*"],
             "@utils/*": ["./src/utils/*"],
             "@lib/*": ["./src/lib/*"],
@@ -32,6 +30,6 @@
     "ts-node": {
         "files": true
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "./*.ts"],
     "exclude": ["node_modules", "lib"]
 }
