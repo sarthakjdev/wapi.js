@@ -28,6 +28,7 @@
             }
         ],
         "import/prefer-default-export": 0,
+        "@typescript-eslint/no-inferrable-types": 0,
         "no-underscore-dangle": "off",
         "newline-before-return": "error",
         "consistent-return": "error",

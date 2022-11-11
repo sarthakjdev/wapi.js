@@ -1,9 +1,11 @@
-import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios'
+import axios, { AxiosInstance } from 'axios'
 
-export function createAxiosInstance(baseURl: string, headers: AxiosRequestHeaders): AxiosInstance {
+export function createAxiosInstance(baseURl: string, token: string): AxiosInstance {
     const client = axios.create({
         baseURL: baseURl,
-        headers,
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
     })
 
     return client

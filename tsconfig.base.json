@@ -16,20 +16,13 @@
         "pretty": true,
         "resolveJsonModule": true,
         "paths": {
-            "@constants/*": ["./src/constants/*"],
-            "@configs/*": ["./src/configs/*"],
             "@utils/*": ["./src/utils/*"],
-            "@lib/*": ["./src/lib/*"],
-            "@factory/*": ["./src/models/factory/*"],
-            "@api/*": ["./src/models/api/*"],
-            "@helpers/*": ["./src/helpers/*"]
-
         },
         "typeRoots": ["./global.d.ts"]
     },
     "ts-node": {
         "files": true
     },
-    "include": ["src/**/*", "./*.ts"],
+    "include": ["src/*", "./*.ts"],
     "exclude": ["node_modules", "lib"]
 }

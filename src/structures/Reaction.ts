@@ -1,5 +1,5 @@
-import { Component } from './Component'
+import { MessageComponent } from './MessageComponent'
 
-export class ReactionMessage extends Component {
+export class ReactionMessage extends MessageComponent {
 
 }
