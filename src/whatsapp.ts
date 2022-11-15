@@ -79,10 +79,20 @@ export class Client {
         return this.axiosClient
     }
 
+    /**
+     * to get the phone nummber id, associated with the instiated client of the lib
+     * @getter
+     * @memberof Client
+     */
     public get getPhoneNumberId(): string {
         return this._phone_number_id
     }
 
+    /**
+     * to get the version of api associated with the instantiated clinet of the lib
+     * @getter
+     * @memberof Client
+     */
     public get getVersion(): string {
         return this.version
     }
@@ -91,7 +101,7 @@ export class Client {
 
     public media?: MediaManager
 
-    public phones? : PhoneNumberManager
+    public static phones? : PhoneNumberManager = new PhoneNumberManager()
 
     public register? : RegistrationManager
 
@@ -111,7 +121,6 @@ export class Client {
         this.axiosClient = createAxiosInstance(Client.baseURL, this.token)
         this.media = new MediaManager(this)
         this.message = new MessageManager(this)
-        this.phones = new PhoneNumberManager(this)
         this.register = new RegistrationManager(this)
         this.webhook = new WebhookManager(this)
     }

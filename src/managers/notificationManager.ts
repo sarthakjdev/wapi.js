@@ -10,6 +10,11 @@ export class NotificationManager {
      */
     private axiosClient: AxiosInstance
 
+    /**
+     * api path to use for notification
+     * @type {string}
+     * @memberof apiPath
+     */
     private apiPath: string
 
     /**

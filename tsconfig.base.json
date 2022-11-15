@@ -17,12 +17,14 @@
         "resolveJsonModule": true,
         "paths": {
             "@utils/*": ["./src/utils/*"],
+            "@managers/*": ["./src/managers/*"],
+            "@structures/*": ["./src/structures/*"]
         },
         "typeRoots": ["./global.d.ts"]
     },
     "ts-node": {
         "files": true
     },
-    "include": ["src/*", "./*.ts"],
+    "include": ["src"],
     "exclude": ["node_modules", "lib"]
 }

@@ -1,3 +1,4 @@
+import { Context } from '../IContext'
 
 export interface Message {
 
@@ -7,5 +8,12 @@ export interface Message {
       * @memberof Component
       */
     status?: string
+
+    /**
+     * conversation context, required if replying to a message or marking a message as read
+     * @type {Context}
+     * @memberof Message
+     */
+    context?: Context
 
 }

@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios'
+import express from 'express'
 // eslint-disable-next-line import/no-cycle
 import { Client } from '../whatsapp'
 
@@ -18,5 +19,9 @@ export class WebhookManager {
      */
     constructor(client: Client) {
         this.axiosClient = client.getRequestClient
+    }
+
+    async create(path: string) {
+        this.apiPath = path
     }
 }

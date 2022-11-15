@@ -1,12 +1,13 @@
 import { Message } from './doc/message/IMessage'
 import { MessageType } from './doc/IMessageType'
+import { Context } from './doc/IContext'
 
 /**
  * parent class to construct message component
  * @class
  * @export
  */
-export abstract class MessageComponent {
+export class MessageComponent {
     /**
      * type of the message you want to send
      * @type {MessageType}
@@ -43,14 +44,34 @@ export abstract class MessageComponent {
     private to: string
 
     /**
+     * conversation context, required if replying to a message or marking a messagge as read
+     */
+    private context?: Context
+
+    /**
+     * set the context of the message for either defining the conversation context
+     * or mark a message as read
+     * @setter
+     * @memberof MessageComponent
+     */
+    public set setMessageContext(messageId) {
+        this.context = {
+            mnessage_id: messageId,
+        }
+    }
+
+    /**
      * constructor to create an instance of contact
      * @constructor
      * @param {Component} options
      * @memberof Component
      */
     constructor(data?: Message) {
-        if (this.status) {
+        if (data.status) {
             this.status = data.status
+        }
+        if (data.context) {
+            this.context = data.context
         }
     }
 
@@ -76,9 +97,18 @@ export abstract class MessageComponent {
         return this
     }
 
+    /**
+     * set the recipent of the component
+     * @param {string} recipentNumber
+     * @returns
+     */
     public setRecipent(recipentNumber: string): this {
         this.to = recipentNumber
 
         return this
+    }
+
+    public get getRecipent() {
+        return this.to
     }
 }
