@@ -5,8 +5,6 @@ import { MessageManager } from './managers/messageManager'
 import { ClientOptions } from './doc/IClient'
 import { MediaManager } from './managers/mediaManager'
 import { PhoneNumberManager } from './managers/phoneNumberManager'
-import { RegistrationManager } from './managers/registrationManager'
-import { WebhookManager } from './managers/webhookManager'
 
 /**
  * main class to instantiate the whatsapp.js lib
@@ -101,11 +99,7 @@ export class Client {
 
     public media?: MediaManager
 
-    public static phones? : PhoneNumberManager = new PhoneNumberManager()
-
-    public register? : RegistrationManager
-
-    public webhook? : WebhookManager
+    public phones? : PhoneNumberManager
 
     /**
      * constructor to build instance of whatsapp client
@@ -120,8 +114,7 @@ export class Client {
         this.version = options.version
         this.axiosClient = createAxiosInstance(Client.baseURL, this.token)
         this.media = new MediaManager(this)
+        this.phones = new PhoneNumberManager(this)
         this.message = new MessageManager(this)
-        this.register = new RegistrationManager(this)
-        this.webhook = new WebhookManager(this)
     }
 }
