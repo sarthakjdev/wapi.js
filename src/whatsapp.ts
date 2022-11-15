@@ -101,7 +101,7 @@ export class Client {
 
     public media?: MediaManager
 
-    public static phones? : PhoneNumberManager = new PhoneNumberManager()
+    public phones? : PhoneNumberManager
 
     public register? : RegistrationManager
 
@@ -120,6 +120,7 @@ export class Client {
         this.version = options.version
         this.axiosClient = createAxiosInstance(Client.baseURL, this.token)
         this.media = new MediaManager(this)
+        this.phones = new PhoneNumberManager(this)
         this.message = new MessageManager(this)
         this.register = new RegistrationManager(this)
         this.webhook = new WebhookManager(this)
