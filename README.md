@@ -1,4 +1,4 @@
-<div align="center "><img src="https://drive.google.com/file/d/1yjyuk4yUb7Tz80UE7hhEXH9DRKqP2OsY/view?usp=share_link"> alt="whatsapp.js" </div>
+<div align="center "><img src="https://media.discordapp.net/attachments/1034852580091777034/1043480459851599913/logo_transparent.png" alt="whatsapp.js">  </div>
 
 ## About
 
@@ -39,7 +39,12 @@ NOTE: This library doesn't holds any rights over the official Whatsapp Cloud API
 
 ### How Whatsapp Cloud API messaging structure looks like
 
-<div align="center "> <img src="hhttps://drive.google.com/file/d/1evHVZ9GLKOm9EFFVCTLBpmSVihAQOrQS/view?usp=share_link"> alt="cloud api message structure" </div>
+<br>
+
+<div align="center "> <img src="https://media.discordapp.net/attachments/1034852580091777034/1042099563063947304/image.png?width=720&height=473" alt="cloud api message structure"> </div>
+
+<br>
+
 
 ### How I framed the API into the library. 
 
