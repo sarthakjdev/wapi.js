@@ -1,4 +1,4 @@
-export interface ClientOptions {
+export interface Client {
 
     /**
      * access token required to authorize the whatsapp cloud api access

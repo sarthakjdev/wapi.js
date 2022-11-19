@@ -1,2 +1,2 @@
-export * from './apiError'
-export * from './error'
+export * from './WhatsappAPIError'
+export * from './WhatsappError'

@@ -10,6 +10,7 @@
     "watch": "tsc --pretty -w",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
+    "clean-install": "rm -rf node_modules && npm install ",
     "prepare": "husky install"
   },
   "keywords": [

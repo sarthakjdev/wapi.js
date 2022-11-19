@@ -6,23 +6,23 @@ import {
     DocumentMessageComponent,
     InteractiveMessageComponent, LocationMessageComponent, MessageComponent, ReactionMessageComponent, TemplateMessageComponent, TextMessageComponent, VideoMessageComponent,
 } from '../structures/index'
-import { WhatsappError } from '../error/error'
+import { WhatsappError } from '../error/WhatsappError'
 // eslint-disable-next-line import/no-cycle
-import { Client } from '../whatsapp'
+import { WhatsappClient } from '../whatsapp'
 
 export class MessageManager {
     /**
      * phone number to use
      * @memberof MessageManager
      */
-    private client: Client
+    private client: WhatsappClient
 
     /**
      * Message Manager
      * @constructor
      * @memberof MessageManager
      */
-    constructor(client: Client) {
+    constructor(client: WhatsappClient) {
         this.client = client
     }
 

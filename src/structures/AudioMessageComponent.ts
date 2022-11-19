@@ -1,6 +1,6 @@
 import { MediaMessage } from './doc/message/index'
 import { MESSAGE_TYPE } from './doc/IMessageType'
-import { MediaMessageComponent } from './MediaMessage'
+import { MediaMessageComponent } from './MediaMessageComponent'
 
 export class AudioMessageComponent extends MediaMessageComponent {
     constructor(data: MediaMessage) {

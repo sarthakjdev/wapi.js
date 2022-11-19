@@ -1,10 +1,10 @@
 /* eslint-disable import/no-cycle */
 import { AxiosInstance } from 'axios'
 import { createAxiosInstance } from './utils/axiosClient'
-import { MessageManager } from './managers/messageManager'
-import { ClientOptions } from './doc/IClient'
-import { MediaManager } from './managers/mediaManager'
-import { PhoneNumberManager } from './managers/phoneNumberManager'
+import { MessageManager } from './managers/MessageManager'
+import { Client } from './doc/IClient'
+import { MediaManager } from './managers/MediaManager'
+import { PhoneNumberManager } from './managers/PhoneNumberManager'
 import { PhoneNumber } from './doc/IPhoneNumber'
 
 /**
@@ -12,7 +12,7 @@ import { PhoneNumber } from './doc/IPhoneNumber'
  * @class
  * @export
  */
-export class Client {
+export class WhatsappClient {
     /**
      * base url of the whatsapp API
      * @type {string}
@@ -178,12 +178,12 @@ export class Client {
      * @constructor
      * @param {ClientOptions} options
      */
-    constructor(options: ClientOptions) {
+    constructor(options: Client) {
         this.token = options.token
         this.business_account_id = options.business_account_id
         if (options.phone_number || options.phone_number_id) this.setPhoneNumberInUse(options.phone_number || options.phone_number_id)
         this.version = options.version
-        this.axiosClient = createAxiosInstance(`${Client.baseURL}/${options.version}`, this.token)
+        this.axiosClient = createAxiosInstance(`${WhatsappClient.baseURL}/${options.version}`, this.token)
         this.media = new MediaManager(this)
         this.phones = new PhoneNumberManager(this)
         this.phones.getPhoneNumbers()

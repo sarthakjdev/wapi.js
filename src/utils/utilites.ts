@@ -1,4 +1,4 @@
-import { WhatsappError } from '../error/error'
+import { WhatsappError } from '../error/WhatsappError'
 import {
     AudioMessageComponent, DocumentMessageComponent, InteractiveMessageComponent, LocationMessageComponent, TemplateMessageComponent, TextMessageComponent, VideoMessageComponent,
 } from '../structures'

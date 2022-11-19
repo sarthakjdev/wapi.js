@@ -1,6 +1,6 @@
-import { WhatsappError } from '../error/error'
+import { WhatsappError } from '../error/WhatsappError'
 // eslint-disable-next-line import/no-cycle
-import { Client } from '../whatsapp'
+import { WhatsappClient } from '../whatsapp'
 import { UPLOAD_TYPE } from './doc/IUploadType'
 
 export class MediaManager {
@@ -8,13 +8,13 @@ export class MediaManager {
      * Whatsapp.js client
      * @memberof MediaManager
      */
-    private client: Client
+    private client: WhatsappClient
 
     /**
      * Message Manager
      * @constructor
      */
-    constructor(client: Client) {
+    constructor(client: WhatsappClient) {
         this.client = client
     }
 

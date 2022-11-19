@@ -1,6 +1,6 @@
-import { WhatsappError } from '../error/error'
+import { WhatsappError } from '../error/WhatsappError'
 // eslint-disable-next-line import/no-cycle
-import { Client } from '../whatsapp'
+import { WhatsappClient } from '../whatsapp'
 import { VERIFICATION_TYPE } from './doc/IVerificationType'
 
 export class PhoneNumberManager {
@@ -8,13 +8,13 @@ export class PhoneNumberManager {
      * Whatsapp.js client
      * @memberof PhoneNumberManager
      */
-    private client: Client
+    private client: WhatsappClient
 
     /**
      * Phone Numbers Manager
      * @constructor
      */
-    constructor(client: Client) {
+    constructor(client: WhatsappClient) {
         this.client = client
     }
 
