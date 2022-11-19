@@ -38,10 +38,10 @@ export interface Interaction {
      * type of the interactive component
      * @memberof Interactive
      */
-    type: TYPEOFINTERACTION
+    type: INTERACTION_TYPE
 }
 
-enum TYPEOFINTERACTION {
+enum INTERACTION_TYPE {
     'button',
     'list',
     'product',

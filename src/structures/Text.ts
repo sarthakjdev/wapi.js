@@ -1,5 +1,5 @@
 import { MessageComponent } from './MessageComponent'
-import { MessageType } from './doc/IMessageType'
+import { MESSAGE_TYPE } from './doc/IMessageType'
 import { Text } from './doc/IText'
 import { TextMessage } from './doc/message/ITextMessage'
 
@@ -19,7 +19,7 @@ export class TextMessageComponent extends MessageComponent {
      */
     constructor(data?: TextMessage) {
         super(data)
-        this.type = MessageType.TEXT
+        this.type = MESSAGE_TYPE.TEXT
         if (data) this.text = data?.text
         else this.text = {} as Text
     }

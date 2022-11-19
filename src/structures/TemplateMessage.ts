@@ -1,5 +1,5 @@
 import { MessageComponent } from './MessageComponent'
-import { MessageType } from './doc/IMessageType'
+import { MESSAGE_TYPE } from './doc/IMessageType'
 import { Template } from './doc/template'
 import { TemplateMessage } from './doc/message/ITemplateMessage'
 
@@ -8,7 +8,7 @@ export class TemplateMessageComponent extends MessageComponent {
 
     constructor(data: TemplateMessage) {
         super(data)
-        this.type = MessageType.TEMPLATE
+        this.type = MESSAGE_TYPE.TEMPLATE
         this.template = data.template
     }
 }

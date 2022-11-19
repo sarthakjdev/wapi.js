@@ -1,0 +1,6 @@
+export * from './structures/index'
+export * from './whatsapp'
+export * from './doc/IClient'
+export * from './doc/IPhoneNumber'
+export * from './error/error'
+export * from './managers/index'

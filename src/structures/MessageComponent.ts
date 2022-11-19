@@ -1,5 +1,5 @@
 import { Message } from './doc/message/IMessage'
-import { MessageType } from './doc/IMessageType'
+import { MESSAGE_TYPE } from './doc/IMessageType'
 import { Context } from './doc/IContext'
 
 /**
@@ -10,10 +10,10 @@ import { Context } from './doc/IContext'
 export class MessageComponent {
     /**
      * type of the message you want to send
-     * @type {MessageType}
+     * @type {MESSAGE_TYPE}
      *  @memberof Component
      */
-    protected type: MessageType
+    protected type: MESSAGE_TYPE
 
     /**
      * type of user you are sending the message, as for now individual is available only
@@ -34,7 +34,7 @@ export class MessageComponent {
      * @type {string}
      * @memberof Component
      */
-    private status?: string
+    // private status?: string
 
     /**
      * whatsapp-id or phone number you want send the message to
@@ -46,7 +46,7 @@ export class MessageComponent {
     /**
      * conversation context, required if replying to a message or marking a messagge as read
      */
-    private context?: Context
+    // private context?: Context
 
     /**
      * set the context of the message for either defining the conversation context
@@ -55,9 +55,9 @@ export class MessageComponent {
      * @memberof MessageComponent
      */
     public set setMessageContext(messageId) {
-        this.context = {
-            mnessage_id: messageId,
-        }
+        // this.context = {
+        //     mnessage_id: messageId,
+        // }
     }
 
     /**
@@ -68,19 +68,19 @@ export class MessageComponent {
      */
     constructor(data?: Message) {
         if (data.status) {
-            this.status = data.status
+            // this.status = data.status
         }
         if (data.context) {
-            this.context = data.context
+            // this.context = data.context
         }
     }
 
     /**
      * set the type of message component
-     * @param {MessageType} type
+     * @param {MESSAGE_TYPE} type
      * @returns {this}
      */
-    public setType(type: MessageType): this {
+    public setType(type: MESSAGE_TYPE): this {
         this.type = type
 
         return this
@@ -92,7 +92,7 @@ export class MessageComponent {
      * @returns {this}
      */
     public setStatus(status: string): this {
-        this.status = status
+        // this.status = status
 
         return this
     }

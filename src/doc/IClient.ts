@@ -14,7 +14,7 @@ export interface ClientOptions {
      * @private
      * @memberof WhatsappClient
      */
-    mobile_number: string
+    phone_number: string
 
     /**
      * bussiness account id to be used by whatsapp cloud api

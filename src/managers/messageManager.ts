@@ -1,25 +1,21 @@
-import { AxiosInstance, AxiosResponse } from 'axios'
+/* eslint-disable consistent-return */
+import { WhatsAPIResponse } from '../error/index'
+import logger from '../utils/logger'
 import {
     AudioMessageComponent,
     DocumentMessageComponent,
-    InteractiveMessageComponent, LocationMessageComponent, MessageComponent, MessageType, ReactionMessageComponent, TemplateMessageComponent, TextMessageComponent, VideoMessageComponent,
-} from '@structures/index'
-import { WhatsappError } from '@utils/error'
+    InteractiveMessageComponent, LocationMessageComponent, MessageComponent, ReactionMessageComponent, TemplateMessageComponent, TextMessageComponent, VideoMessageComponent,
+} from '../structures/index'
+import { WhatsappError } from '../error/error'
 // eslint-disable-next-line import/no-cycle
 import { Client } from '../whatsapp'
 
 export class MessageManager {
     /**
-     * axios instance to make http request to the whatsapp cloud API
-     * @type {AxiosInstance}
+     * phone number to use
      * @memberof MessageManager
      */
-    private axiosClient: AxiosInstance
-
-    /**
-     * path of the messages api requests
-     */
-    private apiPath: string
+    private client: Client
 
     /**
      * Message Manager
@@ -27,36 +23,34 @@ export class MessageManager {
      * @memberof MessageManager
      */
     constructor(client: Client) {
-        this.axiosClient = client.getRequestClient
-        this.apiPath = `/${client.getVersion}/${client.getPhoneNumberId}/messages`
+        this.client = client
     }
 
     /**
      * sends text message to a recipent
      * @param {TextMessageComponent} textComponent
      * @param {string} recipent
-     * @returns {Promise<AxiosResponse | WhatsappError>}
+     * @returns
      * @memberof MessageManager
      */
-    async sendText(textComponent: TextMessageComponent, recipent: string): Promise<AxiosResponse | WhatsappError> {
+    async sendText(textComponent: TextMessageComponent, recipent?: string): Promise<WhatsAPIResponse | WhatsappError> {
         try {
             if (recipent) {
                 textComponent.setRecipent(recipent)
-            } else if (textComponent.getRecipent === '' || textComponent.getRecipent === null) {
+            } else if (textComponent.getRecipent === '' || textComponent.getRecipent === null || textComponent.getRecipent === undefined) {
                 throw new WhatsappError('Component must include a recipent id before sending')
             }
             textComponent.setRecipent(recipent)
-
-            const response = await this.axiosClient.post(this.apiPath, textComponent)
+            const response = await this.client.getRequestClient.post(`${this.client.getPhoneNumberInUse}/messages`, textComponent)
 
             return response.data
         } catch (error) {
-            return new WhatsappError(error)
+            console.log('error ', error)
         }
     }
 
     /**
-     * sends audio message to a recipent
+     * sensetPhoneNumberInUseds audio message to a recipent
      * @param {AudioMessageComponent} audioComponent
      * @param  {string} recipent
      * @returns
@@ -70,11 +64,11 @@ export class MessageManager {
                 throw new WhatsappError('Component must include a recipent id before sending')
             }
             audioComponent.setRecipent(recipent)
-            const response = await this.axiosClient.post(this.apiPath, audioComponent)
+            const response = await this.client.getRequestClient.post(`${this.client.getPhoneNumberInUse}`, audioComponent)
 
             return response.data
         } catch (error) {
-            return new WhatsappError(error)
+            logger.error(error)
         }
     }
 
@@ -93,11 +87,11 @@ export class MessageManager {
                 throw new WhatsappError('Component must include a recipent id before sending')
             }
             videoComponent.setRecipent(recipent)
-            const response = await this.axiosClient.post(this.apiPath, videoComponent)
+            const response = await this.client.getRequestClient.post(this.client.getPhoneNumberInUse, videoComponent)
 
             return response.data
         } catch (error) {
-            return new WhatsappError(error)
+            logger.error(error)
         }
     }
 
@@ -116,11 +110,11 @@ export class MessageManager {
                 throw new WhatsappError('Component must include a recipent id before sending')
             }
             documentComponent.setRecipent(recipent)
-            const response = await this.axiosClient.post(this.apiPath, documentComponent)
+            const response = await this.client.getRequestClient.post(this.client.getPhoneNumberInUse, documentComponent)
 
             return response.data
         } catch (error) {
-            return new WhatsappError(error)
+            logger.error(error)
         }
     }
 
@@ -139,11 +133,11 @@ export class MessageManager {
                 throw new WhatsappError('Component must include a recipent id before sending')
             }
             templateComponent.setRecipent(recipent)
-            const response = await this.axiosClient.post(this.apiPath, templateComponent)
+            const response = await this.client.getRequestClient.post(this.client.getPhoneNumberInUse, templateComponent)
 
             return response.data
         } catch (error) {
-            return new WhatsappError(error)
+            logger.error(error)
         }
     }
 
@@ -162,11 +156,11 @@ export class MessageManager {
                 throw new WhatsappError('Component must include a recipent id before sending')
             }
             interactiveComponent.setRecipent(recipent)
-            const response = await this.axiosClient.post(this.apiPath, interactiveComponent)
+            const response = await this.client.getRequestClient.post(this.client.getPhoneNumberInUse, interactiveComponent)
 
             return response.data
         } catch (error) {
-            return new WhatsappError(error)
+            logger.error(error)
         }
     }
 
@@ -184,11 +178,11 @@ export class MessageManager {
             } else if (locationComponent.getRecipent === '' || locationComponent.getRecipent === null) {
                 throw new WhatsappError('Component must include a recipent id before sending')
             }
-            const response = await this.axiosClient.post(this.apiPath, locationComponent)
+            const response = await this.client.getRequestClient.post(this.client.getPhoneNumberInUse, locationComponent)
 
             return response.data
         } catch (error) {
-            return new WhatsappError(error)
+            logger.error(error)
         }
     }
 
@@ -206,11 +200,11 @@ export class MessageManager {
                 throw new WhatsappError('Component must include a recipent id before sending')
             }
             reactionComponent.setRecipent(recipent)
-            const response = await this.axiosClient.post(this.apiPath, reactionComponent)
+            const response = await this.client.getRequestClient.post(this.client.getPhoneNumberInUse, reactionComponent)
 
             return response.data
         } catch (error) {
-            return new WhatsappError(error)
+            logger.error(error)
         }
     }
 
@@ -223,7 +217,7 @@ export class MessageManager {
         try {
             const message = new MessageComponent({ status: 'read' })
             message.setMessageContext(messageId)
-            const response = await this.axiosClient.post(this.apiPath)
+            const response = await this.client.getRequestClient.post(this.client.getPhoneNumberInUse)
 
             return response
         } catch (error) {

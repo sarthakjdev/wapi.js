@@ -5,8 +5,7 @@ import { MessageManager } from './managers/messageManager'
 import { ClientOptions } from './doc/IClient'
 import { MediaManager } from './managers/mediaManager'
 import { PhoneNumberManager } from './managers/phoneNumberManager'
-import { RegistrationManager } from './managers/registrationManager'
-import { WebhookManager } from './managers/webhookManager'
+import { PhoneNumber } from './doc/IPhoneNumber'
 
 /**
  * main class to instantiate the whatsapp.js lib
@@ -31,14 +30,6 @@ export class Client {
     private token: string
 
     /**
-     * mobile number to be used by whatsapp cloud api
-     * @type {string}
-     * @private
-     * @memberof Client
-     */
-    private mobile_number: string
-
-    /**
      * bussiness account id to be used by whatsapp cloud api
      * @type {string}
      * @private
@@ -52,7 +43,14 @@ export class Client {
      * @private
      * @memberof Client
      */
-    private _phone_number_id: string
+    private phone_numbers: PhoneNumber[]
+
+    /**
+     * phone number to use
+     * @type {PhoneNumber}
+     * @memberof Client
+     */
+    private phoneNumberInUse: PhoneNumber
 
     /**
      * version of APi to use
@@ -70,6 +68,33 @@ export class Client {
     private axiosClient: AxiosInstance
 
     /**
+     * message manager to manage the sending and replyig to messages
+     * @memberof Client
+     */
+    public message?: MessageManager
+
+    /**
+     * media manager to manage the upload and deletion of media
+     * @memberof Client
+     */
+    public media?: MediaManager
+
+    /**
+     * to manage the phone number to be used with the whatsapp cloud api
+     * @memberof Client
+     */
+    public phones?: PhoneNumberManager
+
+    /**
+     * to get the version of api associated with the instantiated clinet of the lib
+     * @getter
+     * @memberof Client
+     */
+    public get getVersion(): string {
+        return this.version
+    }
+
+    /**
      * to get the instance of axios client to make http request
      * @public
      * @getter
@@ -84,28 +109,69 @@ export class Client {
      * @getter
      * @memberof Client
      */
-    public get getPhoneNumberId(): string {
-        return this._phone_number_id
+    public get getPhoneNumbers(): PhoneNumber[] {
+        return this.phone_numbers
     }
 
     /**
-     * to get the version of api associated with the instantiated clinet of the lib
+     * get phone number in usage
      * @getter
-     * @memberof Client
      */
-    public get getVersion(): string {
-        return this.version
+    public get getPhoneNumberInUse(): string {
+        return this.phoneNumberInUse?.phone_number_id
     }
 
-    public message?: MessageManager
+    /**
+     * set the phone number in use
+     * @param {PhoneNumber} phone
+     */
+    public setPhoneNumberInUse(phone: PhoneNumber | string): this {
+        if (phone instanceof String) this.phoneNumberInUse = { phone_number_id: phone as string }
+        else this.phoneNumberInUse = phone as PhoneNumber
 
-    public media?: MediaManager
+        return this
+    }
 
-    public phones? : PhoneNumberManager
+    /**
+     * add oregistered phone number to the client
+     * @param {PhoneNumber} phone
+     * @returns {Client}
+     */
+    public addPhoneNumber(phone: PhoneNumber): this {
+        this.phone_numbers.push(phone)
 
-    public register? : RegistrationManager
+        return this
+    }
 
-    public webhook? : WebhookManager
+    /**
+     * get the whatsapp business account id of the meta app
+     * @type {string}
+     * @returns {string} business_account_id
+     * @memberof Client
+     */
+    public get getBusinessAccountId(): string {
+        return this.business_account_id
+    }
+
+    /**
+     * remove the phone number from the client
+     * @param {string | PhoneNumber} phone
+     * @memberof Client
+     */
+    public removePhoneNumber(phone: PhoneNumber | string) {
+        // eslint-disable-next-line consistent-return, array-callback-return
+        const phoneNumbersArr = this.phone_numbers.filter((ph) => {
+            if (phone instanceof String) {
+                if (ph.phone_number_id !== phone) return phone
+            } else {
+                if (ph !== phone) return phone
+
+                return phone
+            }
+        })
+
+        this.phone_numbers = phoneNumbersArr
+    }
 
     /**
      * constructor to build instance of whatsapp client
@@ -114,15 +180,13 @@ export class Client {
      */
     constructor(options: ClientOptions) {
         this.token = options.token
-        this._phone_number_id = options.phone_number_id
-        this.mobile_number = options.mobile_number
         this.business_account_id = options.business_account_id
+        if (options.phone_number || options.phone_number_id) this.setPhoneNumberInUse(options.phone_number || options.phone_number_id)
         this.version = options.version
-        this.axiosClient = createAxiosInstance(Client.baseURL, this.token)
+        this.axiosClient = createAxiosInstance(`${Client.baseURL}/${options.version}`, this.token)
         this.media = new MediaManager(this)
         this.phones = new PhoneNumberManager(this)
+        this.phones.getPhoneNumbers()
         this.message = new MessageManager(this)
-        this.register = new RegistrationManager(this)
-        this.webhook = new WebhookManager(this)
     }
 }

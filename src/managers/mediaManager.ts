@@ -1,51 +1,36 @@
-import { WhatsappError } from '@utils/error'
-import { AxiosInstance } from 'axios'
+import { WhatsappError } from '../error/error'
 // eslint-disable-next-line import/no-cycle
 import { Client } from '../whatsapp'
-import { UPLOADTYPE } from './doc/IUploadType'
+import { UPLOAD_TYPE } from './doc/IUploadType'
 
 export class MediaManager {
     /**
-     * axios instance to make http request to the whatsapp cloud API
-     * @type {AxiosInstance}
-     * @memberof MessageManager
-     */
-    private axiosClient: AxiosInstance
-
-    /**
-     * version of the api to use
+     * Whatsapp.js client
      * @memberof MediaManager
      */
-    private version: string
-
-    /**
-     * phone number id to use
-     * @memberof MediaManager
-     */
-    private phoneNumberId: string
+    private client: Client
 
     /**
      * Message Manager
      * @constructor
      */
     constructor(client: Client) {
-        this.axiosClient = client.getRequestClient
-        this.version = client.getVersion
+        this.client = client
     }
 
     /**
      * Upload a media to a phone number
      * @param {string} file
-     * @param {UPLOADTYPE} type
+     * @param {UPLOAD_TYPE} type
      * @returns
      */
-    async upload(file: string, type: UPLOADTYPE) {
+    async upload(file: string, type: UPLOAD_TYPE) {
         try {
             const data = {
                 messaging_product: 'whatsapp',
                 file,
             }
-            const response = await this.axiosClient.post(`${this.version}/${this.phoneNumberId}/media`, data)
+            const response = await this.client.getRequestClient.post(`/${this.client.getPhoneNumberInUse}/media`, data)
 
             return response
         } catch (error) {
@@ -60,7 +45,7 @@ export class MediaManager {
      */
     async getMediaUrl(mediaId: string) {
         try {
-            const response = await this.axiosClient.get(`${this.version}/${mediaId}`)
+            const response = await this.client.getRequestClient.get(`/${mediaId}`)
 
             return response
         } catch (error) {
@@ -75,7 +60,7 @@ export class MediaManager {
      */
     async deleteMedia(mediaId: string) {
         try {
-            const response = await this.axiosClient.delete(`${this.version}/${mediaId}`)
+            const response = await this.client.getRequestClient.delete(`/${mediaId}`)
 
             return response
         } catch (error) {

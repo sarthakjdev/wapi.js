@@ -1,4 +1,4 @@
-export enum MessageType {
+export enum MESSAGE_TYPE {
     TEXT = 'text',
     AUDIO = 'audio',
     VIDEO = 'video',

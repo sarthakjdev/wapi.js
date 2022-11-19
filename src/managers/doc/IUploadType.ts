@@ -1,4 +1,4 @@
-export enum UPLOADTYPE {
+export enum UPLOAD_TYPE {
     'media',
     'sticker',
 }
