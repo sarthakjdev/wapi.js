@@ -25,17 +25,13 @@ export class MediaManager {
      * @returns
      */
     async upload(file: string, type: UPLOAD_TYPE) {
-        try {
-            const data = {
-                messaging_product: 'whatsapp',
-                file,
-            }
-            const response = await this.client.getRequestClient.post(`/${this.client.getPhoneNumberInUse}/media`, data)
-
-            return response
-        } catch (error) {
-            throw new WhatsappError(error)
+        const data = {
+            messaging_product: 'whatsapp',
+            file,
         }
+        const response = await this.client.getRequestClient.post(`/${this.client.getPhoneNumberInUse}/media`, data)
+
+        return response
     }
 
     /**
@@ -44,13 +40,9 @@ export class MediaManager {
      * @returns
      */
     async getMediaUrl(mediaId: string) {
-        try {
-            const response = await this.client.getRequestClient.get(`/${mediaId}`)
+        const response = await this.client.getRequestClient.get(`/${mediaId}`)
 
-            return response
-        } catch (error) {
-            throw new WhatsappError(error)
-        }
+        return response
     }
 
     /**
@@ -59,12 +51,8 @@ export class MediaManager {
      * @returns
      */
     async deleteMedia(mediaId: string) {
-        try {
-            const response = await this.client.getRequestClient.delete(`/${mediaId}`)
+        const response = await this.client.getRequestClient.delete(`/${mediaId}`)
 
-            return response
-        } catch (error) {
-            throw new WhatsappError(error)
-        }
+        return response
     }
 }

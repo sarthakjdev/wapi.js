@@ -18,23 +18,22 @@ export class NotificationManager {
      */
     constructor(client: WhatsappClient) {
         this.phoneNumberInUse = client.getPhoneNumberInUse
+        this.initaite()
     }
 
     /**
      * initite the webhook listener
      * @memberof NotificationManager
      */
-    async initaite() {
-        try {
-            const webhookListener = express()
-            webhookListener.use(express.urlencoded({ extended: true }))
-            webhookListener.use(express.json)
-            webhookListener.get('/', () => {
-                logger.info('Whatsapp.js client webhook ready to listen the events')
-            })
-        } catch (error) {
-            throw new WhatsappError(error)
-        }
+    private async initaite() {
+        const webhookListener = express()
+        webhookListener.use(express.urlencoded({ extended: true }))
+        webhookListener.use(express.json)
+        webhookListener.listen(3000, () => {
+            logger.info('Listerner ready')
+        })
+        webhookListener.get('/', () => {
+        })
     }
 
     /**
@@ -42,11 +41,7 @@ export class NotificationManager {
      * @memberof NotificationManager
      */
     async setRoute() {
-        try {
-            logger.info('setting the route.......')
-        } catch (error) {
-            throw new WhatsappError(error)
-        }
+        logger.info('setting the route.......')
     }
 
     /**
@@ -54,11 +49,7 @@ export class NotificationManager {
      * @memberof NotificationManager
      */
     async setRequestHandler() {
-        try {
-            logger.info('setting the request handler........')
-        } catch (error) {
-            throw new WhatsappError(error)
-        }
+        logger.info('setting the request handler........')
     }
 }
 

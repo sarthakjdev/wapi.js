@@ -25,17 +25,13 @@ export class PhoneNumberManager {
      * @returns
      */
     async register(phoneNumberId: string, pin: string) {
-        try {
-            const data = {
-                messaging_product: 'whatsapp',
-                pin,
-            }
-            const response = await this.client.getRequestClient.post(`${phoneNumberId}/register`, data)
-
-            return response
-        } catch (error) {
-            throw new WhatsappError(error)
+        const data = {
+            messaging_product: 'whatsapp',
+            pin,
         }
+        const response = await this.client.getRequestClient.post(`${phoneNumberId}/register`, data)
+
+        return response
     }
 
     /**
@@ -45,13 +41,9 @@ export class PhoneNumberManager {
      * @returns
      */
     async deRegister(phoneNumberId: string) {
-        try {
-            const response = await this.client.getRequestClient.post(`${phoneNumberId}/deregister`)
+        const response = await this.client.getRequestClient.post(`${phoneNumberId}/deregister`)
 
-            return response
-        } catch (error) {
-            throw new WhatsappError(error)
-        }
+        return response
     }
 
     /**
@@ -61,16 +53,12 @@ export class PhoneNumberManager {
      * @param {string} pin
      */
     async setPin(phoneNumberId: string, pin: string) {
-        try {
-            const data = {
-                pin,
-            }
-            const response = await this.client.getRequestClient.post(`${phoneNumberId}/`, data)
-
-            return response
-        } catch (error) {
-            throw new WhatsappError(error)
+        const data = {
+            pin,
         }
+        const response = await this.client.getRequestClient.post(`${phoneNumberId}/`, data)
+
+        return response
     }
 
     /**
@@ -82,17 +70,13 @@ export class PhoneNumberManager {
      * @returns
      */
     async requestVerification(phoneNumberId: string, type: VERIFICATION_TYPE, language: string) {
-        try {
-            const data = {
-                coe_method: type,
-                language,
-            }
-            const response = await this.client.getRequestClient.post(`/${phoneNumberId}/request_code`, data)
-
-            return response
-        } catch (error) {
-            throw new WhatsappError(error)
+        const data = {
+            coe_method: type,
+            language,
         }
+        const response = await this.client.getRequestClient.post(`/${phoneNumberId}/request_code`, data)
+
+        return response
     }
 
     /**
@@ -101,16 +85,12 @@ export class PhoneNumberManager {
      * @param {string} code
      */
     async verifyPhone(phoneNumberId: string, code: string) {
-        try {
-            const data = {
-                code,
-            }
-            const response = await this.client.getRequestClient.post(`/${phoneNumberId}/verify_code`, data)
-
-            return response
-        } catch (error) {
-            throw new WhatsappError(error)
+        const data = {
+            code,
         }
+        const response = await this.client.getRequestClient.post(`/${phoneNumberId}/verify_code`, data)
+
+        return response
     }
 
     /**
@@ -118,12 +98,8 @@ export class PhoneNumberManager {
      * @returns
      */
     async getPhoneNumbers() {
-        try {
-            const response = await this.client.getRequestClient.get(`/${this.client.getBusinessAccountId}`)
+        const response = await this.client.getRequestClient.get(`/${this.client.getBusinessAccountId}`)
 
-            return response.data
-        } catch (error) {
-            throw new WhatsappError(error)
-        }
+        return response.data
     }
 }
