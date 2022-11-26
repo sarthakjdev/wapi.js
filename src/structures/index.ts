@@ -19,4 +19,5 @@ export * from './doc/interactive/index'
 export * from './doc/IText'
 export * from './doc/template/index'
 export * from './doc/message/index'
-
+export * from './doc/notification/index'
+export * from './doc/IReaction'

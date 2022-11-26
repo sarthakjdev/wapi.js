@@ -1,4 +1,4 @@
-import { Message } from './doc/message/IMessage'
+import { BaseMessage } from './doc/message/IBaseMessage'
 import { MESSAGE_TYPE } from './doc/IMessageType'
 import { Context } from './doc/IContext'
 
@@ -66,7 +66,7 @@ export class MessageComponent {
      * @param {Component} options
      * @memberof Component
      */
-    constructor(data?: Message) {
+    constructor(data?: BaseMessage) {
         if (data.status) {
             // this.status = data.status
         }

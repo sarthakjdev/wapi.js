@@ -1,6 +1,12 @@
 import { Location } from '../ILocation'
-import { Message } from './IMessage'
+import { BaseMessage } from './IBaseMessage'
 
-export interface LocationMessage extends Message {
+/**
+ * location message
+ * @interface
+ * @extends BaseMessage
+ * @export
+ */
+export interface LocationMessage extends BaseMessage {
     location: Location
 }

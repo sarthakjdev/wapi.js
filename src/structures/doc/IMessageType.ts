@@ -1,3 +1,9 @@
+
+/**
+ * type of message received, if the notification received of type message
+ * @enum
+ * @export
+ */
 export enum MESSAGE_TYPE {
     TEXT = 'text',
     AUDIO = 'audio',
@@ -9,4 +15,5 @@ export enum MESSAGE_TYPE {
     LOCATION = 'location',
     STICKER = 'sticker',
     TEMPLATE = 'template',
+    REACTION = 'reaction',
 }

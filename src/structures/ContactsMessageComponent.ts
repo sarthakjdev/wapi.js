@@ -1,5 +1,7 @@
 import { MessageComponent } from './MessageComponent'
 import { Contact } from './doc/contact'
+import { ContactMessage } from './doc/message/IContactMessage'
+import { MESSAGE_TYPE } from './doc/IMessageType'
 
 export class ContactMessageComponent extends MessageComponent {
     /**
@@ -7,6 +9,17 @@ export class ContactMessageComponent extends MessageComponent {
      * @memberof ContactMessageComponent
      */
     contacts: Contact[]
+
+    /**
+     * constructor of contact message component class
+     * @param {ContactMessage} data
+     * @constructor
+     */
+    constructor(data: ContactMessage) {
+        super(data)
+        this.type = MESSAGE_TYPE.CONTACTS
+        this.contacts = data.contacts
+    }
 
     /**
      * add a contact in the contacts component

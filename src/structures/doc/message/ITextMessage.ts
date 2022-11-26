@@ -1,6 +1,12 @@
-import { Message } from './IMessage'
+import { BaseMessage } from './IBaseMessage'
 import { Text } from '../IText'
 
-export interface TextMessage extends Message {
+/**
+ * text message
+ * @interface
+ * @extends BaseMessage
+ * @export
+ */
+export interface TextMessage extends BaseMessage {
     text: Text
 }
