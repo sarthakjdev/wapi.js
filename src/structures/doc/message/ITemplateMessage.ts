@@ -1,6 +1,12 @@
-import { Message } from './IMessage'
+import { BaseMessage } from './IBaseMessage'
 import { Template } from '../template'
 
-export interface TemplateMessage extends Message {
+/**
+ * template message
+ * @interface
+ * @extends BaseMessage
+ * @export
+ */
+export interface TemplateMessage extends BaseMessage {
     template: Template
 }

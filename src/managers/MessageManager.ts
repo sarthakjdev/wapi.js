@@ -7,24 +7,9 @@ import {
 } from '../structures/index'
 import { WhatsappError } from '../error/WhatsappError'
 // eslint-disable-next-line import/no-cycle
-import { WhatsappClient } from '../whatsapp'
+import { BaseManager } from './BaseManager'
 
-export class MessageManager {
-    /**
-     * phone number to use
-     * @memberof MessageManager
-     */
-    private client: WhatsappClient
-
-    /**
-     * Message Manager
-     * @constructor
-     * @memberof MessageManager
-     */
-    constructor(client: WhatsappClient) {
-        this.client = client
-    }
-
+export class MessageManager extends BaseManager {
     /**
      * sends text message to a recipent
      * @param {TextMessageComponent} textComponent

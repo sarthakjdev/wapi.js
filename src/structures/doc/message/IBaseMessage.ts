@@ -1,6 +1,6 @@
 import { Context } from '../IContext'
 
-export interface Message {
+export interface BaseMessage {
 
     /**
       * A message's status. You can use this field to mark a message as read.

@@ -8,7 +8,7 @@ import { Header } from './IHeader'
  * @interface
  * @export
  */
-export interface Interaction {
+export interface Interactive {
 
     /**
      * action of the interactive component

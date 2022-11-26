@@ -4,9 +4,6 @@ import { WhatsAPIResponse, WhatsappAPIError } from '../error/index'
 export function createAxiosInstance(baseURl: string, token: string): AxiosInstance {
     const client = axios.create({
         baseURL: baseURl,
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
     })
 
     client.interceptors.response.use((response) => response as WhatsAPIResponse, (error) => {

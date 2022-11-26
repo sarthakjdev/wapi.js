@@ -1,6 +1,6 @@
 import { WhatsappError } from '../error/WhatsappError'
 // eslint-disable-next-line import/no-cycle
-import { WhatsappClient } from '../whatsapp'
+import { WhatsappClient } from '../client/whatsapp'
 import { VERIFICATION_TYPE } from './doc/IVerificationType'
 
 export class PhoneNumberManager {

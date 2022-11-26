@@ -1,6 +1,6 @@
 import { WhatsappError } from '../error/WhatsappError'
 // eslint-disable-next-line import/no-cycle
-import { WhatsappClient } from '../whatsapp'
+import { WhatsappClient } from '../client/whatsapp'
 import { UPLOAD_TYPE } from './doc/IUploadType'
 
 export class MediaManager {

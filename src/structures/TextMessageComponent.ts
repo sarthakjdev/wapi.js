@@ -3,6 +3,12 @@ import { MESSAGE_TYPE } from './doc/IMessageType'
 import { Text } from './doc/IText'
 import { TextMessage } from './doc/message/ITextMessage'
 
+/**
+ * text message component
+ * @class
+ * @extends MessageComponent
+ * @export
+ */
 export class TextMessageComponent extends MessageComponent {
     /**
      * text object to send in message of type="text"

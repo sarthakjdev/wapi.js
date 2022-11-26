@@ -25,7 +25,7 @@ export interface PhoneNumber {
      * @type {STATUS}
      * @memberof PhoneNumber
      */
-    status?: STATUS
+    status?: PHONE_NUMBER_STATUS
 
     /**
      * if the phone number is used as deafault
@@ -35,7 +35,7 @@ export interface PhoneNumber {
     default?: boolean
 }
 
-export enum STATUS {
+export enum PHONE_NUMBER_STATUS {
     'verified',
     'registered',
 }
