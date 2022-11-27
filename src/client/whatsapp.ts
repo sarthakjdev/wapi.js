@@ -1,14 +1,13 @@
 /* eslint-disable import/no-cycle */
 import { AxiosInstance } from 'axios'
 import EventEmitter from 'node:events'
-import { NotificationManager } from '../managers/NotificationManager'
+import {
+    NotificationManager, MessageManager, PhoneNumberManager, MediaManager,
+} from '../managers/index'
 import { createAxiosInstance } from '../utils/axiosClient'
-import { MessageManager } from '../managers/MessageManager'
-import { ClientOptions } from './doc/IClientOptions'
-import { MediaManager } from '../managers/MediaManager'
-import { PhoneNumberManager } from '../managers/PhoneNumberManager'
 import { PhoneNumber } from './doc/IPhoneNumber'
 import { CLIENT_STATUS } from './doc/IClientStatus'
+import { ClientOptions } from './index'
 
 /**
  * main class to instantiate the whatsapp.js lib

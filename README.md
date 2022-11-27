@@ -1,4 +1,14 @@
-<div align="center "><img src="https://media.discordapp.net/attachments/1034852580091777034/1043480459851599913/logo_transparent.png" alt="whatsapp.js">  </div>
+<div align="center "><img src="https://media.discordapp.net/attachments/1034852580091777034/1046335630797459456/logo_transparent_1.png" alt="whatsapp.js">  </div>
+
+<!-- PROJECT SHIELDS -->
+<div align="center">
+
+  <a href="">[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)</a>
+  <a href="">![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)</a>
+  <a href="">[<img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white">](https://www.npmjs.com/package/@whatsappjs/whatsapp.js)</a>
+  <a href="">![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)</a>
+
+</div>
 
 ## About
 
@@ -10,7 +20,7 @@ Whatsapp.js is a javascript module written in typescript to interact with Whatsa
 - Single Client
 - Registering phone number with Whatsapp Business account
 - Send Messages
-- Handle Webhook Listener to receive notifications
+- Handle Notifications via event listeners
 - Respond to notifications using event listeners
 
 <br/><hr/><br/>
@@ -30,25 +40,16 @@ NOTE: This library doesn't holds any rights over the official Whatsapp Cloud API
 
 ## Usage : 
 
-- Visit https://developers.meta.com
-- Visit my apps.
-- Create a new meta app
-- 
+Wanna start with your first whatsapp application using whatsapp.js library, checkout [User Manual](./USER_MANUAL.md)
 
-## Structure : 
+<br/><hr/><br/>
+
 
 ### How Whatsapp Cloud API messaging structure looks like
 
 <br>
 
 <div align="center "> <img src="https://media.discordapp.net/attachments/1034852580091777034/1042099563063947304/image.png?width=720&height=473" alt="cloud api message structure"> </div>
-
-<br>
-
-
-### How I framed the API into the library. 
-
-<!-- <div align="center "> <img src="https://media.discordapp.net/attachments/1034852580091777034/1043480459851599913/logo_transparent.png"> alt="whatsapp.js" </div> -->
 
 <br/><hr/><br/>
 
@@ -59,17 +60,14 @@ npm run build : To build the project
 npm run watch: To compile the project in watch mode or transpile the project
 npm run clean-install : To clean install the modules removing the previous ones
 npm run lint : TO check for the eslint errors
-npm run lint:fi : To fix the fixable eslint errors
+npm run lint:fix : To fix the fixable eslint errors
 ```
 
 <br/><hr/><br/>
 
-## License : 
+## Future Scopes : 
 
-Distributed under the MIT License. See [LICENCE](./LICENSE) for more information.
-
-<br/><hr/><br/>
-
+This library is in its development and pre-release phase only. If you are using this library and facing any issue and bugs, please report to us by creatng an issue here, also you can contribute to this project, visit [Contribution Guidelines](#contribution-guidelines)
 
 ## Contribution Guidelines : 
 
@@ -85,7 +83,47 @@ Refer to this [Contributing.md](./CONTRIBUTING.md) if you have any difficulty in
 
 <br/><hr/><br/>
 
+## Build the library from source :
+
+- After cloning the project in your local, run the following command to install the dependencies required by the project: 
+```sh
+npm install
+```
+
+- Build the project using the follwing command: 
+
+```sh
+npm run build
+```
+<br/><hr/><br/>
+
+## Installing Whatsapp.js form source for development purposes: 
+
+1. cd to your node project where you wanna use the library.
+
+2. Run the follwing commands: 
+
+```sh
+npm run install <path-to-whatsapp-js>
+npm link <path-to-whatsapp.js>
+```
+
+NOTE: Make sure you have already built the library using ``npm run build``
+
+<br/><hr/><br/>
+
+## License : 
+
+Distributed under the MIT License. See [LICENCE](./LICENSE) for more information.
+
+<br/><hr/><br/>
+
 ## Contact Information: 
+
+Sarthak Jain <br/>
+contact.sarthakjain@gmail.com <br/>
+[Twitter](https://twitter.com/sarthakjdev) <br/>
+[LLinkedin](https://www.linkedin.com/in/sarthakjdev)
 
 <br/><hr/><br/>
 

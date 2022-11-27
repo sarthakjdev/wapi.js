@@ -1,23 +1,8 @@
-import { WhatsappError } from '../error/WhatsappError'
-// eslint-disable-next-line import/no-cycle
-import { WhatsappClient } from '../client/whatsapp'
+/* eslint-disable import/no-cycle */
 import { VERIFICATION_TYPE } from './doc/IVerificationType'
+import { BaseManager } from './BaseManager'
 
-export class PhoneNumberManager {
-    /**
-     * Whatsapp.js client
-     * @memberof PhoneNumberManager
-     */
-    private client: WhatsappClient
-
-    /**
-     * Phone Numbers Manager
-     * @constructor
-     */
-    constructor(client: WhatsappClient) {
-        this.client = client
-    }
-
+export class PhoneNumberManager extends BaseManager {
     /**
      * register the phone number
      * NOTE: You are required to verify your phone number before registering with the Business API

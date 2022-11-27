@@ -56,7 +56,7 @@ export class NotificationManager extends BaseManager {
      * @param {PayloadMessage[]} message
      */
     protected checkMessageType(message: PayloadMessage[]) {
-        message.map((m) => {
+        message?.map((m) => {
             switch (m.type) {
                 case NOTIFICATION_MESSAGE_TYPE.AUDIO:
                     return this.client.emit(EVENTS.AUDIOMESSAGE, m.audio as AudioPayload)
@@ -130,7 +130,8 @@ export class NotificationManager extends BaseManager {
                 const { changes } = e
                 await changes.map((c) => this.checkNotificationType(c))
             })
-            res.sendStatus(200)
+
+            return res.status(200).send('Notification recieved !!')
         })
         webhookListener.listen(port, () => {
             this.client.emit(EVENTS.READY)
