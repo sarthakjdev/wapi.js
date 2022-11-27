@@ -125,7 +125,6 @@ export class NotificationManager extends BaseManager {
 
         webhookListener.post('/webhook', (req: Request, res: Response) => {
             const entries = req.body.entry
-            console.log(req.body.entry[0].changes[0])
             entries.map(async (e) => {
                 const { changes } = e
                 await changes.map((c) => this.checkNotificationType(c))

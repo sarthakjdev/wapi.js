@@ -39,8 +39,8 @@ export interface Header {
 }
 
 enum HEADER_TYPE {
-    'text',
-    'video',
-    'image',
-    'document',
+    TEXT = 'text',
+    VIDEO = 'video',
+    IMAGE = 'image',
+    DOCUMENT = 'document',
 }

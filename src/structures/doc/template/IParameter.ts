@@ -53,9 +53,9 @@ export interface Parameter {
 }
 
 enum PARAMETER_TYPE {
-    'currency',
-    'document',
-    'image',
-    'text',
-    'video',
+    CURRENCY = 'currency',
+    DOCUMENT = 'document',
+    IMAGE = 'image',
+    TEXT = 'text',
+    VIDEO = 'video',
 }

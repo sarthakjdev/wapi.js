@@ -3,18 +3,18 @@
 <!-- PROJECT SHIELDS -->
 <div align="center">
 
-  <a href="">[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)</a>
-  <a href="">![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)</a>
-  <a href="">[<img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white">](https://www.npmjs.com/package/@whatsappjs/whatsapp.js)</a>
-  <a href="">![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)</a>
+<a href="">[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)</a>
+<a href="">![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)</a>
+<a href="">[<img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white">](https://www.npmjs.com/package/@whatsappjs/whatsapp.js)</a>
+<a href="">![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)</a>
 
 </div>
 
 ## About
 
-Whatsapp.js is a javascript module written in typescript to interact with Whatsapp cloud API in user-friendly way. 
+Whatsapp.js is a javascript module written in typescript to interact with Whatsapp cloud API in user-friendly way.
 
-## Features : 
+## Features :
 
 - Object- Oriented
 - Single Client
@@ -38,22 +38,31 @@ NOTE: This library doesn't holds any rights over the official Whatsapp Cloud API
 
 <br/><hr/><br/>
 
-## Usage : 
+## Usage :
 
 Wanna start with your first whatsapp application using whatsapp.js library, checkout [User Manual](./USER_MANUAL.md)
 
 <br/><hr/><br/>
 
-
-### How Whatsapp Cloud API messaging structure looks like
+### Cloud API messaging structure : 
 
 <br>
+
+For refernce visit Whatsapp Docs [here](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages)
+
+<div align="center "> <img src="https://media.discordapp.net/attachments/1034852580091777034/1042099563063947304/image.png?width=720&height=473" alt="cloud api message structure"> </div>
+
+### Cloud API notification payload structure : 
+
+<br>
+
+For refernce visit Whatsapp Docs [here](https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components)
 
 <div align="center "> <img src="https://media.discordapp.net/attachments/1034852580091777034/1042099563063947304/image.png?width=720&height=473" alt="cloud api message structure"> </div>
 
 <br/><hr/><br/>
 
-## Scripts: 
+## Scripts:
 
 ```
 npm run build : To build the project
@@ -65,11 +74,17 @@ npm run lint:fix : To fix the fixable eslint errors
 
 <br/><hr/><br/>
 
-## Future Scopes : 
+## Future Scopes :
 
 This library is in its development and pre-release phase only. If you are using this library and facing any issue and bugs, please report to us by creatng an issue here, also you can contribute to this project, visit [Contribution Guidelines](#contribution-guidelines)
 
-## Contribution Guidelines : 
+### Future tasks :
+
+[] Bification of components into more scattered and specific ones such as template and interactive message component into more specific component of different type like button, list, product etc.
+
+<br/><hr/><br/>
+
+## Contribution Guidelines :
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -85,40 +100,42 @@ Refer to this [Contributing.md](./CONTRIBUTING.md) if you have any difficulty in
 
 ## Build the library from source :
 
-- After cloning the project in your local, run the following command to install the dependencies required by the project: 
+- After cloning the project in your local, run the following command to install the dependencies required by the project:
+
 ```sh
 npm install
 ```
 
-- Build the project using the follwing command: 
+- Build the project using the follwing command:
 
 ```sh
 npm run build
 ```
+
 <br/><hr/><br/>
 
-## Installing Whatsapp.js form source for development purposes: 
+## Installing Whatsapp.js from source for development purposes:
 
 1. cd to your node project where you wanna use the library.
 
-2. Run the follwing commands: 
+2. Run the follwing commands:
 
 ```sh
 npm run install <path-to-whatsapp-js>
 npm link <path-to-whatsapp.js>
 ```
 
-NOTE: Make sure you have already built the library using ``npm run build``
+NOTE: Make sure you have already built the library using `npm run build`
 
 <br/><hr/><br/>
 
-## License : 
+## License :
 
 Distributed under the MIT License. See [LICENCE](./LICENSE) for more information.
 
 <br/><hr/><br/>
 
-## Contact Information: 
+## Contact Information:
 
 Sarthak Jain <br/>
 contact.sarthakjain@gmail.com <br/>
@@ -126,4 +143,3 @@ contact.sarthakjain@gmail.com <br/>
 [LLinkedin](https://www.linkedin.com/in/sarthakjdev)
 
 <br/><hr/><br/>
-

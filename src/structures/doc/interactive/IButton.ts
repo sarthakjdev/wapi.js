@@ -30,6 +30,6 @@ export interface Button {
 }
 
 enum TYPE_OF_BUTTON {
-    'payload',
-    'text',
+    PAYLOAD = 'payload',
+    TEXT = 'text',
 }
