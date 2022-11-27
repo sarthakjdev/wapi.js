@@ -58,7 +58,7 @@ For refernce visit Whatsapp Docs [here](https://developers.facebook.com/docs/wha
 
 For refernce visit Whatsapp Docs [here](https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components)
 
-<div align="center "> <img src="https://media.discordapp.net/attachments/1034852580091777034/1042099563063947304/image.png?width=720&height=473" alt="cloud api message structure"> </div>
+<div align="center "> <img src="https://media.discordapp.net/attachments/1034852580091777034/1046371179163828264/notification_payload.png?width=720&height=434" alt="cloud api notification structure"> </div>
 
 <br/><hr/><br/>
 
