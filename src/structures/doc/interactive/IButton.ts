@@ -8,10 +8,10 @@ export interface Button {
 
     /**
      * type of paramter of button
-     * @type {TYPEOFBUTTON}
+     * @type {TYPE_OF_BUTTON}
      * @memberof Button
      */
-    type: TYPEOFBUTTON
+    type: TYPE_OF_BUTTON
 
     /**
      * title of the button
@@ -29,7 +29,7 @@ export interface Button {
 
 }
 
-enum TYPEOFBUTTON {
-    'payload',
-    'text',
+enum TYPE_OF_BUTTON {
+    PAYLOAD = 'payload',
+    TEXT = 'text',
 }

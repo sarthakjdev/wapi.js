@@ -24,12 +24,6 @@ export interface Template {
      * array of components objects containing the parameters of the message
      * @memberof Template
      */
-    components: TemplateComponent[]
-
-    /**
-     * namespace of the template
-     * @memberof Template
-     */
-    namespace: string
+    components?: TemplateComponent[]
 
 }

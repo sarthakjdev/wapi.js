@@ -44,13 +44,13 @@ export interface Address {
 
     /**
      * type of address
-     * @type {TYPEOFADDRESS}
+     * @type {ADDRESS_TYPE}
      * @memberof Address
      */
-    type?: TYPEOFADDRESS
+    type?: ADDRESS_TYPE
 }
 
-enum TYPEOFADDRESS {
+enum ADDRESS_TYPE {
     'HOME',
     'WORK',
 }

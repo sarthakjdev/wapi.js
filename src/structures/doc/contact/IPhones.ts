@@ -15,7 +15,7 @@ export interface Phone {
      * type of the phone
      * @memberof Phone
      */
-    type?: TYPEOFPHONE
+    type?: PHONE_TYPE
 
     /**
      * phone number
@@ -24,7 +24,7 @@ export interface Phone {
     wa_id?: string
 }
 
-enum TYPEOFPHONE {
+enum PHONE_TYPE {
     'CELL',
     'MAIN',
     'IPHONE',

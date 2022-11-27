@@ -8,7 +8,7 @@ import { Header } from './IHeader'
  * @interface
  * @export
  */
-export interface Interaction {
+export interface Interactive {
 
     /**
      * action of the interactive component
@@ -17,33 +17,33 @@ export interface Interaction {
     action: Action
 
     /**
-     * body of the interactive component
+     * body of the interactive component, required if the type of interactive message is product
      * @memberof Interactive
      */
-    body: Body
+    body?: Body
 
     /**
      * footer of the interactive component
      * @memberof Interactive
      */
-    footer: Footer
+    footer?: Footer
 
     /**
-     * header of the interactive component
+     * header of the interactive component, required if the type of interactive message is product_list
      * @memberof Interactive
      */
-    header: Header
+    header?: Header
 
     /**
      * type of the interactive component
      * @memberof Interactive
      */
-    type: TYPEOFINTERACTION
+    type: INTERACTION_TYPE
 }
 
-enum TYPEOFINTERACTION {
-    'button',
-    'list',
-    'product',
-    'product_list',
+enum INTERACTION_TYPE {
+    BUTTON = 'button',
+    LIST = 'list',
+    PRODUCT = 'product',
+    PRODUCT_LIST = 'product_list',
 }

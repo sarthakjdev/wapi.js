@@ -13,7 +13,7 @@ export interface Parameter {
      * type of paramter
      * @memberof Parameter
      */
-    type: TYPEOFPARAMTER
+    type: PARAMETER_TYPE
 
     /**
      * message text
@@ -52,10 +52,10 @@ export interface Parameter {
     video: Media
 }
 
-enum TYPEOFPARAMTER {
-    'currency',
-    'document',
-    'image',
-    'text',
-    'video',
+enum PARAMETER_TYPE {
+    CURRENCY = 'currency',
+    DOCUMENT = 'document',
+    IMAGE = 'image',
+    TEXT = 'text',
+    VIDEO = 'video',
 }

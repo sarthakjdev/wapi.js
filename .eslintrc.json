@@ -38,6 +38,36 @@
                 "allowElseIf": false
             }
         ],
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "variable",
+                "format": [
+                    "camelCase",
+                    "PascalCase"
+                ],
+                "leadingUnderscore": "allow",
+                "trailingUnderscore": "allow"
+            },
+            {
+                "selector": "classProperty",
+                "format": [
+                    "snake_case",
+                    "camelCase"
+                ],
+                "leadingUnderscore": "allow",
+                "trailingUnderscore": "allow"
+            },
+            {
+                "selector": "enumMember",
+                "format": [
+                    "UPPER_CASE",
+                    "snake_case"
+                ],
+                "leadingUnderscore": "allow",
+                "trailingUnderscore": "allow"
+            }
+        ],
         "class-methods-use-this": "off",
         "indent": [
             "error",
@@ -92,5 +122,12 @@
             }
         ],
         "prefer-const": "error"
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": {
+                "project": "./tsconfig.json"
+            }
+        }
     }
 }

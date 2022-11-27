@@ -37,17 +37,17 @@ export interface Contact {
      *  contact organisation information
      * @memberof Contact
      */
-    org: Org
+    org?: Org
 
     /**
      *  contact phone number(s)
      * @memberof Contact
      */
-    phones: Phone[]
+    phones?: Phone[]
 
     /**
      *  contact url(s)
      * @memberof Contact
      */
-    url: URL
+    url?: URL
 }

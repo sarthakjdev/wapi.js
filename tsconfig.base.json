@@ -1,16 +1,19 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
+        "types": [
+            "node"
+        ],
         "declaration": true,
         "alwaysStrict": true,
         "charset": "UTF-8",
         "esModuleInterop": true,
         "moduleResolution": "node",
-        "module": "commonjs",
+        "module": "ESNext",
         "newLine": "lf",
         "preserveConstEnums": true,
         "removeComments": false,
-        "target": "ES2021",
+        "target": "ESNext",
         "incremental": true,
         "baseUrl": "./",
         "pretty": true,
@@ -20,11 +23,10 @@
             "@managers/*": ["./src/managers/*"],
             "@structures/*": ["./src/structures/*"]
         },
-        "typeRoots": ["./global.d.ts"]
     },
     "ts-node": {
         "files": true
     },
-    "include": ["src"],
+    "include": ["src", "./*.ts"],
     "exclude": ["node_modules", "lib"]
 }

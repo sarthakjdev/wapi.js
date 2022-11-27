@@ -26,10 +26,10 @@ export interface Header {
 
     /**
      * document to send in the header of interactive message
-     * @type {TYPEOFHEADER}
+     * @type {HEADER_TYPE}
      * @memberof Header
      */
-    type: TYPEOFHEADER
+    type: HEADER_TYPE
 
     /**
      * document to send in the header of interactive message
@@ -38,9 +38,9 @@ export interface Header {
     video: Media
 }
 
-enum TYPEOFHEADER {
-    'text',
-    'video',
-    'image',
-    'document',
+enum HEADER_TYPE {
+    TEXT = 'text',
+    VIDEO = 'video',
+    IMAGE = 'image',
+    DOCUMENT = 'document',
 }

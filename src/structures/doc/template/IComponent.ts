@@ -14,20 +14,20 @@ export interface TemplateComponent {
     type: string
 
     /**
-     * sub type of the TemplateComponent
+     * sub type of the TemplateComponent, required when type of template component is button
      * @memberof TemplateComponent
      */
-    sub_type: string
+    sub_type?: string
 
     /**
-     * parameters of the TemplateComponent
+     * parameters of the TemplateComponent, required when type of template component is button
      * @memberof TemplateComponent
      */
-    parameters: Parameter
+    parameters?: Parameter
 
     /**
-     * index of the TemplateComponent
+     * index of the TemplateComponent, required when type of template component is button
      * @memberof TemplateComponent
      */
-    index: string
+    index?: string
 }
