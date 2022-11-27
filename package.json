@@ -1,6 +1,6 @@
 {
   "name": "whatsapp.js",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "a lib to develop whatsapp bot for whatsapp business platform",
   "main": "./lib/src/index.js",
   "types": "./lib/src/index.d.ts",
@@ -14,7 +14,13 @@
     "prepare": "husky install"
   },
   "keywords": [
-    "whatsapp-cloud-api"
+    "whatsapp-cloud-api",
+    "whatsapp-chatbot",
+    "whatsapp-api",
+    "typescript",
+    "nodejs",
+    "whatsapp.js",
+    "whatsapp.js library"
   ],
   "files": [
     "lib"

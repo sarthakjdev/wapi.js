@@ -44,7 +44,7 @@ Wanna start with your first whatsapp application using whatsapp.js library, chec
 
 <br/><hr/><br/>
 
-### Cloud API messaging structure : 
+### Cloud API structures : 
 
 <br>
 
@@ -137,7 +137,7 @@ Distributed under the MIT License. See [LICENCE](./LICENSE) for more information
 
 ## Contact Information:
 
-Sarthak Jain <br/>
+[Sarthak Jain](https://sarthakjdev.com) <br/>
 contact.sarthakjain@gmail.com <br/>
 [Twitter](https://twitter.com/sarthakjdev) <br/>
 [LLinkedin](https://www.linkedin.com/in/sarthakjdev)
