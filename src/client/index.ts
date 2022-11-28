@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 export * from './whatsapp'
 export * from './doc/IClientOptions'
 export * from './doc/IClientStatus'

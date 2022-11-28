@@ -1,7 +1,0 @@
-export * from './IAddress'
-export * from './IEmail'
-export * from './IName'
-export * from './IOrg'
-export * from './IPhones'
-export * from './IUrl'
-export * from './IContact'
