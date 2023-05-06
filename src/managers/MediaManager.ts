@@ -35,7 +35,7 @@ export class MediaManager {
     }
 
     /**
-     * Get the media url by the mmedia id
+     * Get the media url by the media id
      * @param {string} mediaId
      * @returns
      */
