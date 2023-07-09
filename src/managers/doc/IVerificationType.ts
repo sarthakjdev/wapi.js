@@ -1,4 +1,4 @@
-export enum VERIFICATION_TYPE {
-    'SMS',
-    'VOICE',
+export enum VerificationTypeEnum {
+	'SMS',
+	'VOICE'
 }

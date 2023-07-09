@@ -1,5 +1,5 @@
-import { Location } from '../ILocation'
-import { BaseMessage } from './IBaseMessage'
+import { type Location } from '../ILocation'
+import { type BaseMessage } from './IBaseMessage'
 
 /**
  * location message
@@ -8,5 +8,5 @@ import { BaseMessage } from './IBaseMessage'
  * @export
  */
 export interface LocationMessage extends BaseMessage {
-    location: Location
+	location: Location
 }

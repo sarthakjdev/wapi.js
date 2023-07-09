@@ -1,5 +1,5 @@
-import { BaseMessage } from './IBaseMessage'
-import { Interactive } from '../interactive'
+import { type BaseMessage } from './IBaseMessage'
+import { type Interactive } from '../interactive'
 
 /**
  * interactive message
@@ -8,5 +8,5 @@ import { Interactive } from '../interactive'
  * @export
  */
 export interface InteractiveMessage extends BaseMessage {
-    interactive: Interactive
+	interactive: Interactive
 }

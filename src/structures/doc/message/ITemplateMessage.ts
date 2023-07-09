@@ -1,5 +1,5 @@
-import { BaseMessage } from './IBaseMessage'
-import { Template } from '../template'
+import { type BaseMessage } from './IBaseMessage'
+import { type Template } from '../template'
 
 /**
  * template message
@@ -8,5 +8,5 @@ import { Template } from '../template'
  * @export
  */
 export interface TemplateMessage extends BaseMessage {
-    template: Template
+	template: Template
 }

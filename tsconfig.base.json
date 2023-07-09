@@ -6,9 +6,8 @@
         ],
         "declaration": true,
         "alwaysStrict": true,
-        "charset": "UTF-8",
         "esModuleInterop": true,
-        "moduleResolution": "node",
+        "moduleResolution": "Node",
         "module": "ESNext",
         "newLine": "lf",
         "preserveConstEnums": true,
@@ -19,14 +18,28 @@
         "pretty": true,
         "resolveJsonModule": true,
         "paths": {
-            "@utils/*": ["./src/utils/*"],
-            "@managers/*": ["./src/managers/*"],
-            "@structures/*": ["./src/structures/*"]
+            "@utils/*": [
+                "./src/utils/*"
+            ],
+            "@managers/*": [
+                "./src/managers/*"
+            ],
+            "@structures/*": [
+                "./src/structures/*"
+            ]
         },
     },
     "ts-node": {
         "files": true
     },
-    "include": ["src", "./*.ts"],
-    "exclude": ["node_modules", "lib"]
+    "include": [
+        "src",
+        "./*.ts",
+        "./.eslintrc.js",
+        "lint-staged.config.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }

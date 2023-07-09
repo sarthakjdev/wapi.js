@@ -1,35 +1,32 @@
-
 /**
- * buttom component interface
+ * button component interface
  * @interface
  * @export
  */
 export interface Button {
+	/**
+	 * type of parameter of button
+	 * @type {ButtonTypeEnum}
+	 * @memberof Button
+	 */
+	type: ButtonTypeEnum
 
-    /**
-     * type of paramter of button
-     * @type {TYPE_OF_BUTTON}
-     * @memberof Button
-     */
-    type: TYPE_OF_BUTTON
+	/**
+	 * title of the button
+	 * @type {string}
+	 * @memberof Button
+	 */
+	title: string
 
-    /**
-     * title of the button
-     * @type {string}
-     * @memberof Button
-     */
-    title: string
-
-    /**
-     * unique identifier of the buttonn
-     * @type {string}
-     * @memberof Button
-     */
-    id: string
-
+	/**
+	 * unique identifier of the buttonn
+	 * @type {string}
+	 * @memberof Button
+	 */
+	id: string
 }
 
-enum TYPE_OF_BUTTON {
-    PAYLOAD = 'payload',
-    TEXT = 'text',
+enum ButtonTypeEnum {
+	Payload = 'payload',
+	Text = 'text'
 }

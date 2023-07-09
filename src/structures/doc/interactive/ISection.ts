@@ -1,5 +1,5 @@
-import { Product } from './IProduct'
-import { Row } from './IRow'
+import { type Product } from './IProduct'
+import { type Row } from './IRow'
 
 /**
  * Section interface
@@ -7,25 +7,24 @@ import { Row } from './IRow'
  * @export
  */
 export interface Section {
+	/**
+	 *  array of products to send, a minimum of 1 and a maximum of 30 products, required for multi-product message
+	 * @type {Product[]}
+	 * @memberof Section
+	 */
+	product_items?: Product[]
 
-    /**
-     *  array of products to send, a minimum of 1 and a maximum of 30 products, required for multi-product message
-     * @type {Product[]}
-     * @memberof Section
-     */
-    product_items?: Product[]
+	/**
+	 * a list of rows in the section, requied for list message
+	 * @type {Row[]}
+	 * @memberof Section
+	 */
+	rows: Row[]
 
-    /**
-     * a list of rows in the section, requied for list message
-     * @type {Row[]}
-     * @memberof Section
-     */
-    rows: Row[]
-
-    /**
-     *  title of the section, required if the message has more than one section
-     * @type {string}
-     * @memberof Section
-     */
-    title: string
+	/**
+	 *  title of the section, required if the message has more than one section
+	 * @type {string}
+	 * @memberof Section
+	 */
+	title: string
 }

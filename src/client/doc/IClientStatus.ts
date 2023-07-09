@@ -1,4 +1,4 @@
-export enum CLIENT_STATUS {
-    'READY',
-    'WAITING',
+export enum ClientStatusEnum {
+	'Ready',
+	'Waiting'
 }

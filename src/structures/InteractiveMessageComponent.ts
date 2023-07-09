@@ -1,6 +1,6 @@
-import { MESSAGE_TYPE } from './doc/IMessageType'
-import { Interactive } from './doc/interactive'
-import { InteractiveMessage } from './doc/message/IInteractiveMessage'
+import { MessageTypeEnum } from './doc/IMessageType'
+import { type Interactive } from './doc/interactive'
+import { type InteractiveMessage } from './doc/message/IInteractiveMessage'
 import { MessageComponent } from './MessageComponent'
 
 /**
@@ -10,11 +10,11 @@ import { MessageComponent } from './MessageComponent'
  * @export
  */
 export class InteractiveMessageComponent extends MessageComponent {
-    interactive: Interactive
+	interactive: Interactive
 
-    constructor(data: InteractiveMessage) {
-        super(data)
-        this.interactive = data.interactive
-        this.type = MESSAGE_TYPE.INTERACTIVE
-    }
+	constructor(data: InteractiveMessage) {
+		super(data)
+		this.interactive = data.interactive
+		this.type = MessageTypeEnum.Interactive
+	}
 }

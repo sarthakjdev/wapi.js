@@ -1,4 +1,4 @@
-export interface URL {
-    url? : string
-    type? : string
+export interface Url {
+	url?: string
+	type?: string
 }

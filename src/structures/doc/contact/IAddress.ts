@@ -1,56 +1,54 @@
-
 /**
  * Address interface
  * @interface
  * @export
  */
 export interface Address {
+	/**
+	 * street number and name
+	 * @memberof Address
+	 */
+	street?: string
 
-    /**
-     * street number and name
-     * @memberof Address
-     */
-    street?: string
+	/**
+	 * city name
+	 * @memberof Address
+	 */
+	city?: string
 
-    /**
-     * city name
-     * @memberof Address
-     */
-    city?: string
+	/**
+	 * state abbreviation
+	 * @memberof Address
+	 */
+	state?: string
 
-    /**
-     * state abbreviation
-     * @memberof Address
-     */
-    state?: string
+	/**
+	 * zip code
+	 * @memberof Address
+	 */
+	zip?: string
 
-    /**
-     * zip code
-     * @memberof Address
-     */
-    zip?: string
+	/**
+	 * full ccountry name
+	 * @memberof Address
+	 */
+	country?: string
 
-    /**
-     * full ccountry name
-     * @memberof Address
-     */
-    country?: string
+	/**
+	 * two-letter country abbreviation
+	 * @memberof Address
+	 */
+	country_code?: string
 
-    /**
-     * two-leeter country abbreviation
-     * @memberof Address
-     */
-    country_code?: string
-
-    /**
-     * type of address
-     * @type {ADDRESS_TYPE}
-     * @memberof Address
-     */
-    type?: ADDRESS_TYPE
+	/**
+	 * type of address
+	 * @type {ContactAddressTypeEnum}
+	 * @memberof Address
+	 */
+	type?: ContactAddressTypeEnum
 }
 
-enum ADDRESS_TYPE {
-    'HOME',
-    'WORK',
+enum ContactAddressTypeEnum {
+	'HOME',
+	'WORK'
 }

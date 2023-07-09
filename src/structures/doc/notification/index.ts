@@ -23,4 +23,3 @@ export * from './payloadValue/IMessageTemplateStatusUpdate'
 export * from './payloadValue/IPhoneNumberQualityUpdate'
 export * from './payloadValue/IPhoneNumberNameUpdate'
 export * from './payloadValue/ITemplatePerformanceMetrics'
-

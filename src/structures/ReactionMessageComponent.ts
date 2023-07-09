@@ -1,6 +1,6 @@
-import { MESSAGE_TYPE } from './doc/IMessageType'
-import { Reaction } from './doc/IReaction'
-import { ReactionMessage } from './doc/message/IReactionMessage'
+import { MessageTypeEnum } from './doc/IMessageType'
+import { type Reaction } from './doc/IReaction'
+import { type ReactionMessage } from './doc/message/IReactionMessage'
 import { MessageComponent } from './MessageComponent'
 
 /**
@@ -10,11 +10,11 @@ import { MessageComponent } from './MessageComponent'
  * @export
  */
 export class ReactionMessageComponent extends MessageComponent {
-    reaction: Reaction
+	reaction: Reaction
 
-    constructor(data: ReactionMessage) {
-        super(data)
-        this.type = MESSAGE_TYPE.REACTION
-        this.reaction = data.reaction
-    }
+	constructor(data: ReactionMessage) {
+		super(data)
+		this.type = MessageTypeEnum.Reaction
+		this.reaction = data.reaction
+	}
 }

@@ -1,5 +1,5 @@
-import { Media } from '../IMedia'
-import { BaseMessage } from './IBaseMessage'
+import { type Media } from '../IMedia'
+import { type BaseMessage } from './IBaseMessage'
 
 /**
  * media message
@@ -8,5 +8,5 @@ import { BaseMessage } from './IBaseMessage'
  * @export
  */
 export interface MediaMessage extends BaseMessage {
-    media: Media
+	media: Media
 }

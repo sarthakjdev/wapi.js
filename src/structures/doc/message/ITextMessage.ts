@@ -1,5 +1,5 @@
-import { BaseMessage } from './IBaseMessage'
-import { Text } from '../IText'
+import { type BaseMessage } from './IBaseMessage'
+import { type Text } from '../IText'
 
 /**
  * text message
@@ -8,5 +8,5 @@ import { Text } from '../IText'
  * @export
  */
 export interface TextMessage extends BaseMessage {
-    text: Text
+	text: Text
 }

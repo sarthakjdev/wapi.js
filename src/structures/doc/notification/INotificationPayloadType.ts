@@ -1,19 +1,18 @@
-
 /**
- * type of message recieved in the notification of type message
+ * type of message received in the notification of type message
  * @enum
  * @export
  */
-export enum NOTIFICATION_MESSAGE_TYPE {
-    AUDIO = 'audio',
-    BUTTON = 'button',
-    DOCUMENT = 'document',
-    TEXT = 'text',
-    IMAGE = 'image',
-    INTERACTIVE = 'interactive',
-    ORDER = 'order',
-    STICKER = 'sticker',
-    SYSTEM = 'system',
-    UNKNOWN = 'unknown',
-    VIDEO = 'video',
+export enum NotificationMessageTypeEnum {
+	Audio = 'audio',
+	Button = 'button',
+	Document = 'document',
+	Text = 'text',
+	Image = 'image',
+	Interactive = 'interactive',
+	Order = 'order',
+	Sticker = 'sticker',
+	System = 'system',
+	Unknown = 'unknown',
+	Video = 'video'
 }

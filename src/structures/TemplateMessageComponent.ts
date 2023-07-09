@@ -1,7 +1,7 @@
 import { MessageComponent } from './MessageComponent'
-import { MESSAGE_TYPE } from './doc/IMessageType'
-import { Template } from './doc/template'
-import { TemplateMessage } from './doc/message/ITemplateMessage'
+import { MessageTypeEnum } from './doc/IMessageType'
+import { type Template } from './doc/template'
+import { type TemplateMessage } from './doc/message/ITemplateMessage'
 
 /**
  * template message component
@@ -10,11 +10,11 @@ import { TemplateMessage } from './doc/message/ITemplateMessage'
  * @export
  */
 export class TemplateMessageComponent extends MessageComponent {
-    template: Template
+	template: Template
 
-    constructor(data: TemplateMessage) {
-        super(data)
-        this.type = MESSAGE_TYPE.TEMPLATE
-        this.template = data.template
-    }
+	constructor(data: TemplateMessage) {
+		super(data)
+		this.type = MessageTypeEnum.Template
+		this.template = data.template
+	}
 }

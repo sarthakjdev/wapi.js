@@ -1,5 +1,5 @@
-import { BaseMessage } from './IBaseMessage'
-import { Contact } from '../contact'
+import { type BaseMessage } from './IBaseMessage'
+import { type Contact } from '../contact'
 
 /**
  * contact message
@@ -8,5 +8,5 @@ import { Contact } from '../contact'
  * @export
  */
 export interface ContactMessage extends BaseMessage {
-    contacts: Contact[]
+	contacts: Contact[]
 }

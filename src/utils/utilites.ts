@@ -1,12 +1,27 @@
 import { WhatsappError } from '../error/WhatsappError'
 import {
-    AudioMessageComponent, DocumentMessageComponent, InteractiveMessageComponent, LocationMessageComponent, TemplateMessageComponent, TextMessageComponent, VideoMessageComponent,
+	type AudioMessageComponent,
+	type DocumentMessageComponent,
+	type InteractiveMessageComponent,
+	type LocationMessageComponent,
+	type TemplateMessageComponent,
+	type TextMessageComponent,
+	type VideoMessageComponent
 } from '../structures'
 
 export class Utilites {
-    static async checkRecipent(component: TextMessageComponent | AudioMessageComponent | VideoMessageComponent | DocumentMessageComponent | LocationMessageComponent | InteractiveMessageComponent | TemplateMessageComponent) {
-        if (component.getRecipent == null || component.getRecipent === '') {
-            throw new WhatsappError('Recipent must be defined in component before sending')
-        }
-    }
+	static checkRecipent(
+		component:
+			| TextMessageComponent
+			| AudioMessageComponent
+			| VideoMessageComponent
+			| DocumentMessageComponent
+			| LocationMessageComponent
+			| InteractiveMessageComponent
+			| TemplateMessageComponent
+	) {
+		if (component.getRecipent == null || component.getRecipent === '') {
+			throw new WhatsappError('Recipent must be defined in component before sending')
+		}
+	}
 }

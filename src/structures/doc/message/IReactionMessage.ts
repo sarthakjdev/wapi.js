@@ -1,5 +1,5 @@
-import { BaseMessage } from './IBaseMessage'
-import { Reaction } from '../IReaction'
+import { type BaseMessage } from './IBaseMessage'
+import { type Reaction } from '../IReaction'
 
 /**
  * reaction message
@@ -8,5 +8,5 @@ import { Reaction } from '../IReaction'
  * @export
  */
 export interface ReactionMessage extends BaseMessage {
-    reaction: Reaction
+	reaction: Reaction
 }

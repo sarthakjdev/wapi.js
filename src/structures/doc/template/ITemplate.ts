@@ -1,5 +1,5 @@
-import { TemplateComponent } from './IComponent'
-import { Language } from './ILanguage'
+import { type TemplateComponent } from './IComponent'
+import { type Language } from './ILanguage'
 
 /**
  * interface to represent the template object
@@ -7,23 +7,21 @@ import { Language } from './ILanguage'
  * @export
  */
 export interface Template {
+	/**
+	 * name of the template
+	 * @memberof Template
+	 */
+	name: string
 
-    /**
-     * name of the template
-     * @memberof Template
-     */
-    name: string
+	/**
+	 * language to render the template in
+	 * @memberof Template
+	 */
+	languege: Language
 
-    /**
-     * language to render the template in
-     * @memberof Template
-     */
-    languege: Language
-
-    /**
-     * array of components objects containing the parameters of the message
-     * @memberof Template
-     */
-    components?: TemplateComponent[]
-
+	/**
+	 * array of components objects containing the parameters of the message
+	 * @memberof Template
+	 */
+	components?: TemplateComponent[]
 }

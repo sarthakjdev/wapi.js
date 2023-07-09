@@ -1,18 +1,18 @@
 import { MessageComponent } from './MessageComponent'
-import { Location } from './doc/ILocation'
-import { LocationMessage } from './doc/message/index'
-import { MESSAGE_TYPE } from './doc/IMessageType'
+import { type Location } from './doc/ILocation'
+import { type LocationMessage } from './doc/message/index'
+import { MessageTypeEnum } from './doc/IMessageType'
 
 export class LocationMessageComponent extends MessageComponent {
-    location: Location
+	location: Location
 
-    /**
-     * constturctor
-     * @param {Component & LocationComponent} data
-     */
-    constructor(data: LocationMessage) {
-        super(data)
-        this.location = data.location
-        this.type = MESSAGE_TYPE.LOCATION
-    }
+	/**
+	 * constturctor
+	 * @param {Component & LocationComponent} data
+	 */
+	constructor(data: LocationMessage) {
+		super(data)
+		this.location = data.location
+		this.type = MessageTypeEnum.Location
+	}
 }

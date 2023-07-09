@@ -1,14 +1,17 @@
-import axios, { AxiosInstance } from 'axios'
-import { WhatsAPIResponse, WhatsappAPIError } from '../error/index'
+import axios, { type AxiosInstance } from 'axios'
+import { type WhatsApiResponse, WhatsappApiError } from '../error/index'
 
-export function createAxiosInstance(baseURl: string, token: string): AxiosInstance {
-    const client = axios.create({
-        baseURL: baseURl,
-    })
+export function createAxiosInstance(baseUrl: string, token: string): AxiosInstance {
+	const client = axios.create({
+		baseURL: baseUrl
+	})
 
-    client.interceptors.response.use((response) => response as WhatsAPIResponse, (error) => {
-        throw new WhatsappAPIError(error)
-    })
+	client.interceptors.response.use(
+		response => response as WhatsApiResponse,
+		error => {
+			throw new WhatsappApiError(error)
+		}
+	)
 
-    return client
+	return client
 }
