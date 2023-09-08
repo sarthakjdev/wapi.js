@@ -5,3 +5,4 @@ errors.log
 build/**
 dist/**
 .next/**
+yarn-error.log

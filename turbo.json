@@ -1,6 +1,10 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "pipeline": {
+        "install": {
+            "cache": false,
+            "outputMode": "errors-only"
+        },
         "build": {
             "cache": false,
             "dependsOn": [
@@ -39,6 +43,10 @@
                 "test/**/*.ts",
                 "test/**/*.tsx"
             ],
+            "outputMode": "errors-only"
+        },
+        "clean-install": {
+            "cache": false,
             "outputMode": "errors-only"
         },
         "dev": {

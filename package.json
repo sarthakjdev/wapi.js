@@ -12,7 +12,8 @@
     "lint": "turbo run lint",
     "prepare": "husky install",
     "pretty": "turbo pretty",
-    "clean-install": "turbo run clean-install"
+    "clean-install": "turbo run clean-install",
+    "install": "turbo run install"
   },
   "keywords": [
     "whatsapp-cloud-api",
@@ -49,7 +50,7 @@
     "eslint-plugin-import": "^2.28.1",
     "husky": "^8.0.3",
     "prettier": "^3.0.3",
+    "turbo": "^1.10.13",
     "typescript": "^5.2.2"
-  },
-  "dependencies": {}
+  }
 }

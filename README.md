@@ -3,7 +3,6 @@
 <!-- PROJECT SHIELDS -->
 <div align="center">
 
-<a href="">[![License](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)</a>
 <a href="">![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)</a>
 <a href="">[<img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white">](https://www.npmjs.com/package/@whatsappjs/Wapi.js)</a>
 <a href="">![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)</a>
@@ -108,13 +107,13 @@ Refer to this [Contributing.md](./CONTRIBUTING.md) if you have any difficulty in
 -   After cloning the project in your local, run the following command to install the dependencies required by the project:
 
 ```sh
-npm install
+yarn install --frozen-lockfile
 ```
 
 -   Build the project using the following command:
 
 ```sh
-npm run build
+yarn build
 ```
 
 <br/><hr/><br/>
@@ -126,17 +125,17 @@ npm run build
 2. Run the following commands:
 
 ```sh
-npm run install <path-to-whatsapp-js>
-npm link <path-to-Wapi.js>
+yarn install <path-to-wapi.js>
+yarn link <path-to-wapi.js>
 ```
 
-NOTE: Make sure you have already built the library using `npm run build`
+NOTE: Make sure you have already built the library using `yarn build`
 
 <br/><hr/><br/>
 
 ## License :
 
-Distributed under the MIT License. See [LICENCE](./LICENSE) for more information.
+Distributed under the MIT License. See [LICENSE](./LICENSE) for more information.
 
 <br/><hr/><br/>
 
