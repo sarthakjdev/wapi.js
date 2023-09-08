@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "allowUnreachableCode": false,
+        "strict": true,
+        "module": "ESNext",
+        "declaration": true,
+        "declarationMap": true,
+        "importHelpers": false,
+        "newLine": "lf",
+        "noEmitHelpers": true,
+        "outDir": "dist",
+        "removeComments": false,
+        "sourceMap": true,
+    },
+    "lib": [
+        "ESNext"
+    ],
+    "target": "ES2022"
+}

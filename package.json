@@ -1,0 +1,55 @@
+{
+  "name": "wapi.js",
+  "version": "0.1.0",
+  "description": "wapi.js is a node library built for developing whatsapp cloud API based app in a user friendly way.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "watch": "tsc --pretty -w",
+    "lint": "turbo run lint",
+    "prepare": "husky install",
+    "pretty": "turbo pretty",
+    "clean-install": "turbo run clean-install"
+  },
+  "keywords": [
+    "whatsapp-cloud-api",
+    "whatsapp-chatbot",
+    "whatsapp-api",
+    "typescript",
+    "nodejs",
+    "wapi.js",
+    "wapi.js library"
+  ],
+  "authors": [
+    "contact.sarthakjain@gmail.com"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wapijs/wapi.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wapijs/wapi.js/issues"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@types/node": "^20.5.9",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "concurrently": "^8.2.1",
+    "eslint": "^8.48.0",
+    "eslint-config-next": "^13.4.19",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-nibble": "^8.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "husky": "^8.0.3",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {}
+}

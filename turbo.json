@@ -1,0 +1,49 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+        "build": {
+            "cache": false,
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                "./dist/**/*"
+            ]
+        },
+        "test": {
+            "dependsOn": [
+                "build"
+            ],
+            "inputs": [
+                "src/**/*.tsx",
+                "src/**/*.ts",
+                "test/**/*.ts",
+                "test/**/*.tsx",
+                "package.json",
+                "tsconfig.json"
+            ]
+        },
+        "pretty": {
+            "inputs": [
+                "src/**/*.tsx",
+                "src/**/*.ts",
+                "test/**/*.ts",
+                "test/**/*.tsx"
+            ],
+            "outputMode": "errors-only"
+        },
+        "lint": {
+            "inputs": [
+                "src/**/*.tsx",
+                "src/**/*.ts",
+                "test/**/*.ts",
+                "test/**/*.tsx"
+            ],
+            "outputMode": "errors-only"
+        },
+        "dev": {
+            "cache": false,
+            "persistent": true
+        }
+    }
+}
