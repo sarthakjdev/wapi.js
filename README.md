@@ -47,7 +47,7 @@ NOTE: This library doesn't hold any rights over the official Whatsapp Cloud API.
 
 ## Usage :
 
-Wanna start with your first WhatsApp application using Wapi.js library, check [User Manual](./USER_MANUAL.md)
+Wanna start with your first WhatsApp application using Wapi.js library, check the [User Manual](./USER_MANUAL.md)
 
 <br/><hr/><br/>
 
