@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
-    "build": "tsc --pretty",
+    "build": "yarn tsc --pretty",
     "lint": "yarn eslint . --max-warnings=0",
     "pretty": "prettier --config ../../prettierrc.js --write ./src/**/**/**/**/**/**/**/**/**/**/**/**/**/*.{ts}",
-    "clean-install": "rm -rf ./node_modules && yarn --frozen-lockfile",
-    "install": "yarn install --frozen-lockfile"
+    "clean-install": "rm -rf ./node_modules && yarn install --frozen-lockfile"
   },
   "keywords": [],
   "author": "",
