@@ -7,13 +7,12 @@
   ],
   "private": true,
   "scripts": {
-    "build": "turbo build",
+    "build": "turbo build --concurrency=2",
     "watch": "tsc --pretty -w",
-    "lint": "turbo run lint",
+    "lint": "turbo run lint --concurrency=2",
     "prepare": "husky install",
-    "pretty": "turbo pretty",
-    "clean-install": "turbo run clean-install",
-    "install": "turbo run install"
+    "pretty": "turbo pretty --concurrency=2",
+    "clean-install": "turbo run clean-install"
   },
   "keywords": [
     "whatsapp-cloud-api",
