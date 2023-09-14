@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
         "allowUnreachableCode": false,
+        "allowJs": true,
         "strict": true,
-        "module": "ESNext",
         "declaration": true,
-        "declarationMap": true,
+        "declarationMap": false,
         "importHelpers": false,
         "newLine": "lf",
         "noEmitHelpers": true,

@@ -1,6 +1,25 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "pipeline": {
+        "clean": {},
+        "build:esm": {
+            "cache": false,
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                "./dist/**/*"
+            ]
+        },
+        "build:cjs": {
+            "cache": false,
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                "./dist/**/*"
+            ]
+        },
         "build": {
             "cache": false,
             "dependsOn": [
@@ -40,10 +59,6 @@
                 "test/**/*.tsx"
             ],
             "outputMode": "errors-only"
-        },
-        "dev": {
-            "cache": false,
-            "persistent": true
         }
     }
 }

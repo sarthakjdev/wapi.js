@@ -2,10 +2,14 @@
   "name": "component-generator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
     "test": "vitest run",
-    "build": "yarn tsc --pretty",
+    "clean": "rm -rf ./dist",
+    "build:cjs": "yarn tsc -p tsconfig-cjs.json --pretty",
+    "build:esm": "yarn tsc -p tsconfig.json --pretty",
+    "build": "yarn run clean && concurrently -n esm,cjs \"npm run build:esm\" \"npm run build:cjs\"",
     "lint": "yarn eslint . --max-warnings=0",
     "pretty": "prettier --config ../../.prettierrc.js --write ./src/**/**/**/**/**/**/**/**/**/**/**/**/**/*.{ts}",
     "clean-install": "rm -rf ./node_modules && yarn install --frozen-lockfile"

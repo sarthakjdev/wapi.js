@@ -7,8 +7,11 @@
   ],
   "private": true,
   "scripts": {
+    "test": "turbo test --concurrency=2",
+    "clean": "turbo clean --concurrency=2",
     "build": "turbo build --concurrency=2",
-    "watch": "tsc --pretty -w",
+    "build:esm": "turbo build:esm  --concurrency=2",
+    "build:cjs": "turbo build:cjs  --concurrency=2",
     "lint": "turbo run lint --concurrency=2",
     "prepare": "husky install",
     "pretty": "turbo pretty --concurrency=2",
