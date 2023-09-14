@@ -11,7 +11,7 @@
     "build:esm": "yarn tsc -p tsconfig.json --pretty",
     "build": "yarn run clean && concurrently -n esm,cjs \"npm run build:esm\" \"npm run build:cjs\"",
     "lint": "yarn eslint . --max-warnings=0",
-    "pretty": "prettier --config ../../.prettierrc.js --write ./src/**/**/**/**/**/**/**/**/**/**/**/**/**/*.{ts}",
+    "pretty": "yarn prettier --write \"src/**/*.ts\"",
     "clean-install": "rm -rf ./node_modules && yarn install --frozen-lockfile"
   },
   "keywords": [],

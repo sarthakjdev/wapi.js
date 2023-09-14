@@ -37,21 +37,15 @@
                 "src/**/*.tsx",
                 "src/**/*.ts",
                 "test/**/*.ts",
-                "test/**/*.tsx",
-                "package.json",
-                "tsconfig.json"
+                "test/**/*.tsx"
             ]
         },
         "pretty": {
-            "inputs": [
-                "src/**/*.tsx",
-                "src/**/*.ts",
-                "test/**/*.ts",
-                "test/**/*.tsx"
-            ],
+            "cache": false,
             "outputMode": "errors-only"
         },
         "lint": {
+            "cache": false,
             "inputs": [
                 "src/**/*.tsx",
                 "src/**/*.ts",
