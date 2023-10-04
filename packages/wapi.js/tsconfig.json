@@ -3,6 +3,12 @@
     "compilerOptions": {
         "module": "ESNext",
         "outDir": "dist/esm",
+        "noEmit": false,
+        "paths": {
+            "~/*": [
+                "./src/*"
+            ]
+        }
     },
     "include": [
         "src/",

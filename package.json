@@ -1,20 +1,22 @@
 {
-  "name": "wapi.js",
+  "name": "wapijs",
   "version": "0.1.0",
   "description": "wapi.js is a node library built for developing whatsapp cloud API based app in a user friendly way.",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "private": true,
   "scripts": {
-    "test": "turbo test --concurrency=2",
-    "clean": "turbo clean --concurrency=2",
-    "build": "turbo build --concurrency=2",
-    "build:esm": "turbo build:esm  --concurrency=2",
-    "build:cjs": "turbo build:cjs  --concurrency=2",
-    "lint": "turbo run lint --concurrency=2",
+    "watch": "turbo watch --concurrency=3",
+    "test": "turbo test --concurrency=3",
+    "clean": "turbo clean --concurrency=3",
+    "build": "turbo build --concurrency=3",
+    "build:esm": "turbo build:esm  --concurrency=3",
+    "build:cjs": "turbo build:cjs  --concurrency=3",
+    "lint": "turbo run lint --concurrency=3",
     "prepare": "husky install",
-    "pretty": "turbo pretty --concurrency=2",
+    "pretty": "turbo pretty --concurrency=3",
     "clean-install": "turbo run clean-install"
   },
   "keywords": [

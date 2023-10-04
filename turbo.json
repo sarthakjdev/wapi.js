@@ -53,6 +53,9 @@
                 "test/**/*.tsx"
             ],
             "outputMode": "errors-only"
+        },
+        "watch": {
+            "cache": false
         }
     }
 }
