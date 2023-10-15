@@ -1,0 +1,13 @@
+{
+  "name": "example-chatbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "pako": "^2.1.0",
+    "wapi.js": "file:./../packages/wapi.js/"
+  }
+}

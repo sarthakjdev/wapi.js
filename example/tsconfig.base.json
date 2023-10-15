@@ -8,6 +8,7 @@
         "strict": true,
         "declaration": true,
         "declarationMap": false,
+        "module": "ESNext",
         "importHelpers": false,
         "newLine": "lf",
         "noEmitHelpers": true,
