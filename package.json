@@ -1,11 +1,7 @@
 {
   "name": "wapijs",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "wapi.js is a node library built for developing whatsapp cloud API based app in a user friendly way.",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
   "private": true,
   "scripts": {
     "watch": "turbo watch --concurrency=3",
@@ -56,5 +52,6 @@
     "prettier": "^3.0.3",
     "turbo": "^1.10.13",
     "typescript": "^5.2.2"
-  }
+  },
+  "packageManager": "pnpm@8.7.0"
 }

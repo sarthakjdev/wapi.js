@@ -237,6 +237,34 @@ export const TextMessageEventDataSchemaType = z.object({
 
 export type EventDataMap = {
 	[NotificationEventTypeEnum.TextMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.AudioMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.AdInteraction]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.ContactsMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.ButtonInteraction]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.CustomerIdentityChanged]: Zod.infer<
+		typeof TextMessageEventDataSchemaType
+	>
+	[NotificationEventTypeEnum.CustomerNumberChanged]: Zod.infer<
+		typeof TextMessageEventDataSchemaType
+	>
+	[NotificationEventTypeEnum.DocumentMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.ImageMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.ListInteraction]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.LocationMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.MessageDeleted]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.MessageDelivered]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.MessageFailed]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.MessageRead]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.MessageSent]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.MessageUndelivered]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.OrderReceived]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.ProductInquiry]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.Reaction]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.ReplyMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.StickerMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.UnknownEvent]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	[NotificationEventTypeEnum.VideoMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
 	['Error']: Error
 	['Warn']: string
+	['Ready']: null
 }

@@ -8,10 +8,9 @@ export class Webhook extends EventEmitter {
 	private endpoint: string
 	private port = 3000
 	private server: Express
-	private client: Client
 	private listening = false
-
 	private webhookSecret: string
+	private client: Client
 
 	constructor(params: {
 		client: Client
@@ -43,8 +42,7 @@ export class Webhook extends EventEmitter {
 						break
 				}
 			} else {
-				// ! TODO: emit warn event with warning message
-				// this.client.emit('warn')
+				this.client.emit('Warn', 'Unknown notification event received')
 			}
 		})
 	}
@@ -92,9 +90,10 @@ export class Webhook extends EventEmitter {
 	 */
 	listen(cb: () => void) {
 		this.server.listen(this.port, cb)
-		this.server.on('error', () => {
+		this.server.on('error', error => {
+			console.error(error)
 			// ! TODO: emit the error with JS error here
-			// this.client.emit('Error', new Error(error.))
+			// this.client.emit('Error', )
 		})
 		this.listening = true
 	}

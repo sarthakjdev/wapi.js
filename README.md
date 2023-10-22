@@ -71,11 +71,11 @@ For reference visit WhatsApp Docs [here](https://developers.facebook.com/docs/wh
 ## Scripts:
 
 ```
-yarn run build : To build the project
-yarn run watch: To compile the project in watch mode or transpile the project
-yarn run clean-install : To clean install the modules removing the previous ones
-yarn run lint : TO check for the eslint errors
-yarn run lint:fix : To fix the fixable eslint errors
+pnpm run build : To build the project
+pnpm run watch: To compile the project in watch mode or transpile the project
+pnpm run clean-install : To clean install the modules removing the previous ones
+pnpm run lint : TO check for the eslint errors
+pnpm run lint:fix : To fix the fixable eslint errors
 ```
 
 <br/><hr/><br/>
@@ -107,13 +107,13 @@ Refer to this [Contributing.md](./CONTRIBUTING.md) if you have any difficulty in
 -   After cloning the project in your local, run the following command to install the dependencies required by the project:
 
 ```sh
-yarn install --frozen-lockfile
+pnpm install --frozen-lockfile
 ```
 
 -   Build the project using the following command:
 
 ```sh
-yarn build
+pnpm build
 ```
 
 <br/><hr/><br/>
@@ -125,11 +125,11 @@ yarn build
 2. Run the following commands:
 
 ```sh
-yarn install <path-to-wapi.js>
-yarn link <path-to-wapi.js>
+pnpm install <path-to-wapi.js>
+pnpm link <path-to-wapi.js>
 ```
 
-NOTE: Make sure you have already built the library using `yarn build`
+NOTE: Make sure you have already built the library using `pnpm build`
 
 <br/><hr/><br/>
 

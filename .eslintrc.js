@@ -42,7 +42,7 @@ module.exports = {
     ],
     "no-empty-pattern": "off",
     "no-inner-declarations": "off",
-    "no-console": "error",
+    "no-console": "off",
     "no-debugger": "error",
     "no-alert": "error",
     "no-useless-escape": "error",

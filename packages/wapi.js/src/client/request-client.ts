@@ -36,14 +36,20 @@ export class RequestClient {
 		return `${this.protocol}/${this.host}/${this.phoneNumberId}`
 	}
 
-	async requestCloudApi(body: any) {
+	async requestCloudApi({
+		body,
+		path,
+		method = 'POST'
+	}: {
+		path: string
+		body?: any
+		method?: 'GET' | 'POST' | 'DELETE'
+	}) {
 		try {
 			const requestUrl = this.getRequestUrl()
 
-			// ! implement timeout here
-
-			const response = await fetch(requestUrl, {
-				method: 'POST',
+			const response = await fetch(`${requestUrl}/${path}`, {
+				method: method,
 				body,
 				headers: {
 					'Content-Type': 'application/json',
@@ -52,7 +58,8 @@ export class RequestClient {
 				}
 			})
 
-			return response.json()
+			const responseBody = await response.json()
+			return responseBody
 		} catch (error) {
 			if (error instanceof Error) this.client.emit('Error', error)
 		}

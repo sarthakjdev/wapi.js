@@ -4,12 +4,15 @@ import { Webhook } from '~/webhook'
 import { PhoneNumberManager } from '~/manager/phone'
 import { MediaManager } from '~/manager/media'
 import { RequestClient } from './request-client'
+import { type ClientInterface } from './interface'
 
-export class Client extends EventEmitter {
+export class Client extends EventEmitter implements ClientInterface {
 	phone: PhoneNumberManager
 	media: MediaManager
 	webhook: Webhook
 	requester: RequestClient
+	status: 'Ready' | 'Idle' | null = null
+	readyAtTimeStamp: Date | null = null
 
 	private static baseUrl = 'cloud.whatsapp.com'
 
@@ -30,8 +33,10 @@ export class Client extends EventEmitter {
 			webhookEndpoint: params.webhookEndpoint,
 			port: params.port
 		})
-		this.phone = new PhoneNumberManager()
-		this.media = new MediaManager()
+		this.phone = new PhoneNumberManager(this)
+		this.media = new MediaManager({
+			client: this
+		})
 		this.requester = new RequestClient({
 			accessToken: params.apiAccessToken,
 			businessAccountId: params.businessAccountId,
@@ -55,9 +60,27 @@ export class Client extends EventEmitter {
 		return super.on(eventName, listener)
 	}
 
-	initiate() {
+	getReadyAt() {
+		return this.readyAtTimeStamp
+	}
+
+	updateAccessToken(accessToken: string) {
+		this.requester.accessToken = accessToken
+	}
+
+	updateSenderPhoneNumberId(phoneNumber: string) {
+		this.requester.phoneNumberId = phoneNumber
+	}
+
+	async initiate() {
 		this.webhook.listen(() => {
-			// ! TODO: emit the ready event here
+			this.status = 'Ready'
+			this.emit('Ready', null)
 		})
+
+		this.readyAtTimeStamp = new Date()
+		await Promise.resolve()
+
+		return true
 	}
 }
