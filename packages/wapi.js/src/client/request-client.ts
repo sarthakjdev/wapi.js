@@ -7,7 +7,6 @@ type RequestClientConfigOptions = {
 	businessAccountId: string
 	apiVersion: string
 	client: Client
-	userAgent: string
 	accessToken: string
 }
 
@@ -18,8 +17,8 @@ export class RequestClient {
 	businessAccountId: string
 	apiVersion: string
 	client: Client
-	userAgent: string
 	accessToken: string
+	private userAgent: string
 
 	constructor(options: RequestClientConfigOptions) {
 		this.host = options.host
@@ -28,7 +27,7 @@ export class RequestClient {
 		this.businessAccountId = options.businessAccountId
 		this.client = options.client
 		this.phoneNumberId = options.phoneNumberId
-		this.userAgent = options.userAgent
+		this.userAgent = ''
 		this.accessToken = options.accessToken
 	}
 

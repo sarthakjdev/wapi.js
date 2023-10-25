@@ -5,33 +5,38 @@ import { type z } from 'zod'
 import { AudioMessageConstructorParamSchemaType } from './schema'
 
 export class AudioMessage extends BaseMessage implements AudioMessageInterface {
-	readonly data: { id?: string | null; link?: string | null } = {}
+	readonly data: { mediaId?: string | null; link?: string | null } = {}
 
 	private static schema = AudioMessageConstructorParamSchemaType
 
 	constructor(params: z.infer<typeof AudioMessage.schema>) {
 		super({ type: MessageTypeEnum.Audio })
 
+		// parse the constructor payload for early feedback
+		AudioMessage.parseConstructorPayload(AudioMessage.schema, params)
+
 		if ('id' in params) {
-			this.data.id = params.id
+			this.data.mediaId = params.id
 		} else {
 			this.data.link = params.link
 		}
 	}
 
-	setId(id: string | null) {
+	setMediaId(id: string | null) {
 		if (this.data.link) {
 			// throw error saying you can either set id or a link
 		}
 
-		this.data.id = id
+		this.data.mediaId = id
 	}
 
 	setLink(link: string | null) {
-		if (this.data.id) {
+		if (this.data.mediaId) {
 			// throw error saying you can either set id or a link
 		}
 
 		this.data.link = link
 	}
+
+	toJson() {}
 }

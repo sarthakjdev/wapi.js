@@ -1,8 +1,9 @@
-import { type Client } from '../../..'
+import { type Client } from '../../client'
+import { type BaseMessage } from '../../structures/message'
 import { BaseManager } from '../base'
-import { type MessagerManagerInterface } from './interface'
+import { type MessageManagerInterface } from './interface'
 
-export class MessageManager extends BaseManager implements MessagerManagerInterface {
+export class MessageManager extends BaseManager implements MessageManagerInterface {
 	client: Client
 
 	constructor(props: { client: Client }) {
@@ -10,10 +11,14 @@ export class MessageManager extends BaseManager implements MessagerManagerInterf
 		this.client = props.client
 	}
 
-	async send() {
-		await Promise.resolve()
+	async send<T extends BaseMessage>(props: { message: T; phoneNumber: string }): Promise<string> {
+		const response = await this.client.requester.requestCloudApi({
+			path: '/messages',
+			body: props.message.toJson(),
+			method: 'POST'
+		})
 
-		return ''
+		return response
 	}
 
 	async read(messageId: string) {

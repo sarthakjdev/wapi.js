@@ -1,10 +1,11 @@
-import { type Client } from '../../..'
+import { type Client } from '../../client'
+import { type BaseMessage } from '../../structures/message'
 import { type BaseManager } from '../base'
 
-export interface MessagerManagerInterface extends BaseManager {
+export interface MessageManagerInterface extends BaseManager {
 	client: Client
 
-	send(props: { message: any; phoneNumber: string }): Promise<string>
+	send<T extends BaseMessage>(props: { message: T; phoneNumber: string }): Promise<string>
 
 	read(messageId: string): Promise<boolean>
 }

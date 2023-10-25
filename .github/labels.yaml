@@ -1,0 +1,12 @@
+- name: good-first-issue
+  color: ''
+- name: level1-issue
+  color: ''
+- name: level2-issue
+  color: ''
+- name: level3-issue
+  color: ''
+- name: feature
+  color: ''
+- name: docs
+  color: ''

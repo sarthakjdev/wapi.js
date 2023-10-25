@@ -1,8 +1,9 @@
 import { type EventDataMap } from '../webhook/schema'
 import type { RequestClient } from './request-client'
-import {type PhoneNumberManager } from '../manager/phone'
+import { type PhoneNumberManager } from '../manager/phone'
 import { type MediaManager } from '../manager/media'
 import { type Webhook } from '../webhook'
+import { type MessageManager } from '../manager/message'
 import { type Client } from './index'
 
 export interface ClientInterface {
@@ -10,7 +11,8 @@ export interface ClientInterface {
 	media: MediaManager
 	webhook: Webhook
 	requester: RequestClient
-	status: 'Ready' | 'Idle' | null
+	message: MessageManager
+	status: ClientStatusEnum | null
 	readyAtTimeStamp: Date | null
 	getReadyAt: () => Date | null
 
@@ -38,4 +40,9 @@ export interface RequestClientInterface {
 		body: any
 		method: 'GET' | 'POST' | 'DELETE'
 	}): Promise<void>
+}
+
+export enum ClientStatusEnum {
+	Ready = 'ready',
+	Idle = 'idle'
 }

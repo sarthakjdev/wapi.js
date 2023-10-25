@@ -4,27 +4,31 @@ import { Webhook } from '../webhook'
 import { PhoneNumberManager } from '../manager/phone'
 import { MediaManager } from '../manager/media'
 import { RequestClient } from './request-client'
-import { type ClientInterface } from './interface'
+import { ClientStatusEnum, type ClientInterface } from './interface'
+import { MessageManager } from '../manager/message'
 
 export class Client extends EventEmitter implements ClientInterface {
+	/**
+	 * phone number manager to verify phone numbers for your
+	 */
 	phone: PhoneNumberManager
 	media: MediaManager
 	webhook: Webhook
 	requester: RequestClient
-	status: 'Ready' | 'Idle' | null = null
+	message: MessageManager
+	status: ClientStatusEnum | null = null
 	readyAtTimeStamp: Date | null = null
 
 	private static baseUrl = 'cloud.whatsapp.com'
+	private static apiVersion = 'v17.0'
 
 	constructor(params: {
 		webhookSecret: string
 		webhookEndpoint: string
 		apiAccessToken: string
-		apiVersion: string
 		phoneNumberId: string
 		businessAccountId: string
 		port: number
-		userAgent: string
 	}) {
 		super()
 		this.webhook = new Webhook({
@@ -33,20 +37,24 @@ export class Client extends EventEmitter implements ClientInterface {
 			webhookEndpoint: params.webhookEndpoint,
 			port: params.port
 		})
-		this.phone = new PhoneNumberManager({client: this})
+		this.phone = new PhoneNumberManager({ client: this })
 		this.media = new MediaManager({
 			client: this
 		})
+		this.message = new MessageManager({ client: this })
 		this.requester = new RequestClient({
 			accessToken: params.apiAccessToken,
 			businessAccountId: params.businessAccountId,
 			phoneNumberId: params.phoneNumberId,
 			client: this,
 			host: Client.baseUrl,
-			apiVersion: '',
-			protocol: 'https',
-			userAgent: params.userAgent
+			apiVersion: Client.apiVersion,
+			protocol: 'https'
 		})
+	}
+
+	static getClient() {
+		return this
 	}
 
 	emit<T extends keyof EventDataMap>(eventName: T, data: EventDataMap[T]): boolean {
@@ -74,7 +82,7 @@ export class Client extends EventEmitter implements ClientInterface {
 
 	async initiate() {
 		this.webhook.listen(() => {
-			this.status = 'Ready'
+			this.status = ClientStatusEnum.Ready
 			this.emit('Ready', null)
 		})
 
