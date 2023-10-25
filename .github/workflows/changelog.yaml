@@ -22,5 +22,4 @@ jobs:
         with:
           header: "## Recent Changes"
           file: "CHANGELOG.md"
-          lerna: true
           ignoreFiles: "package.json|pnpm-lock.json|*.md"
