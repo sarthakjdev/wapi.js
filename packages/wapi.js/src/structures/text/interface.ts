@@ -1,5 +1,5 @@
 import { type BaseMessageInterface } from '../message/interface'
 
 export interface TextMessageInterface extends BaseMessageInterface {
-	text: string
+	data: { text: string | null }
 }

@@ -5,8 +5,7 @@ import { type z } from 'zod'
 import { AudioMessageConstructorParamSchemaType } from './schema'
 
 export class AudioMessage extends BaseMessage implements AudioMessageInterface {
-	id?: string
-	link?: string | undefined
+	readonly data: { id?: string | null; link?: string | null } = {}
 
 	private static schema = AudioMessageConstructorParamSchemaType
 
@@ -14,9 +13,25 @@ export class AudioMessage extends BaseMessage implements AudioMessageInterface {
 		super({ type: MessageTypeEnum.Audio })
 
 		if ('id' in params) {
-			this.id = params.id
+			this.data.id = params.id
 		} else {
-			this.link = params.link
+			this.data.link = params.link
 		}
+	}
+
+	setId(id: string | null) {
+		if (this.data.link) {
+			// throw error saying you can either set id or a link
+		}
+
+		this.data.id = id
+	}
+
+	setLink(link: string | null) {
+		if (this.data.id) {
+			// throw error saying you can either set id or a link
+		}
+
+		this.data.link = link
 	}
 }

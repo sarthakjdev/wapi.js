@@ -1,10 +1,13 @@
-import { type EventDataMap } from '~/webhook/schema'
-import type { Client, MediaManagerInterface, PhoneNumberManagerInterface, Webhook } from '../..'
+import { type EventDataMap } from '../webhook/schema'
 import type { RequestClient } from './request-client'
+import {type PhoneNumberManager } from '../manager/phone'
+import { type MediaManager } from '../manager/media'
+import { type Webhook } from '../webhook'
+import { type Client } from './index'
 
 export interface ClientInterface {
-	phone: PhoneNumberManagerInterface
-	media: MediaManagerInterface
+	phone: PhoneNumberManager
+	media: MediaManager
 	webhook: Webhook
 	requester: RequestClient
 	status: 'Ready' | 'Idle' | null

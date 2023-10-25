@@ -4,11 +4,6 @@
         "outDir": "dist/cjs",
         "module": "CommonJS",
         "noEmit": false,
-        "paths": {
-            "~/*": [
-                "./src/*"
-            ]
-        }
     },
     "include": [
         "src/",

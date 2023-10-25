@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events'
 import { type EventDataMap } from '../webhook/schema'
-import { Webhook } from '~/webhook'
-import { PhoneNumberManager } from '~/manager/phone'
-import { MediaManager } from '~/manager/media'
+import { Webhook } from '../webhook'
+import { PhoneNumberManager } from '../manager/phone'
+import { MediaManager } from '../manager/media'
 import { RequestClient } from './request-client'
 import { type ClientInterface } from './interface'
 
@@ -33,7 +33,7 @@ export class Client extends EventEmitter implements ClientInterface {
 			webhookEndpoint: params.webhookEndpoint,
 			port: params.port
 		})
-		this.phone = new PhoneNumberManager(this)
+		this.phone = new PhoneNumberManager({client: this})
 		this.media = new MediaManager({
 			client: this
 		})

@@ -1,4 +1,4 @@
-import { type Client } from '../../..'
+import { type Client } from '../../client'
 import { type BaseManagerInterface } from './interface'
 
 export class BaseManager implements BaseManagerInterface {
