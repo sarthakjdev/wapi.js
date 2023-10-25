@@ -53,30 +53,6 @@ jobs:
         if: ${{ success() }}
         run: pnpm build
 
-      - name: Build Success
-        if: ${{ success() }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require("fs")
-             const path = require("path")
-             const {  data: pullRequestData  } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                   owner: context.repo.owner,
-                   repo: context.repo.repo,
-                   commit_sha: context.payload.after
-               })
-
-             if(pullRequestData[0]){
-                await github.rest.issues.createComment({
-                     issue_number: pullRequestData[0].number,
-                     owner: context.repo.owner,
-                     repo: context.repo.repo,
-                     body: `#### 🟢  Build success`
-                 })
-             } else {
-             throw new Error('Pull request data not found')
-             }
-
       - name: Build Failed
         if: ${{ failure() }}
         uses: actions/github-script@v6
