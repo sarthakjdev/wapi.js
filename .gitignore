@@ -7,3 +7,5 @@ dist/**
 .next/**
 yarn-error.log
 dist
+coverage
+.vscode/*
