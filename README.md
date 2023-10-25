@@ -22,7 +22,6 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 ### Packages:
 
 - [**wapi.js**]('/packages/wapi.js'): Interact with WhatsApp cloud API efficiently.
-- [**@wapijs/component-builder**]('/packages/component-generator): Utility to build WhatsApp cloud API payloads.
 
 ---
 
