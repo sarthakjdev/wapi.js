@@ -26,5 +26,5 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  success-state: 'PR Title follows the Conventional Commits spec'
-                  failure-state: 'PR Title does not follow the Conventional Commits spec'
+                  success-state: "PR Title follows the Conventional Commits spec"
+                  failure-state: "PR Title does not follow the Conventional Commits spec"

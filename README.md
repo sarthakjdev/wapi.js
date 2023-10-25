@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="https://media.discordapp.net/attachments/1046394448088674371/1149627540474953749/transparent_dark_mode.png?width=666&height=440" alt="wapi.js">
 </p>
@@ -25,7 +24,7 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 
 ---
 
-## ✨ Features 
+## ✨ Features
 
 - Object-Oriented Architecture
 - Single Client Model
@@ -50,7 +49,7 @@ pnpm install wapi.js
 
 ---
 
-## 🚀 Usage 
+## 🚀 Usage
 
 Kickstart your first WhatsApp application with Wapi.js. Check the [User Manual](./USER_MANUAL.md).
 
@@ -90,7 +89,7 @@ This library is in early development. Please report bugs or issues [here](#). Yo
 
 ---
 
-## 🤝 Contribution Guidelines 
+## 🤝 Contribution Guidelines
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -102,7 +101,7 @@ For detailed guidelines, check [Contributing.md](./CONTRIBUTING.md).
 
 ---
 
-## 📜 License 
+## 📜 License
 
 Distributed under the MIT License. View [LICENSE](./LICENSE).
 
