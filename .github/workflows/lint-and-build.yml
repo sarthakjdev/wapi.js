@@ -50,6 +50,7 @@ jobs:
               }
 
       - name: Build the packages
+        if: ${{ success() }}
         run: pnpm build
 
       - name: Build Success
