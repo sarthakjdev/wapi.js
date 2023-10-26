@@ -1,0 +1,8 @@
+:root {
+	--vp-wapi-primary: #22c55e;
+	--vp-wapi-secondary: transparent;
+	--vp-home-hero-name-color: var(--vp-wapi-primary);
+	--vp-button-brand-bg: var(--vp-wapi-primary);
+	--vp-button-alt-bg: var(--vp-wapi-secondary);
+	--vp-local-search-highlight-bg: var(--vp-wapi-primary);
+}
