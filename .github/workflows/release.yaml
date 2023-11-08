@@ -2,8 +2,6 @@ name: Build
 
 on:
   release:
-    branches:
-      - "master"
 
 jobs:
   lint:
