@@ -1,4 +1,4 @@
-const prettierWriteCommand = 'yarn prettier --write'
+const prettierWriteCommand = 'pnpm prettier --write'
 
 // eslint-disable-next-line no-undef
 module.exports = {

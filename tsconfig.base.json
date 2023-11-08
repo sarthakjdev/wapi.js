@@ -1,19 +1,20 @@
 {
-    "compilerOptions": {
-        "allowUnreachableCode": false,
-        "allowJs": true,
-        "strict": true,
-        "declaration": true,
-        "declarationMap": false,
-        "importHelpers": false,
-        "newLine": "lf",
-        "noEmitHelpers": true,
-        "outDir": "dist",
-        "removeComments": false,
-        "sourceMap": true,
-    },
-    "lib": [
-        "ESNext"
-    ],
-    "target": "ES2022"
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "moduleResolution": "Node",
+    "allowUnreachableCode": false,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "declaration": true,
+    "declarationMap": false,
+    "importHelpers": false,
+    "newLine": "lf",
+    "noEmitHelpers": true,
+    "noEmit": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "ESNext"
+  },
+  "lib": ["ESNext"]
 }

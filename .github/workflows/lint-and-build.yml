@@ -1,0 +1,77 @@
+name: Build
+
+on:
+  push:
+    branches-ignore:
+      - "master"
+
+jobs:
+  lint-and-build:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: User Node.js LTS
+        uses: actions/setup-node@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: false
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Linter Failed
+        if: ${{ failure() }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const { data: pullRequestData } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    commit_sha: context.payload.after
+                })
+
+              if(pullRequestData[0]){
+                 await github.rest.issues.createComment({
+                      issue_number: pullRequestData[0].number,
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      body: `### 🚨  Linter failed`
+                  })
+              } else {
+                  throw new Error('Pull request data not found')
+              }
+
+      - name: Build the packages
+        if: ${{ success() }}
+        run: pnpm build
+
+      - name: Build Failed
+        if: ${{ failure() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: pullRequestData } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  commit_sha: context.payload.after
+              })
+
+            if(pullRequestData[0]){
+               await github.rest.issues.createComment({
+                    issue_number: pullRequestData[0].number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: `#### ❌ Build failed:
+            `
+                })
+            } else {
+              throw new Error('Pull request data not found')
+            }

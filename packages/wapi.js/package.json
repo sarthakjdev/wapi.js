@@ -1,23 +1,32 @@
 {
   "name": "wapi.js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
   "scripts": {
+    "watch": "pnpm tsc  --watch",
     "test": "vitest run",
     "clean": "rm -rf ./dist",
-    "build:cjs": "yarn tsc -p tsconfig-cjs.json --pretty",
-    "build:esm": "yarn tsc -p tsconfig.json --pretty",
-    "build": "yarn run clean && concurrently -n esm,cjs \"npm run build:esm\" \"npm run build:cjs\"",
-    "lint": "yarn eslint . --max-warnings=0",
-    "pretty": "yarn prettier --write \"src/**/*.ts\"",
-    "clean-install": "rm -rf ./node_modules && yarn install --frozen-lockfile"
+    "build:cjs": "pnpm tsc -p tsconfig-cjs.json --pretty",
+    "build:esm": "pnpm tsc -p tsconfig.json --pretty",
+    "build": "pnpm run clean && concurrently -n esm,cjs \"pnpm run build:esm\" \"pnpm run build:cjs\"",
+    "lint": "pnpm eslint . --max-warnings=10",
+    "pretty": "pnpm prettier --write \"src/**/*.ts\"",
+    "clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
+    "doc:gen": "typedoc --out docs-md --entryPointStrategy Expand ./src"
   },
   "keywords": [],
   "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wapijs/wapi.js.git",
+    "directory": "packages/wapi.js"
+  },
   "license": "Apache-2.0",
   "devDependencies": {
+    "@types/express": "^4.17.18",
     "concurrently": "^8.2.1",
     "eslint": "^8.48.0",
     "eslint-config-next": "^13.4.19",
@@ -26,9 +35,15 @@
     "eslint-plugin-import": "^2.28.1",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
+    "tsup": "^7.2.0",
+    "typedoc": "^0.25.1",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   },
   "dependencies": {
-    "dayjs": "^1.11.9"
-  }
+    "dayjs": "^1.11.9",
+    "express": "^4.18.2",
+    "zod": "^3.22.2"
+  },
+  "packageManager": "pnpm@8.7.0"
 }

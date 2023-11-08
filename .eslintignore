@@ -1,5 +1,6 @@
 node_modules
 *.env
+dist/
 dist/cjs/**
 dist/esm/**
 errors.log
