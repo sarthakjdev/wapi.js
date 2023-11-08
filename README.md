@@ -12,6 +12,8 @@
 
 ## 📌 Status
 
+:warning: Work in progress
+
 This library is currently in beta version and in work in progress state. Report issues [here](https://github.com/sarthakjdev/wapi.js/issues).
 
 ## 📖 About

@@ -1,113 +1,56 @@
-# ! TODO: deployment workflow
+name: Deploy Documentation
 
-# name: Deploy Documentation
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - "master"
+    paths: ["apps/website/**"]
 
-# on:
-#   push:
-#     branches:
-#       - "master"
-#     paths:
-#       - "apps/website/**"
+jobs:
+  docs:
+    environment: Production
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-# concurrency:
-#   group: ${{ github.workflow }}-${{ github.ref }}-website-deployment
-#   cancel-in-progress: true
+      - name: User Node.js LTS
+        uses: actions/setup-node@v2
 
-# # ! TODO: add jobs to generate api docs, parse them into md and integrate into existing vite press site
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
 
-# jobs:
-#   lint:
-#     timeout-minutes: 10
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: pnpm -g add vercel@canary
 
-#       - name: User Node.js LTS
-#         uses: actions/setup-node@v2
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: docs
 
-#       - name: Install pnpm
-#         uses: pnpm/action-setup@v2.2.4
-#         with:
-#           run_install: false
+      - name: Build
+        run: pnpm run build
+        working-directory: docs
 
-#       - name: Install Dependencies
-#         run: pnpm install --frozen-lockfile
+      - name: Trigger Production Deployment
+        run: vercel deploy -y --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
 
-#       - name: Lint
-#         run: yarn run lint
+      - name: Deployment Failure Alert
+        if: ${{ failure() }}
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          embed-title: "🚨🚨🚨 MASTER BRANCH DOCUMENTATION DEPLOYMENT FAILED 🚨🚨🚨"
+          embed-description: " .<@517983211708612609> deploy job on master branch failed, check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
 
-#       - name: Linter Failed
-#         if: ${{ failure() }}
-#         uses: actions/github-script@v5
-#         with:
-#           script: |
-#             const { pullRequestData: data } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-#                     owner: context.repo.owner,
-#                     repo: context.repo.repo,
-#                     commit_sha: context.payload.after
-#                 })
-
-#               if(pullRequestData[0]){
-#                  await github.rest.issues.createComment({
-#                       issue_number: pullRequestData[0].number,
-#                       owner: context.repo.owner,
-#                       repo: context.repo.repo,
-#                       body: `### 🚨  Linter failed`
-#                   })
-#               } else {
-#                   throw new Error('Pull request data not found')
-#               }
-#   deploy:
-#     environment: Production
-#     timeout-minutes: 15
-#     runs-on: ubuntu-latest
-#     needs: [lint]
-#     env:
-#       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-#       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-
-#       - name: User Node.js LTS
-#         uses: actions/setup-node@v2
-
-#       - name: Install Vercel CLI
-#         run: yarn global add vercel@canary
-
-#       - name: Install Dependencies
-#         run: yarn install --frozen-lockfile
-
-#       - name: Build
-#         run: yarn run build
-
-#       - name: Trigger Production Deployment
-#         run: vercel deploy -y --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
-
-#       - name: Deployment Failure
-#         if: ${{ failure() }}
-#         uses: actions/github-script@v6
-#         with:
-#           script: |
-#             const { data: pullRequestData } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-#                   owner: context.repo.owner,
-#                   repo: context.repo.repo,
-#                   commit_sha: context.payload.after
-#               })
-
-#             // ! TODO: send notification either on slack or on discord
-
-#             if(pullRequestData[0]){
-#                await github.rest.issues.createComment({
-#                     issue_number: pullRequestData[0].number,
-#                     owner: context.repo.owner,
-#                     repo: context.repo.repo,
-#                     body: `#### ❌ Deployment failed:
-#             `
-#                 })
-#             } else {
-#             throw new Error('Pull request data not found')
-#             }
-
-
+      - name: Deployment Failure Alert
+        if: ${{ success() }}
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          embed-title: "🟢 NEW VERSION OF DOCUMENTATION DEPLOYED"
+          embed-description: "Documentation deployed success!"
