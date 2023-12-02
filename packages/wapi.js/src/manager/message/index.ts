@@ -12,6 +12,8 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 	}
 
 	async send<T extends BaseMessage>(props: { message: T; phoneNumber: string }): Promise<string> {
+		console.log({ props: props.message.toJson() })
+
 		const response = await this.client.requester.requestCloudApi({
 			path: '/messages',
 			body: props.message.toJson(),

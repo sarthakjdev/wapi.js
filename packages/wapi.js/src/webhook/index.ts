@@ -2,7 +2,8 @@ import * as EventEmitter from 'events'
 import { type Client } from '../client'
 import { WhatsappApiNotificationPayloadSchemaType } from './schema'
 import { NotificationEventTypeEnum } from './type'
-import express, { type Express, json as expressJson } from 'express'
+import * as express from 'express'
+import { type Express, json as expressJson } from 'express'
 
 export class Webhook extends EventEmitter {
 	private endpoint: string
@@ -11,7 +12,6 @@ export class Webhook extends EventEmitter {
 	private listening = false
 	private webhookSecret: string
 	private client: Client
-
 	constructor(params: {
 		client: Client
 		webhookSecret: string
@@ -25,23 +25,103 @@ export class Webhook extends EventEmitter {
 		this.port = params.port
 		this.server = express()
 		this.server.use(expressJson())
-		this.server.get(this.endpoint, request => {
-			const parsedPayload = WhatsappApiNotificationPayloadSchemaType.safeParse(request.body)
+		this.server.get(this.endpoint, (request, response) => {
+			const queryToken = request.query['hub.verify_token']
+			if (typeof queryToken === 'string') {
+				if (queryToken === this.webhookSecret) {
+					response.send(request.query['hub.challenge'])
+				} else {
+					response.status(400).send()
+				}
+			} else {
+				// ignore this request
+			}
+		})
 
+		this.server.post(this.endpoint, (request, response) => {
+			const requestBody = request.body
+			const bodyEntry = JSON.stringify(requestBody.entry, null, 4)
+			console.log({ bodyEntry })
+			const parsedPayload = WhatsappApiNotificationPayloadSchemaType.safeParse(request.body)
 			if (parsedPayload.success) {
 				const notificationEventData = this.getNotificationEventData(parsedPayload.data)
+				console.log({ notificationEventData })
 
 				switch (notificationEventData.type) {
 					case NotificationEventTypeEnum.TextMessage: {
-						// this.client.emit('TextMessage', {})
+						this.client.emit('TextMessage', { from: 'test', text: 'hello' })
+						break
+					}
 
-						return
+					case NotificationEventTypeEnum.AdInteraction: {
+						this.client.emit('AdInteraction', { from: 'test', text: 'hello' })
+						break
+					}
+
+					case NotificationEventTypeEnum.AudioMessage: {
+						break
+					}
+
+					case NotificationEventTypeEnum.VideoMessage: {
+						break
+					}
+
+					case NotificationEventTypeEnum.LocationMessage: {
+						break
+					}
+
+					case NotificationEventTypeEnum.ContactsMessage: {
+						break
+					}
+
+					case NotificationEventTypeEnum.DocumentMessage: {
+						break
+					}
+
+					case NotificationEventTypeEnum.MessageRead: {
+						break
+					}
+
+					case NotificationEventTypeEnum.MessageSent: {
+						break
+					}
+
+					case NotificationEventTypeEnum.MessageDelivered: {
+						break
+					}
+
+					case NotificationEventTypeEnum.MessageDeleted: {
+						break
+					}
+
+					case NotificationEventTypeEnum.MessageFailed: {
+						break
+					}
+
+					case NotificationEventTypeEnum.MessageUndelivered: {
+						break
+					}
+
+					case NotificationEventTypeEnum.ImageMessage: {
+						break
+					}
+
+					case NotificationEventTypeEnum.ReplyMessage: {
+						break
+					}
+
+					case NotificationEventTypeEnum.StickerMessage: {
+						break
 					}
 
 					default:
 						break
 				}
+
+				response.status(200).send()
 			} else {
+				const errors = parsedPayload.error.errors
+				console.log({ errors })
 				this.client.emit('Warn', 'Unknown notification event received')
 			}
 		})

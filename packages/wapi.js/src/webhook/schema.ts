@@ -34,44 +34,46 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 								})
 							})
 						),
-						statuses: z.array(
-							z.object({
-								conversation: z.object({
-									id: z.string(),
-									origin: z.object({
-										type: z.enum([
-											'authentication',
-											'marketing',
-											'utility',
-											'service',
-											' referral_conversion'
-										]),
-										// this would only be present if the message status is sent,
-										expiration_timestamp: z.string().nullish()
-									}),
-									errors: NotificationPayloadErrorSchemaType.array(),
-									status: z.enum(['delivered', 'read', 'sent']),
-									timestamp: z.number(),
-									recipient_id: z.string(),
-									pricing: z.object({
-										pricing_model: z.literal('CBP'),
-										category: z.enum([
-											'authentication',
-											'marketing',
-											'utility',
-											'service',
-											' referral_conversion'
-										])
+						statuses: z
+							.array(
+								z.object({
+									conversation: z.object({
+										id: z.string(),
+										origin: z.object({
+											type: z.enum([
+												'authentication',
+												'marketing',
+												'utility',
+												'service',
+												' referral_conversion'
+											]),
+											// this would only be present if the message status is sent,
+											expiration_timestamp: z.string().nullish()
+										}),
+										errors: NotificationPayloadErrorSchemaType.array(),
+										status: z.enum(['delivered', 'read', 'sent']),
+										timestamp: z.number(),
+										recipient_id: z.string(),
+										pricing: z.object({
+											pricing_model: z.literal('CBP'),
+											category: z.enum([
+												'authentication',
+												'marketing',
+												'utility',
+												'service',
+												' referral_conversion'
+											])
+										})
 									})
 								})
-							})
-						),
+							)
+							.nullish(),
 						messages: z.array(
 							z
 								.object({
 									id: z.string(),
 									from: z.string(),
-									timestamp: z.number(),
+									timestamp: z.string(),
 									context: z
 										.object({
 											forwarded: z.boolean(),
@@ -221,7 +223,7 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 										)
 								)
 						),
-						errors: z.array(NotificationPayloadErrorSchemaType)
+						errors: z.array(NotificationPayloadErrorSchemaType).nullish()
 					}),
 					field: z.literal('messages')
 				})
@@ -236,9 +238,9 @@ export const TextMessageEventDataSchemaType = z.object({
 })
 
 export type EventDataMap = {
-	[NotificationEventTypeEnum.TextMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.AudioMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.AdInteraction]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	TextMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	AudioMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	AdInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
 	[NotificationEventTypeEnum.ContactsMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
 	[NotificationEventTypeEnum.ButtonInteraction]: Zod.infer<typeof TextMessageEventDataSchemaType>
 	[NotificationEventTypeEnum.CustomerIdentityChanged]: Zod.infer<

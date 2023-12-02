@@ -1,24 +1,23 @@
 import { type EventDataMap } from '../webhook/schema'
-import type { RequestClient } from './request-client'
 import { type PhoneNumberManager } from '../manager/phone'
 import { type MediaManager } from '../manager/media'
 import { type Webhook } from '../webhook'
 import { type MessageManager } from '../manager/message'
 import { type Client } from './index'
+import { type RequestClient } from './request-client'
 
 export interface ClientInterface {
 	phone: PhoneNumberManager
 	media: MediaManager
 	webhook: Webhook
-	requester: RequestClient
 	message: MessageManager
 	status: ClientStatusEnum | null
 	readyAtTimeStamp: Date | null
+	requester: RequestClient
 	getReadyAt: () => Date | null
-
 	emit<T extends keyof EventDataMap>(eventName: T, data: EventDataMap[T]): boolean
 	on<T extends keyof EventDataMap>(eventName: T, listener: (data: EventDataMap[T]) => void): this
-	initiate: () => Promise<boolean>
+	initiate: () => void
 	updateAccessToken(accessToken: string): void
 	updateSenderPhoneNumberId(phoneNumber: string): void
 }

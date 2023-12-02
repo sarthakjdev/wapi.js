@@ -31,8 +31,7 @@ export abstract class BaseMessage implements BaseMessageInterface {
 		}
 
 		await Promise.resolve(true)
-
-		return 'sghj'
+		return 'message_id'
 	}
 
 	setId(id: string): void {
@@ -41,7 +40,7 @@ export abstract class BaseMessage implements BaseMessageInterface {
 
 	async markAsRead() {
 		if (!this.id) {
-			// ! TODO: throw error here
+			throw new Error('message id missing trying to mark a message as read')
 		}
 
 		await Promise.resolve(true)

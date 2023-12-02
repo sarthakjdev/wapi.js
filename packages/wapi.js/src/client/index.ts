@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events'
+import { EventEmitter } from 'node:events'
 import { type EventDataMap } from '../webhook/schema'
 import { Webhook } from '../webhook'
 import { PhoneNumberManager } from '../manager/phone'
@@ -10,16 +10,53 @@ import { MessageManager } from '../manager/message'
 export class Client extends EventEmitter implements ClientInterface {
 	/**
 	 * phone number manager to verify phone numbers for your
+	 * @type {PhoneNumberManager}
+	 * @memberof Client
 	 */
 	phone: PhoneNumberManager
+
+	/**
+	 * media manager to upload, get and media via whatsapp cloud api
+	 * 	@type {PhoneNumberManager}
+	 * 	@memberof Client
+	 */
 	media: MediaManager
+
+	/**
+	 * webhook manager to handle the incoming message and event listening
+	 * 	@type {Webhook}
+	 * 	@memberof Client
+	 */
 	webhook: Webhook
-	requester: RequestClient
+
+	/**
+	 * message manager allows to send various type of messages and reply to incoming messages
+	 * 	@type {MessageManager}
+	 * 	@memberof Client
+	 */
 	message: MessageManager
+
+	/**
+	 * status of the client
+	 * @type {ClientStatusEnum}
+	 * 	@memberof Client
+	 */
 	status: ClientStatusEnum | null = null
+
+	/**
+	 * timestamp when the clients gets ready to send and listen to messages
+	 * @type {Date}
+	 * 	@memberof Client
+	 */
 	readyAtTimeStamp: Date | null = null
 
-	private static baseUrl = 'cloud.whatsapp.com'
+	/**
+	 * requester is an internal utility to communicate with Whatsapp cloud api
+	 * @type {RequestClient}
+	 * 	@memberof Client
+	 */
+	requester: RequestClient
+	private static baseUrl = 'graph.facebook.com'
 	private static apiVersion = 'v17.0'
 
 	constructor(params: {
@@ -80,15 +117,17 @@ export class Client extends EventEmitter implements ClientInterface {
 		this.requester.phoneNumberId = phoneNumber
 	}
 
-	async initiate() {
+	initiate() {
+		console.log('INITIATING CHAT BOT')
+
+		console.log(this.webhook)
+
 		this.webhook.listen(() => {
+			console.log('STARTING LISTENING FUNCTION')
 			this.status = ClientStatusEnum.Ready
 			this.emit('Ready', null)
+			this.readyAtTimeStamp = new Date()
+			console.log('CLIENT STATUS => ', this.status)
 		})
-
-		this.readyAtTimeStamp = new Date()
-		await Promise.resolve()
-
-		return true
 	}
 }

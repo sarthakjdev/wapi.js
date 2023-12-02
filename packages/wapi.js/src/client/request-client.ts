@@ -32,7 +32,7 @@ export class RequestClient {
 	}
 
 	getRequestUrl() {
-		return `${this.protocol}/${this.host}/${this.phoneNumberId}`
+		return `${this.protocol}://${this.host}/${this.apiVersion}/${this.phoneNumberId}`
 	}
 
 	async requestCloudApi({
@@ -47,7 +47,7 @@ export class RequestClient {
 		try {
 			const requestUrl = this.getRequestUrl()
 
-			const response = await fetch(`${requestUrl}/${path}`, {
+			const response = await fetch(`${requestUrl}${path}`, {
 				method: method,
 				body,
 				headers: {
