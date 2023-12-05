@@ -17,5 +17,7 @@ export class TextMessage extends BaseMessage implements TextMessageInterface {
 		this.data.text = text
 	}
 
-	toJson() {}
+	toJson() {
+		return {}
+	}
 }

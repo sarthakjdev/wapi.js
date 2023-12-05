@@ -6,22 +6,27 @@ import { type MessageManager } from '../manager/message'
 import { type Client } from './index'
 import { type RequestClient } from './request-client'
 
+/**
+ * Main client interface
+ * @interface
+ */
 export interface ClientInterface {
 	phone: PhoneNumberManager
 	media: MediaManager
 	webhook: Webhook
 	message: MessageManager
 	status: ClientStatusEnum | null
-	readyAtTimeStamp: Date | null
+	readyAtTimeStamp: number | null
 	requester: RequestClient
-	getReadyAt: () => Date | null
 	emit<T extends keyof EventDataMap>(eventName: T, data: EventDataMap[T]): boolean
 	on<T extends keyof EventDataMap>(eventName: T, listener: (data: EventDataMap[T]) => void): this
 	initiate: () => void
-	updateAccessToken(accessToken: string): void
-	updateSenderPhoneNumberId(phoneNumber: string): void
 }
 
+/**
+ * Request client interface
+ * @interface
+ */
 export interface RequestClientInterface {
 	host: string
 	protocol: string
@@ -29,7 +34,6 @@ export interface RequestClientInterface {
 	businessAccountId: string
 	apiVersion: string
 	client: Client
-	userAgent: string
 	accessToken: string
 
 	getRequestUrl(): string
@@ -41,6 +45,23 @@ export interface RequestClientInterface {
 	}): Promise<void>
 }
 
+/**
+ * Request client configuration options type
+ */
+export type RequestClientConfigOptions = {
+	host: string
+	protocol: string
+	phoneNumberId: string
+	businessAccountId: string
+	apiVersion: string
+	client: Client
+	accessToken: string
+}
+
+/**
+ * Client status enum to identify the current state of wapi client
+ * @enum
+ */
 export enum ClientStatusEnum {
 	Ready = 'ready',
 	Idle = 'idle'

@@ -1,7 +1,6 @@
 import * as EventEmitter from 'events'
 import { type Client } from '../client'
 import { WhatsappApiNotificationPayloadSchemaType } from './schema'
-import { NotificationEventTypeEnum } from './type'
 import * as express from 'express'
 import { type Express, json as expressJson } from 'express'
 
@@ -44,78 +43,69 @@ export class Webhook extends EventEmitter {
 			console.log({ bodyEntry })
 			const parsedPayload = WhatsappApiNotificationPayloadSchemaType.safeParse(request.body)
 			if (parsedPayload.success) {
-				const notificationEventData = this.getNotificationEventData(parsedPayload.data)
-				console.log({ notificationEventData })
+				if (parsedPayload.data.entry.length) {
+					parsedPayload.data.entry.map(ent => {
+						ent.changes.map(change => {
+							const messages = change.value.messages
+							if (messages) {
+								messages.map(message => {
+									switch (message.type) {
+										case 'text': {
+											this.client.emit('TextMessage', {
+												from: message.from,
+												text: 'hiiii'
+											})
 
-				switch (notificationEventData.type) {
-					case NotificationEventTypeEnum.TextMessage: {
-						this.client.emit('TextMessage', { from: 'test', text: 'hello' })
-						break
-					}
+											break
+										}
 
-					case NotificationEventTypeEnum.AdInteraction: {
-						this.client.emit('AdInteraction', { from: 'test', text: 'hello' })
-						break
-					}
+										case 'audio': {
+											break
+										}
 
-					case NotificationEventTypeEnum.AudioMessage: {
-						break
-					}
+										case 'video': {
+											break
+										}
 
-					case NotificationEventTypeEnum.VideoMessage: {
-						break
-					}
+										case 'image': {
+											break
+										}
 
-					case NotificationEventTypeEnum.LocationMessage: {
-						break
-					}
+										case 'document': {
+											break
+										}
 
-					case NotificationEventTypeEnum.ContactsMessage: {
-						break
-					}
+										case 'button': {
+											break
+										}
 
-					case NotificationEventTypeEnum.DocumentMessage: {
-						break
-					}
+										case 'interactive': {
+											throw new Error('NOT IMPLENTED!!')
+											break
+										}
 
-					case NotificationEventTypeEnum.MessageRead: {
-						break
-					}
+										case 'order': {
+											break
+										}
 
-					case NotificationEventTypeEnum.MessageSent: {
-						break
-					}
+										case 'system': {
+											break
+										}
 
-					case NotificationEventTypeEnum.MessageDelivered: {
-						break
-					}
+										case 'unknown': {
+											break
+										}
 
-					case NotificationEventTypeEnum.MessageDeleted: {
-						break
-					}
-
-					case NotificationEventTypeEnum.MessageFailed: {
-						break
-					}
-
-					case NotificationEventTypeEnum.MessageUndelivered: {
-						break
-					}
-
-					case NotificationEventTypeEnum.ImageMessage: {
-						break
-					}
-
-					case NotificationEventTypeEnum.ReplyMessage: {
-						break
-					}
-
-					case NotificationEventTypeEnum.StickerMessage: {
-						break
-					}
-
-					default:
-						break
+										default:
+											break
+									}
+								})
+							} else {
+								// ! TODO: figure out this
+								// if no messages then what ??
+							}
+						})
+					})
 				}
 
 				response.status(200).send()
@@ -176,26 +166,5 @@ export class Webhook extends EventEmitter {
 			// this.client.emit('Error', )
 		})
 		this.listening = true
-	}
-
-	// ! TODO: implement
-	private getNotificationEventData(
-		parsedPayload: Zod.infer<typeof WhatsappApiNotificationPayloadSchemaType>
-	): {
-		type: NotificationEventTypeEnum
-		data: Zod.infer<typeof WhatsappApiNotificationPayloadSchemaType> // ! TODO: make it more granular level data event specific only
-	} {
-		if (parsedPayload.entry.length) {
-			parsedPayload.entry.map(ent => {
-				ent.changes.map(change => {
-					change.value.messages.length
-				})
-			})
-		}
-
-		return {
-			data: parsedPayload,
-			type: NotificationEventTypeEnum.AdInteraction
-		}
 	}
 }

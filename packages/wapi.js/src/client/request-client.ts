@@ -1,16 +1,11 @@
 import { type Client } from './index'
+import { type RequestClientInterface, type RequestClientConfigOptions } from './interface'
 
-type RequestClientConfigOptions = {
-	host: string
-	protocol: string
-	phoneNumberId: string
-	businessAccountId: string
-	apiVersion: string
-	client: Client
-	accessToken: string
-}
-
-export class RequestClient {
+/**
+ * Request client use to communicate with whatsapp cloud api using http request
+ * @class
+ */
+export class RequestClient implements RequestClientInterface {
 	host: string
 	protocol: string
 	phoneNumberId: string

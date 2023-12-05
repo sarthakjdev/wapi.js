@@ -7,6 +7,12 @@ import { RequestClient } from './request-client'
 import { ClientStatusEnum, type ClientInterface } from './interface'
 import { MessageManager } from '../manager/message'
 
+/**
+ * builds the main whatsapp client instance
+ * @implements {ClientInterface}
+ * @extends {EventEmitter}
+ * @class
+ */
 export class Client extends EventEmitter implements ClientInterface {
 	/**
 	 * phone number manager to verify phone numbers for your
@@ -17,7 +23,7 @@ export class Client extends EventEmitter implements ClientInterface {
 
 	/**
 	 * media manager to upload, get and media via whatsapp cloud api
-	 * 	@type {PhoneNumberManager}
+	 * 	@type {MediaManager}
 	 * 	@memberof Client
 	 */
 	media: MediaManager
@@ -44,11 +50,11 @@ export class Client extends EventEmitter implements ClientInterface {
 	status: ClientStatusEnum | null = null
 
 	/**
-	 * timestamp when the clients gets ready to send and listen to messages
-	 * @type {Date}
-	 * 	@memberof Client
+	 * Unix Timestamp at which client gets into {@link ClientStatusEnum.Ready} state
+	 * @type {number}
+	 * @memberof Client
 	 */
-	readyAtTimeStamp: Date | null = null
+	readyAtTimeStamp: number | null = null
 
 	/**
 	 * requester is an internal utility to communicate with Whatsapp cloud api
@@ -56,9 +62,23 @@ export class Client extends EventEmitter implements ClientInterface {
 	 * 	@memberof Client
 	 */
 	requester: RequestClient
+
+	/**
+	 * @ignore
+	 * @private
+	 */
 	private static baseUrl = 'graph.facebook.com'
+
+	/**
+	 * @ignore
+	 * @private
+	 */
 	private static apiVersion = 'v17.0'
 
+	/**
+	 * @param params
+	 * @constructor
+	 */
 	constructor(params: {
 		webhookSecret: string
 		webhookEndpoint: string
@@ -90,14 +110,31 @@ export class Client extends EventEmitter implements ClientInterface {
 		})
 	}
 
+	/**
+	 * getter for client
+	 * @returns {Client}
+	 * @static
+	 * @memberof Client
+	 */
 	static getClient() {
 		return this
 	}
 
+	/**
+	 * Function to emit a new event on incoming webhook or wapi events
+	 * @param eventName
+	 * @param data
+	 * @memberof Client
+	 */
 	emit<T extends keyof EventDataMap>(eventName: T, data: EventDataMap[T]): boolean {
 		return super.emit(eventName, data)
 	}
 
+	/**
+	 * Function to attach event listener to wapi client
+	 * @param eventName
+	 * @param listener
+	 */
 	on<T extends keyof EventDataMap>(
 		eventName: T,
 		listener: (data: EventDataMap[T]) => void
@@ -105,29 +142,63 @@ export class Client extends EventEmitter implements ClientInterface {
 		return super.on(eventName, listener)
 	}
 
-	getReadyAt() {
-		return this.readyAtTimeStamp
+	/**
+	 * Timestamp at which the client switched to {@link ClientStatusEnum.Ready} state
+	 * @readonly
+	 * @returns {Date}
+	 */
+	get getReadyAtTimestamp() {
+		return this.readyAtTimeStamp && new Date(this.readyAtTimeStamp * 1000)
 	}
 
-	updateAccessToken(accessToken: string) {
+	/**
+	 * Uptime in milliseconds since the client first got into {@link ClientStatusEnum.Ready} state
+	 * @type {number}
+	 * @readonly
+	 * @memberof Client
+	 */
+	get uptime() {
+		return this.readyAtTimeStamp && Date.now() - this.readyAtTimeStamp * 1000
+	}
+
+	/**
+	 * Function to update the initial access token given at the point of client creations
+	 * @param {string} accessToken
+	 * @memberof Client
+	 *
+	 */
+	set updateAccessToken(accessToken: string) {
 		this.requester.accessToken = accessToken
 	}
 
-	updateSenderPhoneNumberId(phoneNumber: string) {
+	/**
+	 * Getter for phone number
+	 * @type {string}
+	 * @memberof Client
+	 * @readonly
+	 */
+	get phoneNumberId() {
+		return this.requester.phoneNumberId
+	}
+
+	/**
+	 * Function to set the phone number id used to send messages
+	 * @param {string} phoneNumber
+	 * @memberof Client
+	 */
+	set updateSenderPhoneNumberId(phoneNumber: string) {
 		this.requester.phoneNumberId = phoneNumber
 	}
 
+	/**
+	 * Function to initiate the wapi client and start listening to the incoming webhook events
+	 * @memberof Client
+	 */
 	initiate() {
-		console.log('INITIATING CHAT BOT')
-
-		console.log(this.webhook)
-
 		this.webhook.listen(() => {
-			console.log('STARTING LISTENING FUNCTION')
 			this.status = ClientStatusEnum.Ready
 			this.emit('Ready', null)
-			this.readyAtTimeStamp = new Date()
-			console.log('CLIENT STATUS => ', this.status)
+			this.readyAtTimeStamp = Date.now() / 1000
 		})
 	}
 }

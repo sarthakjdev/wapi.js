@@ -12,6 +12,133 @@ export const NotificationPayloadErrorSchemaType = z.object({
 	})
 })
 
+export const NotificationPayloadMessageContextSchemaType = z
+	.object({
+		forwarded: z.boolean(),
+		frequently_forwarded: z.boolean(),
+		from: z.string(),
+		id: z.string(),
+		referred_product: z.object({
+			catalog_id: z.string(),
+			product_retailer_id: z.string()
+		})
+	})
+	.nullish()
+
+export const NotificationPayloadTextMessageSchemaType = z.object({
+	type: z.literal('text'),
+	text: z.object({
+		body: z.string()
+	})
+})
+
+export const NotificationPayloadAudioMessageSchemaType = z.object({
+	type: z.literal('audio'),
+	audio: z.object({
+		id: z.string(),
+		mime_type: z.string()
+	})
+})
+
+export const NotificationPayloadImageMessageSchemaType = z.object({
+	type: z.literal('image'),
+	image: z.object({
+		id: z.string(),
+		mime_type: z.string(),
+		sha256: z.string(),
+		caption: z.string()
+	})
+})
+
+export const NotificationPayloadButtonMessageSchemaType = z.object({
+	type: z.literal('button'),
+	button: z.object({
+		payload: z.string(),
+		text: z.string()
+	})
+})
+
+export const NotificationPayloadDocumentMessageSchemaType = z.object({
+	type: z.literal('document'),
+	document: z.object({
+		id: z.string(),
+		mime_type: z.string(),
+		sha256: z.string(),
+		caption: z.string(),
+		filename: z.string()
+	})
+})
+
+// ! TODO:
+export const NotificationPayloadOrderMessageSchemaType = z.object({
+	type: z.literal('order'),
+	text: z.object({})
+})
+
+export const NotificationPayloadStickerMessageSchemaType = z.object({
+	type: z.literal('sticker'),
+	sticker: z.object({
+		id: z.string(),
+		mime_type: z.string(),
+		sha256: z.string(),
+		animated: z.boolean()
+	})
+})
+
+export const NotificationPayloadSystemMessageSchemaType = z.object({
+	type: z.literal('system'),
+	system: z.object({
+		identity: z.string(),
+		body: z.string(),
+		customer: z.string(),
+		type: z.enum(['customer_changed_number', 'customer_identity_changed']),
+		wa_id: z.string(),
+		acknowledged: z.string(),
+		created_timestamp: z.string(),
+		hash: z.string()
+	})
+})
+
+export const NotificationPayloadVideoMessageSchemaType = z.object({
+	type: z.literal('video'),
+	media: z.object({})
+})
+
+export const NotificationPayloadInteractionMessageSchemaType = z.object({
+	type: z.literal('interactive'),
+	interactive: z
+		.object({
+			button_reply: z.object({
+				id: z.string(),
+				title: z.string()
+			})
+		})
+		.or(
+			z.object({
+				list_reply: z.object({
+					id: z.string(),
+					title: z.string(),
+					description: z.string()
+				})
+			})
+		)
+})
+
+export const NotificationPayloadUnknownMessageSchemaType = z.object({
+	type: z.literal('unknown'),
+	text: z.object({})
+})
+
+export const NotificationPayloadLocationMessageSchemaType = z.object({
+	type: z.literal('location'),
+	location: z.object({
+		latitude: z.string(),
+		longitude: z.string(),
+		name: z.string(),
+		address: z.string()
+	})
+})
+
 export const WhatsappApiNotificationPayloadSchemaType = z.object({
 	object: z.string(),
 	entry: z.array(
@@ -74,150 +201,27 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 									id: z.string(),
 									from: z.string(),
 									timestamp: z.string(),
-									context: z
-										.object({
-											forwarded: z.boolean(),
-											frequently_forwarded: z.boolean(),
-											from: z.string(),
-											id: z.string(),
-											referred_product: z.object({
-												catalog_id: z.string(),
-												product_retailer_id: z.string()
-											})
-										})
-										.nullish()
+									type: z.string(),
+									context: NotificationPayloadMessageContextSchemaType
 								})
 								.and(
-									z
-										.object({
-											type: z.literal('audio'),
-											audio: z.object({
-												id: z.string(),
-												mime_type: z.string()
-											})
-										})
-										.or(
-											z.object({
-												type: z.literal('text'),
-												text: z.object({
-													body: z.string()
-												})
-											})
-										)
-										.or(
-											z.object({
-												type: z.literal('image'),
-												image: z.object({
-													id: z.string(),
-													mime_type: z.string(),
-													sha256: z.string(),
-													caption: z.string()
-												})
-											})
-										)
-										.or(
-											z.object({
-												type: z.literal('button'),
-												button: z.object({
-													payload: z.string(),
-													text: z.string()
-												})
-											})
-										)
-										.or(
-											z.object({
-												type: z.literal('document'),
-												document: z.object({
-													id: z.string(),
-													mime_type: z.string(),
-													sha256: z.string(),
-													caption: z.string(),
-													filename: z.string()
-												})
-											})
-										)
-										.or(
-											// ! TODO:
-											z.object({
-												type: z.literal('order'),
-												text: z.object({})
-											})
-										)
-										.or(
-											z.object({
-												type: z.literal('sticker'),
-												sticker: z.object({
-													id: z.string(),
-													mime_type: z.string(),
-													sha256: z.string(),
-													animated: z.boolean()
-												})
-											})
-										)
-										.or(
-											z.object({
-												type: z.literal('system'),
-												system: z.object({
-													identity: z.string(),
-													body: z.string(),
-													customer: z.string(),
-													type: z.enum([
-														'customer_changed_number',
-														'customer_identity_changed'
-													]),
-													wa_id: z.string(),
-													acknowledged: z.string(),
-													created_timestamp: z.string(),
-													hash: z.string()
-												})
-											})
-										)
-										.or(
-											z.object({
-												type: z.literal('video'),
-												system: z.object({})
-											})
-										)
-										.or(
-											z.object({
-												type: z.literal('interactive'),
-												interactive: z
-													.object({
-														button_reply: z.object({
-															id: z.string(),
-															title: z.string()
-														})
-													})
-													.or(
-														z.object({
-															list_reply: z.object({
-																id: z.string(),
-																title: z.string(),
-																description: z.string()
-															})
-														})
-													)
-											})
-										)
-										.or(
-											z.object({
-												type: z.literal('unknown'),
-												text: z.object({})
-											})
-										)
-										.or(
-											z.object({
-												location: z.object({
-													latitude: z.string(),
-													longitude: z.string(),
-													name: z.string(),
-													address: z.string()
-												})
-											})
-										)
+									NotificationPayloadAudioMessageSchemaType.or(
+										NotificationPayloadTextMessageSchemaType
+									)
+										.or(NotificationPayloadImageMessageSchemaType)
+										.or(NotificationPayloadButtonMessageSchemaType)
+										.or(NotificationPayloadDocumentMessageSchemaType)
+										.or(NotificationPayloadOrderMessageSchemaType)
+										.or(NotificationPayloadStickerMessageSchemaType)
+										.or(NotificationPayloadSystemMessageSchemaType)
+										.or(NotificationPayloadVideoMessageSchemaType)
+										.or(NotificationPayloadInteractionMessageSchemaType)
+										.or(NotificationPayloadUnknownMessageSchemaType)
+										.or(NotificationPayloadLocationMessageSchemaType)
 										.or(
 											// ! TODO: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#:~:text=%7D%5D%0A%20%20%20%20%7D%5D%0A%7D-,Contacts%20Messages,-The%20following%20is
 											z.object({
+												type: z.literal('contact'),
 												contacts: z.array(z.object({}))
 											})
 										)

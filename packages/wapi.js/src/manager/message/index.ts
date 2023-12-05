@@ -3,17 +3,25 @@ import { type BaseMessage } from '../../structures/message'
 import { BaseManager } from '../base'
 import { type MessageManagerInterface } from './interface'
 
+/**
+ * manager to handle outgoing messages for wapi
+ * @implements {MessageManagerInterface}
+ * @extends {BaseManager}
+ * @class
+ */
 export class MessageManager extends BaseManager implements MessageManagerInterface {
 	client: Client
-
 	constructor(props: { client: Client }) {
 		super(props.client)
 		this.client = props.client
 	}
 
+	/**
+	 * Function used to send message
+	 * @param {{ message: {T}; phoneNumber: {string} }} props
+	 * @param props
+	 */
 	async send<T extends BaseMessage>(props: { message: T; phoneNumber: string }): Promise<string> {
-		console.log({ props: props.message.toJson() })
-
 		const response = await this.client.requester.requestCloudApi({
 			path: '/messages',
 			body: props.message.toJson(),
@@ -23,6 +31,32 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 		return response
 	}
 
+	/**
+	 * Function used to reply to a message using a message id
+	 * @param {{ replyToMessageId: {string}; message: {T}; phoneNumber: {string} }} props
+	 * @memberof MessageManager
+	 */
+	async reply<T extends BaseMessage>(props: {
+		replyToMessageId: string
+		message: T
+		phoneNumber: string
+	}): Promise<string> {
+		const response = await this.client.requester.requestCloudApi({
+			path: '/messages',
+			body: {
+				...props.message.toJson()
+			},
+			method: 'POST'
+		})
+
+		return response
+	}
+
+	/**
+	 * Function used to mark a message as read using message Id
+	 * @param {string} messageId
+	 * @memberof MessageManager
+	 */
 	async read(messageId: string) {
 		await Promise.resolve(messageId)
 
