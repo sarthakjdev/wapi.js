@@ -8,8 +8,6 @@
   <a href=""><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"></a>
 </p>
 
----
-
 ## 📌 Status
 
 :warning: Work in progress
@@ -24,18 +22,14 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 
 - [**wapi.js**]('/packages/wapi.js'): Interact with WhatsApp cloud API efficiently.
 
----
-
 ## ✨ Features
 
 - Object-Oriented Architecture
 - Single Client Model
-- Phone number registration with WhatsApp Business
+- Zod based Schema parsing Capabilities
 - Message Sending Capabilities
 - Event Listener for Notifications
 - Responding to notifications
-
----
 
 ## 💻 Installation
 
@@ -49,13 +43,9 @@ pnpm install wapi.js
 
 > Note: This library is not affiliated with the official WhatsApp Cloud API.
 
----
-
 ## 🚀 Usage
 
 Kickstart your first WhatsApp application with Wapi.js. Check the [User Manual](./USER_MANUAL.md).
-
----
 
 ## 🔗 Cloud API References
 
@@ -71,8 +61,6 @@ Kickstart your first WhatsApp application with Wapi.js. Check the [User Manual](
   <img src="https://media.discordapp.net/attachments/1034852580091777034/1046371179163828264/notification_payload.png?width=720&height=434" alt="cloud-api notification structure">
 </p>
 
----
-
 ## 🧰 Scripts
 
 ```sh
@@ -83,13 +71,9 @@ pnpm run lint           # Check eslint errors
 pnpm run lint:fix       # Fix eslint errors
 ```
 
----
-
 ## 🌐 Future Roadmap
 
 This library is in early development. Please report bugs or issues [here](#). You're also welcome to contribute; see our [Contribution Guidelines](#contribution-guidelines).
-
----
 
 ## 🤝 Contribution Guidelines
 
@@ -101,13 +85,9 @@ This library is in early development. Please report bugs or issues [here](#). Yo
 
 For detailed guidelines, check [Contributing.md](./CONTRIBUTING.md).
 
----
-
 ## 📜 License
 
 Distributed under the MIT License. View [LICENSE](./LICENSE).
-
----
 
 ## 📞 Contact
 

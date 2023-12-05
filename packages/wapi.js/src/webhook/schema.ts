@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { type NotificationEventTypeEnum } from './type'
 
 export const NotificationReasonEnum = z.enum(['message'])
 
@@ -139,6 +138,11 @@ export const NotificationPayloadLocationMessageSchemaType = z.object({
 	})
 })
 
+export const TextMessageEventDataSchemaType = z.object({
+	text: z.string(),
+	from: z.string()
+})
+
 export const WhatsappApiNotificationPayloadSchemaType = z.object({
 	object: z.string(),
 	entry: z.array(
@@ -153,14 +157,16 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 							display_phone_number: z.string(),
 							phone_number_id: z.string()
 						}),
-						contacts: z.array(
-							z.object({
-								wa_id: z.string(),
-								profile: z.object({
-									name: z.string()
+						contacts: z
+							.array(
+								z.object({
+									wa_id: z.string(),
+									profile: z.object({
+										name: z.string()
+									})
 								})
-							})
-						),
+							)
+							.optional(),
 						statuses: z
 							.array(
 								z.object({
@@ -195,38 +201,40 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 								})
 							)
 							.nullish(),
-						messages: z.array(
-							z
-								.object({
-									id: z.string(),
-									from: z.string(),
-									timestamp: z.string(),
-									type: z.string(),
-									context: NotificationPayloadMessageContextSchemaType
-								})
-								.and(
-									NotificationPayloadAudioMessageSchemaType.or(
-										NotificationPayloadTextMessageSchemaType
-									)
-										.or(NotificationPayloadImageMessageSchemaType)
-										.or(NotificationPayloadButtonMessageSchemaType)
-										.or(NotificationPayloadDocumentMessageSchemaType)
-										.or(NotificationPayloadOrderMessageSchemaType)
-										.or(NotificationPayloadStickerMessageSchemaType)
-										.or(NotificationPayloadSystemMessageSchemaType)
-										.or(NotificationPayloadVideoMessageSchemaType)
-										.or(NotificationPayloadInteractionMessageSchemaType)
-										.or(NotificationPayloadUnknownMessageSchemaType)
-										.or(NotificationPayloadLocationMessageSchemaType)
-										.or(
-											// ! TODO: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#:~:text=%7D%5D%0A%20%20%20%20%7D%5D%0A%7D-,Contacts%20Messages,-The%20following%20is
-											z.object({
-												type: z.literal('contact'),
-												contacts: z.array(z.object({}))
-											})
+						messages: z
+							.array(
+								z
+									.object({
+										id: z.string(),
+										from: z.string(),
+										timestamp: z.string(),
+										type: z.string(),
+										context: NotificationPayloadMessageContextSchemaType
+									})
+									.and(
+										NotificationPayloadAudioMessageSchemaType.or(
+											NotificationPayloadTextMessageSchemaType
 										)
-								)
-						),
+											.or(NotificationPayloadImageMessageSchemaType)
+											.or(NotificationPayloadButtonMessageSchemaType)
+											.or(NotificationPayloadDocumentMessageSchemaType)
+											.or(NotificationPayloadOrderMessageSchemaType)
+											.or(NotificationPayloadStickerMessageSchemaType)
+											.or(NotificationPayloadSystemMessageSchemaType)
+											.or(NotificationPayloadVideoMessageSchemaType)
+											.or(NotificationPayloadInteractionMessageSchemaType)
+											.or(NotificationPayloadUnknownMessageSchemaType)
+											.or(NotificationPayloadLocationMessageSchemaType)
+											.or(
+												// ! TODO: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#:~:text=%7D%5D%0A%20%20%20%20%7D%5D%0A%7D-,Contacts%20Messages,-The%20following%20is
+												z.object({
+													type: z.literal('contact'),
+													contacts: z.array(z.object({}))
+												})
+											)
+									)
+							)
+							.optional(),
 						errors: z.array(NotificationPayloadErrorSchemaType).nullish()
 					}),
 					field: z.literal('messages')
@@ -236,40 +244,31 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 	)
 })
 
-export const TextMessageEventDataSchemaType = z.object({
-	text: z.string(),
-	from: z.string()
-})
-
-export type EventDataMap = {
+export type WapiEventDataMap = {
 	TextMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
 	AudioMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
 	AdInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.ContactsMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.ButtonInteraction]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.CustomerIdentityChanged]: Zod.infer<
-		typeof TextMessageEventDataSchemaType
-	>
-	[NotificationEventTypeEnum.CustomerNumberChanged]: Zod.infer<
-		typeof TextMessageEventDataSchemaType
-	>
-	[NotificationEventTypeEnum.DocumentMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.ImageMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.ListInteraction]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.LocationMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.MessageDeleted]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.MessageDelivered]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.MessageFailed]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.MessageRead]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.MessageSent]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.MessageUndelivered]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.OrderReceived]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.ProductInquiry]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.Reaction]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.ReplyMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.StickerMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.UnknownEvent]: Zod.infer<typeof TextMessageEventDataSchemaType>
-	[NotificationEventTypeEnum.VideoMessage]: Zod.infer<typeof TextMessageEventDataSchemaType>
+	ContactsMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	ButtonInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
+	CustomerIdentityChanged: Zod.infer<typeof TextMessageEventDataSchemaType>
+	CustomerNumberChanged: Zod.infer<typeof TextMessageEventDataSchemaType>
+	DocumentMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	ImageMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	ListInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
+	LocationMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	MessageDeleted: Zod.infer<typeof TextMessageEventDataSchemaType>
+	MessageDelivered: Zod.infer<typeof TextMessageEventDataSchemaType>
+	MessageFailed: Zod.infer<typeof TextMessageEventDataSchemaType>
+	MessageRead: Zod.infer<typeof TextMessageEventDataSchemaType>
+	MessageSent: Zod.infer<typeof TextMessageEventDataSchemaType>
+	MessageUndelivered: Zod.infer<typeof TextMessageEventDataSchemaType>
+	OrderReceived: Zod.infer<typeof TextMessageEventDataSchemaType>
+	ProductInquiry: Zod.infer<typeof TextMessageEventDataSchemaType>
+	Reaction: Zod.infer<typeof TextMessageEventDataSchemaType>
+	ReplyMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	StickerMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	UnknownEvent: Zod.infer<typeof TextMessageEventDataSchemaType>
+	VideoMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
 	['Error']: Error
 	['Warn']: string
 	['Ready']: null

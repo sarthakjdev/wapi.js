@@ -1,4 +1,4 @@
-import { type EventDataMap } from '../webhook/schema'
+import { type WapiEventDataMap } from '../webhook/schema'
 import { type PhoneNumberManager } from '../manager/phone'
 import { type MediaManager } from '../manager/media'
 import { type Webhook } from '../webhook'
@@ -18,8 +18,11 @@ export interface ClientInterface {
 	status: ClientStatusEnum | null
 	readyAtTimeStamp: number | null
 	requester: RequestClient
-	emit<T extends keyof EventDataMap>(eventName: T, data: EventDataMap[T]): boolean
-	on<T extends keyof EventDataMap>(eventName: T, listener: (data: EventDataMap[T]) => void): this
+	emit<T extends keyof WapiEventDataMap>(eventName: T, data: WapiEventDataMap[T]): boolean
+	on<T extends keyof WapiEventDataMap>(
+		eventName: T,
+		listener: (data: WapiEventDataMap[T]) => void
+	): this
 	initiate: () => void
 }
 

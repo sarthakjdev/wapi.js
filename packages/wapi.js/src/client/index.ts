@@ -1,11 +1,12 @@
 import { EventEmitter } from 'node:events'
-import { type EventDataMap } from '../webhook/schema'
+
 import { Webhook } from '../webhook'
 import { PhoneNumberManager } from '../manager/phone'
 import { MediaManager } from '../manager/media'
 import { RequestClient } from './request-client'
 import { ClientStatusEnum, type ClientInterface } from './interface'
 import { MessageManager } from '../manager/message'
+import { type WapiEventDataMap } from '../webhook/schema'
 
 /**
  * builds the main whatsapp client instance
@@ -126,7 +127,7 @@ export class Client extends EventEmitter implements ClientInterface {
 	 * @param data
 	 * @memberof Client
 	 */
-	emit<T extends keyof EventDataMap>(eventName: T, data: EventDataMap[T]): boolean {
+	emit<T extends keyof WapiEventDataMap>(eventName: T, data: WapiEventDataMap[T]): boolean {
 		return super.emit(eventName, data)
 	}
 
@@ -135,9 +136,9 @@ export class Client extends EventEmitter implements ClientInterface {
 	 * @param eventName
 	 * @param listener
 	 */
-	on<T extends keyof EventDataMap>(
+	on<T extends keyof WapiEventDataMap>(
 		eventName: T,
-		listener: (data: EventDataMap[T]) => void
+		listener: (data: WapiEventDataMap[T]) => void
 	): this {
 		return super.on(eventName, listener)
 	}

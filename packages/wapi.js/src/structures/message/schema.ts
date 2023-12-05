@@ -15,8 +15,8 @@ export const AddressSchemaType = z.object({
 export const LocationSchemaType = z.object({
 	latitude: z.number(),
 	longitude: z.number(),
-	name: z.string().optional(),
-	address: z.string().optional()
+	name: z.string(),
+	address: z.string()
 })
 
 export const InteractiveMessageHeaderSchemaType = z.object({})
@@ -109,20 +109,4 @@ export const MessageStatusSchemaType = z.object({
 	failed: z.boolean(),
 	read: z.boolean(),
 	warning: z.string().nullish()
-})
-
-async function sendMessage(params: {
-	phoneNumber: string
-	message: z.infer<typeof MessageComponentSchemaType>
-}) {
-	await Promise.resolve(params)
-	return true
-}
-
-void sendMessage({
-	phoneNumber: '',
-	message: {
-		type: MessageTypeEnum.Text,
-		text: 'helo'
-	}
 })

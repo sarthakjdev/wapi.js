@@ -21,12 +21,21 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 	 * @param {{ message: {T}; phoneNumber: {string} }} props
 	 * @param props
 	 */
-	async send<T extends BaseMessage>(props: { message: T; phoneNumber: string }): Promise<string> {
+	async send<T extends BaseMessage<string>>(props: {
+		message: T
+		phoneNumber: string
+	}): Promise<string> {
+		const payload = props.message.toJson({ to: props.phoneNumber })
+
+		console.log({ payload })
+
 		const response = await this.client.requester.requestCloudApi({
 			path: '/messages',
-			body: props.message.toJson(),
+			body: JSON.stringify(props.message.toJson({ to: props.phoneNumber })),
 			method: 'POST'
 		})
+
+		console.log({ response })
 
 		return response
 	}
@@ -36,16 +45,14 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 	 * @param {{ replyToMessageId: {string}; message: {T}; phoneNumber: {string} }} props
 	 * @memberof MessageManager
 	 */
-	async reply<T extends BaseMessage>(props: {
+	async reply<T extends BaseMessage<string>>(props: {
 		replyToMessageId: string
 		message: T
 		phoneNumber: string
 	}): Promise<string> {
 		const response = await this.client.requester.requestCloudApi({
 			path: '/messages',
-			body: {
-				...props.message.toJson()
-			},
+			body: JSON.stringify(props.message.toJson({ to: props.phoneNumber })),
 			method: 'POST'
 		})
 

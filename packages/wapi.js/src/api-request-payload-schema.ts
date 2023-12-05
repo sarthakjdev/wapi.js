@@ -1,34 +1,73 @@
 import { z } from 'zod'
+import { AddressSchemaType } from './structures/message/schema'
 
-export const DocumentMediaObjectPayloadSchemaType = z.object({
-	id: z.string(),
-	link: z.string(),
-	filename: z.string().optional(),
-	caption: z.string().optional()
-})
+export const DocumentMediaObjectWithoutCaptionPayloadSchemaType = z
+	.object({
+		filename: z.string().optional()
+	})
+	.and(
+		z
+			.object({
+				id: z.string()
+			})
+			.or(
+				z.object({
+					link: z.string()
+				})
+			)
+	)
 
-export const ImageMediaObjectPayloadSchemaType = z.object({
-	id: z.string(),
-	link: z.string(),
-	caption: z.string().optional()
-})
+export const DocumentMediaObjectPayloadSchemaType =
+	DocumentMediaObjectWithoutCaptionPayloadSchemaType.and(
+		z.object({ caption: z.string().optional() })
+	)
 
-export const VideoMediaObjectPayloadSchemaType = z.object({
-	id: z.string(),
-	link: z.string(),
-	caption: z.string().optional()
-})
+export const ImageMediaObjectWithoutCaptionPayloadSchemaType = z
+	.object({
+		id: z.string()
+	})
+	.or(
+		z.object({
+			link: z.string()
+		})
+	)
+
+export const ImageMediaObjectPayloadSchemaType =
+	ImageMediaObjectWithoutCaptionPayloadSchemaType.and(
+		z.object({
+			caption: z.string().optional()
+		})
+	)
+
+export const VideoMediaObjectWithoutCaptionPayloadSchemaType = z
+	.object({
+		id: z.string()
+	})
+	.or(
+		z.object({
+			link: z.string()
+		})
+	)
+
+export const VideoMediaObjectPayloadSchemaType =
+	VideoMediaObjectWithoutCaptionPayloadSchemaType.and(
+		z.object({
+			caption: z.string().optional()
+		})
+	)
 
 export const LocationDataPayloadSchemaType = z.object({
-	latitude: z.string(),
-	longitude: z.string(),
+	latitude: z.number(),
+	longitude: z.number(),
 	name: z.string(),
 	address: z.string()
 })
 
 export const ContactDataPayloadSchemaType = z.object({
-	addresses: z.object({}).optional(),
-	birthday: z.string({ description: 'YYYY-MM-DD formatted string.' }),
+	addresses: AddressSchemaType.optional(),
+	birthday: z.string({
+		description: 'YYYY-MM-DD formatted string.'
+	}),
 	emails: z
 		.object({
 			email: z.string().optional(),
@@ -91,17 +130,13 @@ export const TemplateMessageParametersSchemaType = z.array(
 		.or(
 			z.object({
 				type: z.literal('document'),
-				document: DocumentMediaObjectPayloadSchemaType.omit({
-					caption: true
-				})
+				document: DocumentMediaObjectWithoutCaptionPayloadSchemaType
 			})
 		)
 		.or(
 			z.object({
 				type: z.literal('image'),
-				image: ImageMediaObjectPayloadSchemaType.omit({
-					caption: true
-				})
+				image: ImageMediaObjectWithoutCaptionPayloadSchemaType
 			})
 		)
 		.or(
@@ -113,9 +148,7 @@ export const TemplateMessageParametersSchemaType = z.array(
 		.or(
 			z.object({
 				type: z.literal('video'),
-				video: VideoMediaObjectPayloadSchemaType.omit({
-					caption: true
-				})
+				video: VideoMediaObjectWithoutCaptionPayloadSchemaType
 			})
 		)
 )
@@ -160,6 +193,7 @@ export const WhatsappCloudApiRequestPayloadSchemaType = z
 			.optional(),
 		to: z.string(),
 		type: z.string(),
+		messaging_product: z.literal('whatsapp'),
 		recipient_type: z.literal('individual'),
 		biz_opaque_callback_data: z.string().optional()
 	})
@@ -168,7 +202,6 @@ export const WhatsappCloudApiRequestPayloadSchemaType = z
 			.object({
 				type: z.literal('text'),
 				preview_url: z.boolean(),
-				status: z.literal('read'),
 				text: z.object({
 					body: z.string(),
 					preview_url: z.boolean().optional()
@@ -189,10 +222,11 @@ export const WhatsappCloudApiRequestPayloadSchemaType = z
 			.or(
 				z.object({
 					type: z.literal('audio'),
-					audio: z.object({
-						id: z.string(),
-						link: z.string()
-					})
+					audio: z
+						.object({
+							id: z.string()
+						})
+						.or(z.object({ link: z.string() }))
 				})
 			)
 			.or(
@@ -333,6 +367,12 @@ export const WhatsappCloudApiRequestPayloadSchemaType = z
 				z.object({
 					type: z.literal('reaction'),
 					image: ReactionDataPayloadSchemaType
+				})
+			)
+			.or(
+				z.object({
+					status: z.literal('read'),
+					message_id: z.string()
 				})
 			)
 	)

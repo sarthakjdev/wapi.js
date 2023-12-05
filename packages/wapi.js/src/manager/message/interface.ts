@@ -4,8 +4,8 @@ import { type BaseManager } from '../base'
 
 export interface MessageManagerInterface extends BaseManager {
 	client: Client
-	send<T extends BaseMessage>(props: { message: T; phoneNumber: string }): Promise<string>
-	reply<T extends BaseMessage>(props: {
+	send<T extends BaseMessage<string>>(props: { message: T; phoneNumber: string }): Promise<string>
+	reply<T extends BaseMessage<string>>(props: {
 		replyToMessageId: string
 		message: T
 		phoneNumber: string

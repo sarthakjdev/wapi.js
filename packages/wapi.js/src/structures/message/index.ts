@@ -1,12 +1,15 @@
-import { type ZodSchema } from 'zod'
+import { type z, type ZodSchema } from 'zod'
 import { type BaseMessageInterface } from './interface'
 import { type MessageTypeEnum } from './types'
+import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
 
-export abstract class BaseMessage implements BaseMessageInterface {
+export abstract class BaseMessage<T extends string> implements BaseMessageInterface {
 	type: MessageTypeEnum
-	id: string | null
 	messaging_product: 'whatsapp'
 	recipient_type: 'individual'
+	abstract toJson(params: {
+		to: string
+	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: T }>
 
 	protected static parseConstructorPayload(schema: ZodSchema<any>, payload: any) {
 		const response = schema.safeParse(payload)
@@ -21,17 +24,14 @@ export abstract class BaseMessage implements BaseMessageInterface {
 					4
 				)
 			)
+		} else {
+			return response.data
 		}
 	}
 
 	constructor(params: { type: MessageTypeEnum }) {
 		this.type = params.type
-		this.id = null
 		this.messaging_product = 'whatsapp'
 		this.recipient_type = 'individual'
-	}
-
-	toJson() {
-		return {}
 	}
 }

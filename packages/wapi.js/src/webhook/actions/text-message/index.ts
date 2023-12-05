@@ -15,7 +15,7 @@ export class TextMessageEvent extends BaseEvent implements TextMessageEventInter
 		this.context = { From: '919643500545' }
 	}
 
-	async reply<T extends BaseMessage>(props: {
+	async reply<T extends BaseMessage<string>>(props: {
 		message: T
 		phoneNumber: string
 	}): Promise<string> {
@@ -29,7 +29,7 @@ export class TextMessageEvent extends BaseEvent implements TextMessageEventInter
 
 		// example message
 
-		const apiPayload = props.message.toJson()
+		const apiPayload = props.message
 
 		console.log({ apiPayload })
 
