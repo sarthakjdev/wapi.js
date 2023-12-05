@@ -2,19 +2,12 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "moduleResolution": "Node",
-    "allowUnreachableCode": false,
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "declaration": true,
-    "declarationMap": false,
-    "importHelpers": false,
     "newLine": "lf",
-    "noEmitHelpers": true,
-    "noEmit": true,
-    "removeComments": false,
-    "sourceMap": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "noImplicitAny": true
   },
   "lib": ["ESNext"]
 }

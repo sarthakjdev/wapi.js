@@ -1,8 +1,8 @@
 import * as EventEmitter from 'events'
 import { type Client } from '../client'
 import { WhatsappApiNotificationPayloadSchemaType } from './schema'
-import { NotificationEventTypeEnum } from './type'
-import express, { type Express, json as expressJson } from 'express'
+import * as express from 'express'
+import { type Express, json as expressJson } from 'express'
 
 export class Webhook extends EventEmitter {
 	private endpoint: string
@@ -11,7 +11,6 @@ export class Webhook extends EventEmitter {
 	private listening = false
 	private webhookSecret: string
 	private client: Client
-
 	constructor(params: {
 		client: Client
 		webhookSecret: string
@@ -25,23 +24,94 @@ export class Webhook extends EventEmitter {
 		this.port = params.port
 		this.server = express()
 		this.server.use(expressJson())
-		this.server.get(this.endpoint, request => {
-			const parsedPayload = WhatsappApiNotificationPayloadSchemaType.safeParse(request.body)
-
-			if (parsedPayload.success) {
-				const notificationEventData = this.getNotificationEventData(parsedPayload.data)
-
-				switch (notificationEventData.type) {
-					case NotificationEventTypeEnum.TextMessage: {
-						// this.client.emit('TextMessage', {})
-
-						return
-					}
-
-					default:
-						break
+		this.server.get(this.endpoint, (request, response) => {
+			const queryToken = request.query['hub.verify_token']
+			if (typeof queryToken === 'string') {
+				if (queryToken === this.webhookSecret) {
+					response.send(request.query['hub.challenge'])
+				} else {
+					response.status(400).send()
 				}
 			} else {
+				// ignore this request
+			}
+		})
+
+		this.server.post(this.endpoint, (request, response) => {
+			const requestBody = request.body
+			const bodyEntry = JSON.stringify(requestBody.entry, null, 4)
+			console.log({ bodyEntry })
+			const parsedPayload = WhatsappApiNotificationPayloadSchemaType.safeParse(request.body)
+			if (parsedPayload.success) {
+				if (parsedPayload.data.entry.length) {
+					parsedPayload.data.entry.map(ent => {
+						ent.changes.map(change => {
+							const messages = change.value.messages
+							if (messages) {
+								messages.map(message => {
+									switch (message.type) {
+										case 'text': {
+											this.client.emit('TextMessage', {
+												from: message.from,
+												text: 'hiiii'
+											})
+
+											break
+										}
+
+										case 'audio': {
+											break
+										}
+
+										case 'video': {
+											break
+										}
+
+										case 'image': {
+											break
+										}
+
+										case 'document': {
+											break
+										}
+
+										case 'button': {
+											break
+										}
+
+										case 'interactive': {
+											throw new Error('NOT IMPLENTED!!')
+											break
+										}
+
+										case 'order': {
+											break
+										}
+
+										case 'system': {
+											break
+										}
+
+										case 'unknown': {
+											break
+										}
+
+										default:
+											break
+									}
+								})
+							} else {
+								// ! TODO: figure out this
+								// if no messages then what ??
+							}
+						})
+					})
+				}
+
+				response.status(200).send()
+			} else {
+				const errors = parsedPayload.error.errors
+				console.log({ errors })
 				this.client.emit('Warn', 'Unknown notification event received')
 			}
 		})
@@ -96,26 +166,5 @@ export class Webhook extends EventEmitter {
 			// this.client.emit('Error', )
 		})
 		this.listening = true
-	}
-
-	// ! TODO: implement
-	private getNotificationEventData(
-		parsedPayload: Zod.infer<typeof WhatsappApiNotificationPayloadSchemaType>
-	): {
-		type: NotificationEventTypeEnum
-		data: Zod.infer<typeof WhatsappApiNotificationPayloadSchemaType> // ! TODO: make it more granular level data event specific only
-	} {
-		if (parsedPayload.entry.length) {
-			parsedPayload.entry.map(ent => {
-				ent.changes.map(change => {
-					change.value.messages.length
-				})
-			})
-		}
-
-		return {
-			data: parsedPayload,
-			type: NotificationEventTypeEnum.AdInteraction
-		}
 	}
 }
