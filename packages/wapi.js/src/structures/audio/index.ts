@@ -1,8 +1,7 @@
 import { type AudioMessageInterface } from './interface'
 import { MessageTypeEnum } from '../message/types'
 import { BaseMessage } from '../message'
-import { type z } from 'zod'
-import { AudioMessageConstructorParamSchemaType } from './schema'
+import { z } from 'zod'
 import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
 
 /**
@@ -14,7 +13,13 @@ import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request
 export class AudioMessage extends BaseMessage<'audio'> implements AudioMessageInterface {
 	readonly data: { mediaId: string } | { link: string }
 
-	private static schema = AudioMessageConstructorParamSchemaType
+	/**
+	 * Zod schema to parse the constructor arguments
+	 */
+	private static schema = z
+		.object({ id: z.string() })
+		.or(z.object({ link: z.string() }))
+
 
 	/**
 	 * @constructor
@@ -51,11 +56,11 @@ export class AudioMessage extends BaseMessage<'audio'> implements AudioMessageIn
 			audio:
 				'mediaId' in this.data
 					? {
-							id: this.data.mediaId
-					  }
+						id: this.data.mediaId
+					}
 					: {
-							link: this.data.link
-					  }
+						link: this.data.link
+					}
 		}
 	}
 }
