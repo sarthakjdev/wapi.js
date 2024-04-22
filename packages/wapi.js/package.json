@@ -46,6 +46,7 @@
 		"eslint-plugin-import": "^2.28.1",
 		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.3",
+		"ts-enum-utils": "^1.0.3",
 		"tsup": "^7.2.0",
 		"typedoc": "^0.25.1",
 		"typescript": "^5.2.2",

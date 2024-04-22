@@ -11,6 +11,7 @@ export abstract class BaseMessage<T extends string> implements BaseMessageInterf
 		to: string
 	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: T }>
 
+	// ! TODO: fix types here
 	protected static parseConstructorPayload(schema: ZodSchema<any>, payload: any) {
 		const response = schema.safeParse(payload)
 		if (!response.success) {

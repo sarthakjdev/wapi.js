@@ -1,68 +1,161 @@
 import { z } from 'zod'
-import { AddressSchemaType } from './structures/message/schema'
+import { AddressSchemaType, InteractiveMessageHeaderSchemaType } from './structures/message/schema'
+import { InteractiveMessageTypeEnum } from './structures'
+import { MessageTypeEnum } from './structures/message/types'
+import {
+	ExternalAudioMediaObjectType,
+	ExternalDocumentMediaObjectSchemaType,
+	ExternalImageMediaObjectType,
+	ExternalStickerMediaObjectType,
+	ExternalVideoMediaObjectType,
+	MetaAudioMediaObjectSchemaType,
+	MetaDocumentMediaObjectSchemaType,
+	MetaImageMediaObjectSchemaType,
+	MetaStickerMediaObjectSchemaType,
+	MetaVideoMediaObjectSchemaType
+} from './structures/media/schema'
+import { ButtonComponentSchemaType } from './structures/interaction/schema'
 
-export const DocumentMediaObjectWithoutCaptionPayloadSchemaType = z
-	.object({
-		filename: z.string().optional()
-	})
-	.and(
-		z
-			.object({
-				id: z.string()
-			})
-			.or(
-				z.object({
-					link: z.string()
-				})
-			)
-	)
-
-export const DocumentMediaObjectPayloadSchemaType =
-	DocumentMediaObjectWithoutCaptionPayloadSchemaType.and(
-		z.object({ caption: z.string().optional() })
-	)
-
-export const ImageMediaObjectWithoutCaptionPayloadSchemaType = z
-	.object({
-		id: z.string()
-	})
-	.or(
-		z.object({
-			link: z.string()
+// ==== BASE MESSAGE PAYLOAD ====
+export const BaseMessageApiPayloadSchema = z.object({
+	context: z
+		.object({
+			message_id: z.string()
 		})
-	)
-
-export const ImageMediaObjectPayloadSchemaType =
-	ImageMediaObjectWithoutCaptionPayloadSchemaType.and(
-		z.object({
-			caption: z.string().optional()
-		})
-	)
-
-export const VideoMediaObjectWithoutCaptionPayloadSchemaType = z
-	.object({
-		id: z.string()
-	})
-	.or(
-		z.object({
-			link: z.string()
-		})
-	)
-
-export const VideoMediaObjectPayloadSchemaType =
-	VideoMediaObjectWithoutCaptionPayloadSchemaType.and(
-		z.object({
-			caption: z.string().optional()
-		})
-	)
-
-export const LocationDataPayloadSchemaType = z.object({
-	latitude: z.number(),
-	longitude: z.number(),
-	name: z.string(),
-	address: z.string()
+		.optional(),
+	to: z.string(),
+	type: z.nativeEnum(MessageTypeEnum),
+	messaging_product: z.literal('whatsapp'),
+	recipient_type: z.literal('individual'),
+	biz_opaque_callback_data: z.string().optional()
 })
 
+// ===== TEMPLATE MESSAGE PAYLOAD ======
+export const TemplateMessageParametersSchemaType = z.array(
+	z
+		.object({
+			type: z.literal('currency'),
+			currency: z.object({
+				fallback_value: z.string(),
+				code: z.string(),
+				amount_1000: z.number()
+			})
+		})
+		.or(
+			z.object({
+				type: z.literal('date_time'),
+				date_time: z.object({
+					fallback_value: z.string()
+				})
+			})
+		)
+		.or(
+			z.object({
+				type: z.literal('document'),
+				document: MetaDocumentMediaObjectSchemaType.or(
+					ExternalDocumentMediaObjectSchemaType
+				)
+			})
+		)
+		.or(
+			z.object({
+				type: z.literal('image'),
+				image: ExternalImageMediaObjectType.or(MetaImageMediaObjectSchemaType)
+			})
+		)
+		.or(
+			z.object({
+				type: z.literal('text'),
+				text: z.string()
+			})
+		)
+		.or(
+			z.object({
+				type: z.literal('video'),
+				video: ExternalVideoMediaObjectType.or(MetaVideoMediaObjectSchemaType)
+			})
+		)
+)
+
+export const TemplateMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		interactive: z.object({
+			name: z.string(),
+			language: z.object({
+				policy: z.literal('deterministic'),
+				code: z.string(),
+				components: z
+					.array(
+						z
+							.object({
+								type: z.literal('header'),
+								parameters: TemplateMessageParametersSchemaType.optional()
+							})
+							.or(
+								z.object({
+									type: z.literal('body'),
+									parameters: TemplateMessageParametersSchemaType.optional()
+								})
+							)
+							.or(
+								z.object({
+									type: z.literal('button'),
+									sub_type: z.enum(['quick_reply', 'url', 'catalog']),
+									parameters: TemplateMessageParametersSchemaType,
+									index: z.number().min(0).max(10)
+								})
+							)
+					)
+					.optional()
+			})
+		})
+	})
+)
+
+// ===== TEXT MESSAGE PAYLOAD =====
+export const TextMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Text),
+		preview_url: z.boolean(),
+		text: z.object({
+			body: z.string(),
+			preview_url: z.boolean().optional()
+		})
+	})
+)
+
+// ==== AUDIO MESSAGE PAYLOAD =====
+export const AudioMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Audio),
+		audio: ExternalAudioMediaObjectType.or(MetaAudioMediaObjectSchemaType)
+	})
+)
+// ===== VIDEO MESSAGE PAYLOAD =====
+export const VideoMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Video),
+		video: ExternalVideoMediaObjectType.or(MetaVideoMediaObjectSchemaType)
+	})
+)
+
+// ===== DOCUMENT MESSAGE PAYLOAD =====
+export const DocumentMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Document),
+		document: ExternalDocumentMediaObjectSchemaType.or(MetaDocumentMediaObjectSchemaType)
+	})
+)
+
+// ==== IMAGE MESSAGE PAYLOAD =====
+export const ImageMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Image),
+		image: ExternalImageMediaObjectType.or(MetaImageMediaObjectSchemaType)
+	})
+)
+
+// ==== CONTACT MESSAGE PAYLOAD =====
 export const ContactDataPayloadSchemaType = z.object({
 	addresses: AddressSchemaType.optional(),
 	birthday: z.string({
@@ -104,275 +197,195 @@ export const ContactDataPayloadSchemaType = z.object({
 		.optional()
 })
 
+export const ContactMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Contacts),
+		contacts: z.array(ContactDataPayloadSchemaType)
+	})
+)
+
+// ==== LOCATION MESSAGE PAYLOAD ====
+
+export const LocationDataPayloadSchemaType = z.object({
+	latitude: z.number(),
+	longitude: z.number(),
+	name: z.string(),
+	address: z.string()
+})
+
+export const LocationMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Location),
+		location: LocationDataPayloadSchemaType
+	})
+)
+
+// ==== STICKER MESSAGE PAYLOAD ====
+
+export const StickerMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Sticker),
+		sticker: ExternalStickerMediaObjectType.or(MetaStickerMediaObjectSchemaType)
+	})
+)
+
+// ==== REACTION MESSAGE PAYLOAD ====
 export const ReactionDataPayloadSchemaType = z.object({
 	message_id: z.string(),
 	emoji: z.string()
 })
 
-export const TemplateMessageParametersSchemaType = z.array(
-	z
-		.object({
-			type: z.literal('currency'),
-			currency: z.object({
-				fallback_value: z.string(),
-				code: z.string(),
-				amount_1000: z.number()
-			})
-		})
-		.or(
-			z.object({
-				type: z.literal('date_time'),
-				date_time: z.object({
-					fallback_value: z.string()
-				})
-			})
-		)
-		.or(
-			z.object({
-				type: z.literal('document'),
-				document: DocumentMediaObjectWithoutCaptionPayloadSchemaType
-			})
-		)
-		.or(
-			z.object({
-				type: z.literal('image'),
-				image: ImageMediaObjectWithoutCaptionPayloadSchemaType
-			})
-		)
-		.or(
-			z.object({
-				type: z.literal('text'),
-				text: z.string()
-			})
-		)
-		.or(
-			z.object({
-				type: z.literal('video'),
-				video: VideoMediaObjectWithoutCaptionPayloadSchemaType
-			})
-		)
+export const ReactionMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Sticker),
+		reaction: ReactionDataPayloadSchemaType
+	})
 )
 
-export const TemplateMessagePayloadSchemaType = z.object({
-	name: z.string(),
-	language: z.object({
-		policy: z.literal('deterministic'),
-		code: z.string(),
-		components: z
-			.array(
-				z
-					.object({
-						type: z.literal('header'),
-						parameters: TemplateMessageParametersSchemaType.optional()
-					})
-					.or(
-						z.object({
-							type: z.literal('body'),
-							parameters: TemplateMessageParametersSchemaType.optional()
-						})
-					)
-					.or(
-						z.object({
-							type: z.literal('button'),
-							sub_type: z.enum(['quick_reply', 'url', 'catalog']),
-							parameters: TemplateMessageParametersSchemaType,
-							index: z.number().min(0).max(10)
-						})
-					)
-			)
-			.optional()
-	})
+// ===== INTERACTIVE MESSAGE PAYLOAD ======
+export const BaseInteractiveMessagePayload = z.object({
+	type: z.nativeEnum(InteractiveMessageTypeEnum),
+	body: z.object({
+		text: z.string()
+	}),
+	footer: z
+		.object({
+			text: z.string()
+		})
+		.optional(),
+	header: InteractiveMessageHeaderSchemaType.optional()
 })
 
-export const WhatsappCloudApiRequestPayloadSchemaType = z
-	.object({
-		context: z
-			.object({
-				message_id: z.string()
-			})
-			.optional(),
-		to: z.string(),
-		type: z.string(),
-		messaging_product: z.literal('whatsapp'),
-		recipient_type: z.literal('individual'),
-		biz_opaque_callback_data: z.string().optional()
+export const ButtonInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+	z.object({
+		type: z.literal(InteractiveMessageTypeEnum.Button),
+		action: z.object({
+			buttons: z.array(ButtonComponentSchemaType)
+		}),
+		body: z.object({
+			text: z.string()
+		})
 	})
-	.and(
-		z
+)
+
+const ProductListInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+	z.object({
+		type: z.literal(InteractiveMessageTypeEnum.ProductList),
+		header: InteractiveMessageHeaderSchemaType,
+		action: z.object({
+			productRetailerId: z.string(),
+			catalogId: z.string(),
+			sections: z.array(z.object({}))
+		})
+	})
+)
+
+const ProductInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+	z.object({
+		type: z.literal(InteractiveMessageTypeEnum.Product),
+		action: z.object({
+			productRetailerId: z.string(),
+			catalogId: z.string(),
+			sections: z.array(z.object({}))
+		}),
+		body: z
 			.object({
-				type: z.literal('text'),
-				preview_url: z.boolean(),
-				text: z.object({
-					body: z.string(),
-					preview_url: z.boolean().optional()
-				})
+				text: z.string()
 			})
-			.or(
-				z.object({
-					type: z.literal('sticker'),
-					sticker: z.object({ id: z.string() })
+			.optional()
+	})
+)
+
+const CatalogInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+	z.object({
+		type: z.literal(InteractiveMessageTypeEnum.Catalog),
+		action: z.object({
+			productRetailerId: z.string(),
+			catalogId: z.string(),
+			sections: z.array(z.object({}))
+		}),
+		body: z
+			.object({
+				text: z.string()
+			})
+			.optional()
+	})
+)
+
+const ListInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+	z.object({
+		type: z.literal(InteractiveMessageTypeEnum.List),
+		action: z.object({
+			button: z.string()
+		}),
+		body: z
+			.object({
+				text: z.string()
+			})
+			.optional()
+	})
+)
+
+const FlowInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+	z.object({
+		type: z.literal(InteractiveMessageTypeEnum.Flow),
+		action: z.object({
+			mode: z.enum(['draft', 'published']),
+			flow_message_version: z.literal('3'),
+			flow_token: z.string(),
+			flow_id: z.string(),
+			flow_cta: z.string(),
+			flow_action: z.enum(['navigate', 'data_exchange']).default('navigate').optional(),
+			flow_action_payload: z
+				.object({
+					flow_action_payload: z.string(),
+					data: z.object({}).optional()
 				})
-			)
-			.or(
-				z.object({
-					type: z.literal('video'),
-					video: VideoMediaObjectPayloadSchemaType
-				})
-			)
-			.or(
-				z.object({
-					type: z.literal('audio'),
-					audio: z
-						.object({
-							id: z.string()
-						})
-						.or(z.object({ link: z.string() }))
-				})
-			)
-			.or(
-				z.object({
-					type: z.literal('document'),
-					document: DocumentMediaObjectPayloadSchemaType
-				})
-			)
-			.or(
-				z.object({
-					type: z.literal('template')
-				})
-			)
-			.or(
-				z.object({
-					type: z.literal('location'),
-					location: LocationDataPayloadSchemaType
-				})
-			)
-			.or(
-				z.object({
-					type: z.literal('interactive'),
-					interactive: z
-						.object({
-							action: z.object({
-								button: z.string().optional()
-							}),
-							body: z.object({}),
-							footer: z.object({}),
-							header: z
-								.object({
-									type: z.literal('text'),
-									text: z.string()
-								})
-								.or(
-									z.object({
-										type: z.literal('document'),
-										document: DocumentMediaObjectPayloadSchemaType
-									})
-								)
-								.or(
-									z.object({
-										type: z.literal('image'),
-										image: ImageMediaObjectPayloadSchemaType
-									})
-								)
-								.or(
-									z.object({
-										type: z.literal('video'),
-										video: VideoMediaObjectPayloadSchemaType
-									})
-								)
-								.optional(),
-							type: z.literal('catalog_message').or(z.literal('flow'))
-						})
-						.and(
-							z
-								.object({
-									type: z.literal('product'),
-									body: z.object({}).optional(),
-									action: z.object({
-										catalog_id: z.string(),
-										product_retailer_id: z.string()
-									})
-								})
-								.or(
-									z.object({
-										type: z.literal('product_list'),
-										header: z.object({}),
-										action: z.object({
-											catalog_id: z.string(),
-											product_retailer_id: z.string(),
-											sections: z.array(z.object({}))
-										})
-									})
-								)
-								.or(
-									z.object({
-										type: z.literal('list'),
-										action: z.object({
-											button: z.string(),
-											sections: z.array(z.object({}))
-										})
-									})
-								)
-								.or(
-									z.object({
-										type: z.literal('list'),
-										action: z.object({
-											buttons: z.array(
-												z.object({
-													type: z.literal('reply'),
-													title: z.string(),
-													id: z.string()
-												})
-											)
-										})
-									})
-								)
-								.or(
-									z.object({
-										type: z.literal('flow'),
-										action: z.object({
-											mode: z.enum(['draft', 'published']),
-											flow_message_version: z.literal('3'),
-											flow_token: z.string(),
-											flow_id: z.string(),
-											flow_cta: z.string(),
-											flow_action: z
-												.enum(['navigate', 'data_exchange'])
-												.default('navigate')
-												.optional(),
-											flow_action_payload: z
-												.object({
-													flow_action_payload: z.string(),
-													data: z.object({}).optional()
-												})
-												.optional()
-										})
-									})
-								)
-						)
-				})
-			)
-			.or(
-				z.object({
-					type: z.literal('image'),
-					image: ImageMediaObjectPayloadSchemaType
-				})
-			)
-			.or(
-				z.object({
-					type: z.literal('contacts'),
-					image: ContactDataPayloadSchemaType
-				})
-			)
-			.or(
-				z.object({
-					type: z.literal('reaction'),
-					image: ReactionDataPayloadSchemaType
-				})
-			)
-			.or(
-				z.object({
-					status: z.literal('read'),
-					message_id: z.string()
-				})
-			)
-	)
+				.optional()
+		})
+	})
+)
+
+export const InteractiveMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
+	z.object({
+		type: z.literal(MessageTypeEnum.Interactive),
+		interactive: ButtonInteractiveMessagePayload.or(FlowInteractiveMessagePayload)
+			.or(ProductInteractiveMessagePayload)
+			.or(ProductListInteractiveMessagePayload)
+			.or(CatalogInteractiveMessagePayload)
+			.or(ListInteractiveMessagePayload)
+	})
+)
+
+export const WhatsappCloudApiRequestPayloadSchemaType = ImageMessageApiPayloadSchemaType.or(
+	TextMessageApiPayloadSchemaType
+)
+	.or(AudioMessageApiPayloadSchemaType)
+	.or(VideoMessageApiPayloadSchemaType)
+	.or(DocumentMessageApiPayloadSchemaType)
+	.or(StickerMessageApiPayloadSchemaType)
+	.or(ReactionMessageApiPayloadSchemaType)
+	.or(TemplateMessageApiPayloadSchemaType)
+	.or(InteractiveMessageApiPayloadSchemaType)
+	.or(LocationMessageApiPayloadSchemaType)
+	.or(ContactMessageApiPayloadSchemaType)
+
+export type GeneralRequestBody = Record<string, any>
+
+export type GeneralMessageBody = GeneralRequestBody & {
+	messaging_product: 'whatsapp'
+}
+
+export type ApiRequestResponseSchemaType = GeneralMessageBody & {
+	contacts: [
+		{
+			input: string
+			wa_id: string
+		}
+	]
+	messages: [
+		{
+			id: string
+		}
+	]
+}

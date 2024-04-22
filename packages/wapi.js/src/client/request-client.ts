@@ -27,6 +27,7 @@ export class RequestClient implements RequestClientInterface {
 	}
 
 	getRequestUrl() {
+		console.log({ version: this.apiVersion })
 		return `${this.protocol}://${this.host}/${this.apiVersion}/${this.phoneNumberId}`
 	}
 
@@ -41,6 +42,16 @@ export class RequestClient implements RequestClientInterface {
 	}) {
 		try {
 			const requestUrl = this.getRequestUrl()
+			console.log({
+				url: `${requestUrl}${path}`,
+				method: method,
+				body,
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${this.accessToken}`,
+					'User-Agent': this.userAgent
+				}
+			})
 
 			const response = await fetch(`${requestUrl}${path}`, {
 				method: method,
@@ -55,6 +66,7 @@ export class RequestClient implements RequestClientInterface {
 			const responseBody = await response.json()
 			return responseBody
 		} catch (error) {
+			console.log({ error })
 			if (error instanceof Error) this.client.emit('Error', error)
 		}
 	}

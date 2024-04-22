@@ -21,7 +21,7 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
 
 	/**
 	 * Function used to get the URL of an media using media id from whatsapp
-	 * @param {string} mediaId 
+	 * @param {string} mediaId
 	 * @memberof MediaManager
 	 */
 	async getUrl(mediaId: string) {
@@ -35,7 +35,7 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
 
 	/**
 	 * Function used to delete uploaded media on whatsapp using media id
-	 * @param {string} mediaId 
+	 * @param {string} mediaId
 	 * @memberof MediaManager
 	 */
 	async delete(mediaId: string) {
@@ -51,7 +51,7 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
 
 	/**
 	 * Function to upload media
-	 * @param params 
+	 * @param params
 	 * @memberof MediaManager
 	 */
 	async upload(params: { filePath: string; mediaType: string }) {

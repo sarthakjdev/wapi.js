@@ -4,6 +4,7 @@ import { BaseMessage } from '../message'
 import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
 import { z } from 'zod'
 import { AudioMessage } from '../audio'
+import { MediaTypeEnum } from '../media/interface'
 
 /**
  * Video message component
@@ -56,18 +57,14 @@ export class VideoMessage extends BaseMessage<'video'> implements VideoMessageIn
 		to: string
 	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: 'video' }> {
 		return {
-			type: 'video',
+			type: MessageTypeEnum.Video,
 			to: params.to,
 			messaging_product: this.messaging_product,
 			recipient_type: this.recipient_type,
-			video:
-				'mediaId' in this.data
-					? {
-							id: this.data.mediaId
-					  }
-					: {
-							link: this.data.link
-					  }
+			video: {
+				id: '234123',
+				type: MediaTypeEnum.Video
+			}
 		}
 	}
 }

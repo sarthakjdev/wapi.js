@@ -32,7 +32,7 @@ export class TextMessage extends BaseMessage<'text'> implements TextMessageInter
 		to: string
 	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: 'text' }> {
 		return {
-			type: 'text',
+			type: MessageTypeEnum.Text,
 			to: params.to,
 			messaging_product: this.messaging_product,
 			recipient_type: this.recipient_type,

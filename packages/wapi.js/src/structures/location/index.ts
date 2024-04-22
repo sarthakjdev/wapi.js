@@ -33,7 +33,7 @@ export class LocationMessage extends BaseMessage<'location'> implements Location
 			messaging_product: 'whatsapp',
 			recipient_type: 'individual',
 			to: params.to,
-			type: 'location'
+			type: MessageTypeEnum.Location,
 		}
 	}
 }

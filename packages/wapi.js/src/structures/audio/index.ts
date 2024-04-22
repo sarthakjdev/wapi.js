@@ -3,6 +3,7 @@ import { MessageTypeEnum } from '../message/types'
 import { BaseMessage } from '../message'
 import { z } from 'zod'
 import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
+import { MediaTypeEnum } from '../media/interface'
 
 /**
  * Audio message component
@@ -16,10 +17,7 @@ export class AudioMessage extends BaseMessage<'audio'> implements AudioMessageIn
 	/**
 	 * Zod schema to parse the constructor arguments
 	 */
-	private static schema = z
-		.object({ id: z.string() })
-		.or(z.object({ link: z.string() }))
-
+	private static schema = z.object({ id: z.string() }).or(z.object({ link: z.string() }))
 
 	/**
 	 * @constructor
@@ -47,20 +45,16 @@ export class AudioMessage extends BaseMessage<'audio'> implements AudioMessageIn
 	 */
 	toJson(params: {
 		to: string
-	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: 'audio' }> {
+	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: MessageTypeEnum.Audio }> {
 		return {
-			type: 'audio',
+			type: MessageTypeEnum.Audio,
 			to: params.to,
 			messaging_product: this.messaging_product,
 			recipient_type: this.recipient_type,
-			audio:
-				'mediaId' in this.data
-					? {
-						id: this.data.mediaId
-					}
-					: {
-						link: this.data.link
-					}
+			audio: {
+				id: '242rfasvsdv',
+				type: MediaTypeEnum.Audio
+			}
 		}
 	}
 }

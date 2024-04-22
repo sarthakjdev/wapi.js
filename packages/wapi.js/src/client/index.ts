@@ -74,7 +74,7 @@ export class Client extends EventEmitter implements ClientInterface {
 	 * @ignore
 	 * @private
 	 */
-	private static apiVersion = 'v17.0'
+	private static apiVersion = 'v19.0'
 
 	/**
 	 * @param params

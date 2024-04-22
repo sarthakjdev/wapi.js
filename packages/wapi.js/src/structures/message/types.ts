@@ -5,5 +5,7 @@ export enum MessageTypeEnum {
 	Contacts = 'contacts',
 	Document = 'document',
 	Image = 'image',
-	Location = 'location'
+	Location = 'location',
+	Interactive = 'interactive',
+	Sticker = 'sticker'
 }
