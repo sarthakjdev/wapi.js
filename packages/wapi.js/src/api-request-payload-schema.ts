@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { AddressSchemaType, InteractiveMessageHeaderSchemaType } from './structures/message/schema'
 import { InteractiveMessageTypeEnum } from './structures/interaction/interface'
 import { MessageTypeEnum } from './structures/message/types'
 import {
@@ -14,7 +13,18 @@ import {
 	MetaStickerMediaObjectSchemaType,
 	MetaVideoMediaObjectSchemaType
 } from './structures/media/schema'
-import { ButtonComponentSchemaType } from './structures/interaction/schema'
+import {
+	ButtonComponentSchemaType,
+	InteractiveMessageHeaderSchemaType
+} from './structures/interaction/schema'
+import {
+	ContactAddressSchemaType,
+	ContactEmailPayloadSchemaType,
+	ContactNamePayloadSchemaType,
+	ContactOrgPayloadSchemaType,
+	ContactPhonePayloadSchemaType,
+	ContactUrlPayloadSchemaType
+} from './structures/contact/schema'
 
 // ==== BASE MESSAGE PAYLOAD ====
 export const BaseMessageApiPayloadSchema = z.object({
@@ -156,45 +166,19 @@ export const ImageMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merg
 )
 
 // ==== CONTACT MESSAGE PAYLOAD =====
+
 export const ContactDataPayloadSchemaType = z.object({
-	addresses: AddressSchemaType.optional(),
-	birthday: z.string({
-		description: 'YYYY-MM-DD formatted string.'
-	}),
-	emails: z
-		.object({
-			email: z.string().optional(),
-			type: z.enum(['HOME', 'WORK'])
+	addresses: z.array(ContactAddressSchemaType).optional(),
+	birthday: z
+		.string({
+			description: 'YYYY-MM-DD formatted string.'
 		})
 		.optional(),
-	name: z.object({
-		formatted_name: z.string(),
-		first_name: z.string().optional(),
-		last_name: z.string().optional(),
-		middle_name: z.string().optional(),
-		suffix: z.string().optional(),
-		prefix: z.string().optional()
-	}),
-	org: z
-		.object({
-			company: z.string().optional(),
-			title: z.string().optional(),
-			department: z.string().optional()
-		})
-		.optional(),
-	phones: z
-		.object({
-			phone: z.string().optional(),
-			type: z.enum(['CELL', 'MAIN', 'IPHONE', 'HOME', 'WORK']).optional(),
-			wa_id: z.string().optional()
-		})
-		.optional(),
-	urls: z
-		.object({
-			url: z.string(),
-			type: z.enum(['HOME', 'WORK'])
-		})
-		.optional()
+	emails: z.array(ContactEmailPayloadSchemaType).optional(),
+	name: ContactNamePayloadSchemaType,
+	org: ContactOrgPayloadSchemaType.optional(),
+	phones: z.array(ContactPhonePayloadSchemaType).optional(),
+	urls: z.array(ContactUrlPayloadSchemaType).optional()
 })
 
 export const ContactMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
@@ -292,14 +276,12 @@ export const ProductListInteractiveMessagePayload = BaseInteractiveMessagePayloa
 	})
 )
 
-
-
 export const ProductInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
 	z.object({
 		type: z.literal(InteractiveMessageTypeEnum.Product),
 		action: z.object({
 			productRetailerId: z.string(),
-			catalogId: z.string(),
+			catalogId: z.string()
 		}),
 		body: z
 			.object({

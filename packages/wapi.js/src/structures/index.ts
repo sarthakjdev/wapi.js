@@ -8,3 +8,4 @@ export * from './interaction/interface'
 
 export * from './location/index'
 export * from './location/interface'
+export * from './contact/index'

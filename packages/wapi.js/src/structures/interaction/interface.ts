@@ -27,7 +27,6 @@ export interface ButtonInteractionMessageInterface extends InteractiveMessageInt
 	}
 }
 
-
 /**
  * @interface
  * @extends {InteractiveMessageInterface}
@@ -38,7 +37,6 @@ export interface ListInteractionMessageInterface extends InteractiveMessageInter
 		sections: z.infer<typeof ListInteractiveMessageSection>[]
 	}
 }
-
 
 /**
  * @interface
@@ -60,7 +58,6 @@ export interface ProductListInteractionMessageInterface extends InteractiveMessa
 		catalogId: string
 		productRetailerId: string
 		sections: z.infer<typeof ProductListInteractiveMessageSection>[]
-
 	}
 }
 

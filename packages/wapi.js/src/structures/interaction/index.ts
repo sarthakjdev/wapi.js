@@ -30,9 +30,9 @@ abstract class InteractiveMessage
 	readonly interactiveMessageData: {
 		type: InteractiveMessageTypeEnum
 		footerText?: string
-		bodyText: string,
+		bodyText: string
 		// ! TODO: add header here
-		// header: 
+		// header:
 	}
 
 	/**
@@ -217,7 +217,7 @@ export class ProductInteractionMessage
 		})
 		this.data = {
 			catalogId: params.catalogId,
-			productRetailerId: params.productRetailerId,
+			productRetailerId: params.productRetailerId
 		}
 	}
 
@@ -237,7 +237,7 @@ export class ProductInteractionMessage
 				type: InteractiveMessageTypeEnum.Product,
 				action: {
 					catalogId: this.data.catalogId,
-					productRetailerId: this.data.productRetailerId,
+					productRetailerId: this.data.productRetailerId
 				},
 				body: {
 					text: this.interactiveMessageData.bodyText
@@ -259,7 +259,9 @@ export class ProductInteractionMessage
  * @extends {InteractiveMessage}
  * @implements {ProductListInteractionMessageInterface}
  */
-export class ProductListInteractionMessage extends InteractiveMessage implements ProductListInteractionMessageInterface {
+export class ProductListInteractionMessage
+	extends InteractiveMessage
+	implements ProductListInteractionMessageInterface {
 	data: {
 		catalogId: string
 		productRetailerId: string
@@ -272,7 +274,7 @@ export class ProductListInteractionMessage extends InteractiveMessage implements
 		bodyText: string
 		catalogId: string
 		productRetailerId: string
-		sections: z.infer<typeof ProductListInteractiveMessageSection>[]
+		sections: z.infer<typeof ProductListInteractiveMessageSection>[],
 	}) {
 		super({
 			type: InteractiveMessageTypeEnum.Button,
@@ -308,6 +310,7 @@ export class ProductListInteractionMessage extends InteractiveMessage implements
 					sections: this.data.sections
 				},
 				header: {
+
 				},
 				body: {
 					text: this.interactiveMessageData.bodyText

@@ -1,7 +1,7 @@
 import { type LocationMessageInterface } from './interface'
 import { MessageTypeEnum } from '../message/types'
 import { BaseMessage } from '../message'
-import { type LocationSchemaType } from '../message/schema'
+import { type LocationSchemaType } from './schema'
 import { type z } from 'zod'
 import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
 
