@@ -45,7 +45,10 @@ export class AudioMessage extends BaseMessage<'audio'> implements AudioMessageIn
 	 */
 	toJson(params: {
 		to: string
-	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: MessageTypeEnum.Audio }> {
+	}): Extract<
+		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
+		{ type: MessageTypeEnum.Audio }
+	> {
 		return {
 			type: MessageTypeEnum.Audio,
 			to: params.to,

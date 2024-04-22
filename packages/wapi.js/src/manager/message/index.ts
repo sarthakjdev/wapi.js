@@ -25,8 +25,10 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 		message: T
 		phoneNumber: string
 	}): Promise<string> {
-
-		console.log({ props: JSON.stringify(props), body: JSON.stringify(props.message.toJson({ to: props.phoneNumber })), })
+		console.log({
+			props: JSON.stringify(props),
+			body: JSON.stringify(props.message.toJson({ to: props.phoneNumber }))
+		})
 
 		const response = await this.client.requester.requestCloudApi({
 			path: '/messages',

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { AddressSchemaType, InteractiveMessageHeaderSchemaType } from './structures/message/schema'
-import { InteractiveMessageTypeEnum } from './structures'
+import { InteractiveMessageTypeEnum } from './structures/interaction/interface'
 import { MessageTypeEnum } from './structures/message/types'
 import {
 	ExternalAudioMediaObjectType,
@@ -268,25 +268,38 @@ export const ButtonInteractiveMessagePayload = BaseInteractiveMessagePayload.mer
 	})
 )
 
-const ProductListInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+export const ProductListInteractiveMessageSection = z.object({
+	title: z.string(),
+	product_items: z
+		.array(
+			z.object({
+				product_retailer_id: z.string()
+			})
+		)
+		.min(1)
+		.max(30)
+})
+
+export const ProductListInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
 	z.object({
 		type: z.literal(InteractiveMessageTypeEnum.ProductList),
 		header: InteractiveMessageHeaderSchemaType,
 		action: z.object({
 			productRetailerId: z.string(),
 			catalogId: z.string(),
-			sections: z.array(z.object({}))
+			sections: z.array(ProductListInteractiveMessageSection).min(1).max(10)
 		})
 	})
 )
 
-const ProductInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+
+
+export const ProductInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
 	z.object({
 		type: z.literal(InteractiveMessageTypeEnum.Product),
 		action: z.object({
 			productRetailerId: z.string(),
 			catalogId: z.string(),
-			sections: z.array(z.object({}))
 		}),
 		body: z
 			.object({
@@ -296,13 +309,12 @@ const ProductInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
 	})
 )
 
-const CatalogInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+export const CatalogInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
 	z.object({
 		type: z.literal(InteractiveMessageTypeEnum.Catalog),
 		action: z.object({
 			productRetailerId: z.string(),
-			catalogId: z.string(),
-			sections: z.array(z.object({}))
+			catalogId: z.string()
 		}),
 		body: z
 			.object({
@@ -312,11 +324,23 @@ const CatalogInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
 	})
 )
 
-const ListInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
+export const ListInteractiveMessageSection = z.object({
+	title: z.string(),
+	rows: z.array(
+		z.object({
+			id: z.string(),
+			title: z.string(),
+			description: z.string()
+		})
+	)
+})
+
+export const ListInteractiveMessagePayload = BaseInteractiveMessagePayload.merge(
 	z.object({
 		type: z.literal(InteractiveMessageTypeEnum.List),
 		action: z.object({
-			button: z.string()
+			button: z.string(),
+			sections: z.array(ListInteractiveMessageSection).min(1).max(10)
 		}),
 		body: z
 			.object({

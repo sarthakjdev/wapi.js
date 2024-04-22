@@ -53,7 +53,7 @@ export class Webhook extends EventEmitter {
 										case 'text': {
 											this.client.emit('TextMessage', {
 												from: message.from,
-												text: 'hiiii'
+												text: message.text.body
 											})
 
 											break
