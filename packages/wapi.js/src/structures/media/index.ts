@@ -1,41 +1,247 @@
 import { type z } from 'zod'
-import { type MediaTypeEnum, type MediaComponentInterface } from './interface'
-import { MediaObjectSchemaType } from './schema'
+import {
+	type ImageMessageInterface,
+	type AudioMessageInterface,
+	type VideoMessageInterface,
+	type StickerMessageInterface,
+	type DocumentMessageInterface
+} from './interface'
+import {
+	type MetaAudioMediaObjectSchemaType,
+	type ExternalAudioMediaObjectType,
+	type ExternalVideoMediaObjectType,
+	type MetaVideoMediaObjectSchemaType,
+	type MetaImageMediaObjectSchemaType,
+	type ExternalImageMediaObjectType,
+	type ExternalDocumentMediaObjectSchemaType,
+	type MetaDocumentMediaObjectSchemaType,
+	type ExternalStickerMediaObjectType,
+	type MetaStickerMediaObjectSchemaType
+} from './schema'
+import { BaseMessage } from '../message'
+import { MessageTypeEnum } from '../message/types'
+import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
 
-export class MediaComponent implements MediaComponentInterface {
-	type: MediaTypeEnum
-	fileName?: string
-	link?: string
-	id?: string
-	caption?: string
+/**
+ * @extends {BaseMessage<MessageTypeEnum.Audio>}
+ * @implements {AudioMessageInterface}
+ * @class
+ */
+export class AudioMessage
+	extends BaseMessage<MessageTypeEnum.Audio>
+	implements AudioMessageInterface {
+	data: z.infer<typeof MetaAudioMediaObjectSchemaType | typeof ExternalAudioMediaObjectType>
 
-	private static schema = MediaObjectSchemaType
-
-	protected static parseConstructorPayload(payload: any) {
-		const response = MediaComponent.schema.safeParse(payload)
-		if (!response.success) {
-			throw new Error(
-				JSON.stringify(
-					{
-						type: 'Parsing Error',
-						errors: response.error.errors
-					},
-					null,
-					4
-				)
-			)
-		} else {
-			return response.data
-		}
+	/**
+	 * @constructor
+	 * @memberof AudioMessage
+	 */
+	constructor(
+		params: z.infer<typeof MetaAudioMediaObjectSchemaType | typeof ExternalAudioMediaObjectType>
+	) {
+		super({ type: MessageTypeEnum.Audio })
+		this.data = params
 	}
 
-	constructor(params: z.infer<typeof MediaObjectSchemaType>) {
-		this.type = params.type
-		MediaComponent.parseConstructorPayload(params)
-		Object.entries(params).map(([key, value]) => {
-			// ! TODO: fix types
-			// @ts-expect-error type error
-			this[key] = value
-		})
+	/**
+	 * Function used to get the get the whatsapp cloud api payload for audio message
+	 * @memberof TextMessage
+	 */
+	toJson(params: {
+		to: string
+	}): Extract<
+		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
+		{ type: MessageTypeEnum.Audio }
+	> {
+		return {
+			type: MessageTypeEnum.Audio,
+			to: params.to,
+			messaging_product: this.messaging_product,
+			recipient_type: this.recipient_type,
+			audio: {
+				...('id' in this.data ? { id: this.data.id } : { link: this.data.link })
+			}
+		}
+	}
+}
+
+/**
+ * @extends {BaseMessage<MessageTypeEnum.Video>}
+ * @implements {VideoMessageInterface}
+ * @class
+ */
+export class VideoMessage
+	extends BaseMessage<MessageTypeEnum.Video>
+	implements VideoMessageInterface {
+	data: z.infer<typeof MetaVideoMediaObjectSchemaType | typeof ExternalVideoMediaObjectType>
+
+	/**
+	 * @constructor
+	 * @memberof VideoMessage
+	 */
+	constructor(
+		params: z.infer<typeof MetaVideoMediaObjectSchemaType | typeof ExternalVideoMediaObjectType>
+	) {
+		super({ type: MessageTypeEnum.Video })
+		this.data = params
+	}
+
+	/**
+	 * Function used to get the get the whatsapp cloud api payload for audio message
+	 * @memberof VideoMessage
+	 */
+	toJson(params: {
+		to: string
+	}): Extract<
+		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
+		{ type: MessageTypeEnum.Video }
+	> {
+		return {
+			type: MessageTypeEnum.Video,
+			to: params.to,
+			messaging_product: this.messaging_product,
+			recipient_type: this.recipient_type,
+			video: {
+				...('id' in this.data ? { id: this.data.id } : { link: this.data.link }),
+				caption: this.data.caption
+			}
+		}
+	}
+}
+
+/**
+ * @extends {BaseMessage<MessageTypeEnum.Image>}
+ * @implements {ImageMessageInterface}
+ * @class
+ */
+export class ImageMessage
+	extends BaseMessage<MessageTypeEnum.Image>
+	implements ImageMessageInterface {
+	data: z.infer<typeof MetaImageMediaObjectSchemaType | typeof ExternalImageMediaObjectType>
+
+	/**
+	 * @constructor
+	 */
+	constructor(
+		params: z.infer<typeof MetaImageMediaObjectSchemaType | typeof ExternalImageMediaObjectType>
+	) {
+		super({ type: MessageTypeEnum.Image })
+		this.data = params
+	}
+
+	/**
+	 * Function used to get the get the whatsapp cloud api payload for audio message
+	 * @memberof VideoMessage
+	 */
+	toJson(params: {
+		to: string
+	}): Extract<
+		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
+		{ type: MessageTypeEnum.Image }
+	> {
+		return {
+			type: MessageTypeEnum.Image,
+			to: params.to,
+			messaging_product: this.messaging_product,
+			recipient_type: this.recipient_type,
+			image: {
+				...('id' in this.data ? { id: this.data.id } : { link: this.data.link }),
+				caption: this.data.caption
+			}
+		}
+	}
+}
+
+/**
+ * @extends {BaseMessage<MessageTypeEnum.Sticker>}
+ * @implements {StickerMessageInterface}
+ * @class
+ */
+export class StickerMessage
+	extends BaseMessage<MessageTypeEnum.Sticker>
+	implements StickerMessageInterface {
+	data: z.infer<typeof MetaStickerMediaObjectSchemaType | typeof ExternalStickerMediaObjectType>
+
+	/**
+	 * @constructor
+	 * @memberof StickerMessage
+	 */
+	constructor(
+		params: z.infer<
+			typeof MetaStickerMediaObjectSchemaType | typeof ExternalStickerMediaObjectType
+		>
+	) {
+		super({ type: MessageTypeEnum.Sticker })
+		this.data = params
+	}
+
+	/**
+	 * Function used to get the get the whatsapp cloud api payload for audio message
+	 * @memberof VideoMessage
+	 */
+	toJson(params: {
+		to: string
+	}): Extract<
+		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
+		{ type: MessageTypeEnum.Sticker }
+	> {
+		return {
+			type: MessageTypeEnum.Sticker,
+			to: params.to,
+			messaging_product: this.messaging_product,
+			recipient_type: this.recipient_type,
+			sticker: {
+				...('id' in this.data ? { id: this.data.id } : { link: this.data.link })
+			}
+		}
+	}
+}
+
+/**
+ * @extends {BaseMessage<MessageTypeEnum.Document>}
+ * @implements {DocumentMessageInterface}
+ * @class
+ */
+export class DocumentMessage
+	extends BaseMessage<MessageTypeEnum.Document>
+	implements DocumentMessageInterface {
+	data: z.infer<
+		typeof MetaDocumentMediaObjectSchemaType | typeof ExternalDocumentMediaObjectSchemaType
+	>
+
+	/**
+	 * @constructor
+	 * @memberof DocumentMessage
+	 */
+	constructor(
+		params: z.infer<
+			typeof MetaDocumentMediaObjectSchemaType | typeof ExternalDocumentMediaObjectSchemaType
+		>
+	) {
+		super({ type: MessageTypeEnum.Document })
+		this.data = params
+	}
+
+	/**
+	 * Function used to get the get the whatsapp cloud api payload for audio message
+	 * @memberof DocumentMessage
+	 */
+	toJson(params: {
+		to: string
+	}): Extract<
+		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
+		{ type: MessageTypeEnum.Document }
+	> {
+		return {
+			type: MessageTypeEnum.Document,
+			to: params.to,
+			messaging_product: this.messaging_product,
+			recipient_type: this.recipient_type,
+			document: {
+				...('id' in this.data ? { id: this.data.id } : { link: this.data.link }),
+				caption: this.data.caption,
+				filename: this.data.filename
+			}
+		}
 	}
 }

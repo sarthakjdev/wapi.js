@@ -1,17 +1,19 @@
 import { type Client } from '../../../client'
 import { TextMessage } from '../../../structures'
 import { type BaseMessage } from '../../../structures/message'
-import { BaseEvent } from '../base'
+import { MessageEvent } from '../base'
 import { type TextMessageEventInterface, type MessageContext } from './interface'
 
-export class TextMessageEvent extends BaseEvent implements TextMessageEventInterface {
+export class TextMessageEvent extends MessageEvent implements TextMessageEventInterface {
 	message: TextMessage
 	context: MessageContext
+	messageId: string
 
-	constructor(params: { client: Client; data: any }) {
+	constructor(params: { client: Client; data: { text: string, messageId: string } }) {
 		super({ client: params.client })
 
-		this.message = new TextMessage({ text: '' })
+		this.message = new TextMessage({ text: params.data.text })
+		this.messageId = params.data.messageId
 		this.context = { From: '919643500545' }
 	}
 

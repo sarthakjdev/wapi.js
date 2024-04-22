@@ -7,5 +7,6 @@ export enum MessageTypeEnum {
 	Image = 'image',
 	Location = 'location',
 	Interactive = 'interactive',
-	Sticker = 'sticker'
+	Sticker = 'sticker',
+	Reaction = 'reaction'
 }

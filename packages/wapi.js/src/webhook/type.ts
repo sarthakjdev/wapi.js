@@ -24,3 +24,20 @@ export enum NotificationEventTypeEnum {
 	MessageUndelivered = 'MessageUndelivered',
 	ReplyMessage = 'ReplyMessage'
 }
+
+export enum NotificationMessageTypeEnum {
+	Contact = 'contacts',
+	Text = 'text',
+	Audio = 'audio',
+	Video = 'Video',
+	Document = 'document',
+	Order = 'order',
+	Sticker = 'sticker',
+	Image = 'image',
+	System = 'system',
+	Location = 'location',
+	Unknown = 'unknown',
+	Interactive = 'interactive',
+	Reaction = 'reaction',
+	Button = 'button'
+}

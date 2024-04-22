@@ -1,4 +1,6 @@
 import { z } from 'zod'
+import { NotificationMessageTypeEnum } from './type'
+import { type TextMessageEvent } from './events/text'
 
 export const NotificationReasonEnum = z.enum(['message'])
 
@@ -17,22 +19,24 @@ export const NotificationPayloadMessageContextSchemaType = z
 		frequently_forwarded: z.boolean(),
 		from: z.string(),
 		id: z.string(),
-		referred_product: z.object({
-			catalog_id: z.string(),
-			product_retailer_id: z.string()
-		})
+		referred_product: z
+			.object({
+				catalog_id: z.string(),
+				product_retailer_id: z.string()
+			})
+			.optional()
 	})
 	.nullish()
 
 export const NotificationPayloadTextMessageSchemaType = z.object({
-	type: z.literal('text'),
+	type: z.literal(NotificationMessageTypeEnum.Text),
 	text: z.object({
 		body: z.string()
 	})
 })
 
 export const NotificationPayloadAudioMessageSchemaType = z.object({
-	type: z.literal('audio'),
+	type: z.literal(NotificationMessageTypeEnum.Audio),
 	audio: z.object({
 		id: z.string(),
 		mime_type: z.string()
@@ -40,7 +44,7 @@ export const NotificationPayloadAudioMessageSchemaType = z.object({
 })
 
 export const NotificationPayloadImageMessageSchemaType = z.object({
-	type: z.literal('image'),
+	type: z.literal(NotificationMessageTypeEnum.Image),
 	image: z.object({
 		id: z.string(),
 		mime_type: z.string(),
@@ -50,7 +54,7 @@ export const NotificationPayloadImageMessageSchemaType = z.object({
 })
 
 export const NotificationPayloadButtonMessageSchemaType = z.object({
-	type: z.literal('button'),
+	type: z.literal(NotificationMessageTypeEnum.Interactive),
 	button: z.object({
 		payload: z.string(),
 		text: z.string()
@@ -58,7 +62,7 @@ export const NotificationPayloadButtonMessageSchemaType = z.object({
 })
 
 export const NotificationPayloadDocumentMessageSchemaType = z.object({
-	type: z.literal('document'),
+	type: z.literal(NotificationMessageTypeEnum.Document),
 	document: z.object({
 		id: z.string(),
 		mime_type: z.string(),
@@ -70,12 +74,12 @@ export const NotificationPayloadDocumentMessageSchemaType = z.object({
 
 // ! TODO:
 export const NotificationPayloadOrderMessageSchemaType = z.object({
-	type: z.literal('order'),
+	type: z.literal(NotificationMessageTypeEnum.Order),
 	text: z.object({})
 })
 
 export const NotificationPayloadStickerMessageSchemaType = z.object({
-	type: z.literal('sticker'),
+	type: z.literal(NotificationMessageTypeEnum.Sticker),
 	sticker: z.object({
 		id: z.string(),
 		mime_type: z.string(),
@@ -85,7 +89,7 @@ export const NotificationPayloadStickerMessageSchemaType = z.object({
 })
 
 export const NotificationPayloadSystemMessageSchemaType = z.object({
-	type: z.literal('system'),
+	type: z.literal(NotificationMessageTypeEnum.System),
 	system: z.object({
 		identity: z.string(),
 		body: z.string(),
@@ -99,12 +103,17 @@ export const NotificationPayloadSystemMessageSchemaType = z.object({
 })
 
 export const NotificationPayloadVideoMessageSchemaType = z.object({
-	type: z.literal('video'),
+	type: z.literal(NotificationMessageTypeEnum.Video),
 	media: z.object({})
 })
 
+export const NotificationPayloadReactionMessageSchemaType = z.object({
+	type: z.literal(NotificationMessageTypeEnum.Reaction),
+	reaction: z.object({})
+})
+
 export const NotificationPayloadInteractionMessageSchemaType = z.object({
-	type: z.literal('interactive'),
+	type: z.literal(NotificationMessageTypeEnum.Interactive),
 	interactive: z
 		.object({
 			button_reply: z.object({
@@ -124,12 +133,12 @@ export const NotificationPayloadInteractionMessageSchemaType = z.object({
 })
 
 export const NotificationPayloadUnknownMessageSchemaType = z.object({
-	type: z.literal('unknown'),
+	type: z.literal(NotificationMessageTypeEnum.Unknown),
 	text: z.object({})
 })
 
 export const NotificationPayloadLocationMessageSchemaType = z.object({
-	type: z.literal('location'),
+	type: z.literal(NotificationMessageTypeEnum.Location),
 	location: z.object({
 		latitude: z.string(),
 		longitude: z.string(),
@@ -182,21 +191,21 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 											]),
 											// this would only be present if the message status is sent,
 											expiration_timestamp: z.string().nullish()
-										}),
-										errors: NotificationPayloadErrorSchemaType.array(),
-										status: z.enum(['delivered', 'read', 'sent']),
-										timestamp: z.number(),
-										recipient_id: z.string(),
-										pricing: z.object({
-											pricing_model: z.literal('CBP'),
-											category: z.enum([
-												'authentication',
-												'marketing',
-												'utility',
-												'service',
-												' referral_conversion'
-											])
 										})
+									}),
+									errors: NotificationPayloadErrorSchemaType.array(),
+									status: z.enum(['delivered', 'read', 'sent', 'failed']),
+									timestamp: z.number(),
+									recipient_id: z.string(),
+									pricing: z.object({
+										pricing_model: z.literal('CBP'),
+										category: z.enum([
+											'authentication',
+											'marketing',
+											'utility',
+											'service',
+											' referral_conversion'
+										])
 									})
 								})
 							)
@@ -208,7 +217,7 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 										id: z.string(),
 										from: z.string(),
 										timestamp: z.string(),
-										type: z.string(),
+										type: z.nativeEnum(NotificationMessageTypeEnum),
 										context: NotificationPayloadMessageContextSchemaType
 									})
 									.and(
@@ -225,10 +234,13 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 											.or(NotificationPayloadInteractionMessageSchemaType)
 											.or(NotificationPayloadUnknownMessageSchemaType)
 											.or(NotificationPayloadLocationMessageSchemaType)
+											.or(NotificationPayloadReactionMessageSchemaType)
 											.or(
 												// ! TODO: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#:~:text=%7D%5D%0A%20%20%20%20%7D%5D%0A%7D-,Contacts%20Messages,-The%20following%20is
 												z.object({
-													type: z.literal('contact'),
+													type: z.literal(
+														NotificationMessageTypeEnum.Contact
+													),
 													contacts: z.array(z.object({}))
 												})
 											)
@@ -245,11 +257,12 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 })
 
 export type WapiEventDataMap = {
-	TextMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	TextMessage: TextMessageEvent
 	AudioMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
 	AdInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
 	ContactsMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
 	ButtonInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
+	ReplyButton: Zod.infer<typeof TextMessageEventDataSchemaType>
 	CustomerIdentityChanged: Zod.infer<typeof TextMessageEventDataSchemaType>
 	CustomerNumberChanged: Zod.infer<typeof TextMessageEventDataSchemaType>
 	DocumentMessage: Zod.infer<typeof TextMessageEventDataSchemaType>

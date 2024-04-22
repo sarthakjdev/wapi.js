@@ -3,6 +3,8 @@ import { type Client } from '../client'
 import { WhatsappApiNotificationPayloadSchemaType } from './schema'
 import * as express from 'express'
 import { type Express, json as expressJson } from 'express'
+import { NotificationMessageTypeEnum } from './type'
+import { TextMessageEvent } from './events/text'
 
 export class Webhook extends EventEmitter {
 	private endpoint: string
@@ -44,65 +46,152 @@ export class Webhook extends EventEmitter {
 			const parsedPayload = WhatsappApiNotificationPayloadSchemaType.safeParse(request.body)
 			if (parsedPayload.success) {
 				if (parsedPayload.data.entry.length) {
-					parsedPayload.data.entry.map(ent => {
-						ent.changes.map(change => {
+					parsedPayload.data.entry.forEach(entry => {
+						entry.changes.forEach(change => {
 							const messages = change.value.messages
-							if (messages) {
-								messages.map(message => {
-									switch (message.type) {
-										case 'text': {
-											this.client.emit('TextMessage', {
-												from: message.from,
-												text: message.text.body
-											})
+							const statuses = change.value.statuses
 
-											break
+							if (statuses) {
+								statuses.forEach(status => {
+									switch (status.status) {
+										case 'delivered': {
+											this.client.emit('MessageDelivered', {})
+
+											return
 										}
 
-										case 'audio': {
-											break
+										case 'sent': {
+											this.client.emit('MessageSent', {})
+
+											return
 										}
 
-										case 'video': {
-											break
+										case 'read': {
+											this.client.emit('MessageRead', {})
+
+											return
 										}
 
-										case 'image': {
-											break
-										}
-
-										case 'document': {
-											break
-										}
-
-										case 'button': {
-											break
-										}
-
-										case 'interactive': {
-											throw new Error('NOT IMPLENTED!!')
-											break
-										}
-
-										case 'order': {
-											break
-										}
-
-										case 'system': {
-											break
-										}
-
-										case 'unknown': {
-											break
+										case 'failed': {
+											if (status.errors.find(err => err.code === 130472)) {
+												this.client.emit('MessageUndelivered', {})
+											} else {
+												this.client.emit('MessageFailed', {})
+											}
+											return
 										}
 
 										default:
 											break
 									}
 								})
-							} else {
-								// ! TODO: figure out this
-								// if no messages then what ??
+							}
+
+							if (messages) {
+								messages.forEach(message => {
+									// extract context here
+									switch (message.type) {
+										case NotificationMessageTypeEnum.Text: {
+											// if (message.referral) {
+											// 	this.client.emit('AdInteraction', {})
+											// } else {
+											this.client.emit(
+												'TextMessage',
+												new TextMessageEvent({
+													client: this.client,
+													data: {
+														text: message.text.body,
+														messageId: message.id
+													}
+												})
+											)
+
+											// }
+
+											return
+										}
+
+										case NotificationMessageTypeEnum.Audio: {
+											this.client.emit('AudioMessage', {})
+
+											return
+										}
+
+										case NotificationMessageTypeEnum.Video: {
+											this.client.emit('VideoMessage', {})
+
+											return
+										}
+
+										case NotificationMessageTypeEnum.Image: {
+											this.client.emit('ImageMessage', {})
+
+											return
+										}
+
+										case NotificationMessageTypeEnum.Document: {
+											this.client.emit('DocumentMessage', {})
+
+											return
+										}
+
+										case NotificationMessageTypeEnum.Contact: {
+											this.client.emit('ContactsMessage', {})
+
+											return
+										}
+
+										case NotificationMessageTypeEnum.Interactive: {
+											//! TODO: determine type of interaction and emit events like ListInteraction , ButtonInteraction etc
+
+											if (message.interactive.type === 'list_reply') {
+												this.client.emit('ListInteraction', {})
+											} else if (
+												message.interactive.type === 'button_reply'
+											) {
+												this.client.emit('ButtonInteraction', {})
+											}
+											return
+										}
+										case NotificationMessageTypeEnum.Order: {
+											this.client.emit('OrderReceived', {})
+											return
+										}
+
+										case NotificationMessageTypeEnum.System: {
+											if (message.system.type === 'customer_changed_number') {
+												this.client.emit('CustomerNumberChanged', {})
+											} else if (
+												message.system.type === 'customer_identity_changed'
+											) {
+												this.client.emit('CustomerIdentityChanged', {})
+											} else {
+												// warning here
+											}
+
+											this.client.emit('OrderReceived', {})
+											return
+										}
+
+										case NotificationMessageTypeEnum.Reaction: {
+											this.client.emit('Reaction', {})
+											return
+										}
+
+										case NotificationMessageTypeEnum.Button: {
+											this.client.emit('ButtonInteraction', {})
+											return
+										}
+
+										case NotificationMessageTypeEnum.Unknown: {
+											this.client.emit('UnknownEvent', {})
+											return
+										}
+
+										default:
+											break
+									}
+								})
 							}
 						})
 					})

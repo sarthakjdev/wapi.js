@@ -26,7 +26,8 @@ import {
  */
 abstract class InteractiveMessage
 	extends BaseMessage<MessageTypeEnum.Interactive>
-	implements InteractiveMessageInterface {
+	implements InteractiveMessageInterface
+{
 	readonly interactiveMessageData: {
 		type: InteractiveMessageTypeEnum
 		footerText?: string
@@ -60,7 +61,8 @@ abstract class InteractiveMessage
  */
 export class ButtonInteractionMessage
 	extends InteractiveMessage
-	implements ButtonInteractionMessageInterface {
+	implements ButtonInteractionMessageInterface
+{
 	data: {
 		buttons: { id: string; title: string }[]
 	}
@@ -85,9 +87,9 @@ export class ButtonInteractionMessage
 		}
 	}
 
-	addHeader() { }
+	addHeader() {}
 
-	addFooter() { }
+	addFooter() {}
 
 	/**
 	 * @memberof ButtonInteractionMessage
@@ -126,7 +128,8 @@ export class ButtonInteractionMessage
  */
 export class ListInteractionMessage
 	extends InteractiveMessage
-	implements ListInteractionMessageInterface {
+	implements ListInteractionMessageInterface
+{
 	data: {
 		buttonText: string
 		sections: z.infer<typeof ListInteractiveMessageSection>[]
@@ -157,9 +160,9 @@ export class ListInteractionMessage
 		this.data.sections.push(section)
 	}
 
-	addHeader() { }
+	addHeader() {}
 
-	addFooter() { }
+	addFooter() {}
 
 	toJson(params: { to: string }): z.infer<typeof InteractiveMessageApiPayloadSchemaType> & {
 		interactive: z.infer<typeof ListInteractiveMessagePayload>
@@ -180,10 +183,10 @@ export class ListInteractionMessage
 				},
 				...(this.interactiveMessageData.footerText
 					? {
-						footer: {
-							text: this.interactiveMessageData.footerText
-						}
-					}
+							footer: {
+								text: this.interactiveMessageData.footerText
+							}
+					  }
 					: {})
 			}
 		}
@@ -197,7 +200,8 @@ export class ListInteractionMessage
  */
 export class ProductInteractionMessage
 	extends InteractiveMessage
-	implements ProductInteractionMessageInterface {
+	implements ProductInteractionMessageInterface
+{
 	data: {
 		catalogId: string
 		productRetailerId: string
@@ -221,9 +225,9 @@ export class ProductInteractionMessage
 		}
 	}
 
-	addHeader() { }
+	addHeader() {}
 
-	addFooter() { }
+	addFooter() {}
 
 	toJson(params: { to: string }): z.infer<typeof InteractiveMessageApiPayloadSchemaType> & {
 		interactive: z.infer<typeof ProductInteractiveMessagePayload>
@@ -244,10 +248,10 @@ export class ProductInteractionMessage
 				},
 				...(this.interactiveMessageData.footerText
 					? {
-						footer: {
-							text: this.interactiveMessageData.footerText
-						}
-					}
+							footer: {
+								text: this.interactiveMessageData.footerText
+							}
+					  }
 					: {})
 			}
 		}
@@ -261,7 +265,8 @@ export class ProductInteractionMessage
  */
 export class ProductListInteractionMessage
 	extends InteractiveMessage
-	implements ProductListInteractionMessageInterface {
+	implements ProductListInteractionMessageInterface
+{
 	data: {
 		catalogId: string
 		productRetailerId: string
@@ -274,7 +279,7 @@ export class ProductListInteractionMessage
 		bodyText: string
 		catalogId: string
 		productRetailerId: string
-		sections: z.infer<typeof ProductListInteractiveMessageSection>[],
+		sections: z.infer<typeof ProductListInteractiveMessageSection>[]
 	}) {
 		super({
 			type: InteractiveMessageTypeEnum.Button,
@@ -292,7 +297,7 @@ export class ProductListInteractionMessage
 		this.data.sections.push(section)
 	}
 
-	addFooter() { }
+	addFooter() {}
 
 	toJson(params: { to: string }): z.infer<typeof InteractiveMessageApiPayloadSchemaType> & {
 		interactive: z.infer<typeof ProductListInteractiveMessagePayload>
@@ -309,18 +314,16 @@ export class ProductListInteractionMessage
 					productRetailerId: this.data.productRetailerId,
 					sections: this.data.sections
 				},
-				header: {
-
-				},
+				header: {},
 				body: {
 					text: this.interactiveMessageData.bodyText
 				},
 				...(this.interactiveMessageData.footerText
 					? {
-						footer: {
-							text: this.interactiveMessageData.footerText
-						}
-					}
+							footer: {
+								text: this.interactiveMessageData.footerText
+							}
+					  }
 					: {})
 			}
 		}

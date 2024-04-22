@@ -221,7 +221,7 @@ export const ReactionDataPayloadSchemaType = z.object({
 
 export const ReactionMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
 	z.object({
-		type: z.literal(MessageTypeEnum.Sticker),
+		type: z.literal(MessageTypeEnum.Reaction),
 		reaction: ReactionDataPayloadSchemaType
 	})
 )

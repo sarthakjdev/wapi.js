@@ -8,3 +8,10 @@ export class BaseEvent implements BaseEventInterface {
 		this.client = params.client
 	}
 }
+
+export class MessageEvent extends BaseEvent {
+	// ! TODO reply
+	// ! TODO react
+}
+
+export class StatusUpdateEvent extends BaseEvent {}
