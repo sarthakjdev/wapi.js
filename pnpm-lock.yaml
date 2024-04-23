@@ -117,6 +117,9 @@ importers:
       prettier:
         specifier: ^3.0.3
         version: 3.0.3
+      ts-enum-utils:
+        specifier: ^1.0.3
+        version: 1.0.3
       tsup:
         specifier: ^7.2.0
         version: 7.2.0(ts-node@10.9.1)(typescript@5.2.2)
@@ -5084,6 +5087,12 @@ packages:
       typescript: 5.2.2
     dev: true
 
+  /ts-enum-utils@1.0.3:
+    resolution: {integrity: sha512-RX46pmBjxDJNsiXd58whBNbLAMjbfHxF6doJXmg7f52rg6JWSNP7VIS1qDcePhzdHtetAenC81PbPRA2eJIU5g==}
+    dependencies:
+      typescript: 2.8.3
+    dev: true
+
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
@@ -5328,6 +5337,12 @@ packages:
       minimatch: 9.0.3
       shiki: 0.14.5
       typescript: 5.2.2
+    dev: true
+
+  /typescript@2.8.3:
+    resolution: {integrity: sha512-K7g15Bb6Ra4lKf7Iq2l/I5/En+hLIHmxWZGq3D4DIRNFxMNV6j2SHSvDOqs2tGd4UvD/fJvrwopzQXjLrT7Itw==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
     dev: true
 
   /typescript@5.2.2:

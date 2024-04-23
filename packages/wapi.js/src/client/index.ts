@@ -1,27 +1,91 @@
-import { EventEmitter } from 'events'
-import { type EventDataMap } from '../webhook/schema'
+import { EventEmitter } from 'node:events'
+
 import { Webhook } from '../webhook'
 import { PhoneNumberManager } from '../manager/phone'
 import { MediaManager } from '../manager/media'
 import { RequestClient } from './request-client'
 import { ClientStatusEnum, type ClientInterface } from './interface'
 import { MessageManager } from '../manager/message'
+import { type WapiEventDataMap } from '../webhook/type'
 
+/**
+ * wapi client
+ * @implements {ClientInterface}
+ * @extends {EventEmitter}
+ * @class
+ */
 export class Client extends EventEmitter implements ClientInterface {
 	/**
 	 * phone number manager to verify phone numbers for your
+	 * @type {PhoneNumberManager}
+	 * @memberof Client
 	 */
 	phone: PhoneNumberManager
+
+	/**
+	 * 	media manager to upload, get and media via whatsapp cloud api
+	 * 	@type {MediaManager}
+	 * 	@memberof Client
+	 */
 	media: MediaManager
+
+	/**
+	 * webhook manager to handle the incoming message and event listening
+	 * 	@type {Webhook}
+	 * 	@memberof Client
+	 */
 	webhook: Webhook
-	requester: RequestClient
+
+	/**
+	 * message manager allows to send various type of messages and reply to incoming messages
+	 * 	@type {MessageManager}
+	 * 	@memberof Client
+	 */
 	message: MessageManager
+
+	/**
+	 * status of the client
+	 * @type {ClientStatusEnum}
+	 * @memberof Client
+	 */
 	status: ClientStatusEnum | null = null
-	readyAtTimeStamp: Date | null = null
 
-	private static baseUrl = 'cloud.whatsapp.com'
-	private static apiVersion = 'v17.0'
+	/**
+	 * Unix Timestamp at which client gets into {@link ClientStatusEnum.Ready} state
+	 * @type {number}
+	 * @memberof Client
+	 */
+	readyAtTimeStamp: number | null = null
 
+	/**
+	 * requester is an internal utility to communicate with Whatsapp cloud api
+	 * @type {RequestClient}
+	 * 	@memberof Client
+	 */
+	requester: RequestClient
+
+	/**
+	 * @ignore
+	 * @private
+	 */
+	private static baseUrl = 'graph.facebook.com'
+
+	/**
+	 * @ignore
+	 * @private
+	 */
+	private static apiVersion = 'v19.0'
+
+	/**
+	 * @param {object} params
+	 * @param {string} params.webhookSecret
+	 * @param {string} params.webhookEndpoint
+	 * @param {string} params.apiAccessToken
+	 * @param {string} params.phoneNumberId
+	 * @param {string} params.businessAccountId
+	 * @param {number} params.port
+	 * @constructor
+	 */
 	constructor(params: {
 		webhookSecret: string
 		webhookEndpoint: string
@@ -53,42 +117,96 @@ export class Client extends EventEmitter implements ClientInterface {
 		})
 	}
 
+	/**
+	 * getter for client
+	 * @returns {Client}
+	 * @memberof Client
+	 * @static
+	 */
 	static getClient() {
 		return this
 	}
 
-	emit<T extends keyof EventDataMap>(eventName: T, data: EventDataMap[T]): boolean {
+	/**
+	 * Function to emit a new event on incoming webhook or wapi events
+	 * @param {T} eventName
+	 * @param {WapiEventDataMap[T]} data
+	 * @returns {boolean}
+	 * @memberof Client
+	 */
+	emit<T extends keyof WapiEventDataMap>(eventName: T, data: WapiEventDataMap[T]): boolean {
 		return super.emit(eventName, data)
 	}
 
-	on<T extends keyof EventDataMap>(
+	/**
+	 * Function to attach event listener to wapi client
+	 * @param eventName
+	 * @param listener
+	 */
+	on<T extends keyof WapiEventDataMap>(
 		eventName: T,
-		listener: (data: EventDataMap[T]) => void
+		listener: (data: WapiEventDataMap[T]) => void
 	): this {
 		return super.on(eventName, listener)
 	}
 
-	getReadyAt() {
-		return this.readyAtTimeStamp
+	/**
+	 * Timestamp at which the client switched to {@link ClientStatusEnum.Ready} state
+	 * @readonly
+	 * @returns {Date}
+	 */
+	get getReadyAtTimestamp() {
+		return this.readyAtTimeStamp && new Date(this.readyAtTimeStamp * 1000)
 	}
 
-	updateAccessToken(accessToken: string) {
+	/**
+	 * Uptime in milliseconds since the client first got into {@link ClientStatusEnum.Ready} state
+	 * @type {number}
+	 * @readonly
+	 * @memberof Client
+	 */
+	get uptime() {
+		return this.readyAtTimeStamp && Date.now() - this.readyAtTimeStamp * 1000
+	}
+
+	/**
+	 * Function to update the initial access token given at the point of client creations
+	 * @param {string} accessToken
+	 * @memberof Client
+	 *
+	 */
+	set updateAccessToken(accessToken: string) {
 		this.requester.accessToken = accessToken
 	}
 
-	updateSenderPhoneNumberId(phoneNumber: string) {
+	/**
+	 * Getter for phone number
+	 * @type {string}
+	 * @memberof Client
+	 * @readonly
+	 */
+	get phoneNumberId() {
+		return this.requester.phoneNumberId
+	}
+
+	/**
+	 * Function to set the phone number id used to send messages
+	 * @param {string} phoneNumber
+	 * @memberof Client
+	 */
+	set updateSenderPhoneNumberId(phoneNumber: string) {
 		this.requester.phoneNumberId = phoneNumber
 	}
 
-	async initiate() {
+	/**
+	 * Function to initiate the wapi client and start listening to the incoming webhook events
+	 * @memberof Client
+	 */
+	initiate() {
 		this.webhook.listen(() => {
 			this.status = ClientStatusEnum.Ready
 			this.emit('Ready', null)
+			this.readyAtTimeStamp = Date.now() / 1000
 		})
-
-		this.readyAtTimeStamp = new Date()
-		await Promise.resolve()
-
-		return true
 	}
 }

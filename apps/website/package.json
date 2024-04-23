@@ -1,8 +1,8 @@
 {
 	"name": "wapijs.co",
 	"version": "0.0.0",
-  "private": true,
-  "type": "module",
+	"private": true,
+	"type": "module",
 	"main": "index.js",
 	"license": "Apache-2.0",
 	"scripts": {
@@ -14,5 +14,6 @@
 	"dependencies": {
 		"vitepress": "^1.0.0-beta.2",
 		"vue": "^3.3.4"
-	}
+	},
+	"packageManager": "pnpm@8.7.0"
 }

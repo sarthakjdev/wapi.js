@@ -1,21 +1,55 @@
 import { type LocationMessageInterface } from './interface'
 import { MessageTypeEnum } from '../message/types'
 import { BaseMessage } from '../message'
-import { type LocationSchemaType } from '../message/schema'
+import { type LocationSchemaType } from './schema'
 import { type z } from 'zod'
+import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
 
-export class LocationMessage extends BaseMessage implements LocationMessageInterface {
-	address?: string | undefined
-	latitude: number
-	longitude: number
-	name?: string | undefined
+/**
+ * @class
+ * @extends {BaseMessage}
+ * @implements {LocationMessageInterface}
+ */
+export class LocationMessage extends BaseMessage<'location'> implements LocationMessageInterface {
+	data: {
+		address?: string
+		latitude: number
+		longitude: number
+		name?: string
+	}
 
+	/**
+	 * @constructor
+	 * @memberof LocationMessage
+	 */
 	constructor(params: z.infer<typeof LocationSchemaType>) {
 		super({ type: MessageTypeEnum.Location })
+		this.data = {
+			latitude: params.latitude,
+			longitude: params.longitude,
+			address: params.address,
+			name: params.name
+		}
+	}
 
-		this.latitude = params.latitude
-		this.longitude = params.longitude
-		this.address = params.address
-		this.name = params.name
+	toJson(params: {
+		to: string
+		replyToMessageId?: string
+	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: 'location' }> {
+		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
+			messaging_product: 'whatsapp',
+			recipient_type: 'individual',
+			to: params.to,
+			location: {
+				latitude: this.data.latitude,
+				longitude: this.data.longitude,
+				name: this.data.name,
+				address: this.data.address
+			},
+			type: MessageTypeEnum.Location
+		}
 	}
 }

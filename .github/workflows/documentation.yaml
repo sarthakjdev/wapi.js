@@ -46,11 +46,3 @@ jobs:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           embed-title: "🚨🚨🚨 MASTER BRANCH DOCUMENTATION DEPLOYMENT FAILED 🚨🚨🚨"
           embed-description: " .<@517983211708612609> deploy job on master branch failed, check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-
-      - name: Deployment Failure Alert
-        if: ${{ success() }}
-        uses: tsickert/discord-webhook@v5.3.0
-        with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          embed-title: "🟢 NEW VERSION OF DOCUMENTATION DEPLOYED"
-          embed-description: "Documentation deployed success!"

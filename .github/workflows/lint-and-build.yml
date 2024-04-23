@@ -25,6 +25,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Lint
+        id: lint
         run: pnpm run lint
 
       - name: Linter Failed
@@ -50,11 +51,12 @@ jobs:
               }
 
       - name: Build the packages
-        if: ${{ success() }}
+        id: build
+        if: ${{ success() && !failure() }}
         run: pnpm build
 
       - name: Build Failed
-        if: ${{ failure() }}
+        if: ${{ failure() && !steps.lint.outcome == 'failure' }}
         uses: actions/github-script@v6
         with:
           script: |
