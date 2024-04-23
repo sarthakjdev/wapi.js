@@ -41,8 +41,12 @@ jobs:
 
       - name: Deployment Failure Alert
         if: ${{ failure() }}
-        uses: tsickert/discord-webhook@v5.3.0
-        with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          embed-title: "🚨🚨🚨 MASTER BRANCH DOCUMENTATION DEPLOYMENT FAILED 🚨🚨🚨"
-          embed-description: " .<@517983211708612609> deploy job on master branch failed, check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: "production deployment failed, check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          SLACK_TITLE: "🚨🚨🚨 [WAPIJS.CO] MASTER BRANCH DEPLOYMENT FAILED 🚨🚨🚨"
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
