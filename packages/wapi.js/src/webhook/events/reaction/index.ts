@@ -1,5 +1,6 @@
 import { type Client } from '../../../client'
 import { type ReactionMessage } from '../../../structures'
+import { MessageEvent } from '../base'
 import { type ReactionEventInterface } from './interface'
 
 /**
@@ -12,19 +13,21 @@ export class ReactionEvent extends MessageEvent implements ReactionEventInterfac
 	constructor(params: {
 		client: Client
 		data: {
-			sticker: ReactionMessage
+			reaction: ReactionMessage
 			from: string
 			id: string
 			timestamp: string
+			isForwarded: boolean
 		}
 	}) {
 		super({
 			client: params.client,
-			messageId: params.data.id,
+			id: params.data.id,
 			from: params.data.from,
-			timestamp: params.data.timestamp
+			timestamp: params.data.timestamp,
+			isForwarded: params.data.isForwarded
 		})
 
-		this.reaction = params.data.sticker
+		this.reaction = params.data.reaction
 	}
 }

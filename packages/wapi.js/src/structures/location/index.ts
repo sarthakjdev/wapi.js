@@ -12,10 +12,10 @@ import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request
  */
 export class LocationMessage extends BaseMessage<'location'> implements LocationMessageInterface {
 	data: {
-		address: string
+		address?: string
 		latitude: number
 		longitude: number
-		name: string
+		name?: string
 	}
 
 	/**

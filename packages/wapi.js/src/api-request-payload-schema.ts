@@ -193,8 +193,8 @@ export const ContactMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.me
 export const LocationDataPayloadSchemaType = z.object({
 	latitude: z.number(),
 	longitude: z.number(),
-	name: z.string(),
-	address: z.string()
+	name: z.string().optional(),
+	address: z.string().optional()
 })
 
 export const LocationMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(

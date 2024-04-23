@@ -3,13 +3,20 @@ import { type Client } from '../client'
 import { WhatsappApiNotificationPayloadSchemaType } from './schema'
 import * as express from 'express'
 import { type Express, json as expressJson } from 'express'
-import { NotificationMessageTypeEnum } from './type'
+import {
+	InteractionNotificationTypeEnum,
+	NotificationMessageTypeEnum,
+} from './type'
 import { TextMessageEvent } from './events/text'
 import {
 	AudioMessage,
+	Contact,
 	ContactMessage,
 	DocumentMessage,
 	ImageMessage,
+	LocationMessage,
+	ReactionMessage,
+	StickerMessage,
 	TextMessage,
 	VideoMessage
 } from '../structures'
@@ -23,10 +30,23 @@ import { MessageSentEvent } from './events/message-sent'
 import { MessageReadEvent } from './events/message-read'
 import { MessageUndeliveredEvent } from './events/message-undelivered'
 import { MessageFailedEvent } from './events/message-failed'
-import { ButtonInteraction, ListInteractionEvent } from './events/interaction'
+import {
+	ListInteractionEvent,
+	ReplyButtonInteractionEvent
+} from './events/interaction'
 import { ReactionEvent } from './events/reaction'
 import { OrderMessageEvent } from './events/order'
+import { UnknownEvent } from './events/unknown'
+import { CustomerIdentityChangeEvent } from './events/customer-identity-changed'
+import { CustomerNumberChangeEvent } from './events/customer-number-changed'
+import { Order, ProductItem } from '../structures/order'
+import { StickerMessageEvent } from './events/sticker'
+import { LocationMessageEvent } from './events/location'
 
+/**
+ * @class
+ * @extends {EventEmitter}
+ */
 export class Webhook extends EventEmitter {
 	private endpoint: string
 	private port = 3000
@@ -61,7 +81,6 @@ export class Webhook extends EventEmitter {
 		})
 
 		this.server.post(this.endpoint, (request, response) => {
-			console.log({ body: JSON.stringify(request.body, null, 4) })
 			const parsedPayload = WhatsappApiNotificationPayloadSchemaType.safeParse(request.body)
 			if (parsedPayload.success) {
 				if (parsedPayload.data.entry.length) {
@@ -76,7 +95,13 @@ export class Webhook extends EventEmitter {
 										case 'delivered': {
 											this.client.emit(
 												'MessageDelivered',
-												new MessageDeliveryEvent({})
+												new MessageDeliveryEvent({
+													client: this.client,
+													data: {
+														from: status.recipient_id,
+														timestamp: status.timestamp
+													}
+												})
 											)
 
 											return
@@ -85,7 +110,13 @@ export class Webhook extends EventEmitter {
 										case 'sent': {
 											this.client.emit(
 												'MessageSent',
-												new MessageSentEvent({})
+												new MessageSentEvent({
+													client: this.client,
+													data: {
+														from: status.recipient_id,
+														timestamp: status.timestamp
+													}
+												})
 											)
 
 											return
@@ -94,24 +125,51 @@ export class Webhook extends EventEmitter {
 										case 'read': {
 											this.client.emit(
 												'MessageRead',
-												new MessageReadEvent({})
+												new MessageReadEvent({
+													client: this.client,
+													data: {
+														from: status.recipient_id,
+														timestamp: status.timestamp
+													}
+												})
 											)
 
 											return
 										}
 
 										case 'failed': {
-											if (status.errors.find(err => err.code === 130472)) {
-												this.client.emit(
-													'MessageUndelivered',
-													new MessageUndeliveredEvent({})
-												)
+											if (status.errors) {
+												if (
+													status.errors.find(err => err.code === 130472)
+												) {
+													this.client.emit(
+														'MessageUndelivered',
+														new MessageUndeliveredEvent({
+															client: this.client,
+															data: {
+																from: status.recipient_id,
+																timestamp: status.timestamp
+															}
+														})
+													)
+												} else {
+													this.client.emit(
+														'MessageFailed',
+														new MessageFailedEvent({
+															client: this.client,
+															data: {
+																from: status.recipient_id,
+																timestamp: status.timestamp,
+																// ! TODO: consider the whole array here
+																failReason: status.errors[0].message
+															}
+														})
+													)
+												}
 											} else {
-												this.client.emit(
-													'MessageFailed',
-													new MessageFailedEvent({})
-												)
+												// do nothing
 											}
+
 											return
 										}
 
@@ -123,7 +181,6 @@ export class Webhook extends EventEmitter {
 
 							if (messages) {
 								messages.forEach(message => {
-									// extract context here
 									switch (message.type) {
 										case NotificationMessageTypeEnum.Text: {
 											// if (message.referral) {
@@ -160,7 +217,10 @@ export class Webhook extends EventEmitter {
 														audio: new AudioMessage({
 															id: message.audio.id
 														}),
-														timestamp: message.timestamp
+														timestamp: message.timestamp,
+														mimeType: message.audio.mime_type,
+														sha256: message.audio.sha256,
+														mediaId: message.audio.id
 													}
 												})
 											)
@@ -180,7 +240,11 @@ export class Webhook extends EventEmitter {
 															id: message.id
 														}),
 														mediaId: message.video.id,
-														timestamp: message.timestamp
+														mimeType: message.video.mime_type,
+														sha256: message.video.sha256,
+														timestamp: message.timestamp,
+														isForwarded:
+															message.context?.forwarded || false
 													}
 												})
 											)
@@ -199,7 +263,11 @@ export class Webhook extends EventEmitter {
 															id: message.id
 														}),
 														mediaId: message.image.id,
-														timestamp: message.timestamp
+														timestamp: message.timestamp,
+														mimeType: message.image.mime_type,
+														sha256: message.image.sha256,
+														isForwarded:
+															message.context?.forwarded || false
 													}
 												})
 											)
@@ -217,10 +285,15 @@ export class Webhook extends EventEmitter {
 														messageId: message.id,
 														document: new DocumentMessage({
 															id: message.id,
-															caption: ''
+															caption: message.document.caption,
+															filename: message.document.filename
 														}),
 														timestamp: message.timestamp,
-														mediaId: message.document.id
+														mediaId: message.document.id,
+														mimeType: message.document.mime_type,
+														sha256: message.document.sha256,
+														isForwarded:
+															message.context?.forwarded || false
 													}
 												})
 											)
@@ -228,7 +301,26 @@ export class Webhook extends EventEmitter {
 											return
 										}
 
-										case NotificationMessageTypeEnum.Contact: {
+										case NotificationMessageTypeEnum.Contacts: {
+											const contacts = message.contacts.map(contact => {
+												const contactToReturn = new Contact({
+													name: contact.name
+												})
+												contact.addresses?.forEach(add =>
+													contactToReturn.addAddress(add)
+												)
+												contact.urls?.forEach(url =>
+													contactToReturn.addUrl(url)
+												)
+												contact.phones?.forEach(phone =>
+													contactToReturn.addPhone(phone)
+												)
+												contact.emails?.forEach(email =>
+													contactToReturn.addEmail(email)
+												)
+												return contactToReturn
+											})
+
 											this.client.emit(
 												'ContactsMessage',
 												new ContactMessageEvent({
@@ -237,9 +329,11 @@ export class Webhook extends EventEmitter {
 														from: message.from,
 														messageId: message.id,
 														contact: new ContactMessage({
-															contacts: message.contacts
+															contacts: contacts
 														}),
-														timestamp: message.timestamp
+														timestamp: message.timestamp,
+														isForwarded:
+															message.context?.forwarded || false
 													}
 												})
 											)
@@ -248,23 +342,62 @@ export class Webhook extends EventEmitter {
 										}
 
 										case NotificationMessageTypeEnum.Interactive: {
-											//! TODO: determine type of interaction and emit events like ListInteraction , ButtonInteraction etc
-
-											if (message.interactive.type === 'list_reply') {
-												this.client.emit(
-													'ListInteraction',
-													new ListInteractionEvent({})
-												)
-											} else if (
-												message.interactive.type === 'button_reply'
+											if (
+												message.interactive.type ===
+												InteractionNotificationTypeEnum.ListReply
 											) {
 												this.client.emit(
-													'ButtonInteraction',
-													new ButtonInteraction({})
+													'ListInteraction',
+													new ListInteractionEvent({
+														client: this.client,
+														data: {
+															from: message.from,
+															messageId: message.id,
+															timestamp: message.timestamp,
+															isForwarded:
+																message.context?.forwarded || false,
+															description: message.interative.list_reply.description,
+															title: message.interative.list_reply.title,
+															listId: message.interative.list_reply.id,
+														}
+													})
+												)
+											} else if (
+												message.interactive.type ===
+												InteractionNotificationTypeEnum.ButtonReply
+											) {
+												this.client.emit(
+													'ReplyButtonInteraction',
+													new ReplyButtonInteractionEvent({
+														client: this.client,
+														data: {
+															from: message.from,
+															messageId: message.id,
+															timestamp: message.timestamp,
+															isForwarded:
+																message.context?.forwarded || false,
+															title: message.interative.button_reply.title,
+															buttonId: message.interative.button_reply.id,
+														}
+													})
 												)
 											}
+
 											return
 										}
+
+										// ! TODO: finish this with template message
+										// case NotificationMessageTypeEnum.Button: {
+										// 	this.client.emit(
+										// 		'QuickReplyButtonInteraction',
+										// 		new QuickReplyButtonInteractionEvent({
+										// 			client: this.client,
+										// 			data: {}
+										// 		})
+										// 	)
+										// 	return
+										// }
+
 										case NotificationMessageTypeEnum.Order: {
 											this.client.emit(
 												'OrderReceived',
@@ -273,7 +406,25 @@ export class Webhook extends EventEmitter {
 													data: {
 														from: message.from,
 														messageId: message.id,
-														timestamp: message.timestamp
+														timestamp: message.timestamp,
+														order: new Order({
+															catalogId: message.order.catalog_id,
+															productItems:
+																message.order.product_items.map(
+																	item =>
+																		new ProductItem({
+																			currency: item.currency,
+																			itemPrice:
+																				item.item_price,
+																			productRetailerId:
+																				item.product_retailer_id,
+																			quantity: item.quantity
+																		})
+																),
+															text: message.text
+														}),
+														isForwarded:
+															message.context?.forwarded || false
 													}
 												})
 											)
@@ -281,32 +432,100 @@ export class Webhook extends EventEmitter {
 										}
 
 										case NotificationMessageTypeEnum.System: {
-											if (message.system.type === 'customer_changed_number') {
-												this.client.emit('CustomerNumberChanged', {})
-											} else if (
-												message.system.type === 'customer_identity_changed'
-											) {
-												this.client.emit('CustomerIdentityChanged', {})
-											} else {
-												// warning here
-											}
-
-											this.client.emit('OrderReceived', {})
+											// ! TODO:
+											// if (
+											// 	message.system.type ===
+											// 	SystemNotificationTypeEnum.CustomerNumberChange
+											// ) {
+											// 	this.client.emit(
+											// 		'CustomerNumberChanged',
+											// 		new CustomerIdentityChangeEvent({})
+											// 	)
+											// } else if (
+											// 	message.system.type ===
+											// 	SystemNotificationTypeEnum.CustomerIdentityChange
+											// ) {
+											// 	this.client.emit(
+											// 		'CustomerIdentityChanged',
+											// 		new CustomerNumberChangeEvent({})
+											// 	)
+											// } else {
+											// 	// ! TOOD: warning here
+											// }
 											return
 										}
 
 										case NotificationMessageTypeEnum.Reaction: {
-											this.client.emit('Reaction', new ReactionEvent({}))
+											this.client.emit(
+												'Reaction',
+												new ReactionEvent({
+													client: this.client,
+													data: {
+														from: message.from,
+														id: message.id,
+														reaction: new ReactionMessage({
+															emoji: message.reaction.emoji,
+															messageId: message.reaction.message_id
+														}),
+														timestamp: message.timestamp,
+														isForwarded:
+															message.context?.forwarded || false
+													}
+												})
+											)
 											return
 										}
 
-										case NotificationMessageTypeEnum.Button: {
-											this.client.emit('ButtonInteraction')
+										case NotificationMessageTypeEnum.Location: {
+											this.client.emit(
+												'LocationMessage',
+												new LocationMessageEvent({
+													client: this.client,
+													data: {
+														from: message.from,
+														location: new LocationMessage({
+															address: message.location.address,
+															latitude: message.location.latitude,
+															longitude: message.location.latitude,
+															name: message.location.name
+														}),
+														messageId: message.id,
+														timestamp: message.timestamp
+													}
+												})
+											)
 											return
 										}
 
+										case NotificationMessageTypeEnum.Sticker: {
+											this.client.emit(
+												'StickerMessage',
+												new StickerMessageEvent({
+													client: this.client,
+													data: {
+														from: message.from,
+														sticker: new StickerMessage({
+															id: message.sticker.id
+														}),
+														messageId: message.id,
+														timestamp: message.timestamp,
+														mediaId: message.sticker.id,
+														mimeType: message.sticker.mime_type,
+														sha256: message.sticker.sha256
+													}
+												})
+											)
+											return
+										}
 										case NotificationMessageTypeEnum.Unknown: {
-											this.client.emit('UnknownEvent', {})
+											this.client.emit(
+												'UnknownEvent',
+												new UnknownEvent({
+													code: String(message.errors?.[0].code || ''),
+													message: message.errors?.[0].message || '',
+													title: message.errors?.[0].title || ''
+												})
+											)
 											return
 										}
 
@@ -321,7 +540,9 @@ export class Webhook extends EventEmitter {
 
 				response.status(200).send()
 			} else {
+				console.error({ parsedPayloadError: JSON.stringify(parsedPayload.error) })
 				this.client.emit('Error', new Error('Notification payload parsing failed'))
+				response.status(500).send()
 			}
 		})
 	}
@@ -336,6 +557,7 @@ export class Webhook extends EventEmitter {
 
 	/**
 	 * Set new webhook endpoint (this will replace the previously set webhook endpoint)
+	 * @param {path} string
 	 */
 	setEndpoint(path: string) {
 		this.endpoint = path
@@ -351,6 +573,7 @@ export class Webhook extends EventEmitter {
 
 	/**
 	 * Set new webhook port (this will replace the previously set webhook port)
+	 * @param {number} port
 	 */
 	setPort(port: number) {
 		this.port = port

@@ -1,96 +1,114 @@
 import { type Client } from '../../../client'
 import { type AudioMessage } from '../../../structures'
 import { MessageEvent } from '../base'
-import { type AudioMessageEventInterface } from './interface'
+import {
+	type ButtonReplyInteractionMessageEventInterface,
+	type ListInteractionMessageEventInterface,
+	type InteractionMessageEventInterface
+} from './interface'
 
-export class InteractionEvent extends MessageEvent implements AudioMessageEventInterface {
-	audio: AudioMessage
-	constructor(params: {
-		client: Client
-		data: {
-			audio: AudioMessage
-			from: string
-			messageId: string
-			timestamp: string
-		}
-	}) {
-		super({
-			client: params.client,
-			id: params.data.messageId,
-			from: params.data.from,
-			timestamp: params.data.timestamp
-		})
-		this.audio = params.data.audio
-	}
-}
-
-export class ListInteractionEvent extends MessageEvent implements AudioMessageEventInterface {
-	audio: AudioMessage
-	constructor(params: {
-		client: Client
-		data: {
-			audio: AudioMessage
-			from: string
-			messageId: string
-			timestamp: string
-		}
-	}) {
-		super({
-			client: params.client,
-			id: params.data.messageId,
-			from: params.data.from,
-			timestamp: params.data.timestamp
-		})
-		this.audio = params.data.audio
-	}
-}
-
-export class QuickReplyButtonInteractionEvent
+/**
+ * @class
+ * @extends {MessageEvent}
+ * @implements {InteractionMessageEventInterface}
+ */
+export abstract class InteractionEvent
 	extends MessageEvent
-	implements AudioMessageEventInterface
-{
-	audio: AudioMessage
+	implements InteractionMessageEventInterface {
 	constructor(params: {
 		client: Client
 		data: {
-			audio: AudioMessage
 			from: string
 			messageId: string
 			timestamp: string
+			isForwarded: boolean
 		}
 	}) {
 		super({
 			client: params.client,
 			id: params.data.messageId,
 			from: params.data.from,
-			timestamp: params.data.timestamp
+			timestamp: params.data.timestamp,
+			isForwarded: params.data.isForwarded
 		})
-		this.audio = params.data.audio
 	}
 }
 
+/**
+ * @class
+ * @extends {InteractionEvent}
+ * @implements {ListInteractionMessageEventInterface}
+ */
+export class ListInteractionEvent
+	extends InteractionEvent
+	implements ListInteractionMessageEventInterface {
+	title: string
+	listId: string
+	description: string
+
+	constructor(params: {
+		client: Client
+		data: {
+			from: string
+			messageId: string
+			timestamp: string
+			title: string
+			listId: string
+			description: string
+			isForwarded: boolean
+		}
+	}) {
+		super({
+			client: params.client,
+			data: {
+				from: params.data.from,
+				messageId: params.data.messageId,
+				timestamp: params.data.timestamp,
+				isForwarded: params.data.isForwarded
+			}
+		})
+
+		this.title = params.data.title
+		this.listId = params.data.id
+		this.description = params.data.description
+	}
+}
+
+/**
+ * @class
+ * @extends {InteractionEvent}
+ * @implements {ButtonReplyInteractionMessageEventInterface}
+ */
 export class ReplyButtonInteractionEvent
-	extends MessageEvent
-	implements AudioMessageEventInterface
-{
-	audio: AudioMessage
+	extends InteractionEvent
+	implements ButtonReplyInteractionMessageEventInterface {
+	title: string
+	buttonId: string
+
 	constructor(params: {
 		client: Client
 		data: {
-			audio: AudioMessage
 			from: string
 			messageId: string
 			timestamp: string
+			isForwarded: boolean
+			title: string
+			buttonId: string
 		}
 	}) {
 		super({
 			client: params.client,
-			id: params.data.messageId,
-			from: params.data.from,
-			timestamp: params.data.timestamp
+			data: {
+				messageId: params.data.messageId,
+				from: params.data.from,
+				timestamp: params.data.timestamp,
+				isForwarded: params.data.isForwarded
+			}
 		})
-		this.audio = params.data.audio
+
+		this.title = params.data.title
+		this.buttonId = params.data.buttonId
 	}
 }
 
-export class AdInteractionEvent {}
+export class AdInteractionEvent { }

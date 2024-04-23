@@ -1,31 +1,12 @@
 import { z } from 'zod'
-import { NotificationMessageTypeEnum } from './type'
-import { type TextMessageEvent } from './events/text'
-import { type AudioMessageEvent } from './events/audio'
-import { type ImageMessageEvent } from './events/image'
-import { type DocumentMessageEvent } from './events/document'
-import { type LocationMessageEvent } from './events/location'
-import { type StickerMessageEvent } from './events/sticker'
-import { type VideoMessageEvent } from './events/video'
 import {
-	QuickReplyButtonInteractionEvent,
-	ReplyButtonInteractionEvent,
-	type AdInteractionEvent,
-	type ButtonInteraction,
-	type ListInteractionEvent
-} from './events/interaction'
-import { type ContactMessageEvent } from './events/contacts'
-import { type ReactionEvent } from './events/reaction'
-import { type OrderMessageEvent } from './events/order'
-import { type MessageUndeliveredEvent } from './events/message-undelivered'
-import { type MessageSentEvent } from './events/message-sent'
-import { type MessageReadEvent } from './events/message-read'
-import { type MessageFailedEvent } from './events/message-failed'
-import { type MessageDeliveryEvent } from './events/message-delivered'
-import { type CustomerIdentityChangeEvent } from './events/customer-identity-changed'
-import { type CustomerNumberChangeEvent } from './events/customer-number-changed'
-import { type ProductInquiryEvent } from './events/product-inquiry'
-import { type UnknownEvent } from './events/unknown'
+	InteractionNotificationTypeEnum,
+	MessageStatusCategoryEnum,
+	MessageStatusEnum,
+	NotificationMessageTypeEnum,
+	SystemNotificationTypeEnum
+} from './type'
+import { Contact } from '../structures'
 
 export const NotificationReasonEnum = z.enum(['message'])
 
@@ -40,8 +21,8 @@ export const NotificationPayloadErrorSchemaType = z.object({
 
 export const NotificationPayloadMessageContextSchemaType = z
 	.object({
-		forwarded: z.boolean(),
-		frequently_forwarded: z.boolean(),
+		forwarded: z.boolean().optional(),
+		frequently_forwarded: z.boolean().optional(),
 		from: z.string(),
 		id: z.string(),
 		referred_product: z
@@ -51,7 +32,7 @@ export const NotificationPayloadMessageContextSchemaType = z
 			})
 			.optional()
 	})
-	.nullish()
+	.optional()
 
 export const NotificationPayloadTextMessageSchemaType = z.object({
 	type: z.literal(NotificationMessageTypeEnum.Text),
@@ -64,7 +45,8 @@ export const NotificationPayloadAudioMessageSchemaType = z.object({
 	type: z.literal(NotificationMessageTypeEnum.Audio),
 	audio: z.object({
 		id: z.string(),
-		mime_type: z.string()
+		mime_type: z.string(),
+		sha256: z.string()
 	})
 })
 
@@ -74,7 +56,7 @@ export const NotificationPayloadImageMessageSchemaType = z.object({
 		id: z.string(),
 		mime_type: z.string(),
 		sha256: z.string(),
-		caption: z.string()
+		caption: z.string().optional()
 	})
 })
 
@@ -92,15 +74,26 @@ export const NotificationPayloadDocumentMessageSchemaType = z.object({
 		id: z.string(),
 		mime_type: z.string(),
 		sha256: z.string(),
-		caption: z.string(),
-		filename: z.string()
+		caption: z.string().optional(),
+		filename: z.string().optional()
 	})
 })
 
 // ! TODO:
 export const NotificationPayloadOrderMessageSchemaType = z.object({
 	type: z.literal(NotificationMessageTypeEnum.Order),
-	text: z.object({})
+	text: z.string(),
+	order: z.object({
+		catalog_id: z.string(),
+		product_items: z.array(
+			z.object({
+				product_retailer_id: z.string(),
+				quantity: z.string(),
+				item_price: z.string(),
+				currency: z.string()
+			})
+		)
+	})
 })
 
 export const NotificationPayloadStickerMessageSchemaType = z.object({
@@ -119,8 +112,10 @@ export const NotificationPayloadSystemMessageSchemaType = z.object({
 		identity: z.string(),
 		body: z.string(),
 		customer: z.string(),
-		type: z.enum(['customer_changed_number', 'customer_identity_changed']),
-		wa_id: z.string(),
+		type: z.nativeEnum(SystemNotificationTypeEnum),
+		wa_id: z.string()
+	}),
+	identity: z.object({
 		acknowledged: z.string(),
 		created_timestamp: z.string(),
 		hash: z.string()
@@ -129,52 +124,68 @@ export const NotificationPayloadSystemMessageSchemaType = z.object({
 
 export const NotificationPayloadVideoMessageSchemaType = z.object({
 	type: z.literal(NotificationMessageTypeEnum.Video),
-	media: z.object({})
+	video: z.object({
+		id: z.string(),
+		mime_type: z.string(),
+		sha256: z.string(),
+		caption: z.string().optional(),
+		filename: z.string().optional()
+	})
 })
 
 export const NotificationPayloadReactionMessageSchemaType = z.object({
 	type: z.literal(NotificationMessageTypeEnum.Reaction),
-	reaction: z.object({})
+	reaction: z.object({
+		message_id: z.string(),
+		emoji: z.string()
+	})
 })
 
 export const NotificationPayloadInteractionMessageSchemaType = z.object({
 	type: z.literal(NotificationMessageTypeEnum.Interactive),
 	interactive: z
 		.object({
-			button_reply: z.object({
-				id: z.string(),
-				title: z.string()
-			})
+			type: z.nativeEnum(InteractionNotificationTypeEnum)
 		})
-		.or(
-			z.object({
-				list_reply: z.object({
-					id: z.string(),
-					title: z.string(),
-					description: z.string()
+		.and(
+			z
+				.object({
+					type: z.literal(InteractionNotificationTypeEnum.ButtonReply),
+					button_reply: z.object({
+						id: z.string(),
+						title: z.string()
+					})
 				})
-			})
+				.or(
+					z.object({
+						type: z.literal(InteractionNotificationTypeEnum.ListReply),
+						list_reply: z.object({
+							id: z.string(),
+							title: z.string(),
+							description: z.string()
+						})
+					})
+				)
 		)
 })
 
 export const NotificationPayloadUnknownMessageSchemaType = z.object({
-	type: z.literal(NotificationMessageTypeEnum.Unknown),
-	text: z.object({})
+	type: z.literal(NotificationMessageTypeEnum.Unknown)
 })
 
 export const NotificationPayloadLocationMessageSchemaType = z.object({
 	type: z.literal(NotificationMessageTypeEnum.Location),
 	location: z.object({
-		latitude: z.string(),
-		longitude: z.string(),
-		name: z.string(),
-		address: z.string()
+		latitude: z.number(),
+		longitude: z.number(),
+		name: z.string().optional(),
+		address: z.string().optional()
 	})
 })
 
-export const TextMessageEventDataSchemaType = z.object({
-	text: z.string(),
-	from: z.string()
+export const NotificationPayloadContactMessageSchemaType = z.object({
+	type: z.literal(NotificationMessageTypeEnum.Contacts),
+	contacts: z.array(z.instanceof(Contact))
 })
 
 export const WhatsappApiNotificationPayloadSchemaType = z.object({
@@ -204,34 +215,26 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 						statuses: z
 							.array(
 								z.object({
-									conversation: z.object({
-										id: z.string(),
-										origin: z.object({
-											type: z.enum([
-												'authentication',
-												'marketing',
-												'utility',
-												'service',
-												' referral_conversion'
-											]),
-											// this would only be present if the message status is sent,
-											expiration_timestamp: z.string().nullish()
+									conversation: z
+										.object({
+											id: z.string(),
+											origin: z.object({
+												type: z.nativeEnum(MessageStatusCategoryEnum),
+												// this would only be present if the message status is sent,
+												expiration_timestamp: z.string().nullish()
+											})
 										})
-									}),
+										.optional(),
 									errors: NotificationPayloadErrorSchemaType.array().optional(),
-									status: z.enum(['delivered', 'read', 'sent', 'failed']),
+									status: z.nativeEnum(MessageStatusEnum),
 									timestamp: z.string(),
 									recipient_id: z.string(),
-									pricing: z.object({
-										pricing_model: z.literal('CBP'),
-										category: z.enum([
-											'authentication',
-											'marketing',
-											'utility',
-											'service',
-											' referral_conversion'
-										])
-									})
+									pricing: z
+										.object({
+											pricing_model: z.literal('CBP'),
+											category: z.nativeEnum(MessageStatusCategoryEnum)
+										})
+										.optional()
 								})
 							)
 							.optional(),
@@ -243,7 +246,10 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 										from: z.string(),
 										timestamp: z.string(),
 										type: z.nativeEnum(NotificationMessageTypeEnum),
-										context: NotificationPayloadMessageContextSchemaType
+										context: NotificationPayloadMessageContextSchemaType,
+										errors: z
+											.array(NotificationPayloadErrorSchemaType)
+											.optional()
 									})
 									.and(
 										NotificationPayloadAudioMessageSchemaType.or(
@@ -260,15 +266,7 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 											.or(NotificationPayloadUnknownMessageSchemaType)
 											.or(NotificationPayloadLocationMessageSchemaType)
 											.or(NotificationPayloadReactionMessageSchemaType)
-											.or(
-												// ! TODO: https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#:~:text=%7D%5D%0A%20%20%20%20%7D%5D%0A%7D-,Contacts%20Messages,-The%20following%20is
-												z.object({
-													type: z.literal(
-														NotificationMessageTypeEnum.Contact
-													),
-													contacts: z.array(z.object({}))
-												})
-											)
+											.or(NotificationPayloadContactMessageSchemaType)
 									)
 							)
 							.optional(),
@@ -280,32 +278,3 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 		})
 	)
 })
-
-export type WapiEventDataMap = {
-	TextMessage: TextMessageEvent
-	AudioMessage: AudioMessageEvent
-	AdInteraction: AdInteractionEvent
-	ContactsMessage: ContactMessageEvent
-	QuickReplyButtonInteraction: QuickReplyButtonInteractionEvent
-	ReplyButtonInteraction: ReplyButtonInteractionEvent
-	CustomerIdentityChanged: CustomerIdentityChangeEvent
-	CustomerNumberChanged: CustomerNumberChangeEvent
-	DocumentMessage: DocumentMessageEvent
-	ImageMessage: ImageMessageEvent
-	ListInteraction: ListInteractionEvent
-	LocationMessage: LocationMessageEvent
-	MessageDelivered: MessageDeliveryEvent
-	MessageFailed: MessageFailedEvent
-	MessageRead: MessageReadEvent
-	MessageSent: MessageSentEvent
-	MessageUndelivered: MessageUndeliveredEvent
-	OrderReceived: OrderMessageEvent
-	ProductInquiry: ProductInquiryEvent
-	Reaction: ReactionEvent
-	StickerMessage: StickerMessageEvent
-	UnknownEvent: UnknownEvent
-	VideoMessage: VideoMessageEvent
-	['Error']: Error
-	['Warn']: string
-	['Ready']: null
-}

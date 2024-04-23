@@ -76,7 +76,6 @@ export class ButtonInteractionMessage
 		footerText?: string
 		bodyText: string
 	}) {
-		console.log(params)
 		super({
 			type: InteractiveMessageTypeEnum.Button,
 			footerText: params.footerText,

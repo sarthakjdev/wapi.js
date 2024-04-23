@@ -1,3 +1,9 @@
 import { type StatusUpdateEventInterface } from '../base/interface'
 
-export interface MessageFailedEventInterface extends StatusUpdateEventInterface {}
+/**
+ * @interface
+ * @extends {StatusUpdateEventInterface}
+ */
+export interface MessageFailedEventInterface extends StatusUpdateEventInterface {
+	failReason: string
+}

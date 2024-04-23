@@ -17,13 +17,15 @@ export class ContactMessageEvent extends MessageEvent implements ContactMessageE
 			from: string
 			messageId: string
 			timestamp: string
+			isForwarded: boolean
 		}
 	}) {
 		super({
 			client: params.client,
 			id: params.data.messageId,
 			from: params.data.from,
-			timestamp: params.data.timestamp
+			timestamp: params.data.timestamp,
+			isForwarded: params.data.isForwarded
 		})
 		this.contact = params.data.contact
 	}

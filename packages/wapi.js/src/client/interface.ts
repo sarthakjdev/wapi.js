@@ -1,4 +1,4 @@
-import { type WapiEventDataMap } from '../webhook/schema'
+import { type WapiEventDataMap } from '../webhook/type'
 import { type PhoneNumberManager } from '../manager/phone'
 import { type MediaManager } from '../manager/media'
 import { type Webhook } from '../webhook'
@@ -16,7 +16,7 @@ export interface ClientInterface {
 	webhook: Webhook
 	message: MessageManager
 	status: ClientStatusEnum | null
-	readyAttimeStamp: string | null
+	readyAtTimeStamp: number | null
 	requester: RequestClient
 	emit<T extends keyof WapiEventDataMap>(eventName: T, data: WapiEventDataMap[T]): boolean
 	on<T extends keyof WapiEventDataMap>(
@@ -43,7 +43,7 @@ export interface RequestClientInterface {
 
 	requestCloudApi(params: {
 		path: string
-		body: any
+		body: string
 		method: 'GET' | 'POST' | 'DELETE'
 	}): Promise<void>
 }

@@ -9,31 +9,35 @@ import { type DocumentMessageEventInterface } from './interface'
  * @implements {DocumentMessageEventInterface}
  */
 export class DocumentMessageEvent
-    extends MediaMessageEvent
-    implements DocumentMessageEventInterface {
-    document: DocumentMessage
-    constructor(params: {
-        client: Client
-        data: {
-            document: DocumentMessage
-            from: string
-            messageId: string
-            timestamp: string
-            mediaId: string
-            mimeType: string
-            sha256: string
-        }
-    }) {
-        super({
-            client: params.client,
-            messageId: params.data.messageId,
-            from: params.data.from,
-            timestamp: params.data.timestamp,
-            mediaId: params.data.mediaId,
-            mimeType: params.data.mimeType,
-            sha256: params.data.sha256
-        })
+	extends MediaMessageEvent
+	implements DocumentMessageEventInterface
+{
+	document: DocumentMessage
+	constructor(params: {
+		client: Client
+		data: {
+			document: DocumentMessage
+			from: string
+			messageId: string
+			timestamp: string
+			mediaId: string
+			mimeType: string
+			sha256: string
+			isForwarded: boolean
+		}
+	}) {
+		super({
+			client: params.client,
+			messageId: params.data.messageId,
+			from: params.data.from,
+			timestamp: params.data.timestamp,
+			mediaId: params.data.mediaId,
+			mimeType: params.data.mimeType,
+			sha256: params.data.sha256,
+			isForwarded: params.data.isForwarded
+		})
 
-        this.document = params.data.document
-    }
+		this.document = params.data.document
+		this.sha256 = params.data.sha256
+	}
 }

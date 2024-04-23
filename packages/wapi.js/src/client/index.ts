@@ -6,10 +6,10 @@ import { MediaManager } from '../manager/media'
 import { RequestClient } from './request-client'
 import { ClientStatusEnum, type ClientInterface } from './interface'
 import { MessageManager } from '../manager/message'
-import { type WapiEventDataMap } from '../webhook/schema'
+import { type WapiEventDataMap } from '../webhook/type'
 
 /**
- * builds the main whatsapp client instance
+ * wapi client
  * @implements {ClientInterface}
  * @extends {EventEmitter}
  * @class
@@ -23,7 +23,7 @@ export class Client extends EventEmitter implements ClientInterface {
 	phone: PhoneNumberManager
 
 	/**
-	 * media manager to upload, get and media via whatsapp cloud api
+	 * 	media manager to upload, get and media via whatsapp cloud api
 	 * 	@type {MediaManager}
 	 * 	@memberof Client
 	 */
@@ -46,7 +46,7 @@ export class Client extends EventEmitter implements ClientInterface {
 	/**
 	 * status of the client
 	 * @type {ClientStatusEnum}
-	 * 	@memberof Client
+	 * @memberof Client
 	 */
 	status: ClientStatusEnum | null = null
 
@@ -55,7 +55,7 @@ export class Client extends EventEmitter implements ClientInterface {
 	 * @type {number}
 	 * @memberof Client
 	 */
-	readyAttimeStamp: string | null = null
+	readyAtTimeStamp: number | null = null
 
 	/**
 	 * requester is an internal utility to communicate with Whatsapp cloud api
@@ -77,7 +77,13 @@ export class Client extends EventEmitter implements ClientInterface {
 	private static apiVersion = 'v19.0'
 
 	/**
-	 * @param params
+	 * @param {object} params
+	 * @param {string} params.webhookSecret
+	 * @param {string} params.webhookEndpoint
+	 * @param {string} params.apiAccessToken
+	 * @param {string} params.phoneNumberId
+	 * @param {string} params.businessAccountId
+	 * @param {number} params.port
 	 * @constructor
 	 */
 	constructor(params: {
@@ -114,8 +120,8 @@ export class Client extends EventEmitter implements ClientInterface {
 	/**
 	 * getter for client
 	 * @returns {Client}
-	 * @static
 	 * @memberof Client
+	 * @static
 	 */
 	static getClient() {
 		return this
@@ -123,8 +129,9 @@ export class Client extends EventEmitter implements ClientInterface {
 
 	/**
 	 * Function to emit a new event on incoming webhook or wapi events
-	 * @param eventName
-	 * @param data
+	 * @param {T} eventName
+	 * @param {WapiEventDataMap[T]} data
+	 * @returns {boolean}
 	 * @memberof Client
 	 */
 	emit<T extends keyof WapiEventDataMap>(eventName: T, data: WapiEventDataMap[T]): boolean {

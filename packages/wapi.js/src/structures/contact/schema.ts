@@ -1,7 +1,5 @@
 import { z } from 'zod'
 
-export const ContactMessageBuilderContactSchemaType = z.object({})
-
 export const ContactAddressSchemaType = z.object({
 	street: z.string().optional(),
 	city: z.string().optional(),

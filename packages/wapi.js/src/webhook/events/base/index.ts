@@ -29,18 +29,26 @@ export abstract class MessageEvent extends BaseEvent implements MessageEventInte
 	messageId: string
 	context: MessageContext
 	timestamp: number
+	isForwarded: boolean
 
 	/**
 	 * @constructor
 	 * @memberof MessageEvent
 	 */
-	constructor(params: { client: Client; id: string; from: string; timestamp: string }) {
+	constructor(params: {
+		client: Client
+		id: string
+		from: string
+		timestamp: string
+		isForwarded: boolean
+	}) {
 		super({ client: params.client })
 		this.messageId = params.id
 		this.timestamp = Number(params.timestamp)
 		this.context = {
 			from: params.from
 		}
+		this.isForwarded = params.isForwarded
 	}
 
 	async reply<T extends BaseMessage<string>>(props: {
@@ -76,14 +84,6 @@ export abstract class MessageEvent extends BaseEvent implements MessageEventInte
 	}
 
 	async read() {
-		console.log({
-			body: JSON.stringify({
-				messaging_product: 'whatsapp',
-				status: 'read',
-				messageId: this.messageId
-			})
-		})
-
 		const response = await this.client.requester.requestCloudApi({
 			path: '/messages',
 			body: JSON.stringify({
@@ -111,12 +111,14 @@ export abstract class MediaMessageEvent extends MessageEvent implements MediaMes
 		mediaId: string
 		mimeType: string
 		sha256: string
+		isForwarded: boolean
 	}) {
 		super({
 			client: params.client,
 			from: params.from,
 			id: params.messageId,
-			timestamp: params.timestamp
+			timestamp: params.timestamp,
+			isForwarded: params.isForwarded
 		})
 		this.mediaId = params.mediaId
 		this.mimeType = params.mimeType
@@ -135,7 +137,6 @@ export abstract class MediaMessageEvent extends MessageEvent implements MediaMes
  * @implements {StatusUpdateEventInterface}
  */
 export abstract class StatusUpdateEvent extends BaseEvent implements StatusUpdateEventInterface {
-	messageId: string
 	context: MessageContext
 	timestamp: number
 
@@ -143,9 +144,8 @@ export abstract class StatusUpdateEvent extends BaseEvent implements StatusUpdat
 	 * @constructor
 	 * @memberof StatusUpdateEvent
 	 */
-	constructor(params: { client: Client; messageId: string; from: string; timestamp: string }) {
+	constructor(params: { client: Client; from: string; timestamp: string }) {
 		super({ client: params.client })
-		this.messageId = params.messageId
 		this.timestamp = Number(params.timestamp)
 		this.context = {
 			from: params.from

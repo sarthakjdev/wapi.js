@@ -22,7 +22,6 @@ export interface MediaMessageEventInterface extends MessageEventInterface {
 }
 
 export interface StatusUpdateEventInterface extends BaseEventInterface {
-	messageId: string
 	context: MessageContext
 	timestamp: number
 }
