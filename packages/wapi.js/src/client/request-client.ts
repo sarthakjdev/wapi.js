@@ -27,7 +27,7 @@ export class RequestClient implements RequestClientInterface {
 	}
 
 	getRequestUrl() {
-		return `${this.protocol}://${this.host}/${this.apiVersion}/${this.phoneNumberId}`
+		return `${this.protocol}://${this.host}/${this.apiVersion}`
 	}
 
 	async requestCloudApi({

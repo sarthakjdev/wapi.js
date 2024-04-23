@@ -1,10 +1,13 @@
 import { type Client } from '../../../client'
-import { type AudioMessage } from '../../../structures'
 import { MessageEvent } from '../base'
 import {
 	type ButtonReplyInteractionMessageEventInterface,
 	type ListInteractionMessageEventInterface,
-	type InteractionMessageEventInterface
+	type InteractionMessageEventInterface,
+	type QuickReplyButtonInteractionEventInterface,
+	type AdInteractionEventInterface,
+	type AdInteractionSourceTypeEnum,
+	type AdInteractionSourceMediaTypeEnum
 } from './interface'
 
 /**
@@ -14,7 +17,8 @@ import {
  */
 export abstract class InteractionEvent
 	extends MessageEvent
-	implements InteractionMessageEventInterface {
+	implements InteractionMessageEventInterface
+{
 	constructor(params: {
 		client: Client
 		data: {
@@ -41,7 +45,8 @@ export abstract class InteractionEvent
  */
 export class ListInteractionEvent
 	extends InteractionEvent
-	implements ListInteractionMessageEventInterface {
+	implements ListInteractionMessageEventInterface
+{
 	title: string
 	listId: string
 	description: string
@@ -69,7 +74,7 @@ export class ListInteractionEvent
 		})
 
 		this.title = params.data.title
-		this.listId = params.data.id
+		this.listId = params.data.listId
 		this.description = params.data.description
 	}
 }
@@ -81,7 +86,8 @@ export class ListInteractionEvent
  */
 export class ReplyButtonInteractionEvent
 	extends InteractionEvent
-	implements ButtonReplyInteractionMessageEventInterface {
+	implements ButtonReplyInteractionMessageEventInterface
+{
 	title: string
 	buttonId: string
 
@@ -111,4 +117,94 @@ export class ReplyButtonInteractionEvent
 	}
 }
 
-export class AdInteractionEvent { }
+/**
+ * @class
+ * @extends {InteractionEvent}
+ * @implements {QuickReplyButtonInteractionEventInterface}
+ */
+export class QuickReplyButtonInteractionEvent
+	extends InteractionEvent
+	implements QuickReplyButtonInteractionEventInterface
+{
+	button: { text: string; payload: string }
+
+	constructor(params: {
+		client: Client
+		data: {
+			from: string
+			messageId: string
+			timestamp: string
+			isForwarded: boolean
+			buttonText: string
+			buttonPayload: string
+		}
+	}) {
+		super({
+			client: params.client,
+			data: {
+				messageId: params.data.messageId,
+				from: params.data.from,
+				timestamp: params.data.timestamp,
+				isForwarded: params.data.isForwarded
+			}
+		})
+
+		this.button = {
+			payload: params.data.buttonPayload,
+			text: params.data.buttonText
+		}
+	}
+}
+
+/**
+ * @class
+ * @extends {MessageEvent}
+ * @implements {AdInteractionEventInterface}
+ */
+export class AdInteractionEvent extends MessageEvent implements AdInteractionEventInterface {
+	text: string
+	source: {
+		url: string
+		id: string
+		type: AdInteractionSourceTypeEnum
+		title: string
+		description: string
+		mediaUrl?: string
+		mediaType: AdInteractionSourceMediaTypeEnum
+		thumbnailUrl: string
+		ctwaClid: string
+	}
+
+	constructor(params: {
+		client: Client
+		data: {
+			from: string
+			id: string
+			timestamp: string
+			isForwarded: boolean
+			text: string
+			source: {
+				url: string
+				id: string
+				type: AdInteractionSourceTypeEnum
+				title: string
+				description: string
+				mediaUrl?: string
+				mediaType: AdInteractionSourceMediaTypeEnum
+				thumbnailUrl: string
+				ctwaClid: string
+			}
+		}
+	}) {
+		super({
+			client: params.client,
+			id: params.data.id,
+			from: params.data.from,
+			timestamp: params.data.timestamp,
+			isForwarded: params.data.isForwarded
+		})
+
+		this.text = params.data.text
+		this.source = params.data.source
+	}
+}

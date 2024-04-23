@@ -85,7 +85,7 @@ export abstract class MessageEvent extends BaseEvent implements MessageEventInte
 
 	async read() {
 		const response = await this.client.requester.requestCloudApi({
-			path: '/messages',
+			path: `/${this.client.phoneNumberId}/messages`,
 			body: JSON.stringify({
 				messaging_product: 'whatsapp',
 				status: 'read',
@@ -127,7 +127,7 @@ export abstract class MediaMessageEvent extends MessageEvent implements MediaMes
 
 	async getUrl() {
 		const response = await this.client.media.getUrl(this.mediaId)
-		return response
+		return response.url
 	}
 }
 

@@ -1,6 +1,7 @@
 import { type Client } from '../../client'
 import { BaseManager } from '../base'
 import { type MediaManagerInterface } from './interface'
+import { GetMediaUrlResponseBodySchemaType } from './schema'
 
 /**
  * manager to handle media
@@ -30,10 +31,13 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
 			method: 'GET'
 		})
 
-		console.info({ getMediaUrlResponse: response })
+		const parsedResponse = GetMediaUrlResponseBodySchemaType.safeParse(response)
 
-		// ! TODO: parse the response using zod here
-		return response.body as string
+		if (parsedResponse.success) {
+			return parsedResponse.data
+		} else {
+			throw new Error('Something went wrong while getting media url')
+		}
 	}
 
 	/**
@@ -55,14 +59,16 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
 	/**
 	 * Function to upload media
 	 * @param params
+	 * @param {string} params.filePath
+	 * @param {string} params.mediaType
 	 * @memberof MediaManager
 	 */
-	async upload(params: { filePath: string; mediaType: string }) {
+	async upload(params: { filePath: string; mediaType: string }): Promise<string> {
 		await Promise.resolve()
 
 		console.log({ params })
 
-		return true
+		return ''
 
 		// ! messaging_product property would always be whatsapp in this case, so send it in the request
 

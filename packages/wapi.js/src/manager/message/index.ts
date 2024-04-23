@@ -26,7 +26,7 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 		phoneNumber: string
 	}): Promise<string> {
 		const response = await this.client.requester.requestCloudApi({
-			path: '/messages',
+			path: `/${this.client.phoneNumberId}/messages`,
 			body: JSON.stringify(props.message.toJson({ to: props.phoneNumber })),
 			method: 'POST'
 		})
@@ -45,7 +45,7 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 		phoneNumber: string
 	}): Promise<string> {
 		const response = await this.client.requester.requestCloudApi({
-			path: '/messages',
+			path: `/${this.client.phoneNumberId}/messages`,
 			body: JSON.stringify(
 				props.message.toJson({
 					to: props.phoneNumber,
@@ -56,16 +56,5 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 		})
 
 		return response
-	}
-
-	/**
-	 * Function used to mark a message as read using message Id
-	 * @param {string} messageId
-	 * @memberof MessageManager
-	 */
-	async read(messageId: string) {
-		await Promise.resolve(messageId)
-
-		return true
 	}
 }

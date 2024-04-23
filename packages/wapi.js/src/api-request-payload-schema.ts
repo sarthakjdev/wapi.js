@@ -1,6 +1,11 @@
 import { z } from 'zod'
 import { InteractiveMessageTypeEnum } from './structures/interaction/interface'
-import { MessageTypeEnum } from './structures/message/types'
+import {
+	LanguageEnum,
+	MessageTypeEnum,
+	TemplateMessageButtonComponentTypeEnum,
+	TemplateMessageComponentTypeEnum
+} from './structures/message/types'
 import {
 	ExternalAudioMediaObjectType,
 	ExternalDocumentMediaObjectSchemaType,
@@ -41,83 +46,79 @@ export const BaseMessageApiPayloadSchema = z.object({
 })
 
 // ===== TEMPLATE MESSAGE PAYLOAD ======
-export const TemplateMessageParametersSchemaType = z.array(
-	z
-		.object({
-			type: z.literal('currency'),
-			currency: z.object({
-				fallback_value: z.string(),
-				code: z.string(),
-				amount_1000: z.number()
+export const TemplateMessageParameterSchemaType = z
+	.object({
+		type: z.literal('currency'),
+		currency: z.object({
+			fallback_value: z.string(),
+			code: z.string(),
+			amount_1000: z.number()
+		})
+	})
+	.or(
+		z.object({
+			type: z.literal('date_time'),
+			date_time: z.object({
+				fallback_value: z.string()
 			})
 		})
-		.or(
-			z.object({
-				type: z.literal('date_time'),
-				date_time: z.object({
-					fallback_value: z.string()
-				})
-			})
-		)
-		.or(
-			z.object({
-				type: z.literal('document'),
-				document: MetaDocumentMediaObjectSchemaType.or(
-					ExternalDocumentMediaObjectSchemaType
-				)
-			})
-		)
-		.or(
-			z.object({
-				type: z.literal('image'),
-				image: ExternalImageMediaObjectType.or(MetaImageMediaObjectSchemaType)
-			})
-		)
-		.or(
-			z.object({
-				type: z.literal('text'),
-				text: z.string()
-			})
-		)
-		.or(
-			z.object({
-				type: z.literal('video'),
-				video: ExternalVideoMediaObjectType.or(MetaVideoMediaObjectSchemaType)
-			})
-		)
-)
-
+	)
+	.or(
+		z.object({
+			type: z.literal('document'),
+			document: MetaDocumentMediaObjectSchemaType.or(ExternalDocumentMediaObjectSchemaType)
+		})
+	)
+	.or(
+		z.object({
+			type: z.literal('image'),
+			image: ExternalImageMediaObjectType.or(MetaImageMediaObjectSchemaType)
+		})
+	)
+	.or(
+		z.object({
+			type: z.literal('text'),
+			text: z.string()
+		})
+	)
+	.or(
+		z.object({
+			type: z.literal('video'),
+			video: ExternalVideoMediaObjectType.or(MetaVideoMediaObjectSchemaType)
+		})
+	)
 export const TemplateMessageApiPayloadSchemaType = BaseMessageApiPayloadSchema.merge(
 	z.object({
-		interactive: z.object({
+		type: z.literal(MessageTypeEnum.Template),
+		template: z.object({
 			name: z.string(),
 			language: z.object({
 				policy: z.literal('deterministic'),
-				code: z.string(),
-				components: z
-					.array(
-						z
-							.object({
-								type: z.literal('header'),
-								parameters: TemplateMessageParametersSchemaType.optional()
+				code: z.nativeEnum(LanguageEnum)
+			}),
+			components: z
+				.array(
+					z
+						.object({
+							type: z.literal(TemplateMessageComponentTypeEnum.Header),
+							parameters: z.array(TemplateMessageParameterSchemaType).optional()
+						})
+						.or(
+							z.object({
+								type: z.literal(TemplateMessageComponentTypeEnum.Body),
+								parameters: z.array(TemplateMessageParameterSchemaType).optional()
 							})
-							.or(
-								z.object({
-									type: z.literal('body'),
-									parameters: TemplateMessageParametersSchemaType.optional()
-								})
-							)
-							.or(
-								z.object({
-									type: z.literal('button'),
-									sub_type: z.enum(['quick_reply', 'url', 'catalog']),
-									parameters: TemplateMessageParametersSchemaType,
-									index: z.number().min(0).max(10)
-								})
-							)
-					)
-					.optional()
-			})
+						)
+						.or(
+							z.object({
+								type: z.literal(TemplateMessageComponentTypeEnum.Button),
+								sub_type: z.nativeEnum(TemplateMessageButtonComponentTypeEnum),
+								parameters: z.array(TemplateMessageParameterSchemaType),
+								index: z.number().min(0).max(10)
+							})
+						)
+				)
+				.optional()
 		})
 	})
 )

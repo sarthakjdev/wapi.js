@@ -25,6 +25,7 @@ export class AudioMessageEvent extends MediaMessageEvent implements AudioMessage
 			mimeType: string
 			sha256: string
 			mediaId: string
+			isForwarded: boolean
 		}
 	}) {
 		super({
@@ -34,7 +35,8 @@ export class AudioMessageEvent extends MediaMessageEvent implements AudioMessage
 			timestamp: params.data.timestamp,
 			mimeType: params.data.mimeType,
 			sha256: params.data.sha256,
-			mediaId: params.data.mediaId
+			mediaId: params.data.mediaId,
+			isForwarded: params.data.isForwarded
 		})
 		this.audio = params.data.audio
 	}

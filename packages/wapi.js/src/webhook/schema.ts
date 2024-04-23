@@ -7,6 +7,10 @@ import {
 	SystemNotificationTypeEnum
 } from './type'
 import { Contact } from '../structures'
+import {
+	AdInteractionSourceMediaTypeEnum,
+	AdInteractionSourceTypeEnum
+} from './events/interaction/interface'
 
 export const NotificationReasonEnum = z.enum(['message'])
 
@@ -23,7 +27,7 @@ export const NotificationPayloadMessageContextSchemaType = z
 	.object({
 		forwarded: z.boolean().optional(),
 		frequently_forwarded: z.boolean().optional(),
-		from: z.string(),
+		from: z.string().optional(),
 		id: z.string(),
 		referred_product: z
 			.object({
@@ -38,7 +42,21 @@ export const NotificationPayloadTextMessageSchemaType = z.object({
 	type: z.literal(NotificationMessageTypeEnum.Text),
 	text: z.object({
 		body: z.string()
-	})
+	}),
+	referral: z
+		.object({
+			source_url: z.string(),
+			source_type: z.nativeEnum(AdInteractionSourceTypeEnum),
+			source_id: z.string(),
+			headline: z.string(),
+			body: z.string(),
+			image_url: z.string().optional(),
+			video_url: z.string().optional(),
+			thumbnail_url: z.string(),
+			ctwa_clid: z.string(),
+			media_type: z.nativeEnum(AdInteractionSourceMediaTypeEnum)
+		})
+		.optional()
 })
 
 export const NotificationPayloadAudioMessageSchemaType = z.object({
@@ -61,7 +79,7 @@ export const NotificationPayloadImageMessageSchemaType = z.object({
 })
 
 export const NotificationPayloadButtonMessageSchemaType = z.object({
-	type: z.literal(NotificationMessageTypeEnum.Interactive),
+	type: z.literal(NotificationMessageTypeEnum.Button),
 	button: z.object({
 		payload: z.string(),
 		text: z.string()

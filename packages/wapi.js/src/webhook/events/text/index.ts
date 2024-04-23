@@ -17,13 +17,15 @@ export class TextMessageEvent extends MessageEvent implements TextMessageEventIn
 			messageId: string
 			text: TextMessage
 			timestamp: string
+			isForwarded: boolean
 		}
 	}) {
 		super({
 			client: params.client,
 			id: params.data.messageId,
 			from: params.data.from,
-			timestamp: params.data.timestamp
+			timestamp: params.data.timestamp,
+			isForwarded: params.data.isForwarded
 		})
 		this.text = params.data.text
 	}

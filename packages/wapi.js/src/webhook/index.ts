@@ -6,6 +6,7 @@ import { type Express, json as expressJson } from 'express'
 import {
 	InteractionNotificationTypeEnum,
 	NotificationMessageTypeEnum,
+	SystemNotificationTypeEnum
 } from './type'
 import { TextMessageEvent } from './events/text'
 import {
@@ -31,7 +32,9 @@ import { MessageReadEvent } from './events/message-read'
 import { MessageUndeliveredEvent } from './events/message-undelivered'
 import { MessageFailedEvent } from './events/message-failed'
 import {
+	AdInteractionEvent,
 	ListInteractionEvent,
+	QuickReplyButtonInteractionEvent,
 	ReplyButtonInteractionEvent
 } from './events/interaction'
 import { ReactionEvent } from './events/reaction'
@@ -42,6 +45,7 @@ import { CustomerNumberChangeEvent } from './events/customer-number-changed'
 import { Order, ProductItem } from '../structures/order'
 import { StickerMessageEvent } from './events/sticker'
 import { LocationMessageEvent } from './events/location'
+import { ProductInquiryEvent } from './events/product-inquiry'
 
 /**
  * @class
@@ -183,25 +187,76 @@ export class Webhook extends EventEmitter {
 								messages.forEach(message => {
 									switch (message.type) {
 										case NotificationMessageTypeEnum.Text: {
-											// if (message.referral) {
-											// 	this.client.emit('AdInteraction', {})
-											// } else {
-											this.client.emit(
-												'TextMessage',
-												new TextMessageEvent({
-													client: this.client,
-													data: {
-														text: new TextMessage({
-															text: message.text.body
-														}),
-														from: message.from,
-														messageId: message.id,
-														timestamp: message.timestamp
-													}
-												})
-											)
-
-											// }
+											if (message.context?.referred_product) {
+												this.client.emit(
+													'ProductInquiry',
+													new ProductInquiryEvent({
+														client: this.client,
+														data: {
+															text: message.text.body,
+															from: message.from,
+															id: message.id,
+															timestamp: message.timestamp,
+															catalogId:
+																message.context.referred_product
+																	.catalog_id,
+															productId:
+																message.context.referred_product
+																	.product_retailer_id,
+															isForwarded:
+																message.context?.forwarded || false
+														}
+													})
+												)
+											} else if (message.referral) {
+												this.client.emit(
+													'AdInteraction',
+													new AdInteractionEvent({
+														client: this.client,
+														data: {
+															text: message.text.body,
+															from: message.from,
+															id: message.id,
+															timestamp: message.timestamp,
+															isForwarded:
+																message.context?.forwarded || false,
+															source: {
+																ctwaClid:
+																	message.referral.ctwa_clid,
+																description: message.referral.body,
+																id: message.referral.source_id,
+																thumbnailUrl:
+																	message.referral.thumbnail_url,
+																title: message.referral.headline,
+																type: message.referral.source_type,
+																url: message.referral.source_url,
+																mediaType:
+																	message.referral.media_type,
+																mediaUrl:
+																	message.referral.image_url ||
+																	message.referral.video_url
+															}
+														}
+													})
+												)
+											} else {
+												this.client.emit(
+													'TextMessage',
+													new TextMessageEvent({
+														client: this.client,
+														data: {
+															text: new TextMessage({
+																text: message.text.body
+															}),
+															from: message.from,
+															messageId: message.id,
+															timestamp: message.timestamp,
+															isForwarded:
+																message.context?.forwarded || false
+														}
+													})
+												)
+											}
 
 											return
 										}
@@ -220,7 +275,9 @@ export class Webhook extends EventEmitter {
 														timestamp: message.timestamp,
 														mimeType: message.audio.mime_type,
 														sha256: message.audio.sha256,
-														mediaId: message.audio.id
+														mediaId: message.audio.id,
+														isForwarded:
+															message.context?.forwarded || false
 													}
 												})
 											)
@@ -356,9 +413,13 @@ export class Webhook extends EventEmitter {
 															timestamp: message.timestamp,
 															isForwarded:
 																message.context?.forwarded || false,
-															description: message.interative.list_reply.description,
-															title: message.interative.list_reply.title,
-															listId: message.interative.list_reply.id,
+															description:
+																message.interactive.list_reply
+																	.description,
+															title: message.interactive.list_reply
+																.title,
+															listId: message.interactive.list_reply
+																.id
 														}
 													})
 												)
@@ -376,8 +437,10 @@ export class Webhook extends EventEmitter {
 															timestamp: message.timestamp,
 															isForwarded:
 																message.context?.forwarded || false,
-															title: message.interative.button_reply.title,
-															buttonId: message.interative.button_reply.id,
+															title: message.interactive.button_reply
+																.title,
+															buttonId:
+																message.interactive.button_reply.id
 														}
 													})
 												)
@@ -386,17 +449,24 @@ export class Webhook extends EventEmitter {
 											return
 										}
 
-										// ! TODO: finish this with template message
-										// case NotificationMessageTypeEnum.Button: {
-										// 	this.client.emit(
-										// 		'QuickReplyButtonInteraction',
-										// 		new QuickReplyButtonInteractionEvent({
-										// 			client: this.client,
-										// 			data: {}
-										// 		})
-										// 	)
-										// 	return
-										// }
+										case NotificationMessageTypeEnum.Button: {
+											this.client.emit(
+												'QuickReplyButtonInteraction',
+												new QuickReplyButtonInteractionEvent({
+													client: this.client,
+													data: {
+														from: message.from,
+														messageId: message.id,
+														timestamp: message.timestamp,
+														isForwarded:
+															message.context?.forwarded || false,
+														buttonPayload: message.button.payload,
+														buttonText: message.button.text
+													}
+												})
+											)
+											return
+										}
 
 										case NotificationMessageTypeEnum.Order: {
 											this.client.emit(
@@ -432,26 +502,38 @@ export class Webhook extends EventEmitter {
 										}
 
 										case NotificationMessageTypeEnum.System: {
-											// ! TODO:
-											// if (
-											// 	message.system.type ===
-											// 	SystemNotificationTypeEnum.CustomerNumberChange
-											// ) {
-											// 	this.client.emit(
-											// 		'CustomerNumberChanged',
-											// 		new CustomerIdentityChangeEvent({})
-											// 	)
-											// } else if (
-											// 	message.system.type ===
-											// 	SystemNotificationTypeEnum.CustomerIdentityChange
-											// ) {
-											// 	this.client.emit(
-											// 		'CustomerIdentityChanged',
-											// 		new CustomerNumberChangeEvent({})
-											// 	)
-											// } else {
-											// 	// ! TOOD: warning here
-											// }
+											if (
+												message.system.type ===
+												SystemNotificationTypeEnum.CustomerNumberChange
+											) {
+												this.client.emit(
+													'CustomerNumberChanged',
+													new CustomerNumberChangeEvent({
+														client: this.client,
+														changeDescription: message.system.body,
+														newWaId: message.system.wa_id,
+														timestamp: message.timestamp,
+														oldWaId: message.system.customer
+													})
+												)
+											} else if (
+												message.system.type ===
+												SystemNotificationTypeEnum.CustomerIdentityChange
+											) {
+												this.client.emit(
+													'CustomerIdentityChanged',
+													new CustomerIdentityChangeEvent({
+														client: this.client,
+														creationTimestamp:
+															message.identity.created_timestamp,
+														hash: message.identity.hash,
+														acknowledged: message.identity.acknowledged,
+														timestamp: message.timestamp
+													})
+												)
+											} else {
+												// ! TOOD: warning here
+											}
 											return
 										}
 
@@ -490,7 +572,9 @@ export class Webhook extends EventEmitter {
 															name: message.location.name
 														}),
 														messageId: message.id,
-														timestamp: message.timestamp
+														timestamp: message.timestamp,
+														isForwarded:
+															message.context?.forwarded || false
 													}
 												})
 											)
@@ -511,7 +595,9 @@ export class Webhook extends EventEmitter {
 														timestamp: message.timestamp,
 														mediaId: message.sticker.id,
 														mimeType: message.sticker.mime_type,
-														sha256: message.sticker.sha256
+														sha256: message.sticker.sha256,
+														isForwarded:
+															message.context?.forwarded || false
 													}
 												})
 											)

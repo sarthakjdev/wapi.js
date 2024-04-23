@@ -15,5 +15,4 @@ export interface MessageManagerInterface extends BaseManagerInterface {
 		message: T
 		phoneNumber: string
 	}): Promise<string>
-	read(messageId: string): Promise<boolean>
 }

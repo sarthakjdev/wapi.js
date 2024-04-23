@@ -1,7 +1,13 @@
 import { z } from 'zod'
 import { InteractiveMessageTypeEnum } from './interface'
-import { MediaComponent } from '../media'
-import { MediaTypeEnum } from '../media/interface'
+import {
+	ExternalDocumentMediaObjectSchemaType,
+	ExternalImageMediaObjectType,
+	ExternalVideoMediaObjectType,
+	MetaDocumentMediaObjectSchemaType,
+	MetaImageMediaObjectSchemaType,
+	MetaVideoMediaObjectSchemaType
+} from '../media/schema'
 
 export enum HeaderTypeEnum {
 	Text = 'text',
@@ -17,35 +23,23 @@ export const ButtonComponentSchemaType = z.object({
 		id: z.string()
 	})
 })
-const ImageHeaderObjectSchemaType = z
-	.object({
-		type: z.literal(HeaderTypeEnum.Image),
-		image: z.instanceof(MediaComponent)
-	})
-	.refine(media => media.image.type === MediaTypeEnum.Image, {
-		message: "MediaComponent must be of type 'image'"
-	})
+const ImageHeaderObjectSchemaType = z.object({
+	type: z.literal(HeaderTypeEnum.Image),
+	image: MetaImageMediaObjectSchemaType.or(ExternalImageMediaObjectType)
+})
 
-const VideoHeaderObjectSchemaType = z
-	.object({
-		type: z.literal(HeaderTypeEnum.Video),
-		image: z.instanceof(MediaComponent)
-	})
-	.refine(media => media.image.type === MediaTypeEnum.Video, {
-		message: "MediaComponent must be of type 'video'"
-	})
+const VideoHeaderObjectSchemaType = z.object({
+	type: z.literal(HeaderTypeEnum.Video),
+	video: MetaVideoMediaObjectSchemaType.or(ExternalVideoMediaObjectType)
+})
 
-const DocumentHeaderObjectSchemaType = z
-	.object({
-		type: z.literal(HeaderTypeEnum.Document),
-		image: z.instanceof(MediaComponent)
-	})
-	.refine(media => media.image.type === MediaTypeEnum.Document, {
-		message: "MediaComponent must be of type 'document'"
-	})
+const DocumentHeaderObjectSchemaType = z.object({
+	type: z.literal(HeaderTypeEnum.Document),
+	document: MetaDocumentMediaObjectSchemaType.or(ExternalDocumentMediaObjectSchemaType)
+})
 
 const TextHeaderObjectSchemaType = z.object({
-	type: z.literal(HeaderTypeEnum.Document),
+	type: z.literal(HeaderTypeEnum.Text),
 	text: z.string()
 })
 

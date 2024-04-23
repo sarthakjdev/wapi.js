@@ -18,6 +18,7 @@ import {
 	type ProductListInteractiveMessageSection,
 	type ProductListInteractiveMessagePayload
 } from '../../api-request-payload-schema'
+import { HeaderTypeEnum, type InteractiveMessageHeaderSchemaType } from './schema'
 
 /**
  * @extends {BaseMessage}
@@ -32,8 +33,7 @@ abstract class InteractiveMessage
 		type: InteractiveMessageTypeEnum
 		footerText?: string
 		bodyText: string
-		// ! TODO: add header here
-		// header:
+		header?: z.infer<typeof InteractiveMessageHeaderSchemaType>
 	}
 
 	/**
@@ -88,7 +88,9 @@ export class ButtonInteractionMessage
 
 	addHeader() {}
 
-	addFooter() {}
+	addFooter(footerText: string) {
+		this.interactiveMessageData.footerText = footerText
+	}
 
 	/**
 	 * @memberof ButtonInteractionMessage
@@ -119,6 +121,33 @@ export class ButtonInteractionMessage
 				body: {
 					text: this.interactiveMessageData.bodyText
 				},
+				...(this.interactiveMessageData.header
+					? {
+							header: {
+								...(this.interactiveMessageData.header.type === HeaderTypeEnum.Text
+									? {
+											type: HeaderTypeEnum.Text,
+											text: this.interactiveMessageData.header.text
+									  }
+									: this.interactiveMessageData.header.type ===
+									  HeaderTypeEnum.Document
+									? {
+											type: HeaderTypeEnum.Document,
+											document: this.interactiveMessageData.header.document
+									  }
+									: this.interactiveMessageData.header.type ===
+									  HeaderTypeEnum.Image
+									? {
+											type: HeaderTypeEnum.Image,
+											image: this.interactiveMessageData.header.image
+									  }
+									: {
+											type: HeaderTypeEnum.Video,
+											video: this.interactiveMessageData.header.video
+									  })
+							}
+					  }
+					: {}),
 				type: InteractiveMessageTypeEnum.Button
 			}
 		}
@@ -166,7 +195,9 @@ export class ListInteractionMessage
 
 	addHeader() {}
 
-	addFooter() {}
+	addFooter(footerText: string) {
+		this.interactiveMessageData.footerText = footerText
+	}
 
 	toJson(params: { to: string; replyToMessageId?: string }): z.infer<
 		typeof InteractiveMessageApiPayloadSchemaType
@@ -190,6 +221,33 @@ export class ListInteractionMessage
 				body: {
 					text: this.interactiveMessageData.bodyText
 				},
+				...(this.interactiveMessageData.header
+					? {
+							header: {
+								...(this.interactiveMessageData.header.type === HeaderTypeEnum.Text
+									? {
+											type: HeaderTypeEnum.Text,
+											text: this.interactiveMessageData.header.text
+									  }
+									: this.interactiveMessageData.header.type ===
+									  HeaderTypeEnum.Document
+									? {
+											type: HeaderTypeEnum.Document,
+											document: this.interactiveMessageData.header.document
+									  }
+									: this.interactiveMessageData.header.type ===
+									  HeaderTypeEnum.Image
+									? {
+											type: HeaderTypeEnum.Image,
+											image: this.interactiveMessageData.header.image
+									  }
+									: {
+											type: HeaderTypeEnum.Video,
+											video: this.interactiveMessageData.header.video
+									  })
+							}
+					  }
+					: {}),
 				...(this.interactiveMessageData.footerText
 					? {
 							footer: {
@@ -236,7 +294,9 @@ export class ProductInteractionMessage
 
 	addHeader() {}
 
-	addFooter() {}
+	addFooter(footerText: string) {
+		this.interactiveMessageData.footerText = footerText
+	}
 
 	toJson(params: { to: string; replyToMessageId?: string }): z.infer<
 		typeof InteractiveMessageApiPayloadSchemaType
@@ -260,6 +320,33 @@ export class ProductInteractionMessage
 				body: {
 					text: this.interactiveMessageData.bodyText
 				},
+				...(this.interactiveMessageData.header
+					? {
+							header: {
+								...(this.interactiveMessageData.header.type === HeaderTypeEnum.Text
+									? {
+											type: HeaderTypeEnum.Text,
+											text: this.interactiveMessageData.header.text
+									  }
+									: this.interactiveMessageData.header.type ===
+									  HeaderTypeEnum.Document
+									? {
+											type: HeaderTypeEnum.Document,
+											document: this.interactiveMessageData.header.document
+									  }
+									: this.interactiveMessageData.header.type ===
+									  HeaderTypeEnum.Image
+									? {
+											type: HeaderTypeEnum.Image,
+											image: this.interactiveMessageData.header.image
+									  }
+									: {
+											type: HeaderTypeEnum.Video,
+											video: this.interactiveMessageData.header.video
+									  })
+							}
+					  }
+					: {}),
 				...(this.interactiveMessageData.footerText
 					? {
 							footer: {
@@ -294,6 +381,7 @@ export class ProductListInteractionMessage
 		catalogId: string
 		productRetailerId: string
 		sections: z.infer<typeof ProductListInteractiveMessageSection>[]
+		header: z.infer<typeof InteractiveMessageHeaderSchemaType>
 	}) {
 		super({
 			type: InteractiveMessageTypeEnum.Button,
@@ -311,13 +399,18 @@ export class ProductListInteractionMessage
 		this.data.sections.push(section)
 	}
 
-	addFooter() {}
+	addFooter(footerText: string) {
+		this.interactiveMessageData.footerText = footerText
+	}
 
 	toJson(params: { to: string; replyToMessageId?: string }): z.infer<
 		typeof InteractiveMessageApiPayloadSchemaType
 	> & {
 		interactive: z.infer<typeof ProductListInteractiveMessagePayload>
 	} {
+		if (!this.interactiveMessageData.header)
+			throw new Error('Header is required for ProductListInteractiveMessage')
+
 		return {
 			...(params.replyToMessageId
 				? { context: { message_id: params.replyToMessageId } }
@@ -333,7 +426,27 @@ export class ProductListInteractionMessage
 					productRetailerId: this.data.productRetailerId,
 					sections: this.data.sections
 				},
-				header: {},
+				header: {
+					...(this.interactiveMessageData.header.type === HeaderTypeEnum.Text
+						? {
+								type: HeaderTypeEnum.Text,
+								text: this.interactiveMessageData.header.text
+						  }
+						: this.interactiveMessageData.header.type === HeaderTypeEnum.Document
+						? {
+								type: HeaderTypeEnum.Document,
+								document: this.interactiveMessageData.header.document
+						  }
+						: this.interactiveMessageData.header.type === HeaderTypeEnum.Image
+						? {
+								type: HeaderTypeEnum.Image,
+								image: this.interactiveMessageData.header.image
+						  }
+						: {
+								type: HeaderTypeEnum.Video,
+								video: this.interactiveMessageData.header.video
+						  })
+				},
 				body: {
 					text: this.interactiveMessageData.bodyText
 				},
@@ -349,14 +462,4 @@ export class ProductListInteractionMessage
 	}
 }
 
-// export class FlowInteractionMessage extends InteractiveMessage<'flow'> {
-//     constructor() {
-//         super({ type: InteractiveMessageTypeEnum.Flow })
-//     }
-// }
-
-// export class CatalogInteractionMessage extends InteractiveMessage<'catalog_message'> {
-//     constructor() {
-//         super({ type: InteractiveMessageTypeEnum.Catalog })
-//     }
-// }
+// ! TODO: flow interactions

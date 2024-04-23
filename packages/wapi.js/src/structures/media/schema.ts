@@ -33,7 +33,7 @@ export const MetaDocumentMediaObjectSchemaType = MetaMediaObjectType.merge(
 
 export const ExternalDocumentMediaObjectSchemaType = ExternalMediaObjectType.merge(
 	z.object({
-		caption: z.string(),
+		caption: z.string().optional(),
 		filename: z.string().optional()
 	})
 )

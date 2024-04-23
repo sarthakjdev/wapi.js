@@ -20,6 +20,7 @@ export class StickerMessageEvent extends MediaMessageEvent implements StickerMes
 			mediaId: string
 			mimeType: string
 			sha256: string
+			isForwarded: boolean
 		}
 	}) {
 		super({
@@ -29,7 +30,8 @@ export class StickerMessageEvent extends MediaMessageEvent implements StickerMes
 			timestamp: params.data.timestamp,
 			mediaId: params.data.mediaId,
 			sha256: params.data.sha256,
-			mimeType: params.data.mimeType
+			mimeType: params.data.mimeType,
+			isForwarded: params.data.isForwarded
 		})
 		this.sticker = params.data.sticker
 	}
