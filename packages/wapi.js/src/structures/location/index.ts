@@ -34,8 +34,12 @@ export class LocationMessage extends BaseMessage<'location'> implements Location
 
 	toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: 'location' }> {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			messaging_product: 'whatsapp',
 			recipient_type: 'individual',
 			to: params.to,

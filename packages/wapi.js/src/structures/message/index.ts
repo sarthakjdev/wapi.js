@@ -9,6 +9,7 @@ export abstract class BaseMessage<T extends string> implements BaseMessageInterf
 	recipient_type: 'individual'
 	abstract toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: T }>
 
 	// ! TODO: fix types here

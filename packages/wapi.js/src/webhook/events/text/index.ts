@@ -1,47 +1,30 @@
 import { type Client } from '../../../client'
-import { TextMessage } from '../../../structures'
-import { type BaseMessage } from '../../../structures/message'
+import { type TextMessage } from '../../../structures'
 import { MessageEvent } from '../base'
-import { type TextMessageEventInterface, type MessageContext } from './interface'
+import { type TextMessageEventInterface } from './interface'
 
+/**
+ * @class
+ * @implements {TextMessageEventInterface}
+ * @extends {MessageEvent}
+ */
 export class TextMessageEvent extends MessageEvent implements TextMessageEventInterface {
-	message: TextMessage
-	context: MessageContext
-	messageId: string
-
-	constructor(params: { client: Client; data: { text: string, messageId: string } }) {
-		super({ client: params.client })
-
-		this.message = new TextMessage({ text: params.data.text })
-		this.messageId = params.data.messageId
-		this.context = { From: '919643500545' }
-	}
-
-	async reply<T extends BaseMessage<string>>(props: {
-		message: T
-		phoneNumber: string
-	}): Promise<string> {
-		if (!this.context.From) {
-			throw new Error('No context message id found while replying to message!!')
+	text: TextMessage
+	constructor(params: {
+		client: Client
+		data: {
+			from: string
+			messageId: string
+			text: TextMessage
+			timestamp: string
 		}
-
-		// ! TODO:
-
-		// build the body to send here
-
-		// example message
-
-		const apiPayload = props.message
-
-		console.log({ apiPayload })
-
-		// inject the context here this time
-		await this.client.requester.requestCloudApi({
-			path: '/messages',
-			body: JSON.stringify({}),
-			method: 'POST'
+	}) {
+		super({
+			client: params.client,
+			id: params.data.messageId,
+			from: params.data.from,
+			timestamp: params.data.timestamp
 		})
-
-		return ''
+		this.text = params.data.text
 	}
 }

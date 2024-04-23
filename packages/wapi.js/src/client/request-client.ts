@@ -68,6 +68,7 @@ export class RequestClient implements RequestClientInterface {
 		} catch (error) {
 			console.log({ error })
 			if (error instanceof Error) this.client.emit('Error', error)
+			return null
 		}
 	}
 }

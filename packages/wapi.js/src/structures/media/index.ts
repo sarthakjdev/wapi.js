@@ -29,7 +29,8 @@ import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request
  */
 export class AudioMessage
 	extends BaseMessage<MessageTypeEnum.Audio>
-	implements AudioMessageInterface {
+	implements AudioMessageInterface
+{
 	data: z.infer<typeof MetaAudioMediaObjectSchemaType | typeof ExternalAudioMediaObjectType>
 
 	/**
@@ -49,11 +50,15 @@ export class AudioMessage
 	 */
 	toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<
 		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
 		{ type: MessageTypeEnum.Audio }
 	> {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			type: MessageTypeEnum.Audio,
 			to: params.to,
 			messaging_product: this.messaging_product,
@@ -72,7 +77,8 @@ export class AudioMessage
  */
 export class VideoMessage
 	extends BaseMessage<MessageTypeEnum.Video>
-	implements VideoMessageInterface {
+	implements VideoMessageInterface
+{
 	data: z.infer<typeof MetaVideoMediaObjectSchemaType | typeof ExternalVideoMediaObjectType>
 
 	/**
@@ -92,11 +98,15 @@ export class VideoMessage
 	 */
 	toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<
 		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
 		{ type: MessageTypeEnum.Video }
 	> {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			type: MessageTypeEnum.Video,
 			to: params.to,
 			messaging_product: this.messaging_product,
@@ -116,7 +126,8 @@ export class VideoMessage
  */
 export class ImageMessage
 	extends BaseMessage<MessageTypeEnum.Image>
-	implements ImageMessageInterface {
+	implements ImageMessageInterface
+{
 	data: z.infer<typeof MetaImageMediaObjectSchemaType | typeof ExternalImageMediaObjectType>
 
 	/**
@@ -135,11 +146,15 @@ export class ImageMessage
 	 */
 	toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<
 		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
 		{ type: MessageTypeEnum.Image }
 	> {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			type: MessageTypeEnum.Image,
 			to: params.to,
 			messaging_product: this.messaging_product,
@@ -159,7 +174,8 @@ export class ImageMessage
  */
 export class StickerMessage
 	extends BaseMessage<MessageTypeEnum.Sticker>
-	implements StickerMessageInterface {
+	implements StickerMessageInterface
+{
 	data: z.infer<typeof MetaStickerMediaObjectSchemaType | typeof ExternalStickerMediaObjectType>
 
 	/**
@@ -181,11 +197,15 @@ export class StickerMessage
 	 */
 	toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<
 		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
 		{ type: MessageTypeEnum.Sticker }
 	> {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			type: MessageTypeEnum.Sticker,
 			to: params.to,
 			messaging_product: this.messaging_product,
@@ -204,7 +224,8 @@ export class StickerMessage
  */
 export class DocumentMessage
 	extends BaseMessage<MessageTypeEnum.Document>
-	implements DocumentMessageInterface {
+	implements DocumentMessageInterface
+{
 	data: z.infer<
 		typeof MetaDocumentMediaObjectSchemaType | typeof ExternalDocumentMediaObjectSchemaType
 	>
@@ -228,11 +249,15 @@ export class DocumentMessage
 	 */
 	toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<
 		z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>,
 		{ type: MessageTypeEnum.Document }
 	> {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			type: MessageTypeEnum.Document,
 			to: params.to,
 			messaging_product: this.messaging_product,

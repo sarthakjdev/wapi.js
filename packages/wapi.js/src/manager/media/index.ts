@@ -30,7 +30,10 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
 			method: 'GET'
 		})
 
-		console.log(response)
+		console.info({ getMediaUrlResponse: response })
+
+		// ! TODO: parse the response using zod here
+		return response.body as string
 	}
 
 	/**
@@ -58,6 +61,8 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
 		await Promise.resolve()
 
 		console.log({ params })
+
+		return true
 
 		// ! messaging_product property would always be whatsapp in this case, so send it in the request
 

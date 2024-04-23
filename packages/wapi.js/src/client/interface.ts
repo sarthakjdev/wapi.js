@@ -16,7 +16,7 @@ export interface ClientInterface {
 	webhook: Webhook
 	message: MessageManager
 	status: ClientStatusEnum | null
-	readyAtTimeStamp: number | null
+	readyAttimeStamp: string | null
 	requester: RequestClient
 	emit<T extends keyof WapiEventDataMap>(eventName: T, data: WapiEventDataMap[T]): boolean
 	on<T extends keyof WapiEventDataMap>(

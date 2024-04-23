@@ -94,10 +94,15 @@ export class ButtonInteractionMessage
 	/**
 	 * @memberof ButtonInteractionMessage
 	 */
-	toJson(params: { to: string }): z.infer<typeof InteractiveMessageApiPayloadSchemaType> & {
+	toJson(params: { to: string; replyToMessageId?: string }): z.infer<
+		typeof InteractiveMessageApiPayloadSchemaType
+	> & {
 		interactive: z.infer<typeof ButtonInteractiveMessagePayload>
 	} {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			to: params.to,
 			messaging_product: 'whatsapp',
 			recipient_type: 'individual',
@@ -164,10 +169,15 @@ export class ListInteractionMessage
 
 	addFooter() {}
 
-	toJson(params: { to: string }): z.infer<typeof InteractiveMessageApiPayloadSchemaType> & {
+	toJson(params: { to: string; replyToMessageId?: string }): z.infer<
+		typeof InteractiveMessageApiPayloadSchemaType
+	> & {
 		interactive: z.infer<typeof ListInteractiveMessagePayload>
 	} {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			to: params.to,
 			messaging_product: 'whatsapp',
 			recipient_type: 'individual',
@@ -229,10 +239,15 @@ export class ProductInteractionMessage
 
 	addFooter() {}
 
-	toJson(params: { to: string }): z.infer<typeof InteractiveMessageApiPayloadSchemaType> & {
+	toJson(params: { to: string; replyToMessageId?: string }): z.infer<
+		typeof InteractiveMessageApiPayloadSchemaType
+	> & {
 		interactive: z.infer<typeof ProductInteractiveMessagePayload>
 	} {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			to: params.to,
 			messaging_product: 'whatsapp',
 			recipient_type: 'individual',
@@ -299,10 +314,15 @@ export class ProductListInteractionMessage
 
 	addFooter() {}
 
-	toJson(params: { to: string }): z.infer<typeof InteractiveMessageApiPayloadSchemaType> & {
+	toJson(params: { to: string; replyToMessageId?: string }): z.infer<
+		typeof InteractiveMessageApiPayloadSchemaType
+	> & {
 		interactive: z.infer<typeof ProductListInteractiveMessagePayload>
 	} {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			to: params.to,
 			messaging_product: 'whatsapp',
 			recipient_type: 'individual',

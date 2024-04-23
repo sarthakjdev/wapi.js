@@ -1,6 +1,31 @@
 import { z } from 'zod'
 import { NotificationMessageTypeEnum } from './type'
 import { type TextMessageEvent } from './events/text'
+import { type AudioMessageEvent } from './events/audio'
+import { type ImageMessageEvent } from './events/image'
+import { type DocumentMessageEvent } from './events/document'
+import { type LocationMessageEvent } from './events/location'
+import { type StickerMessageEvent } from './events/sticker'
+import { type VideoMessageEvent } from './events/video'
+import {
+	QuickReplyButtonInteractionEvent,
+	ReplyButtonInteractionEvent,
+	type AdInteractionEvent,
+	type ButtonInteraction,
+	type ListInteractionEvent
+} from './events/interaction'
+import { type ContactMessageEvent } from './events/contacts'
+import { type ReactionEvent } from './events/reaction'
+import { type OrderMessageEvent } from './events/order'
+import { type MessageUndeliveredEvent } from './events/message-undelivered'
+import { type MessageSentEvent } from './events/message-sent'
+import { type MessageReadEvent } from './events/message-read'
+import { type MessageFailedEvent } from './events/message-failed'
+import { type MessageDeliveryEvent } from './events/message-delivered'
+import { type CustomerIdentityChangeEvent } from './events/customer-identity-changed'
+import { type CustomerNumberChangeEvent } from './events/customer-number-changed'
+import { type ProductInquiryEvent } from './events/product-inquiry'
+import { type UnknownEvent } from './events/unknown'
 
 export const NotificationReasonEnum = z.enum(['message'])
 
@@ -193,9 +218,9 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 											expiration_timestamp: z.string().nullish()
 										})
 									}),
-									errors: NotificationPayloadErrorSchemaType.array(),
+									errors: NotificationPayloadErrorSchemaType.array().optional(),
 									status: z.enum(['delivered', 'read', 'sent', 'failed']),
-									timestamp: z.number(),
+									timestamp: z.string(),
 									recipient_id: z.string(),
 									pricing: z.object({
 										pricing_model: z.literal('CBP'),
@@ -209,7 +234,7 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 									})
 								})
 							)
-							.nullish(),
+							.optional(),
 						messages: z
 							.array(
 								z
@@ -247,7 +272,7 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 									)
 							)
 							.optional(),
-						errors: z.array(NotificationPayloadErrorSchemaType).nullish()
+						errors: z.array(NotificationPayloadErrorSchemaType).optional()
 					}),
 					field: z.literal('messages')
 				})
@@ -258,30 +283,28 @@ export const WhatsappApiNotificationPayloadSchemaType = z.object({
 
 export type WapiEventDataMap = {
 	TextMessage: TextMessageEvent
-	AudioMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
-	AdInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
-	ContactsMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
-	ButtonInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
-	ReplyButton: Zod.infer<typeof TextMessageEventDataSchemaType>
-	CustomerIdentityChanged: Zod.infer<typeof TextMessageEventDataSchemaType>
-	CustomerNumberChanged: Zod.infer<typeof TextMessageEventDataSchemaType>
-	DocumentMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
-	ImageMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
-	ListInteraction: Zod.infer<typeof TextMessageEventDataSchemaType>
-	LocationMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
-	MessageDeleted: Zod.infer<typeof TextMessageEventDataSchemaType>
-	MessageDelivered: Zod.infer<typeof TextMessageEventDataSchemaType>
-	MessageFailed: Zod.infer<typeof TextMessageEventDataSchemaType>
-	MessageRead: Zod.infer<typeof TextMessageEventDataSchemaType>
-	MessageSent: Zod.infer<typeof TextMessageEventDataSchemaType>
-	MessageUndelivered: Zod.infer<typeof TextMessageEventDataSchemaType>
-	OrderReceived: Zod.infer<typeof TextMessageEventDataSchemaType>
-	ProductInquiry: Zod.infer<typeof TextMessageEventDataSchemaType>
-	Reaction: Zod.infer<typeof TextMessageEventDataSchemaType>
-	ReplyMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
-	StickerMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
-	UnknownEvent: Zod.infer<typeof TextMessageEventDataSchemaType>
-	VideoMessage: Zod.infer<typeof TextMessageEventDataSchemaType>
+	AudioMessage: AudioMessageEvent
+	AdInteraction: AdInteractionEvent
+	ContactsMessage: ContactMessageEvent
+	QuickReplyButtonInteraction: QuickReplyButtonInteractionEvent
+	ReplyButtonInteraction: ReplyButtonInteractionEvent
+	CustomerIdentityChanged: CustomerIdentityChangeEvent
+	CustomerNumberChanged: CustomerNumberChangeEvent
+	DocumentMessage: DocumentMessageEvent
+	ImageMessage: ImageMessageEvent
+	ListInteraction: ListInteractionEvent
+	LocationMessage: LocationMessageEvent
+	MessageDelivered: MessageDeliveryEvent
+	MessageFailed: MessageFailedEvent
+	MessageRead: MessageReadEvent
+	MessageSent: MessageSentEvent
+	MessageUndelivered: MessageUndeliveredEvent
+	OrderReceived: OrderMessageEvent
+	ProductInquiry: ProductInquiryEvent
+	Reaction: ReactionEvent
+	StickerMessage: StickerMessageEvent
+	UnknownEvent: UnknownEvent
+	VideoMessage: VideoMessageEvent
 	['Error']: Error
 	['Warn']: string
 	['Ready']: null

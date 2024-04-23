@@ -30,8 +30,12 @@ export class TextMessage extends BaseMessage<'text'> implements TextMessageInter
 	 */
 	toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: 'text' }> {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			type: MessageTypeEnum.Text,
 			to: params.to,
 			messaging_product: this.messaging_product,

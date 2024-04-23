@@ -100,8 +100,12 @@ export class ContactMessage extends BaseMessage<'contacts'> implements ContactMe
 
 	toJson(params: {
 		to: string
+		replyToMessageId?: string
 	}): Extract<z.infer<typeof WhatsappCloudApiRequestPayloadSchemaType>, { type: 'contacts' }> {
 		return {
+			...(params.replyToMessageId
+				? { context: { message_id: params.replyToMessageId } }
+				: {}),
 			messaging_product: 'whatsapp',
 			recipient_type: 'individual',
 			to: params.to,

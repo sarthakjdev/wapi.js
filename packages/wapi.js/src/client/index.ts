@@ -55,7 +55,7 @@ export class Client extends EventEmitter implements ClientInterface {
 	 * @type {number}
 	 * @memberof Client
 	 */
-	readyAtTimeStamp: number | null = null
+	readyAttimeStamp: string | null = null
 
 	/**
 	 * requester is an internal utility to communicate with Whatsapp cloud api
