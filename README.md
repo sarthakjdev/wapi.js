@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://www.wapijs.co/logo.png" alt="wapi.js">
+  <img src="https://www.wapijs.co/logo.png" alt="wapi.js"  height="440" width="792">
 </p>
 
 <p align="center">
