@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://media.discordapp.net/attachments/1046394448088674371/1149627540474953749/transparent_dark_mode.png?width=666&height=440" alt="wapi.js">
+  <img src="https://www.wapijs.co/logo.png" alt="wapi.js">
 </p>
 
 <p align="center">
