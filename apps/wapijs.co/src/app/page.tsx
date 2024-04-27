@@ -7,7 +7,7 @@ export default function Home() {
 		<main className="my-auto flex min-h-screen flex-col items-center justify-center gap-12 p-24">
 			<div className="flex flex-col items-center justify-center gap-5">
 				<Balancer>
-					<h1 className="mx-auto flex max-w-5xl flex-col gap-2 text-center text-4xl font-bold leading-relaxed tracking-tight sm:text-5xl md:text-7xl">
+					<h1 className="mx-auto flex max-w-5xl flex-col gap-2 text-center text-4xl font-bold leading-relaxed sm:text-5xl md:text-7xl">
 						Build WhatsApp Chat Bots
 						<span className="block text-primary-500">Easily. Fast</span>
 					</h1>
