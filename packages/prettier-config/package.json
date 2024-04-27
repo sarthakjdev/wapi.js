@@ -1,0 +1,12 @@
+{
+  "name": "@wapijs/prettier-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "config.js"
+  ],
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.12"
+  }
+}

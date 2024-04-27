@@ -1,0 +1,5 @@
+{
+	"extends": "@wapijs/typescript-config/next.base.json",
+	"include": ["./.eslintrc.js", "src", "./prettier.config.js"],
+	"exclude": ["dist", "build", "node_modules"]
+}
