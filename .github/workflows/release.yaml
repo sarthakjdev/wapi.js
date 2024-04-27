@@ -75,10 +75,3 @@ jobs:
           SLACK_TITLE: "🚨🚨🚨 [WAPIJS.CO] MASTER BRANCH BUILD FAILED 🚨🚨🚨"
           SLACK_USERNAME: sarthakjdev
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-
-      - name: publish-packages
-        lint: publish
-        env: 
-           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
-        
