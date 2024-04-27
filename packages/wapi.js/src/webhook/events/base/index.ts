@@ -53,7 +53,6 @@ export abstract class MessageEvent extends BaseEvent implements MessageEventInte
 
 	async reply<T extends BaseMessage<string>>(props: {
 		message: T
-		phoneNumber: string
 	}): Promise<void> {
 		if (!this.context.from) {
 			throw new Error('No context message id found while replying to message!!')
@@ -62,7 +61,7 @@ export abstract class MessageEvent extends BaseEvent implements MessageEventInte
 		// inject the context here this time
 		await this.client.message.reply({
 			message: props.message,
-			phoneNumber: props.phoneNumber,
+			phoneNumber: this.context.from,
 			replyToMessageId: this.messageId
 		})
 	}

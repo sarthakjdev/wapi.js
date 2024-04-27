@@ -6,7 +6,7 @@ import { ClipboardDocumentIcon, ClipboardDocumentCheckIcon } from '@heroicons/re
 const ClipboardCopy: React.FC<{ textToBeCopied: string }> = ({ textToBeCopied }) => {
 	const [isCopied, setIsCopied] = useState(false)
 	return (
-		<div className="border-[1px] flex items-center justify-between gap-2 px-2 py-1 rounded-full border-gray-300">
+		<div className="flex w-fit items-center justify-between gap-2 rounded-full border-[.5px] border-gray-400 px-2 py-1">
 			<p className="h-full flex-1 rounded-md p-1 pl-4 shadow" id="user-profile-link">
 				{textToBeCopied}
 			</p>
