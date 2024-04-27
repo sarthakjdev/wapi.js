@@ -5,6 +5,7 @@ import * as express from 'express'
 import { type Express, json as expressJson, type Request, type Response } from 'express'
 import {
 	InteractionNotificationTypeEnum,
+	MessageStatusEnum,
 	NotificationMessageTypeEnum,
 	SystemNotificationTypeEnum
 } from './type'
@@ -117,7 +118,7 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 						if (statuses) {
 							statuses.forEach(status => {
 								switch (status.status) {
-									case 'delivered': {
+									case MessageStatusEnum.Delivered: {
 										this.client.emit(
 											'MessageDelivered',
 											new MessageDeliveryEvent({
@@ -132,7 +133,7 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 										return
 									}
 
-									case 'sent': {
+									case MessageStatusEnum.Sent: {
 										this.client.emit(
 											'MessageSent',
 											new MessageSentEvent({
@@ -147,7 +148,7 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 										return
 									}
 
-									case 'read': {
+									case MessageStatusEnum.Read: {
 										this.client.emit(
 											'MessageRead',
 											new MessageReadEvent({
@@ -162,7 +163,7 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 										return
 									}
 
-									case 'failed': {
+									case MessageStatusEnum.Failed: {
 										if (status.errors) {
 											if (status.errors.find(err => err.code === 130472)) {
 												this.client.emit(
