@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://www.wapijs.co/logo.png" alt="wapi.js"  height="440" width="792">
+  <img src="https://www.wapijs.co/logo.png" alt="wapi.js"  height="300" width="540">
 </p>
 
 <p align="center">
@@ -46,19 +46,50 @@ pnpm install wapi.js
 
 Kickstart your first WhatsApp application with Wapi.js. Check the [User Manual](./USER_MANUAL.md).
 
-## 🔗 Cloud API References
+## 🔗 References
 
 - **Message Structures**: Refer to the WhatsApp Docs [here](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages).
 
-<p align="center">
-  <img src="https://media.discordapp.net/attachments/1034852580091777034/1042099563063947304/image.png?width=720&height=473" alt="cloud API message structure">
-</p>
-
 - **Notification Payloads**: Details can be found [here](https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components).
 
-<p align="center">
-  <img src="https://media.discordapp.net/attachments/1034852580091777034/1046371179163828264/notification_payload.png?width=720&height=434" alt="cloud-api notification structure">
-</p>
+## 🔗 Other Links
+
+- [Website](https://wapijs.co)
+- [Documentation](https://wapijs.co/docs)
+
+## Example Usage
+
+```typescript
+import { Client, TextMessage } from 'wapi.js'
+
+	const whatsappClient = new Client({
+		apiAccessToken: process.env.WHATSAPP_API_ACCESS_TOKEN,
+		businessAccountId: process.env.WHATSAPP_BUSINESS_ACCOUNT_ID,
+		phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID,
+		port: 8080,
+		webhookEndpoint: '/webhook',
+		webhookSecret: process.env.WHATSAPP_WEBHOOK_SECRET
+	})
+
+	await whatsappClient.message.send({
+		message: new TextMessage({ text: 'hiii, this is wapijs library' }),
+		phoneNumber: 'XXXXXXXXXX'
+	})
+
+	whatsappClient.on('TextMessage', (message) => {
+		console.log(message)
+	})
+
+	whatsappClient.on('TextMessage', async (message) => {
+		message.reply({
+			message: new TextMessage({ text: 'hiii, this is wapijs library' }),,
+		})
+	})
+
+	whatsappClient.initiate()
+
+
+```
 
 ## 🧰 Scripts
 
@@ -69,10 +100,6 @@ pnpm run clean-install  # Clean install modules
 pnpm run lint           # Check eslint errors
 pnpm run lint:fix       # Fix eslint errors
 ```
-
-## 🌐 Future Roadmap
-
-This library is in early development. Please report bugs or issues [here](#). You're also welcome to contribute; see our [Contribution Guidelines](#contribution-guidelines).
 
 ## 🤝 Contribution Guidelines
 
