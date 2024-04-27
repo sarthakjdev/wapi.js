@@ -48,5 +48,5 @@ jobs:
           SLACK_ICON: https://github.com/rtCamp.png?size=48
           SLACK_MESSAGE: "production deployment failed, check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
           SLACK_TITLE: "🚨🚨🚨 [WAPIJS.CO] MASTER BRANCH DEPLOYMENT FAILED 🚨🚨🚨"
-          SLACK_USERNAME: rtCamp
+          SLACK_USERNAME: sarthakjdev
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

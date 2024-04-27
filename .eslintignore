@@ -5,3 +5,5 @@ dist/cjs/**
 dist/esm/**
 errors.log
 .eslintrc.js
+packages
+apps

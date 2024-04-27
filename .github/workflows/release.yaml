@@ -4,7 +4,7 @@ on:
   release:
 
 jobs:
-  lint:
+  npm-publish:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -23,6 +23,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Lint
+        id: lint
         run: pnpm run lint
 
       - name: Linter Failed
@@ -46,39 +47,38 @@ jobs:
               } else {
                   throw new Error('Pull request data not found')
               }
-  build:
-    runs-on: ubuntu-latest
-    needs: [lint]
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Linter Failure Alert
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: "Linter failed while releasing new version of wapi.js. Check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          SLACK_TITLE: "🚨🚨🚨 [WAPIJS.CO] MASTER BRANCH RELEASE FAILED 🚨🚨🚨"
+          SLACK_USERNAME: sarthakjdev
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: Build the packages
+        if: ${{ success() && !failure()}}
         run: pnpm build
 
-      - name: Build Failed
+      - name: Build Failure Alert
         if: ${{ failure() }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { data: pullRequestData } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  commit_sha: context.payload.after
-              })
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: "Build failed while releasing new version of wapi.js. Check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          SLACK_TITLE: "🚨🚨🚨 [WAPIJS.CO] MASTER BRANCH BUILD FAILED 🚨🚨🚨"
+          SLACK_USERNAME: sarthakjdev
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-            if(pullRequestData[0]){
-               await github.rest.issues.createComment({
-                    issue_number: pullRequestData[0].number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: `#### ❌ Build failed:
-            `
-                })
-            } else {
-              throw new Error('Pull request data not found')
-            }
+
+      - name: publish-packages
+        lint: publish
+        env: 
+           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
+        

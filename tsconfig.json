@@ -1,3 +1,5 @@
 {
-  "extends": "./tsconfig.base.json"
+  "extends": "@wapijs/typescript-config/node.base.json",
+  "include": ["."],
+  "exclude": ["packages", "apps", "node_modules", "dist", "build"]
 }

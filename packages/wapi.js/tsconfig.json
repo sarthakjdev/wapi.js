@@ -1,5 +1,5 @@
 {
-	"extends": "../../tsconfig.base.json",
+	"extends": "@wapijs/typescript-config/node.base.json",
 	"include": ["src/", "*.ts"],
 	"compilerOptions": {
 		"module": "ESNext",

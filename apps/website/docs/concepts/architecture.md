@@ -1,1 +1,0 @@
-### Architecture of Wapi.js:

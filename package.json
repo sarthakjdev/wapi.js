@@ -55,7 +55,10 @@
     "tsup": "^7.2.0",
     "turbo": "^1.10.13",
     "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "@wapijs/eslint-config": "workspace:*",
+    "@wapijs/prettier-config": "workspace:*",
+    "@wapijs/typescript-config": "workspace:*"
   },
   "packageManager": "pnpm@8.7.0"
 }

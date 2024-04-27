@@ -29,7 +29,6 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 - Zod based Schema parsing Capabilities
 - Message Sending Capabilities
 - Event Listener for Notifications
-- Responding to notifications
 
 ## 💻 Installation
 

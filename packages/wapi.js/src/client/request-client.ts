@@ -4,6 +4,7 @@ import { type RequestClientInterface, type RequestClientConfigOptions } from './
 /**
  * Request client use to communicate with whatsapp cloud api using http request
  * @class
+ * @implements {RequestClientInterface}
  */
 export class RequestClient implements RequestClientInterface {
 	host: string
@@ -36,7 +37,7 @@ export class RequestClient implements RequestClientInterface {
 		method = 'POST'
 	}: {
 		path: string
-		body?: any
+		body?: string
 		method?: 'GET' | 'POST' | 'DELETE'
 	}) {
 		try {

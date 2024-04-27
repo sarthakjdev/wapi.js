@@ -7,7 +7,6 @@ import { type Client } from './index'
 import { type RequestClient } from './request-client'
 
 /**
- * Main client interface
  * @interface
  */
 export interface ClientInterface {

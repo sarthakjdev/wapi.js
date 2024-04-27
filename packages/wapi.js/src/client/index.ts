@@ -9,42 +9,42 @@ import { MessageManager } from '../manager/message'
 import { type WapiEventDataMap } from '../webhook/type'
 
 /**
- * wapi client
+ * The
  * @implements {ClientInterface}
  * @extends {EventEmitter}
  * @class
  */
 export class Client extends EventEmitter implements ClientInterface {
 	/**
-	 * phone number manager to verify phone numbers for your
+	 * Phone number manager to verify phone numbers for your
 	 * @type {PhoneNumberManager}
 	 * @memberof Client
 	 */
 	phone: PhoneNumberManager
 
 	/**
-	 * 	media manager to upload, get and media via whatsapp cloud api
+	 * 	Media manager to upload, get and media via whatsapp cloud api
 	 * 	@type {MediaManager}
 	 * 	@memberof Client
 	 */
 	media: MediaManager
 
 	/**
-	 * webhook manager to handle the incoming message and event listening
+	 * Webhook manager to handle the incoming message and event listening
 	 * 	@type {Webhook}
 	 * 	@memberof Client
 	 */
 	webhook: Webhook
 
 	/**
-	 * message manager allows to send various type of messages and reply to incoming messages
+	 * Message manager to manage the outgoing messaging operations.
 	 * 	@type {MessageManager}
 	 * 	@memberof Client
 	 */
 	message: MessageManager
 
 	/**
-	 * status of the client
+	 * Status of the client
 	 * @type {ClientStatusEnum}
 	 * @memberof Client
 	 */
@@ -54,27 +54,36 @@ export class Client extends EventEmitter implements ClientInterface {
 	 * Unix Timestamp at which client gets into {@link ClientStatusEnum.Ready} state
 	 * @type {number}
 	 * @memberof Client
+	 * @readonly
 	 */
 	readyAtTimeStamp: number | null = null
 
 	/**
-	 * requester is an internal utility to communicate with Whatsapp cloud api
+	 * Requester is an internal utility to communicate with Whatsapp cloud api
 	 * @type {RequestClient}
 	 * 	@memberof Client
 	 */
 	requester: RequestClient
 
 	/**
+	 * The base url of the whatsapp cloud api
 	 * @ignore
 	 * @private
+	 * @static
+	 * @readonly
+	 * @type {string}
 	 */
-	private static baseUrl = 'graph.facebook.com'
+	private static readonly baseUrl = 'graph.facebook.com'
 
 	/**
+	 * The API version of whatsapp cloud api to use
 	 * @ignore
 	 * @private
+	 * @static
+	 * @readonly
+	 * @type {string}
 	 */
-	private static apiVersion = 'v19.0'
+	private static readonly apiVersion = 'v19.0'
 
 	/**
 	 * @param {object} params
