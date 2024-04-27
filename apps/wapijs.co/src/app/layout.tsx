@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={clsx(roboto.className, 'bg-[#121212]')}>{children}</body>
+			<body className={clsx(roboto.className, 'bg-[#121212] min-h-screen')}>{children}</body>
 		</html>
 	)
 }

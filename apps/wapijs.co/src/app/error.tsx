@@ -7,7 +7,7 @@ import { ArrowPathIcon, ChatBubbleBottomCenterIcon } from '@heroicons/react/24/s
 export default function Error({ reset, error }: { error: Error; reset: () => void }) {
 	console.log({ error: error })
 	return (
-		<div className="flex h-[70vh] flex-col items-center justify-center gap-4">
+		<div className="flex h-[70vh] min-h-screen flex-col items-center justify-center gap-4">
 			<h2 className="mx-auto text-center text-xl text-gray-900">
 				Oops! Something went wrong{' '}
 			</h2>

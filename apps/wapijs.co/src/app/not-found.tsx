@@ -7,10 +7,10 @@ export const metadata: Metadata = { robots: 'noindex, nofollow' }
 
 export default function NotFoundPage() {
 	return (
-		<main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-			<div className="text-center">
+		<section className="flex min-h-screen flex-col items-center justify-center">
+			<div className="my-auto  grid place-items-center px-6 py-24 text-center text-white sm:py-32 lg:px-8">
 				<p className="text-base font-semibold text-primary-500">404</p>
-				<h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+				<h1 className="mt-4 text-3xl font-bold tracking-tight  sm:text-5xl">
 					Page not found
 				</h1>
 				<p className="mt-6 text-base leading-7 text-gray-600">
@@ -22,7 +22,7 @@ export default function NotFoundPage() {
 					</Link>
 
 					<Link href={'/'} title="contact-support">
-						<Button variant={'outline'}>
+						<Button intent={'secondary'}>
 							{' '}
 							<ChatBubbleBottomCenterIcon className="h-6 w-6 text-white" /> Contact
 							Support
@@ -30,6 +30,6 @@ export default function NotFoundPage() {
 					</Link>
 				</div>
 			</div>
-		</main>
+		</section>
 	)
 }
