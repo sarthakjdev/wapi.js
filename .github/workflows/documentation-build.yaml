@@ -26,6 +26,7 @@ concurrency:
 
 jobs:
   build:
+    environment: Production
     name: Build & upload documentation
     runs-on: ubuntu-latest
     steps:
