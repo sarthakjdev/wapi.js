@@ -1,5 +1,5 @@
 {
-	"name": "wapi.js",
+	"name": "@wapijs/wapi.js",
 	"version": "0.0.1",
 	"description": "a typescript based client library to build whatsapp cloud api based chat bots",
 	"main": "dist/cjs/index.js",
@@ -39,11 +39,9 @@
 	"devDependencies": {
 		"@types/express": "^4.17.18",
 		"concurrently": "^8.2.1",
-		"eslint": "^8.48.0",
-		"eslint-config-next": "^13.4.19",
-		"eslint-config-prettier": "^9.0.0",
-		"eslint-import-resolver-typescript": "^3.6.0",
-		"eslint-plugin-import": "^2.28.1",
+		"@wapijs/eslint-config": "workspace:*",
+		"@wapijs/prettier-config": "workspace:*",
+		"@wapijs/typescript-config": "workspace:*",
 		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.3",
 		"ts-enum-utils": "^1.0.3",

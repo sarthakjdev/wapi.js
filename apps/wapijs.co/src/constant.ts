@@ -1,1 +1,1 @@
-export const metaDescription = ""
+export const metaDescription = ''

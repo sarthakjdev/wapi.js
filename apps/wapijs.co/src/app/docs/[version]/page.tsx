@@ -1,5 +1,5 @@
 const VersionHomePage = () => {
-  return <section></section>;
-};
+	return <section></section>
+}
 
-export default VersionHomePage;
+export default VersionHomePage

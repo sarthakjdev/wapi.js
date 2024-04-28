@@ -2,8 +2,6 @@
 const config = require('@wapijs/tailwind-config/tailwind.config')
 const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette')
 
-console.log({ config })
-
 module.exports = {
 	...config,
 	content: [

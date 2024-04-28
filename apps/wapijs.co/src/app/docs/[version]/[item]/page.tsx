@@ -1,5 +1,5 @@
 const LibraryItem = () => {
-  return <section></section>;
-};
+	return <section></section>
+}
 
-export default LibraryItem;
+export default LibraryItem
