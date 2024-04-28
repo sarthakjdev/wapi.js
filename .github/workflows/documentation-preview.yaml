@@ -33,7 +33,7 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-        working-directory: apps/website
+        working-directory: apps/wapijs.co
 
       - name: Trigger Staging Deployment
         run: vercel deploy -y --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
