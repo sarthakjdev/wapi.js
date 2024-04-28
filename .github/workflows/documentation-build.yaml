@@ -5,7 +5,7 @@ on:
       - "master"
       - "feat/documentation"
     paths:
-      - "packages/wapi.js/src/**"
+      - "packages/wapi.js/**"
     tags:
       - "**"
   workflow_dispatch:
