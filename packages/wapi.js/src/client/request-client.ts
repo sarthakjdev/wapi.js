@@ -54,6 +54,8 @@ export class RequestClient implements RequestClientInterface {
 			})
 
 			const responseBody = await response.json()
+
+			// !TODO: fix types here
 			return responseBody
 		} catch (error) {
 			console.log({ error })

@@ -32,6 +32,10 @@ import {
 } from './structures/contact/schema'
 
 // ==== BASE MESSAGE PAYLOAD ====
+
+/**
+ * @ignore
+ */
 export const BaseMessageApiPayloadSchema = z.object({
 	context: z
 		.object({
@@ -376,23 +380,3 @@ export const WhatsappCloudApiRequestPayloadSchemaType = ImageMessageApiPayloadSc
 	.or(InteractiveMessageApiPayloadSchemaType)
 	.or(LocationMessageApiPayloadSchemaType)
 	.or(ContactMessageApiPayloadSchemaType)
-
-export type GeneralRequestBody = Record<string, any>
-
-export type GeneralMessageBody = GeneralRequestBody & {
-	messaging_product: 'whatsapp'
-}
-
-export type ApiRequestResponseSchemaType = GeneralMessageBody & {
-	contacts: [
-		{
-			input: string
-			wa_id: string
-		}
-	]
-	messages: [
-		{
-			id: string
-		}
-	]
-}

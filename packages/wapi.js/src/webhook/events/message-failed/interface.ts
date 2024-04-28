@@ -1,7 +1,7 @@
 import { type StatusUpdateEventInterface } from '../base/interface'
 
 /**
- * @interface
+ * @interface MessageFailedEventInterface
  * @extends {StatusUpdateEventInterface}
  */
 export interface MessageFailedEventInterface extends StatusUpdateEventInterface {

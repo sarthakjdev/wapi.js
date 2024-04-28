@@ -17,7 +17,9 @@ const ClipboardCopy: React.FC<{ textToBeCopied: string }> = ({ textToBeCopied })
 					const text = document.getElementById('user-profile-link')?.innerText
 
 					if (text) {
-						window.navigator.clipboard.writeText(text)
+						window.navigator.clipboard
+							.writeText(text)
+							.catch(error => console.error(error))
 						setIsCopied(() => true)
 					}
 				}}

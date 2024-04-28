@@ -2,6 +2,11 @@ import { type Client } from '../../../client'
 import { StatusUpdateEvent } from '../base/index'
 import { type MessageDeliveryEventInterface } from './interface'
 
+/**
+ * @class MessageDeliveryEvent
+ * @extends {StatusUpdateEvent}
+ * @implements {MessageDeliveryEventInterface}
+ */
 export class MessageDeliveryEvent
 	extends StatusUpdateEvent
 	implements MessageDeliveryEventInterface

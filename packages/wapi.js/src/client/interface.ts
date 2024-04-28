@@ -7,7 +7,7 @@ import { type Client } from './index'
 import { type RequestClient } from './request-client'
 
 /**
- * @interface
+ * @interface ClientInterface
  */
 export interface ClientInterface {
 	phone: PhoneNumberManager

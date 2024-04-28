@@ -54,7 +54,7 @@
     "prettier": "^3.0.3",
     "tsup": "^7.2.0",
     "turbo": "^1.10.13",
-    "typescript": "^5.2.2",
+    "typescript": "5.0.4",
     "vitest": "^0.34.6",
     "@wapijs/eslint-config": "workspace:*",
     "@wapijs/prettier-config": "workspace:*",

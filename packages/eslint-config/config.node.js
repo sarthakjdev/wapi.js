@@ -44,13 +44,8 @@ module.exports = {
       "parent",
       "top",
     ],
-
-    "react/no-unescaped-entities": "off",
-    "react-hooks/exhaustive-deps": "error",
-
     "no-empty-pattern": "off",
     "no-debugger": "error",
-
     "@typescript-eslint/naming-convention": [
       "warn",
       {

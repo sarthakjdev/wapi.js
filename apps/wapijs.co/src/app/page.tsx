@@ -1,4 +1,3 @@
-import { Balancer } from 'react-wrap-balancer'
 import { Button, ClipboardCopy } from '@wapijs/ui'
 import Link from 'next/link'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'

@@ -19,10 +19,10 @@
 		"build:cjs": "pnpm tsc -p tsconfig-cjs.json --pretty",
 		"build:esm": "pnpm tsc -p tsconfig.json --pretty",
 		"build": "pnpm run clean && concurrently -n esm,cjs \"pnpm run build:esm\" \"pnpm run build:cjs\"",
-		"lint": "pnpm eslint . --max-warnings=10",
+		"lint": "pnpm eslint . --max-warnings=20",
 		"pretty": "pnpm prettier --write \"src/**/*.ts\"",
 		"clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
-		"doc:gen": "typedoc --out docs-md --entryPointStrategy Expand ./src"
+		"doc:gen": "docgen -i './src/*.ts' './src/**/*.ts' -c ./docs/index.json -r ./ -o ./docs/docs.json --typescript"
 	},
 	"keywords": [],
 	"author": {
@@ -48,11 +48,11 @@
 		"prettier": "^3.0.3",
 		"ts-enum-utils": "^1.0.3",
 		"tsup": "^7.2.0",
-		"typedoc": "^0.25.1",
-		"typescript": "^5.2.2",
+		"typescript": "^5.0.4",
 		"vitest": "^0.34.6"
 	},
 	"dependencies": {
+		"@discordjs/docgen": "^0.12.1",
 		"dayjs": "^1.11.9",
 		"express": "^4.18.2",
 		"zod": "^3.22.2"

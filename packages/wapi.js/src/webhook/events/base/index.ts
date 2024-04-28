@@ -51,9 +51,7 @@ export abstract class MessageEvent extends BaseEvent implements MessageEventInte
 		this.isForwarded = params.isForwarded
 	}
 
-	async reply<T extends BaseMessage<string>>(props: {
-		message: T
-	}): Promise<void> {
+	async reply<T extends BaseMessage<string>>(props: { message: T }): Promise<void> {
 		if (!this.context.from) {
 			throw new Error('No context message id found while replying to message!!')
 		}

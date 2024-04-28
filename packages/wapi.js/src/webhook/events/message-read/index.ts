@@ -2,6 +2,11 @@ import { type Client } from '../../../client'
 import { StatusUpdateEvent } from '../base/index'
 import { type MessageReadEventInterface } from './interface'
 
+/**
+ * @class MessageReadEvent
+ * @extends {StatusUpdateEvent}
+ * @implements {MessageReadEventInterface}
+ */
 export class MessageReadEvent extends StatusUpdateEvent implements MessageReadEventInterface {
 	constructor(params: {
 		client: Client
