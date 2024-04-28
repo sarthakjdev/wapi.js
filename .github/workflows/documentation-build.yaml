@@ -76,8 +76,16 @@ jobs:
       - name: Move docs to correct directory
         if: ${{ github.ref_type == 'branch' }}
         run: |
-          mkdir -p "out/wapi.js"
-          mv "packages/wapi.js/docs/docs.json" "out/wapi.js/${GITHUB_REF_NAME}.json"
+          input_string="$GITHUB_REF_NAME"
+          if [[ "$input_string" == *"/"* ]]; then
+              documentation_file_name=$(echo "$input_string" | cut -d'/' -f2)
+              echo "Extracted: $documentation_file_name"
+          else
+              documentation_file_name="$GITHUB_REF_NAME"
+              echo "No slash in the string, nothing to extract."
+          fi
+          mkdir -p "out/wapi.js" 
+          mv "packages/wapi.js/docs/docs.json" "out/wapi.js/${documentation_file_name}.json"
 
       - name: Commit and push
         run: |
