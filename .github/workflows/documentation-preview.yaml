@@ -37,6 +37,7 @@ jobs:
 
       - name: Trigger Staging Deployment
         run: vercel deploy -y --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
+        working-directory: apps/wapijs.co
 
       - name: Deployment Success
         if: ${{ success() }}

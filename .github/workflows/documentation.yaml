@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - "master"
-    paths: ["apps/website/**"]
+    paths: ["apps/wapijs.co/**"]
 
 jobs:
   docs:
@@ -30,14 +30,15 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-        working-directory: apps/website
+        working-directory: apps/wapijs.co
 
       - name: Build
         run: pnpm run build
-        working-directory: apps/website
+        working-directory: apps/wapijs.co
 
       - name: Trigger Production Deployment
         run: vercel deploy -y --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
+        working-directory: apps/wapijs.co
 
       - name: Deployment Failure Alert
         if: ${{ failure() }}
