@@ -1,0 +1,89 @@
+name: Preview Deploy Documentation
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches-ignore:
+      - "master"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs:
+    environment: Preview
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: User Node.js LTS
+        uses: actions/setup-node@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Install Vercel CLI
+        run: pnpm -g add vercel@canary
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: apps/wapijs.co
+
+      - name: Trigger Staging Deployment
+        run: vercel deploy -y --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
+
+      - name: Deployment Success
+        if: ${{ success() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require("fs")
+            const path = require("path")
+            const {  data: pullRequestData  } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  commit_sha: context.payload.after
+              })
+
+            const deploymentUrl = fs.readFileSync(path.resolve(path.resolve(), './deployment-url.txt'), 'utf8')
+
+            if(pullRequestData[0]){
+               await github.rest.issues.createComment({
+                    issue_number: pullRequestData[0].number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: `#### 🟢  Deployment success:
+            Deployed Url: ${deploymentUrl}`
+                })
+            } else {
+            throw new Error('Pull request data not found')
+            }
+
+      - name: Deployment Failure
+        if: ${{ failure() }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const { data: pullRequestData } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  commit_sha: context.payload.after
+              })
+
+            if(pullRequestData[0]){
+               await github.rest.issues.createComment({
+                    issue_number: pullRequestData[0].number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: `#### ❌ Deployment failed:
+            `
+                })
+            } else {
+              throw new Error('Pull request data not found')
+            }
