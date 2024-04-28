@@ -38,7 +38,6 @@ jobs:
 
       - name: Trigger Production Deployment
         run: vercel deploy -y --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
-        working-directory: apps/wapijs.co
 
       - name: Deployment Failure Alert
         if: ${{ failure() }}
