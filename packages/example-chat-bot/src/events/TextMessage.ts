@@ -1,4 +1,4 @@
-import { type TextMessageEvent } from '@wapijs/wapi.js/dist/cjs/src/webhook/events/text'
+import { type TextMessageEvent } from '@wapijs/wapi.js'
 
 export default function (message: TextMessageEvent) {
 	console.log(message)
