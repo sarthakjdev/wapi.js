@@ -13,7 +13,8 @@
     "lint": "turbo run lint --concurrency=3",
     "prepare": "husky install",
     "pretty": "turbo pretty --concurrency=3",
-    "clean-install": "turbo run clean-install"
+    "clean-install": "turbo run clean-install",
+    "doc:gen": "turbo run doc:gen"
   },
   "keywords": [
     "whatsapp-cloud-api",
