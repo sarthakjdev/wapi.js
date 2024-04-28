@@ -22,7 +22,7 @@
 		"lint": "pnpm eslint . --max-warnings=20",
 		"pretty": "pnpm prettier --write \"src/**/*.ts\"",
 		"clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
-		"doc:gen": "docgen -i './src/*.ts' './src/**/*.ts' -c ./docs/index.json -r ./ -o ./docs/docs.json --typescript"
+		"doc:gen": "docgen -i '*.ts' -c ./docs/index.json -r ./ -o ./docs/docs.json --typescript"
 	},
 	"keywords": [],
 	"author": {
