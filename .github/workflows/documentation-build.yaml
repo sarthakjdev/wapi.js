@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - "master"
-      - "feat/documentation"
     paths:
       - "packages/wapi.js/**"
     tags:
