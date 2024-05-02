@@ -26,14 +26,7 @@ export function DisclosureSection({
 }: PropsWithChildren<SectionOptions>) {
 	return (
 		<div className={`flex flex-col ${className}`}>
-			<Disclosure
-				as={'div'}
-				className={
-					buttonClassName
-						? buttonClassName
-						: 'hover:bg-light-800 active:bg-light-900 dark:bg-dark-400 dark:hover:bg-dark-300 dark:active:bg-dark-200 focus:ring-width-2 focus:ring-blurple rounded bg-white p-3 outline-none focus:ring'
-				}
-			>
+			<Disclosure as={'div'} className={buttonClassName ? buttonClassName : 'text-white'}>
 				{({ open }) => {
 					return (
 						<>

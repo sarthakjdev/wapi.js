@@ -7,8 +7,7 @@ import { VscSymbolInterface } from '@react-icons/all-files/vsc/VscSymbolInterfac
 import { VscSymbolMethod } from '@react-icons/all-files/vsc/VscSymbolMethod'
 import { VscSymbolVariable } from '@react-icons/all-files/vsc/VscSymbolVariable'
 import { useSelectedLayoutSegment } from 'next/navigation'
-import { useMemo } from 'react'
-import { useNav } from '~/contexts/nav'
+import { useMemo, useState } from 'react'
 import { ItemLink } from '~/components/item-link'
 import { DisclosureSection } from '@wapijs/ui'
 
@@ -82,7 +81,8 @@ function resolveIcon(item: string) {
 
 export function Sidebar({ members }: { readonly members: SidebarSectionItemData[] }) {
 	const segment = useSelectedLayoutSegment()
-	const { setOpened } = useNav()
+
+	const [isOpen, setIsOpen] = useState(true)
 
 	const groupItems = useMemo(() => groupMembers(members), [members])
 
@@ -106,7 +106,7 @@ export function Sidebar({ members }: { readonly members: SidebarSectionItemData[
 								}`}
 								itemURI={member.href}
 								key={`${member.name}-${index}`}
-								onClick={() => setOpened(false)}
+								onClick={() => setIsOpen(false)}
 								title={member.name}
 							>
 								<div className="flex flex-row place-items-center gap-2 lg:text-sm">

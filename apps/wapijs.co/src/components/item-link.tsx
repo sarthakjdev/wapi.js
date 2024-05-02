@@ -9,7 +9,7 @@ import { useDocPathMeta } from '~/hooks/use-docs-path-meta'
 export interface ItemLinkProps<T extends string> extends Omit<LinkProps<T>, 'href'> {
 	className?: string
 	itemURI: string
-	packageName?: string | undefined
+	title?: string
 }
 
 export function ItemLink<T extends string>(props: PropsWithChildren<ItemLinkProps<T>>) {
@@ -22,7 +22,7 @@ export function ItemLink<T extends string>(props: PropsWithChildren<ItemLinkProp
 		)
 	}
 
-	const { itemURI, packageName: pkgName, ...linkProps } = props
+	const { itemURI, ...linkProps } = props
 
 	return <Link {...linkProps} href={`/docs/${version}/${itemURI}`} />
 }
