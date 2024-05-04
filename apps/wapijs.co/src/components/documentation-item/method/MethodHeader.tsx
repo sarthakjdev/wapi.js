@@ -2,7 +2,7 @@ import type { ApiMethod, ApiMethodSignature } from '@microsoft/api-extractor-mod
 import { useMemo } from 'react'
 import { CodeHeading } from '~/components/code-heading'
 import { ExcerptText } from '~/components/excerpt-text'
-import { parametersString } from '~/reusable-function'
+import { parametersString } from '~/utils/api-extractor'
 // import { Badges } from '~/components/Badges';
 
 export function MethodHeader({ method }: { readonly method: ApiMethod | ApiMethodSignature }) {
@@ -16,9 +16,9 @@ export function MethodHeader({ method }: { readonly method: ApiMethod | ApiMetho
 
 	return (
 		<div className="scroll-mt-30 flex flex-col" id={key}>
-			<div className="flex flex-col gap-2 md:-ml-9">
+			<div className="flex flex-col gap-2">
 				{/* <Badges item={method} /> */}
-				<CodeHeading href={`#${key}`}>
+				<CodeHeading href={`#${key}`} >
 					{`${method.name}(${parametersString(method)})`}
 					<span>:</span>
 					<ExcerptText

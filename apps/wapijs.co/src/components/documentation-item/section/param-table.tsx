@@ -1,9 +1,10 @@
 import type { ApiDocumentedItem, ApiParameterListMixin } from '@microsoft/api-extractor-model'
 import { useMemo } from 'react'
-import { resolveParameters } from '~/reusable-function'
+
 import { ExcerptText } from '~/components/excerpt-text'
 import { Table } from '@wapijs/ui'
 import { TSDoc } from '~/components/tsdoc/TSDoc'
+import { resolveParameters } from '~/utils/api-extractor'
 
 const columnStyles = {
 	Name: 'font-mono whitespace-nowrap',
@@ -36,6 +37,8 @@ export function ParameterTable({
 			})),
 		[item, params]
 	)
+
+	console.log({ rows })
 
 	return (
 		<div className="overflow-x-auto">

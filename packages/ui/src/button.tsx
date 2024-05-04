@@ -60,8 +60,8 @@ const buttonClassVariants = cva(
 				intent: 'primary',
 				variant: 'outline',
 				className:
-					// 'bg-transparent hover:bg-primary-50 border-primary-500 text-primary-500 hover:text-primary-700 dark:text-accent-500 dark:border-accent-600 dark:hover:bg-accent-900 dark:hover:text-accent-400'
-					'bg-transparent hover:bg-primary-50 border-primary-500 text-primary-500 hover:text-primary-700'
+					// 'bg-transparent hover:bg-primary-50 border-primary-500 text-primary-500 hover:text-primary-500-700 dark:text-accent-500 dark:border-accent-600 dark:hover:bg-accent-900 dark:hover:text-accent-400'
+					'bg-transparent hover:bg-primary-50 border-primary-500 text-primary-500 hover:text-primary-500-700'
 			},
 			{
 				intent: 'secondary',
@@ -87,8 +87,8 @@ const buttonClassVariants = cva(
 				intent: 'primary',
 				variant: 'text',
 				className:
-					// 'bg-transparent text-primary-500 hover:text-primary-700 dark:text-accent-500 dark:hover:text-accent-400'
-					'bg-transparent text-primary-500 hover:text-primary-700'
+					// 'bg-transparent text-primary-500 hover:text-primary-500-700 dark:text-accent-500 dark:hover:text-accent-400'
+					'bg-transparent text-primary-500 hover:text-primary-500-700'
 			},
 			{
 				intent: 'secondary',

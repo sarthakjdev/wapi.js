@@ -5,17 +5,12 @@ import { DocumentationSection } from './documentation-section'
 
 export function SummarySection({ item }: { readonly item: ApiDeclaredItem }) {
 	return (
-		<DocumentationSection
-			icon={<VscListSelection size={20} />}
-			padded
-			separator
-			title="Summary"
-		>
+		<div title="Summary" className='text-neutral-400'>
 			{item.tsdocComment?.summarySection ? (
 				<TSDoc item={item} tsdoc={item.tsdocComment} />
 			) : (
 				<p>No summary provided.</p>
 			)}
-		</DocumentationSection>
+		</div>
 	)
 }

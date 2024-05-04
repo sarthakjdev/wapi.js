@@ -23,8 +23,7 @@ import { TypeAlias } from '~/components/documentation-item/type-alias'
 import { Enum } from '~/components/documentation-item/enum'
 import { Function } from '~/components/documentation-item/function'
 import { OVERLOAD_SEPARATOR } from '~/constant'
-import { getMember } from '~/reusable-function'
-import { fetchDocumentationJsonDataFromSlug } from '../function'
+import { getMember } from '~/utils/api-extractor'
 
 function resolveMemberSearchParams(packageName: string, member?: ApiItem) {
 	const params = new URLSearchParams({
@@ -62,28 +61,6 @@ function resolveMemberSearchParams(packageName: string, member?: ApiItem) {
 
 	return params
 }
-
-export async function generateMetadata({ params }: { params: { version: string; item: string } }) {
-	const member = getMember({
-		branchOrVersion: params.version,
-		item: params.item
-	})
-
-	return {}
-}
-
-// export async function generateStaticParams({
-// 	params
-// }: {
-// 	params: { version: string; item: string }
-// }) {
-// 	const documentationData = await fetchDocumentationJsonDataFromSlug(params.version)
-// 	if (!documentationData) {
-// 		notFound()
-// 	}
-
-// 	const member = getMemberFromDocumentationJson(params.item, documentationData)
-// }
 
 function Member({ member }: { readonly member?: ApiItem }) {
 	switch (member?.kind) {

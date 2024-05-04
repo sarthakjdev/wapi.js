@@ -1,62 +1,27 @@
 import type { ApiModel, Excerpt } from '@microsoft/api-extractor-model'
 import { ExcerptTokenKind } from '@microsoft/api-extractor-model'
+import Link from 'next/link'
 import { ItemLink } from '~/components/item-link'
 import { resolveItemURI } from '~/reusable-function'
 
 export interface ExcerptTextProps {
-	/**
-	 * The tokens to render.
-	 */
 	readonly excerpt: Excerpt
-	/**
-	 * The model to resolve item references from.
-	 */
 	readonly model: ApiModel
 }
 
-/**
- * A component that renders excerpt tokens from an api item.
- */
 export function ExcerptText({ model, excerpt }: ExcerptTextProps) {
+	console.log({ excerpt })
 	return (
 		<span>
 			{excerpt.spannedTokens.map((token, idx) => {
+				console.log({ token })
 				if (token.kind === ExcerptTokenKind.Reference) {
-					const source = token.canonicalReference?.source
-					const symbol = token.canonicalReference?.symbol
-					if (
-						source &&
-						'packageName' in source &&
-						source.packageName === 'discord-api-types' &&
-						symbol
-					) {
-						const { meaning, componentPath: path } = symbol
-						let href = ''
-
-						// dapi-types doesn't have routes for class members
-						// so we can assume this member is for an enum
-						if (meaning === 'member' && path && 'parent' in path)
-							href += `/enum/${path.parent}#${path.component}`
-						else if (meaning === 'type') href += `#${token.text}`
-						else href += `/${meaning}/${token.text}`
-
-						return (
-							<a
-								className="text-blurple"
-								href={href}
-								key={idx}
-								rel="external noreferrer noopener"
-								target="_blank"
-							>
-								{token.text}
-							</a>
-						)
-					}
-
 					const item = model.resolveDeclarationReference(
 						token.canonicalReference!,
 						model
 					).resolvedApiItem
+
+					console.log({ item })
 
 					if (!item) {
 						return token.text
@@ -64,12 +29,9 @@ export function ExcerptText({ model, excerpt }: ExcerptTextProps) {
 
 					return (
 						<ItemLink
-							className="text-blurple"
+							className="text-primary-500"
 							itemURI={resolveItemURI(item)}
 							key={`${item.displayName}-${item.containerKey}-${idx}`}
-							packageName={item
-								.getAssociatedPackage()
-								?.displayName.replace('@discordjs/', '')}
 						>
 							{token.text}
 						</ItemLink>

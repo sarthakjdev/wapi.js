@@ -1,28 +1,28 @@
-'use client';
+'use client'
 
-import { useMemo, type ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react'
 
 export function Table({
 	rows,
 	columns,
-	columnStyles,
+	columnStyles
 }: {
-	readonly columnStyles?: Record<string, string>;
-	readonly columns: string[];
-	readonly rows: Record<string, ReactNode>[];
+	readonly columnStyles?: Record<string, string>
+	readonly columns: string[]
+	readonly rows: Record<string, ReactNode>[]
 }) {
 	const cols = useMemo(
 		() =>
 			columns.map((column, idx) => (
 				<th
-					className="break-normal border-b border-light-900 px-3 py-2 text-left text-sm dark:border-dark-100"
+					className="border-light-900 dark:border-dark-100 break-normal border-b px-3 py-2 text-left text-sm"
 					key={`${column}-${idx}`}
 				>
 					{column}
 				</th>
 			)),
-		[columns],
-	);
+		[columns]
+	)
 
 	const data = useMemo(
 		() =>
@@ -40,8 +40,8 @@ export function Table({
 					))}
 				</tr>
 			)),
-		[columnStyles, rows],
-	);
+		[columnStyles, rows]
+	)
 
 	return (
 		<table className="w-full border-collapse">
@@ -50,5 +50,5 @@ export function Table({
 			</thead>
 			<tbody>{data}</tbody>
 		</table>
-	);
+	)
 }

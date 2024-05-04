@@ -62,7 +62,7 @@ export function TSDoc({
 
 						return (
 							<ItemLink
-								className="text-blurple focus:ring-width-2 focus:ring-blurple rounded font-mono outline-none focus:ring"
+								className="focus:ring-width-2 rounded font-mono text-primary-500 outline-none focus:ring focus:ring-primary-500"
 								itemURI={resolveItemURI(foundItem)}
 								key={idx}
 							>
@@ -74,7 +74,7 @@ export function TSDoc({
 					if (urlDestination) {
 						return (
 							<Link
-								className="text-blurple focus:ring-width-2 focus:ring-blurple rounded font-mono outline-none focus:ring"
+								className="focus:ring-width-2 rounded font-mono text-primary-500 outline-none focus:ring focus:ring-primary-500"
 								href={urlDestination as Route}
 								key={idx}
 							>
@@ -98,7 +98,6 @@ export function TSDoc({
 				case DocNodeKind.FencedCode: {
 					const { language, code } = tsdoc as DocFencedCode
 					return (
-						// @ts-expect-error async component
 						<SyntaxHighlighter
 							code={code.trim()}
 							key={idx}

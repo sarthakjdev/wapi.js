@@ -3,8 +3,8 @@ import { VscSymbolMethod } from '@react-icons/all-files/vsc/VscSymbolMethod'
 import { CodeHeading } from '~/components/code-heading'
 import { ParameterTable } from '~/components/documentation-item/section/param-table'
 import { TSDoc } from '~/components/tsdoc/TSDoc'
-import { parametersString } from '~/reusable-function'
 import { DocumentationSection } from './DocumentationSection'
+import { parametersString } from '~/utils/api-extractor'
 
 export function ConstructorSection({ item }: { readonly item: ApiConstructor }) {
 	return (

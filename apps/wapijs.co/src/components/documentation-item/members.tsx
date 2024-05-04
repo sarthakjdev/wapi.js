@@ -1,7 +1,7 @@
 import type { ApiDeclaredItem, ApiItemContainerMixin } from '@microsoft/api-extractor-model'
 import { MethodsSection } from './section/MethodsSection'
 import { PropertiesSection } from './section/PropertiesSection'
-import { hasProperties, hasMethods } from '~/reusable-function'
+import { hasMethods, hasProperties } from '~/utils/api-extractor'
 
 export function Members({ item }: { readonly item: ApiDeclaredItem & ApiItemContainerMixin }) {
 	return (

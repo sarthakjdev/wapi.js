@@ -22,7 +22,7 @@ export function Property({
 
 	return (
 		<div className="scroll-mt-30 flex flex-col gap-4" id={item.displayName}>
-			<div className="flex flex-col gap-2 md:-ml-9">
+			<div className="flex flex-col gap-2">
 				{/* <Badges item={item} /> */}
 				<CodeHeading href={`#${item.displayName}`}>
 					{`${item.displayName}${item.isOptional ? '?' : ''}`}

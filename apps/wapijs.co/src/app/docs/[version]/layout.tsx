@@ -1,8 +1,8 @@
 import { Sidebar, SidebarSectionItemData } from '~/components/nav/sidebar'
-import { fetchDocumentationJsonDataFromSlug } from './function'
-import { ApiModel, ApiPackage } from '@microsoft/api-extractor-model'
-import { addPackageToModel, resolveItemURI } from '~/reusable-function'
+import { ApiModel } from '@microsoft/api-extractor-model'
+import { resolveItemURI } from '~/reusable-function'
 import { notFound } from 'next/navigation'
+import { addPackageToModel, fetchDocumentationJsonDataFromSlug } from '~/utils/api-extractor'
 
 export default async function VersionHomeLayout({
 	children
@@ -28,19 +28,16 @@ export default async function VersionHomeLayout({
 				overloadIndex: 0
 			})
 		)
-
 		return allMembers
 	}
 
-	console.log({ pkg: pkg.members[0].members })
-
 	return (
-		<main>
-			<aside className='flex max-w-[20rem] fixed top-0 left-0'>
+		<main className="flex max-w-screen-2xl flex-col gap-4 mx-auto">
+			<aside className="fixed left-0 top-0 flex max-w-[20rem] p-10 pl-0">
 				<Sidebar members={transformMembersIntoSidebarData()} key={'sidebar'} />
 			</aside>
 
-			<section className='pl-[20rem]'>{children}</section>
+			<section className=" p-10 pl-[20rem] ">{children}</section>
 		</main>
 	)
 }

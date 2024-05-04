@@ -17,8 +17,6 @@ export const useDocPathMeta = () => {
 	 */
 	const pathComponentArr = path.split('/')
 
-	console.log({ pathComponentArr })
-
 	return {
 		version: pathComponentArr[2],
 		item: pathComponentArr[3]

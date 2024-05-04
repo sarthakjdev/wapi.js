@@ -5,7 +5,7 @@ import { Button } from '@wapijs/ui'
 import { ArrowPathIcon, ChatBubbleBottomCenterIcon } from '@heroicons/react/24/solid'
 
 export default function Error({ reset, error }: { error: Error; reset: () => void }) {
-	console.log({ error: error })
+	console.log({ error: error, stack: error.stack })
 	return (
 		<div className="flex h-[70vh] min-h-screen flex-col items-center justify-center gap-4">
 			<h2 className="mx-auto text-center text-xl text-gray-900">

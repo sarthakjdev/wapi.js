@@ -1,30 +1,8 @@
 import { ApiItemKind } from '@microsoft/api-extractor-model'
 import { VscFileCode } from '@react-icons/all-files/vsc/VscFileCode'
-import { VscSymbolClass } from '@react-icons/all-files/vsc/VscSymbolClass'
-import { VscSymbolEnum } from '@react-icons/all-files/vsc/VscSymbolEnum'
-import { VscSymbolInterface } from '@react-icons/all-files/vsc/VscSymbolInterface'
-import { VscSymbolMethod } from '@react-icons/all-files/vsc/VscSymbolMethod'
-import { VscSymbolVariable } from '@react-icons/all-files/vsc/VscSymbolVariable'
+import Link from 'next/link'
 import type { PropsWithChildren } from 'react'
-
-function getItemIconByKind(kind: ApiItemKind) {
-	switch (kind) {
-		case ApiItemKind.Class:
-			return <VscSymbolClass />
-		case ApiItemKind.Function:
-		case ApiItemKind.Method:
-			return <VscSymbolMethod />
-		case ApiItemKind.Enum:
-			return <VscSymbolEnum />
-		case ApiItemKind.Interface:
-			return <VscSymbolInterface />
-		case ApiItemKind.TypeAlias:
-		case ApiItemKind.Variable:
-			return <VscSymbolVariable />
-		default:
-			return <VscSymbolMethod />
-	}
-}
+import { getItemIconByKind } from '~/reusable-function'
 
 export function Header({
 	kind,
@@ -37,20 +15,20 @@ export function Header({
 }>) {
 	return (
 		<div className="flex flex-col">
-			<h2 className="flex flex-row place-items-center justify-between gap-2 break-all text-2xl font-bold">
+			<h2 className="flex flex-row place-content-between place-items-center gap-2 break-all text-2xl font-bold">
 				<span className="row flex  place-items-center gap-2">
 					<span>{getItemIconByKind(kind)}</span>
 					{name}
 				</span>
 				{sourceURL ? (
-					<a
-						className="text-blurple"
+					<Link
+						className="text-primary-500"
 						href={sourceURL}
 						rel="external noopener noreferrer"
 						target="_blank"
 					>
 						<VscFileCode />
-					</a>
+					</Link>
 				) : null}
 			</h2>
 		</div>

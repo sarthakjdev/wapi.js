@@ -33,7 +33,7 @@ interface CalloutProps
 	text: string
 }
 
-const Callout: FC<CalloutProps> = ({ type, text, children, className, ...props }) => {
+const Callout: FC<CalloutProps> = ({ type, text, className, ...props }) => {
 	const classes = clsx(calloutClassVariants({ type }), className)
 
 	return (

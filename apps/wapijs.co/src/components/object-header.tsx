@@ -15,8 +15,11 @@ export function ObjectHeader({ item }: ObjectHeaderProps) {
 				name={item.displayName}
 				sourceURL={item.sourceLocation.fileUrl}
 			/>
-			{/* @ts-expect-error async component */}
-			<SyntaxHighlighter code={item.excerpt.text} />
+			<SyntaxHighlighter
+				lang="typescript"
+				code={item.excerpt.text}
+				className="w-full overflow-x-scroll rounded-lg border-[.5px] border-neutral-700   bg-transparent px-2 py-2"
+			/>
 			<SummarySection item={item} />
 		</>
 	)

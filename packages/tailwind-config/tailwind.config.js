@@ -1,11 +1,19 @@
 const colors = require('tailwindcss/colors')
+const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette')
+const plugin = require('tailwindcss/plugin')
+
+function addVariablesForColors({ addBase, theme }) {
+	let allColors = flattenColorPalette(theme('colors'))
+	let newVars = Object.fromEntries(
+		Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+	)
+
+	addBase({
+		':root': newVars
+	})
+}
 
 module.exports = {
-	content: [
-		'../../apps/**/*.{js,ts,jsx,tsx}',
-		'../../packages/**/*.{js,ts,jsx,tsx}',
-		'./src/**/*.{js,ts,jsx,tsx}'
-	],
 	darkMode: 'class',
 	theme: {
 		extend: {
@@ -62,17 +70,17 @@ module.exports = {
 			},
 			colors: {
 				primary: {
-					50: "#EEFCF3",
-					100: "#E1FAEA",
-					200: "#BAF3CF",
-					300: "#92ECB3",
-					400: "#56E189",
-					500: "#25D366",
-					600: "#21BF5B",
-					700: "#1EA951",
-					800: "#188B42",
-					900: "#126832",
-					950: "#0D4A23"
+					50: '#EEFCF3',
+					100: '#E1FAEA',
+					200: '#BAF3CF',
+					300: '#92ECB3',
+					400: '#56E189',
+					500: '#25D366',
+					600: '#21BF5B',
+					700: '#1EA951',
+					800: '#188B42',
+					900: '#126832',
+					950: '#0D4A23'
 				},
 				secondary: colors.gray,
 				destructive: colors.red,
@@ -188,17 +196,93 @@ module.exports = {
 				/^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
 		}
 	],
-	plugins: [require('@headlessui/tailwindcss'), addVariablesForColors]
+	typography: {
+		DEFAULT: {
+			css: {
+				pre: {
+					padding: '12px 0px',
+					'line-height': '1.5',
+					'border-radius': '6px',
+					'border-width': '1px',
+					'border-color': 'rgb(212, 212, 212)'
+				},
+				'.dark pre': {
+					'border-color': 'rgb(64, 64, 64)'
+				},
+				code: {
+					'font-size': '1em',
+					'font-weight': 'unset'
+				},
+				'code span:last-of-type:empty': {
+					display: 'none'
+				},
+				a: {
+					color: '#5865F2',
+					'text-decoration': 'none'
+				},
+				'a:hover': {
+					color: '#3d48c3'
+				},
+				'.dark a:hover': {
+					color: '#7782fa'
+				},
+				'a > img': {
+					display: 'inline-block',
+					margin: '0'
+				},
+				'a > img[height="44"]': {
+					height: '44px'
+				},
+				'div[align="center"] > p > a + a': {
+					'margin-left': '0.5em'
+				},
+				h1: {
+					display: 'flex',
+					'place-items': 'center',
+					'scroll-margin-top': '6.5rem'
+				},
+				h2: {
+					display: 'flex',
+					'place-items': 'center',
+					'margin-top': '1.25em',
+					'scroll-margin-top': '6.5rem'
+				},
+				h3: {
+					display: 'flex',
+					'place-items': 'center',
+					'margin-top': '1.25em',
+					'scroll-margin-top': '6.5rem'
+				},
+				h4: {
+					display: 'flex',
+					'place-items': 'center',
+					'margin-top': '1.25em',
+					'scroll-margin-top': '6.5rem'
+				},
+				// eslint-disable-next-line id-length
+				p: {
+					margin: '.5em 0'
+				}
+			}
+		}
+	},
+	plugins: [
+		require('@headlessui/tailwindcss'),
+		require('@tailwindcss/typography'),
+		addVariablesForColors,
+		plugin(function ({ addUtilities }) {
+			addUtilities({
+				/**
+				 * Mimics the deprecated word-wrap: break-word; property (see: https://drafts.csswg.org/css-text-3/#word-break-property).
+				 *
+				 * Prefer Tailwinds `word-break` and only use this if soft wrap opportunities should be considered
+				 * (https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap).
+				 */
+				'.hn-break-words': {
+					'word-break': 'normal',
+					'overflow-wrap': 'anywhere'
+				}
+			})
+		})
+	]
 }
-
-function addVariablesForColors({ addBase, theme }) {
-	let allColors = flattenColorPalette(theme('colors'))
-	let newVars = Object.fromEntries(
-		Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-	)
-
-	addBase({
-		':root': newVars
-	})
-}
-
