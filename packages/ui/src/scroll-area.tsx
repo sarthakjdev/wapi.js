@@ -56,7 +56,7 @@ const scrollbarStyles = `
   }
 `
 
-interface ScrollAreaProps extends PropsWithChildren<any> {}
+type ScrollAreaProps = PropsWithChildren<any>
 
 const CustomScrollArea = ({ children }: ScrollAreaProps) => (
 	<>

@@ -1,4 +1,4 @@
-import { Sidebar, SidebarSectionItemData } from '~/components/nav/sidebar'
+import { Sidebar, type SidebarSectionItemData } from '~/components/nav/sidebar'
 import { ApiModel } from '@microsoft/api-extractor-model'
 import { resolveItemURI } from '~/reusable-function'
 import { notFound } from 'next/navigation'

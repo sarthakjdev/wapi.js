@@ -9,6 +9,7 @@ import { CodeHeading } from './code-heading'
 import { ExcerptText } from './excerpt-text'
 import { TSDoc } from './tsdoc/TSDoc'
 import { InheritanceText } from './inheritance-text'
+import { notFound } from 'next/navigation'
 
 export function Property({
 	item,
@@ -20,6 +21,12 @@ export function Property({
 }>) {
 	const hasSummary = Boolean(item.tsdocComment?.summarySection)
 
+	const model = item.getAssociatedModel()
+
+	if (!model) {
+		notFound()
+	}
+
 	return (
 		<div className="scroll-mt-30 flex flex-col gap-4" id={item.displayName}>
 			<div className="flex flex-col gap-2">
@@ -28,10 +35,7 @@ export function Property({
 					{`${item.displayName}${item.isOptional ? '?' : ''}`}
 					<span>:</span>
 					{item.propertyTypeExcerpt.text ? (
-						<ExcerptText
-							excerpt={item.propertyTypeExcerpt}
-							model={item.getAssociatedModel()!}
-						/>
+						<ExcerptText excerpt={item.propertyTypeExcerpt} model={model} />
 					) : null}
 				</CodeHeading>
 			</div>

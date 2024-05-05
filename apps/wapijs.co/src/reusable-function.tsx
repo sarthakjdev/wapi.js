@@ -1,4 +1,4 @@
-import { ApiItem, ApiItemKind } from '@microsoft/api-extractor-model'
+import { type ApiItem, ApiItemKind } from '@microsoft/api-extractor-model'
 import { METHOD_SEPARATOR, OVERLOAD_SEPARATOR } from './constant'
 import { VscSymbolClass } from '@react-icons/all-files/vsc/VscSymbolClass'
 import { VscSymbolEnum } from '@react-icons/all-files/vsc/VscSymbolEnum'

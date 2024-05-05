@@ -1,5 +1,4 @@
 import type { ApiFunction } from '@microsoft/api-extractor-model'
-import dynamic from 'next/dynamic'
 import { Header } from '~/components/header'
 import { FunctionBody } from './FunctionBody'
 
@@ -11,11 +10,11 @@ export function Function({ item }: { readonly item: ApiFunction }) {
 	)
 
 	if (item.getMergedSiblings().length > 1) {
-		const overloads = item
-			.getMergedSiblings()
-			.map((sibling, idx) => (
-				<FunctionBody item={sibling as ApiFunction} key={`${sibling.displayName}-${idx}`} />
-			))
+		// const overloads = item
+		// 	.getMergedSiblings()
+		// 	.map((sibling, idx) => (
+		// 		<FunctionBody item={sibling as ApiFunction} key={`${sibling.displayName}-${idx}`} />
+		// 	))
 
 		return (
 			<div>

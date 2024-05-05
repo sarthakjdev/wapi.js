@@ -4,7 +4,7 @@ import { type MessageEventInterface } from '../base/interface'
  * @interface
  * @extends {MessageEventInterface}
  */
-export interface InteractionMessageEventInterface extends MessageEventInterface {}
+export type InteractionMessageEventInterface = MessageEventInterface
 
 /**
  * @interface

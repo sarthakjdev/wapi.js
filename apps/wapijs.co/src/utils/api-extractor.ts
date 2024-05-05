@@ -1,25 +1,24 @@
 import {
-	ApiDocumentedItem,
-	ApiEntryPoint,
+	type ApiDocumentedItem,
+	type ApiEntryPoint,
 	ApiFunction,
 	ApiItem,
-	ApiItemContainerMixin,
+	type ApiItemContainerMixin,
 	ApiItemKind,
-	ApiMethod,
-	ApiMethodSignature,
+	type ApiMethod,
+	type ApiMethodSignature,
 	ApiModel,
-	ApiPackage,
-	ApiParameterListMixin,
-	ApiProperty,
-	ApiPropertySignature
+	type ApiPackage,
+	type ApiParameterListMixin,
+	type ApiProperty,
+	type ApiPropertySignature
 } from '@microsoft/api-extractor-model'
-import { METHOD_SEPARATOR, OVERLOAD_SEPARATOR, PACKAGES } from '~/constant'
-import { ResolvedParameter } from '~/types'
+import { OVERLOAD_SEPARATOR, PACKAGES, IS_DEVELOPMENT } from '~/constant'
+import { type ResolvedParameter } from '~/types'
 import { TSDocConfiguration } from '@microsoft/tsdoc'
 import { TSDocConfigFile } from '@microsoft/tsdoc-config'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { IS_DEVELOPMENT } from '~/constant'
 
 export async function fetchDocumentationJsonDataFromSlug(version: string) {
 	try {
@@ -53,7 +52,12 @@ export async function fetchDocumentationJsonDataFromSlug(version: string) {
 }
 
 export function findMemberByKey(model: ApiModel, packageName: string, containerKey: string) {
-	const pkg = model.tryGetPackageByName(`@wapijs/${packageName}`)!
+	const pkg = model.tryGetPackageByName(`@wapijs/${packageName}`)
+
+	if (!pkg) {
+		throw new Error('Wrong package name passed in to find the member')
+	}
+
 	return (pkg.members[0] as ApiEntryPoint).tryGetMemberByKey(containerKey)
 }
 
@@ -62,7 +66,11 @@ export function findMember(model: ApiModel, packageName: string, memberName: str
 		return undefined
 	}
 
-	const pkg = model.tryGetPackageByName(`@wapijs/${packageName}`)!
+	const pkg = model.tryGetPackageByName(`@wapijs/${packageName}`)
+
+	if (!pkg) {
+		throw new Error('Wrong package name passed in to find the member')
+	}
 	return pkg.entryPoints[0]?.findMembersByName(memberName)[0]
 }
 
@@ -72,7 +80,7 @@ export async function getMember(params: { branchOrVersion: string; item: string 
 
 	if (branchOrVersion === 'master') {
 		const modelJSONFiles = await Promise.all(
-			PACKAGES.map(async pkg => fetchDocumentationJsonDataFromSlug(branchOrVersion))
+			PACKAGES.map(async () => await fetchDocumentationJsonDataFromSlug(branchOrVersion))
 		)
 
 		for (const modelJSONFile of modelJSONFiles) {

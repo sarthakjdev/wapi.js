@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { ExcerptText } from './excerpt-text'
 import { TSDoc } from './tsdoc/TSDoc'
 import { Table } from '@wapijs/ui'
+import { notFound } from 'next/navigation'
 
 const rowElements = {
 	Name: 'font-mono whitespace-nowrap',
@@ -11,7 +12,12 @@ const rowElements = {
 }
 
 export function TypeParamTable({ item }: { readonly item: ApiTypeParameterListMixin }) {
-	const model = item.getAssociatedModel()!
+	const model = item.getAssociatedModel()
+
+	if (!model) {
+		notFound()
+	}
+
 	const rows = useMemo(
 		() =>
 			item.typeParameters.map(typeParam => ({

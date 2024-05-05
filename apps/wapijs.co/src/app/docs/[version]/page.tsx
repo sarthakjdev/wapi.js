@@ -25,6 +25,7 @@ async function fetchReadMeFileFromGithub() {
 }
 
 const VersionHome = async ({ params }: { params: { version: string } }) => {
+	console.log({ params })
 	const highlighter = await getHighlighterCore({
 		themes: [
 			import('shiki/themes/github-light.mjs'),

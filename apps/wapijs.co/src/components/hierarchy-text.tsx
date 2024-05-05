@@ -1,5 +1,6 @@
 import type { ApiClass, ApiInterface, Excerpt } from '@microsoft/api-extractor-model'
 import { ApiItemKind } from '@microsoft/api-extractor-model'
+import { notFound } from 'next/navigation'
 import { ExcerptText } from '~/components/excerpt-text'
 
 export function HierarchyText({
@@ -9,7 +10,11 @@ export function HierarchyText({
 	readonly item: ApiClass | ApiInterface
 	readonly type: 'Extends' | 'Implements'
 }) {
-	const model = item.getAssociatedModel()!
+	const model = item.getAssociatedModel()
+
+	if (!model) {
+		notFound()
+	}
 
 	if (
 		(item.kind === ApiItemKind.Class &&
@@ -34,7 +39,13 @@ export function HierarchyText({
 				return null
 			}
 
-			excerpts = [(item as ApiClass).extendsType!.excerpt]
+			item = item as ApiClass
+
+			if (item.extendsType) {
+				excerpts = [item.extendsType.excerpt]
+			} else {
+				excerpts = []
+			}
 		}
 	} else {
 		if ((item as ApiInterface).extendsTypes.length === 0) {

@@ -26,7 +26,11 @@ export function RemarksBlock({ children }: PropsWithChildren): JSX.Element {
 }
 
 export function DeprecatedBlock({ children }: PropsWithChildren): JSX.Element {
-	return <Callout text="Deprecated" type="warning" />
+	return (
+		<Callout text="Deprecated" type="warning">
+			{children}
+		</Callout>
+	)
 }
 
 export function SeeBlock({ children }: PropsWithChildren): JSX.Element {

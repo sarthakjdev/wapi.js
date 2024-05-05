@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
+
 import type { ApiItem } from '@microsoft/api-extractor-model'
 import type {
 	DocComment,

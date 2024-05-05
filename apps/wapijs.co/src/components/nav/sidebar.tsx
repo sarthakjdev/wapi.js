@@ -1,14 +1,13 @@
-import { ApiItemKind } from '@microsoft/api-extractor-model'
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
+
+import { ApiItemKind, type ApiItem } from '@microsoft/api-extractor-model'
 import { VscSymbolClass } from '@react-icons/all-files/vsc/VscSymbolClass'
 import { VscSymbolEnum } from '@react-icons/all-files/vsc/VscSymbolEnum'
 import { VscSymbolInterface } from '@react-icons/all-files/vsc/VscSymbolInterface'
 import { VscSymbolMethod } from '@react-icons/all-files/vsc/VscSymbolMethod'
 import { VscSymbolVariable } from '@react-icons/all-files/vsc/VscSymbolVariable'
-// import { useSelectedLayoutSegment } from 'next/navigation'
-// import { useMemo, useState } from 'react'
 import { ItemLink } from '~/components/item-link'
 import { DisclosureSection } from '@wapijs/ui'
-import { ApiItem } from '@microsoft/api-extractor-model'
 import { METHOD_SEPARATOR, OVERLOAD_SEPARATOR } from '~/constant'
 
 export function resolveItemURI(item: ApiItem): string {

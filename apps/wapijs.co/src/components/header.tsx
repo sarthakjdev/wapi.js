@@ -1,4 +1,4 @@
-import { ApiItemKind } from '@microsoft/api-extractor-model'
+import { type ApiItemKind } from '@microsoft/api-extractor-model'
 import { VscFileCode } from '@react-icons/all-files/vsc/VscFileCode'
 import Link from 'next/link'
 import type { PropsWithChildren } from 'react'

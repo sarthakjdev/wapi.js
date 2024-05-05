@@ -1,6 +1,5 @@
 import type { ApiModel, Excerpt } from '@microsoft/api-extractor-model'
 import { ExcerptTokenKind } from '@microsoft/api-extractor-model'
-import Link from 'next/link'
 import { ItemLink } from '~/components/item-link'
 import { resolveItemURI } from '~/reusable-function'
 
@@ -15,9 +14,9 @@ export function ExcerptText({ model, excerpt }: ExcerptTextProps) {
 		<span>
 			{excerpt.spannedTokens.map((token, idx) => {
 				console.log({ token })
-				if (token.kind === ExcerptTokenKind.Reference) {
+				if (token.kind === ExcerptTokenKind.Reference && token.canonicalReference) {
 					const item = model.resolveDeclarationReference(
-						token.canonicalReference!,
+						token.canonicalReference,
 						model
 					).resolvedApiItem
 
