@@ -1,13 +1,14 @@
 import { type MessageEventInterface } from '../base/interface'
 
 /**
- * @interface
+ * Represents an interaction message event.
  * @extends {MessageEventInterface}
  */
 export type InteractionMessageEventInterface = MessageEventInterface
 
 /**
- * @interface
+ * Represents a list interaction message event.
+ * @interface ListInteractionMessageEventInterface
  * @extends {InteractionMessageEventInterface}
  */
 export interface ListInteractionMessageEventInterface extends InteractionMessageEventInterface {
@@ -17,7 +18,8 @@ export interface ListInteractionMessageEventInterface extends InteractionMessage
 }
 
 /**
- * @interface
+ * Represents a button reply interaction message event.
+ * @interface ButtonReplyInteractionMessageEventInterface
  * @extends {InteractionMessageEventInterface}
  */
 export interface ButtonReplyInteractionMessageEventInterface
@@ -27,7 +29,8 @@ export interface ButtonReplyInteractionMessageEventInterface
 }
 
 /**
- * @interface
+ * Represents a quick reply button interaction event.
+ * @interface QuickReplyButtonInteractionEventInterface
  * @extends {InteractionMessageEventInterface}
  */
 export interface QuickReplyButtonInteractionEventInterface
@@ -38,17 +41,26 @@ export interface QuickReplyButtonInteractionEventInterface
 	}
 }
 
+/**
+ * Represents an ad interaction source type.
+ * @enum
+ */
 export enum AdInteractionSourceTypeEnum {
 	Ad = 'ad',
 	Post = 'post'
 }
 
+/**
+ * Represents an ad interaction source media type.
+ * @enum
+ */
 export enum AdInteractionSourceMediaTypeEnum {
 	Image = 'image',
 	Video = 'video'
 }
 
 /**
+ * Represents an ad interaction event.
  * @interface
  * @extends {InteractionMessageEventInterface}
  */

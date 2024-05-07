@@ -1,7 +1,7 @@
 
 /**
  * Represents an unknown event.
- * @interface
+ * @interface UnknownEventInterface
  */
 export interface UnknownEventInterface {
 	/**

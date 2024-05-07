@@ -1,9 +1,11 @@
+
 import { type Client } from '../../../client'
 import { type Order } from '../../../structures/order'
 import { MessageEvent } from '../base'
 import { type OrderMessageEventInterface } from './interface'
 
 /**
+ * Represents an event that occurs when a message related to an order is received.
  * @class
  * @extends {MessageEvent}
  * @implements {OrderMessageEventInterface}
