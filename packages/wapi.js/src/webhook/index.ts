@@ -51,7 +51,7 @@ import { type WebhookInterface } from './interface'
 
 /**
  * The webhook client for listening to incoming event notifications
- * @class
+ * @class Webhook
  * @extends {EventEmitter}
  * @implements {WebhookInterface}
  */
@@ -64,6 +64,7 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 	private client: Client
 
 	/**
+	 * Creates a new instance of the webhook client.
 	 * @constructor
 	 * @param params
 	 * @param {Client} params.client
@@ -106,6 +107,11 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 		}
 	}
 
+	/**
+	 * Handles the incoming POST request from the webhook
+	 * @param {Request} request
+	 * @param {Response} response
+	 */
 	public _postRequestHandler(request: Request, response: Response) {
 		const parsedPayload = WhatsappApiNotificationPayloadSchemaType.safeParse(request.body)
 		if (parsedPayload.success) {
@@ -640,7 +646,8 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 
 	/**
 	 * Getter for the webhook endpoint
-	 * @returns {string}
+	 * @returns {string} - The webhook endpoint
+	 * @memberof Webhook
 	 */
 	getEndpoint(): string {
 		return this.endpoint
@@ -648,7 +655,8 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 
 	/**
 	 * Set new webhook endpoint (this will replace the previously set webhook endpoint)
-	 * @param {string}
+	 * @param {string} path - The new webhook endpoint
+	 * @memberof Webhook
 	 */
 	setEndpoint(path: string) {
 		this.endpoint = path
@@ -656,6 +664,7 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 
 	/**
 	 * Returns current configured webhook port
+	 * @memberof Webhook
 	 * @returns {number}
 	 */
 	getPort() {
@@ -664,7 +673,8 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 
 	/**
 	 * Set new webhook port (this will replace the previously set webhook port)
-	 * @param {number}
+	 * @param {number} port - The new port to listen on
+	 * @memberof Webhook
 	 */
 	setPort(port: number) {
 		this.port = port
@@ -673,13 +683,16 @@ export class Webhook extends EventEmitter implements WebhookInterface {
 	/**
 	 * Returns if webhooks is listening
 	 * @returns {boolean}
+	 * @memberof Webhook
 	 */
 	isListening(): boolean {
 		return this.listening
 	}
 
 	/**
-	 * starts listening on the webhook server
+	 * Start listening for incoming webhook events
+	 * @memberof Webhook
+	 * @param {() => void} cb - The callback to be called when the server starts listening
 	 */
 	listen(cb: () => void) {
 		this.server.listen(this.port, cb)

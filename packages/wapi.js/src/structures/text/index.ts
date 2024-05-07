@@ -5,16 +5,20 @@ import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request
 import { type z } from 'zod'
 
 /**
- * Text message component builder
+ * Represents a text message in WhatsApp.
+ * @class
  * @extends {BaseMessage}
  * @implements {TextMessageInterface}
- * @class
  */
 export class TextMessage extends BaseMessage<'text'> implements TextMessageInterface {
 	readonly data: { text: string; allowPreview?: true }
 
 	/**
+	 * Creates a new instance of the TextMessage class.
 	 * @constructor
+	 * @param {Object} params - The parameters for creating the text message.
+	 * @param {string} params.text - The text content of the message.
+	 * @param {boolean} [params.allowPreview] - Whether to allow preview of the message.
 	 */
 	constructor(params: { text: string; allowPreview?: true }) {
 		super({ type: MessageTypeEnum.Text })
@@ -25,8 +29,12 @@ export class TextMessage extends BaseMessage<'text'> implements TextMessageInter
 	}
 
 	/**
-	 * Function used to get the get the whatsapp cloud api payload for text message
+	 * Converts the text message to a WhatsApp Cloud API payload.
 	 * @memberof TextMessage
+	 * @param {Object} params - The parameters for converting the message.
+	 * @param {string} params.to - The recipient of the message.
+	 * @param {string} [params.replyToMessageId] - The ID of the message to reply to.
+	 * @returns {Object} The WhatsApp Cloud API payload for the text message.
 	 */
 	toJson(params: {
 		to: string

@@ -6,6 +6,7 @@ import {
 } from '../../api-request-payload-schema'
 
 /**
+ * Represents the interface for an interactive message.
  * @interface
  * @extends {BaseMessageInterface}
  */
@@ -18,6 +19,7 @@ export interface InteractiveMessageInterface extends BaseMessageInterface {
 }
 
 /**
+ * Represents the interface for a button interaction message.
  * @interface
  * @extends {InteractiveMessageInterface}
  */
@@ -28,6 +30,7 @@ export interface ButtonInteractionMessageInterface extends InteractiveMessageInt
 }
 
 /**
+ * Represents the interface for a list interaction message.
  * @interface
  * @extends {InteractiveMessageInterface}
  */
@@ -39,6 +42,7 @@ export interface ListInteractionMessageInterface extends InteractiveMessageInter
 }
 
 /**
+ * Represents the interface for a product interaction message.
  * @interface
  * @extends {InteractiveMessageInterface}
  */
@@ -50,6 +54,7 @@ export interface ProductInteractionMessageInterface extends InteractiveMessageIn
 }
 
 /**
+ * Represents the interface for a product list interaction message.
  * @interface
  * @extends {InteractiveMessageInterface}
  */
@@ -62,6 +67,7 @@ export interface ProductListInteractionMessageInterface extends InteractiveMessa
 }
 
 /**
+ * Represents the enum for interactive message types.
  * @enum
  */
 export enum InteractiveMessageTypeEnum {

@@ -28,8 +28,10 @@ export function DisclosureSection({
 				{({ open }) => {
 					return (
 						<>
-							<Disclosure.Button className={'w-full hover:bg-gray-800 rounded-lg px-2 py-1'}>
-								<div className="flex flex-row place-content-between place-items-center gap-4 w-full">
+							<Disclosure.Button
+								className={'w-full rounded-lg px-2 py-1 hover:bg-gray-800'}
+							>
+								<div className="flex w-full flex-row place-content-between place-items-center gap-4">
 									<div className="flex flex-row place-items-center gap-3">
 										{icon ?? null}
 										<span className="font-semibold">{title}</span>

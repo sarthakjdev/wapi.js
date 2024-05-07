@@ -1,3 +1,6 @@
+/**
+ * Enum representing the types of messages.
+ */
 export enum MessageTypeEnum {
 	Text = 'text',
 	Audio = 'audio',
@@ -12,6 +15,9 @@ export enum MessageTypeEnum {
 	Template = 'template'
 }
 
+/**
+ * Enum representing the language codes.
+ */
 export enum LanguageEnum {
 	Afrikaans = 'af',
 	Albanian = 'sq',
@@ -86,12 +92,18 @@ export enum LanguageEnum {
 	Zulu = 'zu'
 }
 
+/**
+ * Enum representing the types of components in a template message.
+ */
 export enum TemplateMessageComponentTypeEnum {
 	Header = 'header',
 	Body = 'body',
 	Button = 'button'
 }
 
+/**
+ * Enum representing the types of button components in a template message.
+ */
 export enum TemplateMessageButtonComponentTypeEnum {
 	QuickReply = 'quick_reply',
 	Url = 'url',

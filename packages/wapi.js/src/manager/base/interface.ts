@@ -5,5 +5,9 @@ import { type Client } from '../../client'
  * @interface
  */
 export interface BaseManagerInterface {
+	/**
+	 * The client instance associated with the manager
+	 * @type {Client}
+	 */
 	client: Client
 }

@@ -23,6 +23,7 @@ import { MessageTypeEnum } from '../message/types'
 import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
 
 /**
+ * Represents an audio message.
  * @extends {BaseMessage<MessageTypeEnum.Audio>}
  * @implements {AudioMessageInterface}
  * @class
@@ -34,8 +35,10 @@ export class AudioMessage
 	data: z.infer<typeof MetaAudioMediaObjectSchemaType | typeof ExternalAudioMediaObjectType>
 
 	/**
+	 * Creates a new instance of the AudioMessage class.
 	 * @constructor
 	 * @memberof AudioMessage
+	 * @param {z.infer<typeof MetaAudioMediaObjectSchemaType | typeof ExternalAudioMediaObjectType>} params - The parameters to initialize the audio message.
 	 */
 	constructor(
 		params: z.infer<typeof MetaAudioMediaObjectSchemaType | typeof ExternalAudioMediaObjectType>
@@ -45,8 +48,12 @@ export class AudioMessage
 	}
 
 	/**
-	 * Function used to get the get the whatsapp cloud api payload for audio message
-	 * @memberof TextMessage
+	 * Converts the audio message to the WhatsApp Cloud API payload.
+	 * @memberof AudioMessage
+	 * @param {Object} params - The parameters for the WhatsApp Cloud API payload.
+	 * @param {string} params.to - The recipient of the message.
+	 * @param {string} [params.replyToMessageId] - The ID of the message being replied to.
+	 * @returns {Object} - The WhatsApp Cloud API payload for the audio message.
 	 */
 	toJson(params: {
 		to: string
@@ -71,6 +78,7 @@ export class AudioMessage
 }
 
 /**
+ * Represents a video message.
  * @extends {BaseMessage<MessageTypeEnum.Video>}
  * @implements {VideoMessageInterface}
  * @class
@@ -82,8 +90,10 @@ export class VideoMessage
 	data: z.infer<typeof MetaVideoMediaObjectSchemaType | typeof ExternalVideoMediaObjectType>
 
 	/**
+	 * Creates a new instance of the VideoMessage class.
 	 * @constructor
 	 * @memberof VideoMessage
+	 * @param {z.infer<typeof MetaVideoMediaObjectSchemaType | typeof ExternalVideoMediaObjectType>} params - The parameters to initialize the video message.
 	 */
 	constructor(
 		params: z.infer<typeof MetaVideoMediaObjectSchemaType | typeof ExternalVideoMediaObjectType>
@@ -93,8 +103,12 @@ export class VideoMessage
 	}
 
 	/**
-	 * Function used to get the get the whatsapp cloud api payload for audio message
+	 * Converts the video message to the WhatsApp Cloud API payload.
 	 * @memberof VideoMessage
+	 * @param {Object} params - The parameters for the WhatsApp Cloud API payload.
+	 * @param {string} params.to - The recipient of the message.
+	 * @param {string} [params.replyToMessageId] - The ID of the message being replied to.
+	 * @returns {Object} - The WhatsApp Cloud API payload for the video message.
 	 */
 	toJson(params: {
 		to: string
@@ -120,6 +134,7 @@ export class VideoMessage
 }
 
 /**
+ * Represents an image message.
  * @extends {BaseMessage<MessageTypeEnum.Image>}
  * @implements {ImageMessageInterface}
  * @class
@@ -131,7 +146,10 @@ export class ImageMessage
 	data: z.infer<typeof MetaImageMediaObjectSchemaType | typeof ExternalImageMediaObjectType>
 
 	/**
+	 * Creates a new instance of the ImageMessage class.
 	 * @constructor
+	 * @memberof ImageMessage
+	 * @param {z.infer<typeof MetaImageMediaObjectSchemaType | typeof ExternalImageMediaObjectType>} params - The parameters to initialize the image message.
 	 */
 	constructor(
 		params: z.infer<typeof MetaImageMediaObjectSchemaType | typeof ExternalImageMediaObjectType>
@@ -141,8 +159,12 @@ export class ImageMessage
 	}
 
 	/**
-	 * Function used to get the get the whatsapp cloud api payload for audio message
-	 * @memberof VideoMessage
+	 * Converts the image message to the WhatsApp Cloud API payload.
+	 * @memberof ImageMessage
+	 * @param {Object} params - The parameters for the WhatsApp Cloud API payload.
+	 * @param {string} params.to - The recipient of the message.
+	 * @param {string} [params.replyToMessageId] - The ID of the message being replied to.
+	 * @returns {Object} - The WhatsApp Cloud API payload for the image message.
 	 */
 	toJson(params: {
 		to: string
@@ -168,6 +190,7 @@ export class ImageMessage
 }
 
 /**
+ * Represents a sticker message.
  * @extends {BaseMessage<MessageTypeEnum.Sticker>}
  * @implements {StickerMessageInterface}
  * @class
@@ -179,8 +202,10 @@ export class StickerMessage
 	data: z.infer<typeof MetaStickerMediaObjectSchemaType | typeof ExternalStickerMediaObjectType>
 
 	/**
+	 * Creates a new instance of the StickerMessage class.
 	 * @constructor
 	 * @memberof StickerMessage
+	 * @param {z.infer<typeof MetaStickerMediaObjectSchemaType | typeof ExternalStickerMediaObjectType>} params - The parameters to initialize the sticker message.
 	 */
 	constructor(
 		params: z.infer<
@@ -192,8 +217,12 @@ export class StickerMessage
 	}
 
 	/**
-	 * Function used to get the get the whatsapp cloud api payload for audio message
-	 * @memberof VideoMessage
+	 * Converts the sticker message to the WhatsApp Cloud API payload.
+	 * @memberof StickerMessage
+	 * @param {Object} params - The parameters for the WhatsApp Cloud API payload.
+	 * @param {string} params.to - The recipient of the message.
+	 * @param {string} [params.replyToMessageId] - The ID of the message being replied to.
+	 * @returns {Object} - The WhatsApp Cloud API payload for the sticker message.
 	 */
 	toJson(params: {
 		to: string
@@ -218,6 +247,7 @@ export class StickerMessage
 }
 
 /**
+ * Represents a document message.
  * @extends {BaseMessage<MessageTypeEnum.Document>}
  * @implements {DocumentMessageInterface}
  * @class
@@ -231,8 +261,10 @@ export class DocumentMessage
 	>
 
 	/**
+	 * Creates a new instance of the DocumentMessage class.
 	 * @constructor
 	 * @memberof DocumentMessage
+	 * @param {z.infer<typeof MetaDocumentMediaObjectSchemaType | typeof ExternalDocumentMediaObjectSchemaType>} params - The parameters to initialize the document message.
 	 */
 	constructor(
 		params: z.infer<
@@ -244,8 +276,12 @@ export class DocumentMessage
 	}
 
 	/**
-	 * Function used to get the get the whatsapp cloud api payload for audio message
+	 * Converts the document message to the WhatsApp Cloud API payload.
 	 * @memberof DocumentMessage
+	 * @param {Object} params - The parameters for the WhatsApp Cloud API payload.
+	 * @param {string} params.to - The recipient of the message.
+	 * @param {string} [params.replyToMessageId] - The ID of the message being replied to.
+	 * @returns {Object} - The WhatsApp Cloud API payload for the document message.
 	 */
 	toJson(params: {
 		to: string

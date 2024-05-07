@@ -112,8 +112,6 @@ export function resolveParameters(
 
 		console.log({ tsdocAnalog, param })
 
-
-
 		return {
 			name: param.tsdocParamBlock?.parameterName ?? tsdocAnalog?.parameterName ?? param.name,
 			description: param.tsdocParamBlock?.content ?? tsdocAnalog?.content,

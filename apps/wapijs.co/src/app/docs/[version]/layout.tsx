@@ -32,7 +32,7 @@ export default async function VersionHomeLayout({
 	}
 
 	return (
-		<main className="flex max-w-screen-2xl flex-col gap-4 mx-auto">
+		<main className="mx-auto flex max-w-screen-2xl flex-col gap-4">
 			<aside className="fixed left-0 top-0 flex max-w-[20rem] p-10 pl-0">
 				<Sidebar members={transformMembersIntoSidebarData()} key={'sidebar'} />
 			</aside>

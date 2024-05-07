@@ -16,7 +16,7 @@ export function CodeHeading({ href, className, children }: CodeListingProps) {
 			{href ? (
 				<Link href={href}>
 					{' '}
-					<LinkIcon fontSize={20} className='h-6 w-6 text-primary-500' />{' '}
+					<LinkIcon fontSize={20} className="h-6 w-6 text-primary-500" />{' '}
 				</Link>
 			) : null}
 			{children}

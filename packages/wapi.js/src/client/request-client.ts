@@ -2,7 +2,7 @@ import { type Client } from './index'
 import { type RequestClientInterface, type RequestClientConfigOptions } from './interface'
 
 /**
- * Request client use to communicate with whatsapp cloud api using http request
+ * Request client used to communicate with WhatsApp Cloud API using HTTP requests.
  * @class
  * @implements {RequestClientInterface}
  */
@@ -16,6 +16,10 @@ export class RequestClient implements RequestClientInterface {
 	accessToken: string
 	private userAgent: string
 
+	/**
+	 * Creates an instance of RequestClient.
+	 * @param {RequestClientConfigOptions} options - The configuration options for the request client.
+	 */
 	constructor(options: RequestClientConfigOptions) {
 		this.host = options.host
 		this.protocol = 'https'
@@ -27,10 +31,22 @@ export class RequestClient implements RequestClientInterface {
 		this.accessToken = options.accessToken
 	}
 
-	getRequestUrl() {
+	/**
+	 * Gets the request URL based on the current configuration.
+	 * @returns {string} The request URL.
+	 */
+	getRequestUrl(): string {
 		return `${this.protocol}://${this.host}/${this.apiVersion}`
 	}
 
+	/**
+	 * Sends a request to the WhatsApp Cloud API.
+	 * @param {object} options - The request options.
+	 * @param {string} options.path - The API endpoint path.
+	 * @param {string} [options.body] - The request body.
+	 * @param {'GET' | 'POST' | 'DELETE'} [options.method='POST'] - The request method.
+	 * @returns {Promise<any>} A promise that resolves to the response body.
+	 */
 	async requestCloudApi({
 		body,
 		path,
@@ -39,7 +55,7 @@ export class RequestClient implements RequestClientInterface {
 		path: string
 		body?: string
 		method?: 'GET' | 'POST' | 'DELETE'
-	}) {
+	}): Promise<any> {
 		try {
 			const requestUrl = this.getRequestUrl()
 

@@ -44,7 +44,6 @@ export * from './src/webhook/events/unknown/interface'
 export * from './src/webhook/events/unknown/index'
 export * from './src/webhook/events/video/interface'
 export * from './src/webhook/events/video/index'
-
-
-
-
+export * from './src/webhook/index'
+export * from './src/webhook/schema'
+export * from './src/webhook/type'

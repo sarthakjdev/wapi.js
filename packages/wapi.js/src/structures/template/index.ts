@@ -12,14 +12,26 @@ import {
 } from '../message/types'
 import { type TemplateMessageInterface } from './interface'
 
+/**
+ * Represents a parameter for a template message.
+ * @class
+ */
 export class TemplateParameter {
 	parameterData: z.infer<typeof TemplateMessageParameterSchemaType>
 
+	/**
+	 * @constructor
+	 * @param params - The parameter data.
+	 */
 	constructor(params: z.infer<typeof TemplateMessageParameterSchemaType>) {
 		this.parameterData = params
 	}
 }
 
+/**
+ * Represents a component of a template message.
+ * @class
+ */
 export class TemplateComponent {
 	componentData:
 		| {
@@ -36,6 +48,10 @@ export class TemplateComponent {
 				parameters?: TemplateParameter[]
 		  }
 
+	/**
+	 * @constructor
+	 * @param params - The component data.
+	 */
 	constructor(
 		params:
 			| {
@@ -69,11 +85,19 @@ export class TemplateComponent {
 		}
 	}
 
+	/**
+	 * Adds a parameter to the component.
+	 * @param parameter - The parameter to add.
+	 */
 	addParameters(parameter: TemplateParameter) {
 		this.componentData.parameters?.push(parameter)
 	}
 }
 
+/**
+ * Represents a template message.
+ * @class
+ */
 export class TemplateMessage
 	extends BaseMessage<MessageTypeEnum.Template>
 	implements TemplateMessageInterface
@@ -86,6 +110,7 @@ export class TemplateMessage
 	/**
 	 * @constructor
 	 * @memberof TemplateMessage
+	 * @param params - The template message data.
 	 */
 	constructor(params: { templateName: string; language: LanguageEnum }) {
 		super({ type: MessageTypeEnum.Interactive })
@@ -95,8 +120,18 @@ export class TemplateMessage
 		}
 	}
 
-	addComponent() {}
+	/**
+	 * Adds a component to the template message.
+	 */
+	addComponent() {
+		// TODO: Implement addComponent method
+	}
 
+	/**
+	 * Converts the template message to a JSON object.
+	 * @param params - The parameters for the JSON object.
+	 * @returns The JSON object representing the template message.
+	 */
 	toJson(params: {
 		to: string
 		replyToMessageId?: string

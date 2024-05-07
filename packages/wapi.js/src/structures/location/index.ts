@@ -6,6 +6,7 @@ import { type z } from 'zod'
 import { type WhatsappCloudApiRequestPayloadSchemaType } from '../../api-request-payload-schema'
 
 /**
+ * Represents a location message.
  * @class
  * @extends {BaseMessage}
  * @implements {LocationMessageInterface}
@@ -19,8 +20,10 @@ export class LocationMessage extends BaseMessage<'location'> implements Location
 	}
 
 	/**
+	 * Creates a new LocationMessage instance.
 	 * @constructor
 	 * @memberof LocationMessage
+	 * @param {LocationSchemaType} params - The parameters for creating the LocationMessage.
 	 */
 	constructor(params: z.infer<typeof LocationSchemaType>) {
 		super({ type: MessageTypeEnum.Location })
@@ -32,6 +35,13 @@ export class LocationMessage extends BaseMessage<'location'> implements Location
 		}
 	}
 
+	/**
+	 * Converts the LocationMessage to a JSON object that can be sent as a request payload to the WhatsApp Cloud API.
+	 * @param {Object} params - The parameters for converting the LocationMessage to JSON.
+	 * @param {string} params.to - The recipient of the message.
+	 * @param {string} [params.replyToMessageId] - The ID of the message being replied to.
+	 * @returns {Object} - The JSON representation of the LocationMessage.
+	 */
 	toJson(params: {
 		to: string
 		replyToMessageId?: string

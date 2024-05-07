@@ -4,7 +4,7 @@ import { BaseManager } from '../base'
 import { type MessageManagerInterface } from './interface'
 
 /**
- * manager to handle outgoing messages for wapi
+ * Manager to handle outgoing messages for wapi.
  * @implements {MessageManagerInterface}
  * @extends {BaseManager}
  * @class
@@ -17,9 +17,11 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 	}
 
 	/**
-	 * Function used to send message
-	 * @param {{ message: {T}; phoneNumber: {string} }} props
-	 * @param props
+	 * Function used to send a message.
+	 * @param {{ message: {T}; phoneNumber: {string} }} props - The properties for sending a message.
+	 * @param {T} props.message - The message to be sent.
+	 * @param {string} props.phoneNumber - The phone number to send the message to.
+	 * @returns {Promise<string>} - A promise that resolves to the response from the server.
 	 */
 	async send<T extends BaseMessage<string>>(props: {
 		message: T
@@ -35,9 +37,12 @@ export class MessageManager extends BaseManager implements MessageManagerInterfa
 	}
 
 	/**
-	 * Function used to reply to a message using a message id
-	 * @param {{ replyToMessageId: {string}; message: {T}; phoneNumber: {string} }} props
-	 * @memberof MessageManager
+	 * Function used to reply to a message using a message id.
+	 * @param {{ replyToMessageId: {string}; message: {T}; phoneNumber: {string} }} props - The properties for replying to a message.
+	 * @param {string} props.replyToMessageId - The id of the message to reply to.
+	 * @param {T} props.message - The message to be sent as a reply.
+	 * @param {string} props.phoneNumber - The phone number to send the reply to.
+	 * @returns {Promise<string>} - A promise that resolves to the response from the server.
 	 */
 	async reply<T extends BaseMessage<string>>(props: {
 		replyToMessageId: string

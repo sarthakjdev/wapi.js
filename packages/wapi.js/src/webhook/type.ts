@@ -24,6 +24,10 @@ import { type CustomerNumberChangeEvent } from './events/customer-number-changed
 import { type ProductInquiryEvent } from './events/product-inquiry'
 import { type UnknownEvent } from './events/unknown'
 
+/**
+ * Enum representing the types of notification events
+ * @enum
+ */
 export enum NotificationEventTypeEnum {
 	TextMessage = 'TextMessage',
 	AudioMessage = 'AudioMessage',
@@ -51,6 +55,10 @@ export enum NotificationEventTypeEnum {
 	ReplyMessage = 'ReplyMessage'
 }
 
+/**
+ * Enum representing the types of notification message
+ * @enum
+ */
 export enum NotificationMessageTypeEnum {
 	Contacts = 'contacts',
 	Text = 'text',
@@ -68,11 +76,19 @@ export enum NotificationMessageTypeEnum {
 	Button = 'button'
 }
 
+/**
+ * Enum representing the types of interaction notification
+ * @enum
+ */
 export enum InteractionNotificationTypeEnum {
 	ListReply = 'list_reply',
 	ButtonReply = 'button_reply'
 }
 
+/**
+ * Enum representing the status of a message
+ * @enum
+ */
 export enum MessageStatusEnum {
 	Sent = 'sent',
 	Failed = 'failed',
@@ -80,6 +96,10 @@ export enum MessageStatusEnum {
 	Read = 'read'
 }
 
+/**
+ * Enum representing the category of a message status
+ * @enum
+ */
 export enum MessageStatusCategoryEnum {
 	Authentication = 'authentication',
 	Marketing = 'marketing',
@@ -88,11 +108,18 @@ export enum MessageStatusCategoryEnum {
 	ReferralConversion = 'referral_conversion'
 }
 
+/**
+ * Enum representing the types of system notifications
+ * @enum
+ */
 export enum SystemNotificationTypeEnum {
 	CustomerNumberChange = 'user_changed_number',
 	CustomerIdentityChange = 'customer_identity_changed'
 }
 
+/**
+ * Type representing the mapping of event types to their corresponding event data
+ */
 export type WapiEventDataMap = {
 	TextMessage: TextMessageEvent
 	AudioMessage: AudioMessageEvent
