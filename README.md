@@ -1,4 +1,4 @@
-<p>
+<p align="center">
 <img src="https://www.wapijs.co/logo.png" alt="wapi.js"  height="300" width="540" />
 </p>
 

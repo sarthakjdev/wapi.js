@@ -12,7 +12,7 @@ export const CustomSelect: React.FC<{
 	return (
 		<div className="mx-auto w-full">
 			{label && (
-				<label className="text-secondary-700 block text-sm font-medium">{label}</label>
+				<label className="text-secondary-300 my-2 block text-sm font-medium">{label}</label>
 			)}
 			{error ? (
 				<p className="mt-1 flex items-center gap-1 text-xs text-red-500">
@@ -28,7 +28,7 @@ export const CustomSelect: React.FC<{
 					onChangeHandler(e)
 				}}
 				className={clsx(
-					'focus:border-primary-500 focus:ring-primary-500 border-secondary-300 placeholder-secondary-400 block w-full appearance-none rounded-md border px-3 py-2 shadow-sm focus:outline-none sm:text-sm',
+					'focus:border-primary-500 focus:ring-primary-500 border-secondary-300 placeholder-secondary-400 block w-full appearance-none rounded-md border bg-transparent px-3 py-2 shadow-sm focus:outline-none sm:text-sm',
 					error ? 'border-red-400' : ''
 				)}
 			>

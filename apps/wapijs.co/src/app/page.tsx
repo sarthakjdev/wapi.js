@@ -20,12 +20,12 @@ export default function Home() {
 						<Link href={'/docs'}>
 							<Button>Documentation</Button>
 						</Link>
-
+						{/* 
 						<Link href={'/guide'}>
 							<Button intent={'secondary'} size={'large'}>
 								Guide
 							</Button>
-						</Link>
+						</Link> */}
 
 						<Link href={'https://github.com/sarthakjdev/wapi.js'} target="_blank">
 							<Button intent={'secondary'}>

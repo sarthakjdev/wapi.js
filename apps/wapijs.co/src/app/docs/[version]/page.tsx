@@ -42,7 +42,7 @@ const VersionHome = async ({ params }: { params: { version: string } }) => {
 	const fileContent = await fetchReadMeFileFromGithub()
 
 	return (
-		<div className="prose prose-neutral mx-auto max-w-screen-xl dark:prose-invert">
+		<div className="prose-invert mx-auto max-w-screen-xl">
 			<MDXRemote
 				options={{
 					mdxOptions: {

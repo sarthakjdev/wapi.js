@@ -9,6 +9,7 @@ import { VscSymbolVariable } from '@react-icons/all-files/vsc/VscSymbolVariable'
 import { ItemLink } from '~/components/item-link'
 import { CustomScrollArea, DisclosureSection } from '@wapijs/ui'
 import { METHOD_SEPARATOR, OVERLOAD_SEPARATOR } from '~/constant'
+import VersionSelector from '../version-selector'
 
 export function resolveItemURI(item: ApiItem): string {
 	return !item.parent || item.parent.kind === ApiItemKind.EntryPoint
@@ -130,6 +131,7 @@ export function Sidebar({ members }: { readonly members: SidebarSectionItemData[
 
 	return (
 		<div className="flex min-w-[26rem] flex-col gap-3 p-3">
+			<VersionSelector />
 			{(Object.keys(groupItems) as (keyof GroupedMembers)[])
 				.filter(group => groupItems[group].length)
 				.map((group, idx) => (
