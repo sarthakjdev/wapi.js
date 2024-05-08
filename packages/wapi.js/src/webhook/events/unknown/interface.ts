@@ -1,4 +1,3 @@
-
 /**
  * Represents an unknown event.
  * @interface UnknownEventInterface
@@ -7,15 +6,15 @@ export interface UnknownEventInterface {
 	/**
 	 * The code associated with the unknown event.
 	 */
-	code: string;
+	code: string
 
 	/**
 	 * The message associated with the unknown event.
 	 */
-	message: string;
+	message: string
 
 	/**
 	 * The title of the unknown event.
 	 */
-	title: string;
+	title: string
 }

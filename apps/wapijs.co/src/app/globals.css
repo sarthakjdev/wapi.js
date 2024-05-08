@@ -42,7 +42,6 @@ html.dark .os-scrollbar-handle:hover {
 	--os-handle-bg-hover: rgba(0, 0, 0, 0.7);
 }
 
-
 html.dark .shiki,
 html.dark .shiki span {
 	color: var(--shiki-dark) !important;

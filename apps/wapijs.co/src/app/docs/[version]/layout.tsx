@@ -33,11 +33,11 @@ export default async function VersionHomeLayout({
 
 	return (
 		<main className="mx-auto flex max-w-screen-2xl flex-col gap-4">
-			<aside className="fixed left-0 top-0 flex max-w-[20rem] p-10 pl-0">
+			<aside className="fixed left-0 top-0 flex overflow-scroll p-10 pl-0">
 				<Sidebar members={transformMembersIntoSidebarData()} key={'sidebar'} />
 			</aside>
 
-			<section className=" p-10 pl-[20rem] ">{children}</section>
+			<section className=" p-10 pl-[26rem] ">{children}</section>
 		</main>
 	)
 }

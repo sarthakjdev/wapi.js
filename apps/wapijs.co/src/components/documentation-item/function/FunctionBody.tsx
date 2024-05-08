@@ -13,7 +13,7 @@ export interface FunctionBodyProps {
 export function FunctionBody({ item }: { readonly item: ApiFunction }) {
 	return (
 		<DocumentationContainer>
-			<SyntaxHighlighter code={item.excerpt.text} lang="" />
+			<SyntaxHighlighter code={item.excerpt.text} lang="typescript" />
 			<SummarySection item={item} />
 			{item.typeParameters.length ? <TypeParameterSection item={item} /> : null}
 			{item.parameters.length ? <ParameterSection item={item} /> : null}

@@ -149,8 +149,8 @@ export class Client extends EventEmitter implements ClientInterface {
 
 	/**
 	 * Function to attach event listener to wapi client
-	 * @param eventName
-	 * @param listener
+	 * @param {T} eventName
+	 * @param {(data: WapiEventDataMap[T])=> void} listener
 	 */
 	on<T extends keyof WapiEventDataMap>(
 		eventName: T,

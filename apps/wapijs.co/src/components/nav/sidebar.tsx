@@ -7,7 +7,7 @@ import { VscSymbolInterface } from '@react-icons/all-files/vsc/VscSymbolInterfac
 import { VscSymbolMethod } from '@react-icons/all-files/vsc/VscSymbolMethod'
 import { VscSymbolVariable } from '@react-icons/all-files/vsc/VscSymbolVariable'
 import { ItemLink } from '~/components/item-link'
-import { DisclosureSection } from '@wapijs/ui'
+import { CustomScrollArea, DisclosureSection } from '@wapijs/ui'
 import { METHOD_SEPARATOR, OVERLOAD_SEPARATOR } from '~/constant'
 
 export function resolveItemURI(item: ApiItem): string {
@@ -27,19 +27,19 @@ export function getItemIconByKind(kind: ApiItemKind) {
 		case ApiItemKind.Function:
 		case ApiItemKind.Method:
 			return (
-				<span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary-400/20 p-3 text-base text-primary-700">
+				<span className="flex h-4 w-4 items-center justify-center rounded-full bg-purple-400/20 p-3 text-base text-purple-700">
 					M
 				</span>
 			)
 		case ApiItemKind.Enum:
 			return (
-				<span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary-400/20 p-3 text-base text-primary-700">
+				<span className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-400/20 p-3 text-base text-orange-700">
 					E
 				</span>
 			)
 		case ApiItemKind.Interface:
 			return (
-				<span className="flex h-4 w-4 items-center justify-center rounded-full bg-primary-400/20 p-3 text-base text-primary-700">
+				<span className="flex h-4 w-4 items-center justify-center rounded-full bg-blue-400/20 p-3 text-base text-blue-700">
 					I
 				</span>
 			)
@@ -129,7 +129,7 @@ export function Sidebar({ members }: { readonly members: SidebarSectionItemData[
 	const groupItems = groupMembers(members)
 
 	return (
-		<div className="flex flex-col gap-3 p-3">
+		<div className="flex min-w-[26rem] flex-col gap-3 p-3">
 			{(Object.keys(groupItems) as (keyof GroupedMembers)[])
 				.filter(group => groupItems[group].length)
 				.map((group, idx) => (
@@ -141,7 +141,7 @@ export function Sidebar({ members }: { readonly members: SidebarSectionItemData[
 					>
 						{groupItems[group].map((member, index) => (
 							<ItemLink
-								className={`focus:ring-width-2 ml-2 flex flex-col  p-[5px] pl-2 outline-none focus:rounded focus:border-0 focus:ring focus:ring-primary-500 ${
+								className={` ml-2 flex flex-col rounded-lg  p-2 pl-2 outline-none hover:bg-white/20 focus:rounded focus:border-0 ${
 									decodeURIComponent('') === member.href
 										? 'bg-primary-500 text-white'
 										: 'dark:hover:bg-dark-200 dark:active:bg-dark-100 hover:bg-light-700 active:bg-light-800'

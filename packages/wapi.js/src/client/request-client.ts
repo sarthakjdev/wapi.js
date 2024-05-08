@@ -17,6 +17,9 @@ export class RequestClient implements RequestClientInterface {
 	private userAgent: string
 
 	/**
+	 *  Creates an instance of RequestClient.
+	 * @constructor
+	 * @memberof RequestClient
 	 * Creates an instance of RequestClient.
 	 * @param {RequestClientConfigOptions} options - The configuration options for the request client.
 	 */

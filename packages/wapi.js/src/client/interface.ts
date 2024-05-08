@@ -41,8 +41,8 @@ export interface ClientInterface {
 	requester: RequestClient
 	/**
 	 * Emits an event with the specified event name and data.
-	 * @param eventName - The name of the event.
-	 * @param data - The data associated with the event.
+	 * @param {T} eventName - The name of the event.
+	 * @param {WapiEventDataMap[T]} data - The data associated with the event.
 	 * @returns Returns true if the event was emitted successfully, false otherwise.
 	 */
 	emit<T extends keyof WapiEventDataMap>(eventName: T, data: WapiEventDataMap[T]): boolean
@@ -102,10 +102,10 @@ export interface RequestClientInterface {
 	getRequestUrl(): string
 	/**
 	 * Sends a request to the cloud API.
-	 * @param params - The parameters for the request.
-	 * @param params.path - The path of the API endpoint.
-	 * @param params.body - The body of the request.
-	 * @param params.method - The HTTP method of the request.
+	 * @param {object} params - The parameters for the request.
+	 * @param {string} params.path - The path of the API endpoint.
+	 * @param {string} params.body - The body of the request.
+	 * @param {'GET' | 'POST' | 'DELETE'} params.method - The HTTP method of the request.
 	 * @returns Returns a promise that resolves when the request is completed.
 	 */
 	requestCloudApi(params: {

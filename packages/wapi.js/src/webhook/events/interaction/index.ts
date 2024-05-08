@@ -16,7 +16,9 @@ import {
  * @extends {MessageEvent}
  * @implements {InteractionMessageEventInterface}
  */
-export abstract class InteractionEvent extends MessageEvent implements InteractionMessageEventInterface {
+export abstract class InteractionEvent
+	extends MessageEvent
+	implements InteractionMessageEventInterface {
 	/**
 	 * Creates a new instance of InteractionEvent.
 	 * @param {Object} params - The parameters for creating the InteractionEvent.
@@ -52,7 +54,9 @@ export abstract class InteractionEvent extends MessageEvent implements Interacti
  * @extends {InteractionEvent}
  * @implements {ListInteractionMessageEventInterface}
  */
-export class ListInteractionEvent extends InteractionEvent implements ListInteractionMessageEventInterface {
+export class ListInteractionEvent
+	extends InteractionEvent
+	implements ListInteractionMessageEventInterface {
 	title: string
 	listId: string
 	description: string
@@ -104,7 +108,9 @@ export class ListInteractionEvent extends InteractionEvent implements ListIntera
  * @extends {InteractionEvent}
  * @implements {ButtonReplyInteractionMessageEventInterface}
  */
-export class ReplyButtonInteractionEvent extends InteractionEvent implements ButtonReplyInteractionMessageEventInterface {
+export class ReplyButtonInteractionEvent
+	extends InteractionEvent
+	implements ButtonReplyInteractionMessageEventInterface {
 	title: string
 	buttonId: string
 
@@ -148,11 +154,13 @@ export class ReplyButtonInteractionEvent extends InteractionEvent implements But
 
 /**
  * Represents a quick reply button interaction event.
- * @class
+ * @class QuickReplyButtonInteractionEvent
  * @extends {InteractionEvent}
  * @implements {QuickReplyButtonInteractionEventInterface}
  */
-export class QuickReplyButtonInteractionEvent extends InteractionEvent implements QuickReplyButtonInteractionEventInterface {
+export class QuickReplyButtonInteractionEvent
+	extends InteractionEvent
+	implements QuickReplyButtonInteractionEventInterface {
 	button: { text: string; payload: string }
 
 	/**
