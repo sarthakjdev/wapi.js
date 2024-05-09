@@ -6,9 +6,9 @@ export async function SyntaxHighlighter({
 	code,
 	className = ''
 }: {
-	readonly className?: string
-	readonly code: string
-	readonly lang: string
+	className?: string
+	code: string
+	lang: string
 }) {
 	const highlighter = await getHighlighterCore({
 		themes: [
