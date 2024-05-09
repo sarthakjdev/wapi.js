@@ -10,8 +10,7 @@
 		"start": "node --require dotenv/config src/index.js"
 	},
 	"dependencies": {
-		"@discordjs/core": "^1.1.1",
-		"discord.js": "^14.14.1",
+		"wapi.js": "^14.14.1",
 		"dotenv": "^16.3.1"
 	},
 	"devDependencies": {
