@@ -7,7 +7,7 @@ import { VscSymbolInterface } from '@react-icons/all-files/vsc/VscSymbolInterfac
 import { VscSymbolMethod } from '@react-icons/all-files/vsc/VscSymbolMethod'
 import { VscSymbolVariable } from '@react-icons/all-files/vsc/VscSymbolVariable'
 import { ItemLink } from '~/components/item-link'
-import { CustomScrollArea, DisclosureSection } from '@wapijs/ui'
+import { DisclosureSection } from '@wapijs/ui'
 import { METHOD_SEPARATOR, OVERLOAD_SEPARATOR } from '~/constant'
 import VersionSelector from '../version-selector'
 

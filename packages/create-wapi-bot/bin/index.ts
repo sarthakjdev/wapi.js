@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-// eslint-disable-next-line n/shebang
 import process from 'node:process';
 import { Option, program } from 'commander';
 import chalk from 'chalk';
+
+// eslint-disable-next-line import/no-named-as-default
 import prompts from 'prompts';
 import validateProjectName from 'validate-npm-package-name';
 import packageJSON from '../package.json' assert { type: 'json' };

@@ -19,7 +19,7 @@ export async function SyntaxHighlighter({
 		loadWasm: getWasm
 	})
 
-	const codeHTML = highlighter.codeToHtml(code.trim(), {
+	const codeHtml = highlighter.codeToHtml(code.trim(), {
 		lang,
 		themes: {
 			light: 'github-light',
@@ -30,7 +30,7 @@ export async function SyntaxHighlighter({
 	return (
 		<>
 			{/* eslint-disable-next-line react/no-danger */}
-			<div className={className} dangerouslySetInnerHTML={{ __html: codeHTML }} />
+			<div className={className} dangerouslySetInnerHTML={{ __html: codeHtml }} />
 		</>
 	)
 }

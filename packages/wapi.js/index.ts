@@ -1,5 +1,4 @@
 export * from './src/client/index'
-export * from './src/webhook'
 export * from './src/manager'
 export * from './src/structures'
 export * from './src/webhook/events/audio/interface'

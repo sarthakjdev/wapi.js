@@ -28,7 +28,7 @@ export function installPackages(packageManager: PackageManagerEnum) {
   console.log(`Installing dependencies with ${packageManager}...`);
 
   switch (packageManager) {
-    case "yarn":
+    case PackageManagerEnum.Yarn:
       console.log();
       installCommand = [
         `${packageManager} set version stable`,
@@ -39,11 +39,11 @@ export function installPackages(packageManager: PackageManagerEnum) {
         installCommand,
       ];
       break;
-    case "deno":
+    case PackageManagerEnum.Deno:
       installCommand = `${packageManager} cache --reload src/index.ts`;
       break;
-    case "pnpm":
-    case "bun":
+    case PackageManagerEnum.Pnpm:
+    case PackageManagerEnum.Bun:
       console.log();
       break;
     default:

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { type z } from "zod";
 import { type Client } from "../../client";
 import { BaseManager } from "../base";
 import { type MediaManagerInterface } from "./interface";

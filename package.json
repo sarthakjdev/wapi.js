@@ -10,7 +10,7 @@
     "build": "turbo build --concurrency=3",
     "build:esm": "turbo build:esm  --concurrency=3",
     "build:cjs": "turbo build:cjs  --concurrency=3",
-    "lint": "turbo run lint --concurrency=3",
+    "lint": "turbo run lint --concurrency=5",
     "prepare": "husky install",
     "pretty": "turbo pretty --concurrency=3",
     "clean-install": "turbo run clean-install",

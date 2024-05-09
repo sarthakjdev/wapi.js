@@ -14,7 +14,7 @@ export default async function VersionHomeLayout({
 	const model = new ApiModel()
 	addPackageToModel(model, documentationData)
 
-	const pkg = model.tryGetPackageByName(`@wapijs/wapi.js`)
+	const pkg = model.tryGetPackageByName(`wapi.js`)
 
 	if (!pkg) notFound()
 

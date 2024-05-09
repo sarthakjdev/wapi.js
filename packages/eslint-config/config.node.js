@@ -3,7 +3,6 @@ const { resolve } = require("node:path");
 const project = resolve(process.cwd(), "tsconfig.json");
 module.exports = {
   extends: [
-    "next/core-web-vitals",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",

@@ -10,7 +10,7 @@ import {
 import path from "node:path";
 import process from "node:process";
 import { URL } from "node:url";
-import glob from "fast-glob";
+import { glob } from "fast-glob";
 import chalk from "chalk";
 import { installPackages } from "./reusable-function";
 import { PackageManagerEnum } from "./type.js";
@@ -107,7 +107,7 @@ export async function createWhatsappBot(options: {
   }
 
   if (!deno) {
-    const newPackageJSON = await readFile("./package.json", {
+    const newPackageJson = await readFile("./package.json", {
       encoding: "utf8",
     }).then((str) => {
       let newStr = str.replace("[REPLACE_ME]", directoryName);
@@ -117,7 +117,7 @@ export async function createWhatsappBot(options: {
       );
       return newStr;
     });
-    await writeFile("./package.json", newPackageJSON);
+    await writeFile("./package.json", newPackageJson);
   }
 
   if (doInstallPackage) {

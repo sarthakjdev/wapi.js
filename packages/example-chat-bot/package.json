@@ -43,6 +43,6 @@
 	"packageManager": "pnpm@8.7.0",
 	"dependencies": {
 		"dotenv": "^16.3.1",
-		"@wapijs/wapi.js": "workspace:*"
+		"wapi.js": "workspace:*"
 	}
 }
