@@ -1,5 +1,5 @@
 {
-	"name": "@wapijs/wapi.js",
+	"name": "wapi.js",
 	"version": "0.0.1",
 	"description": "a typescript based client library to build whatsapp cloud api based chat bots",
 	"main": "dist/cjs/index.js",
