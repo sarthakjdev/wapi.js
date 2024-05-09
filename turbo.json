@@ -40,6 +40,9 @@
     },
     "doc:gen": {
       "cache": false
+    },
+    "release": {
+      "cache": false
     }
   }
 }
