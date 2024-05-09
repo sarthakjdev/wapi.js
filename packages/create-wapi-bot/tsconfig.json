@@ -1,6 +1,7 @@
 {
   "extends": "@wapijs/typescript-config/node.base.json",
   "include": ["src/", "*.ts", "./.eslintrc.js", "template", "bin"],
+  "exclude": ["template/"],
   "compilerOptions": {
     "module": "ESNext",
     "outDir": "dist",

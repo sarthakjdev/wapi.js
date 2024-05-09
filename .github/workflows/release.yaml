@@ -1,78 +1,37 @@
-name: Build
-
+name: Publish Release
 on:
   release:
-
+    types: [released]
 jobs:
   npm-publish:
-    environment: Production
-    timeout-minutes: 10
+    name: npm publish
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: User Node.js LTS
-        uses: actions/setup-node@v2
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.4
+      - name: Install node.js v18
+        uses: actions/setup-node@v3
         with:
-          run_install: false
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
 
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        uses: pnpm i --prod --frozen-lockfile --ignore-scripts
 
-      - name: Lint
-        id: lint
-        run: pnpm run lint
+      - name: Build dependencies
+        run: pnpm run build
 
-      - name: Linter Failed
-        if: ${{ failure() }}
-        uses: actions/github-script@v5
+      - name: Extract package and semver from tag
+        id: extract-tag
+        uses: ./format-tag
         with:
-          script: |
-            const { pullRequestData: data } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    commit_sha: context.payload.after
-                })
+          tag: ${{ github.ref_name }}
 
-              if(pullRequestData[0]){
-                 await github.rest.issues.createComment({
-                      issue_number: pullRequestData[0].number,
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      body: `### 🚨  Linter failed`
-                  })
-              } else {
-                  throw new Error('Pull request data not found')
-              }
-
-      - name: Linter Failure Alert
-        if: ${{ failure() }}
-        uses: rtCamp/action-slack-notify@v2
+      - name: Publish package
+        run: |
+          pnpm --filter=${{ steps.extract-tag.outputs.subpackage == 'true' && '@wapijs/' || '' }}${{ steps.extract-tag.outputs.package }} publish --provenance --no-git-checks
         env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: "Linter failed while releasing new version of wapi.js. Check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-          SLACK_TITLE: "🚨🚨🚨 [WAPIJS.CO] MASTER BRANCH RELEASE FAILED 🚨🚨🚨"
-          SLACK_USERNAME: sarthakjdev
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-      - name: Build the packages
-        if: ${{ success() && !failure()}}
-        run: pnpm build
-
-      - name: Build Failure Alert
-        if: ${{ failure() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: "Build failed while releasing new version of wapi.js. Check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-          SLACK_TITLE: "🚨🚨🚨 [WAPIJS.CO] MASTER BRANCH BUILD FAILED 🚨🚨🚨"
-          SLACK_USERNAME: sarthakjdev
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}

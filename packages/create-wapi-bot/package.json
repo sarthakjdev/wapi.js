@@ -22,9 +22,7 @@
     "lib": "src"
   },
   "scripts": {
-    "build:cjs": "pnpm tsc -p tsconfig-cjs.json --pretty",
-    "build:esm": "pnpm tsc -p tsconfig.json --pretty",
-    "build": "pnpm run clean && concurrently -n esm,cjs \"pnpm run build:esm\" \"pnpm run build:cjs\"",
+    "build": "pnpm tsc -p tsconfig.json --pretty",
     "lint": "pnpm eslint .",
     "pretty": "pnpm prettier --write \"src/**/*.ts\""
   },
@@ -61,6 +59,7 @@
     "provenance": true
   },
   "devDependencies": {
+    "@favware/cliff-jumper": "^3.0.3",
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2"
   }

@@ -214,6 +214,9 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1
     devDependencies:
+      '@favware/cliff-jumper':
+        specifier: ^3.0.3
+        version: 3.0.3
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
@@ -418,6 +421,9 @@ importers:
         specifier: ^3.22.2
         version: 3.22.4
     devDependencies:
+      '@favware/cliff-jumper':
+        specifier: ^3.0.3
+        version: 3.0.3
       '@types/express':
         specifier: ^4.17.18
         version: 4.17.20
@@ -1239,6 +1245,31 @@ packages:
   /@eslint/js@8.57.0:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  /@favware/cliff-jumper@3.0.3:
+    resolution: {integrity: sha512-YUeNpExxRu0XrV39aHP9msHBpPPNdog2Gad3MGNzmXAEaM5Qu2xxtOsXKwNzZlCjADbsP03S8oL2nKhAp6nb5w==}
+    engines: {node: '>=v16'}
+    hasBin: true
+    dependencies:
+      '@favware/colorette-spinner': 1.0.1
+      '@sapphire/result': 2.6.6
+      '@sapphire/utilities': 3.15.3
+      colorette: 2.0.20
+      commander: 12.0.0
+      compare-func: 2.0.0
+      conventional-recommended-bump: 9.0.0
+      execa: 8.0.1
+      git-cliff: 2.2.1
+      js-yaml: 4.1.0
+      semver: 7.6.0
+    dev: true
+
+  /@favware/colorette-spinner@1.0.1:
+    resolution: {integrity: sha512-PPYtcLzhSafdylp8NBOxMCYIcLqTUMNiQc7ciBoAIvxNG2egM+P7e2nNPui5+Svyk89Q+Tnbrp139ZRIIBw3IA==}
+    engines: {node: '>=v16'}
+    dependencies:
+      colorette: 2.0.20
+    dev: true
 
   /@headlessui/react@1.7.19(react-dom@18.3.1)(react@18.3.0):
     resolution: {integrity: sha512-Ll+8q3OlMJfJbAKM/+/Y2q6PPYbryqNTXDbryx7SXLIDamkF6iQFbriYHga0dY44PvDhvvBWCx1Xj4U5+G4hOw==}
@@ -2218,6 +2249,16 @@ packages:
     transitivePeerDependencies:
       - '@types/node'
     dev: false
+
+  /@sapphire/result@2.6.6:
+    resolution: {integrity: sha512-QCjj7X/QlY0QUCeAaZQmnrsMH/b2BMQYee3F1Y5iF17JagUQqO3KZlG7vfXWQU3SRAJX5OgZZynBjixUH+nNGg==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
+    dev: true
+
+  /@sapphire/utilities@3.15.3:
+    resolution: {integrity: sha512-K5dFGOB5XvblXFN+Av+Tch/dVBAifmxtZ9/2mFo8VqzbiaFJIRUuoPAoNsp8pWYaU423yV8bfD8WsCSNd9w1YQ==}
+    engines: {node: '>=v14.0.0'}
+    dev: true
 
   /@shikijs/core@1.4.0:
     resolution: {integrity: sha512-CxpKLntAi64h3j+TwWqVIQObPTED0FyXLHTTh3MKXtqiQNn2JGcMQQ362LftDbc9kYbDtrksNMNoVmVXzKFYUQ==}
@@ -3647,7 +3688,6 @@ packages:
   /commander@12.0.0:
     resolution: {integrity: sha512-MwVNWlYjDTtOjX5PiD7o5pK0UrFU/OYgcJfjjK4RaHZETNtjJqrZa9Y9ds88+A+f+d5lv+561eZ+yCKoS3gbAA==}
     engines: {node: '>=18'}
-    dev: false
 
   /commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
@@ -3719,6 +3759,16 @@ packages:
       compare-func: 2.0.0
     dev: true
 
+  /conventional-changelog-preset-loader@4.1.0:
+    resolution: {integrity: sha512-HozQjJicZTuRhCRTq4rZbefaiCzRM2pr6u2NL3XhrmQm4RMnDXfESU6JKu/pnKwx5xtdkYfNCsbhN5exhiKGJA==}
+    engines: {node: '>=16'}
+    dev: true
+
+  /conventional-commits-filter@4.0.0:
+    resolution: {integrity: sha512-rnpnibcSOdFcdclpFwWa+pPlZJhXE7l+XK04zxhbWrhgpR96h33QLz8hITTXbcYICxVr3HZFtbtUAQ+4LdBo9A==}
+    engines: {node: '>=16'}
+    dev: true
+
   /conventional-commits-parser@4.0.0:
     resolution: {integrity: sha512-WRv5j1FsVM5FISJkoYMR6tPk07fkKT0UodruX4je86V4owk451yjXAKzKAPOs9l7y59E2viHUS9eQ+dfUA9NSg==}
     engines: {node: '>=14'}
@@ -3728,6 +3778,30 @@ packages:
       is-text-path: 1.0.1
       meow: 8.1.2
       split2: 3.2.2
+    dev: true
+
+  /conventional-commits-parser@5.0.0:
+    resolution: {integrity: sha512-ZPMl0ZJbw74iS9LuX9YIAiW8pfM5p3yh2o/NbXHbkFuZzY5jvdi5jFycEOkmBW5H5I7nA+D6f3UcsCLP2vvSEA==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      JSONStream: 1.3.5
+      is-text-path: 2.0.0
+      meow: 12.1.1
+      split2: 4.2.0
+    dev: true
+
+  /conventional-recommended-bump@9.0.0:
+    resolution: {integrity: sha512-HR1yD0G5HgYAu6K0wJjLd7QGRK8MQDqqj6Tn1n/ja1dFwBCE6QmV+iSgQ5F7hkx7OUR/8bHpxJqYtXj2f/opPQ==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      conventional-changelog-preset-loader: 4.1.0
+      conventional-commits-filter: 4.0.0
+      conventional-commits-parser: 5.0.0
+      git-raw-commits: 4.0.0
+      git-semver-tags: 7.0.1
+      meow: 12.1.1
     dev: true
 
   /convert-source-map@2.0.0:
@@ -3820,6 +3894,11 @@ packages:
   /dargs@7.0.0:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}
     engines: {node: '>=8'}
+    dev: true
+
+  /dargs@8.1.0:
+    resolution: {integrity: sha512-wAV9QHOsNbwnWdNW2FYvE1P56wtgSbM+3SZcdGiWQILwVjACCXDCI3Ai8QlCjMDB8YK5zySiXZYBiwGmNY3lnw==}
+    engines: {node: '>=12'}
     dev: true
 
   /date-fns@2.30.0:
@@ -5036,6 +5115,21 @@ packages:
       strip-final-newline: 3.0.0
     dev: true
 
+  /execa@8.0.1:
+    resolution: {integrity: sha512-VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==}
+    engines: {node: '>=16.17'}
+    dependencies:
+      cross-spawn: 7.0.3
+      get-stream: 8.0.1
+      human-signals: 5.0.0
+      is-stream: 3.0.0
+      merge-stream: 2.0.0
+      npm-run-path: 5.1.0
+      onetime: 6.0.0
+      signal-exit: 4.1.0
+      strip-final-newline: 3.0.0
+    dev: true
+
   /express@4.18.2:
     resolution: {integrity: sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==}
     engines: {node: '>= 0.10.0'}
@@ -5333,6 +5427,11 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /get-stream@8.0.1:
+    resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
+    engines: {node: '>=16'}
+    dev: true
+
   /get-symbol-description@1.0.0:
     resolution: {integrity: sha512-2EmdH1YvIQiZpltCNgkuiUnyukzxM/R6NDJX31Ke3BG1Nq5b0S2PhX59UKi9vZpPDQVdqn+1IcaAwnzTT5vCjw==}
     engines: {node: '>= 0.4'}
@@ -5347,6 +5446,68 @@ packages:
       resolve-pkg-maps: 1.0.0
     dev: true
 
+  /git-cliff-darwin-arm64@2.2.1:
+    resolution: {integrity: sha512-ZFoqm1Il5ayIYmcbtmZoNmudmsRZPsntXGjR4YHOqKm32ehBlLWL9loqrd6DOJoxj6nlQygoxJ0r4rBPDgczMQ==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /git-cliff-darwin-x64@2.2.1:
+    resolution: {integrity: sha512-fTICBh8vvaLYjMqr8ebbIQbqsg/Wd9YrsxO2uol+WzQInpxxY0uwxYY1mqCyUYA2D/NS5Cm+fz53axM3NppulA==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /git-cliff-linux-arm64@2.2.1:
+    resolution: {integrity: sha512-oxanf/f+ZnB3D2VmY8mLVNMzV527G6k++Wng0vZlQz/89neGD8wmBbzkqgsKs2quLqWnc8p/lNsTKBGtPP5pJg==}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /git-cliff-linux-x64@2.2.1:
+    resolution: {integrity: sha512-LJToEYKqcvrpX/uv8jklScljrCQWsPThrZEo6arhxCDXUWi/hUYtqaJDU8CowL5SoUhgY4JKXzacU1cmNUWC5Q==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /git-cliff-windows-arm64@2.2.1:
+    resolution: {integrity: sha512-iJSDadCKLedtPBvkpfRVc9pB2tsmiEwAazPyXBZzHH+SmxQmQwbGOHp1ExPaOTvKqCvFiwQbG1/9X4LbVI5tmw==}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /git-cliff-windows-x64@2.2.1:
+    resolution: {integrity: sha512-nMP+z6y51Fz7KjhOcMQf0WQcTCuIxcGW0L7lBBDRtDt2AXG0enGPj3AB1xJlAX/EDWM4bENDwswwKtjQt9mkGA==}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /git-cliff@2.2.1:
+    resolution: {integrity: sha512-bALbaUgFgbaqc21iWIje4CgXWfVgtQ5v+NqTd++hbkPgC6blCenrTRudhExRX58GOvWPQnKgPuSus1uhpxU2iw==}
+    hasBin: true
+    dependencies:
+      execa: 8.0.1
+    optionalDependencies:
+      git-cliff-darwin-arm64: 2.2.1
+      git-cliff-darwin-x64: 2.2.1
+      git-cliff-linux-arm64: 2.2.1
+      git-cliff-linux-x64: 2.2.1
+      git-cliff-windows-arm64: 2.2.1
+      git-cliff-windows-x64: 2.2.1
+    dev: true
+
   /git-raw-commits@2.0.11:
     resolution: {integrity: sha512-VnctFhw+xfj8Va1xtfEqCUD2XDrbAPSJx+hSrE5K7fGdjZruW7XV+QOrN7LF/RJyvspRiD2I0asWsxFp0ya26A==}
     engines: {node: '>=10'}
@@ -5357,6 +5518,25 @@ packages:
       meow: 8.1.2
       split2: 3.2.2
       through2: 4.0.2
+    dev: true
+
+  /git-raw-commits@4.0.0:
+    resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      dargs: 8.1.0
+      meow: 12.1.1
+      split2: 4.2.0
+    dev: true
+
+  /git-semver-tags@7.0.1:
+    resolution: {integrity: sha512-NY0ZHjJzyyNXHTDZmj+GG7PyuAKtMsyWSwh07CR2hOZFa+/yoTsXci/nF2obzL8UDhakFNkD9gNdt/Ed+cxh2Q==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      meow: 12.1.1
+      semver: 7.6.0
     dev: true
 
   /github-slugger@2.0.0:
@@ -5600,6 +5780,11 @@ packages:
   /human-signals@4.3.1:
     resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
     engines: {node: '>=14.18.0'}
+    dev: true
+
+  /human-signals@5.0.0:
+    resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
+    engines: {node: '>=16.17.0'}
     dev: true
 
   /husky@8.0.3:
@@ -5943,6 +6128,13 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       text-extensions: 1.9.0
+    dev: true
+
+  /is-text-path@2.0.0:
+    resolution: {integrity: sha512-+oDTluR6WEjdXEJMnC2z6A4FRwFoYuvShVVEGsS7ewc0UTi2QtAKMDJuL4BDEVt+5T7MjFo12RP8ghOM75oKJw==}
+    engines: {node: '>=8'}
+    dependencies:
+      text-extensions: 2.4.0
     dev: true
 
   /is-typed-array@1.1.12:
@@ -6791,6 +6983,11 @@ packages:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
     dev: false
+
+  /meow@12.1.1:
+    resolution: {integrity: sha512-BhXM0Au22RwUneMPwSCnyhTOizdWoIEPU9sp0Aqa1PnDMR5Wv2FGXYDjuzJEIX+Eo2Rb8xuYe5jrnm5QowQFkw==}
+    engines: {node: '>=16.10'}
+    dev: true
 
   /meow@8.1.2:
     resolution: {integrity: sha512-r85E3NdZ+mpYk1C6RjPFEMSE+s1iZMuHtsHAqY0DT3jZczl0diWUZ8g6oU7h0M9cD2EL+PzaYghhCLzR0ZNn5Q==}
@@ -9004,6 +9201,11 @@ packages:
       readable-stream: 3.6.2
     dev: true
 
+  /split2@4.2.0:
+    resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
+    engines: {node: '>= 10.x'}
+    dev: true
+
   /sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
     dev: false
@@ -9353,6 +9555,11 @@ packages:
   /text-extensions@1.9.0:
     resolution: {integrity: sha512-wiBrwC1EhBelW12Zy26JeOUkQ5mRu+5o8rpsJk5+2t+Y5vE7e842qtZDQ2g1NpX/29HdyFeJ4nSIhI47ENSxlQ==}
     engines: {node: '>=0.10'}
+    dev: true
+
+  /text-extensions@2.4.0:
+    resolution: {integrity: sha512-te/NtwBwfiNRLf9Ijqx3T0nlqZiQ2XrrtBvu+cLL8ZRrGkO0NHTug8MYFKyoSrv/sHTaSKfilUkizV6XhxMJ3g==}
+    engines: {node: '>=8'}
     dev: true
 
   /text-table@0.2.0:
