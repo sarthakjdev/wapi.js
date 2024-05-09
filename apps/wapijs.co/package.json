@@ -29,7 +29,8 @@
 		"react-use": "^17.5.0",
 		"react-wrap-balancer": "^1.1.0",
 		"remark-gfm": "^3.0.1",
-		"shiki": "^1.4.0"
+		"shiki": "^1.4.0",
+		"@wapijs/tailwind-config": "workspace:*"
 	},
 	"devDependencies": {
 		"@discordjs/docgen": "^0.12.1",
@@ -38,7 +39,6 @@
 		"@types/react-dom": "^18",
 		"@wapijs/eslint-config": "workspace:*",
 		"@wapijs/prettier-config": "workspace:*",
-		"@wapijs/tailwind-config": "workspace:*",
 		"@wapijs/typescript-config": "workspace:*",
 		"@wapijs/ui": "workspace:*",
 		"docgen": "link:@types/@discordjs/docgen",
