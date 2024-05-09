@@ -1,7 +1,7 @@
 import type { ApiModel, Excerpt } from '@microsoft/api-extractor-model'
 import { ExcerptTokenKind } from '@microsoft/api-extractor-model'
 import { ItemLink } from '~/components/item-link'
-import { resolveItemURI } from '~/reusable-function'
+import { resolveItemUri } from '~/reusable-function'
 
 export interface ExcerptTextProps {
 	readonly excerpt: Excerpt
@@ -29,7 +29,7 @@ export function ExcerptText({ model, excerpt }: ExcerptTextProps) {
 					return (
 						<ItemLink
 							className="text-primary-500"
-							itemURI={resolveItemURI(item)}
+							itemUri={resolveItemUri(item)}
 							key={`${item.displayName}-${item.containerKey}-${idx}`}
 						>
 							{token.text}

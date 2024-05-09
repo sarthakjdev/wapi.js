@@ -1,5 +1,5 @@
 import type { ApiDeclaredItem } from '@microsoft/api-extractor-model'
-import { resolveItemURI } from '~/reusable-function'
+import { resolveItemUri } from '~/reusable-function'
 import { ItemLink } from './item-link'
 
 export function InheritanceText({ parent }: { readonly parent: ApiDeclaredItem }) {
@@ -8,7 +8,7 @@ export function InheritanceText({ parent }: { readonly parent: ApiDeclaredItem }
 			Inherited from{' '}
 			<ItemLink
 				className="focus:ring-width-2 rounded font-mono text-primary-500 outline-none focus:ring focus:ring-primary-500"
-				itemURI={resolveItemURI(parent)}
+				itemUri={resolveItemUri(parent)}
 			>
 				{parent.displayName}
 			</ItemLink>

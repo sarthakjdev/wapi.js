@@ -148,7 +148,7 @@ export function Sidebar({ members }: { readonly members: SidebarSectionItemData[
 										? 'bg-primary-500 text-white'
 										: 'dark:hover:bg-dark-200 dark:active:bg-dark-100 hover:bg-light-700 active:bg-light-800'
 								}`}
-								itemURI={member.href}
+								itemUri={member.href}
 								key={`${member.name}-${index}`}
 								title={member.name}
 							>

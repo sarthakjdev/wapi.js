@@ -6,7 +6,7 @@ import { VscSymbolInterface } from '@react-icons/all-files/vsc/VscSymbolInterfac
 import { VscSymbolMethod } from '@react-icons/all-files/vsc/VscSymbolMethod'
 import { VscSymbolVariable } from '@react-icons/all-files/vsc/VscSymbolVariable'
 
-export function resolveItemURI(item: ApiItem): string {
+export function resolveItemUri(item: ApiItem): string {
 	return !item.parent || item.parent.kind === ApiItemKind.EntryPoint
 		? `${item.displayName}${OVERLOAD_SEPARATOR}${item.kind}`
 		: `${item.parent.displayName}${OVERLOAD_SEPARATOR}${item.parent.kind}${METHOD_SEPARATOR}${item.displayName}`

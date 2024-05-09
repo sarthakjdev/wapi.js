@@ -15,7 +15,7 @@ import Link from 'next/link'
 import { Fragment, useCallback, type ReactNode } from 'react'
 import { ItemLink } from '../item-link'
 import { SyntaxHighlighter } from '@wapijs/ui'
-import { resolveItemURI } from '../../reusable-function'
+import { resolveItemUri } from '../../reusable-function'
 import {
 	DefaultValueBlock,
 	DeprecatedBlock,
@@ -65,7 +65,7 @@ export function TSDoc({
 						return (
 							<ItemLink
 								className="focus:ring-width-2 rounded font-mono text-primary-500 outline-none focus:ring focus:ring-primary-500"
-								itemURI={resolveItemURI(foundItem)}
+								itemUri={resolveItemUri(foundItem)}
 								key={idx}
 							>
 								{linkText ?? foundItem.displayName}

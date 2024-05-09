@@ -1,12 +1,12 @@
 import type { ApiFunction } from '@microsoft/api-extractor-model'
 import { Header } from '~/components/header'
-import { FunctionBody } from './FunctionBody'
+import { FunctionBody } from './function-body'
 
 // const OverloadSwitcher = dynamic(async () => import('../../OverloadSwitcher'))
 
 export function Function({ item }: { readonly item: ApiFunction }) {
 	const header = (
-		<Header kind={item.kind} name={item.name} sourceURL={item.sourceLocation.fileUrl} />
+		<Header kind={item.kind} name={item.name} sourceUrl={item.sourceLocation.fileUrl} />
 	)
 
 	if (item.getMergedSiblings().length > 1) {

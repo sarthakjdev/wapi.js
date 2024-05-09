@@ -13,7 +13,7 @@ export function ObjectHeader({ item }: ObjectHeaderProps) {
 			<Header
 				kind={item.kind}
 				name={item.displayName}
-				sourceURL={item.sourceLocation.fileUrl}
+				sourceUrl={item.sourceLocation.fileUrl}
 			/>
 			<SyntaxHighlighter
 				lang="typescript"

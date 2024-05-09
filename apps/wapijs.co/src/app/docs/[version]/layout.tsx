@@ -1,6 +1,6 @@
 import { Sidebar, type SidebarSectionItemData } from '~/components/nav/sidebar'
 import { ApiModel } from '@microsoft/api-extractor-model'
-import { resolveItemURI } from '~/reusable-function'
+import { resolveItemUri } from '~/reusable-function'
 import { notFound } from 'next/navigation'
 import { addPackageToModel, fetchDocumentationJsonDataFromSlug } from '~/utils/api-extractor'
 
@@ -22,7 +22,7 @@ export default async function VersionHomeLayout({
 		if (!pkg) notFound()
 		const allMembers = pkg.members[0].members.map(
 			(item): SidebarSectionItemData => ({
-				href: resolveItemURI(item),
+				href: resolveItemUri(item),
 				kind: item.kind,
 				name: item.displayName,
 				overloadIndex: 0

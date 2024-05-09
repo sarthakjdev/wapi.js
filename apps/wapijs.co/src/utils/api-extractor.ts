@@ -79,16 +79,16 @@ export async function getMember(params: { branchOrVersion: string; item: string 
 	const model = new ApiModel()
 
 	if (branchOrVersion === 'master') {
-		const modelJSONFiles = await Promise.all(
+		const modelJsonFiles = await Promise.all(
 			PACKAGES.map(async () => await fetchDocumentationJsonDataFromSlug(branchOrVersion))
 		)
 
-		for (const modelJSONFile of modelJSONFiles) {
-			addPackageToModel(model, modelJSONFile)
+		for (const modelJsonFile of modelJsonFiles) {
+			addPackageToModel(model, modelJsonFile)
 		}
 	} else {
-		const modelJSON = await fetchDocumentationJsonDataFromSlug(branchOrVersion)
-		addPackageToModel(model, modelJSON)
+		const modelJson = await fetchDocumentationJsonDataFromSlug(branchOrVersion)
+		addPackageToModel(model, modelJson)
 	}
 
 	const [memberName, overloadIndex] = decodeURIComponent(item).split(OVERLOAD_SEPARATOR)

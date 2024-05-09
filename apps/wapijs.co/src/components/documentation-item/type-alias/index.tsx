@@ -10,7 +10,7 @@ export function TypeAlias({ item }: { readonly item: ApiTypeAlias }) {
 			<Header
 				kind={item.kind}
 				name={item.displayName}
-				sourceURL={item.sourceLocation.fileUrl}
+				sourceUrl={item.sourceLocation.fileUrl}
 			/>
 			{/* @ts-expect-error async component */}
 			<SyntaxHighlighter code={item.excerpt.text} />

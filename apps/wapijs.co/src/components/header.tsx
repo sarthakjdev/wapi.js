@@ -7,11 +7,11 @@ import { getItemIconByKind } from '~/reusable-function'
 export function Header({
 	kind,
 	name,
-	sourceURL
+	sourceUrl
 }: PropsWithChildren<{
-	readonly kind: ApiItemKind
-	readonly name: string
-	readonly sourceURL?: string | undefined
+	kind: ApiItemKind
+	name: string
+	sourceUrl?: string | undefined
 }>) {
 	return (
 		<div className="flex flex-col">
@@ -20,10 +20,10 @@ export function Header({
 					<span>{getItemIconByKind(kind)}</span>
 					{name}
 				</span>
-				{sourceURL ? (
+				{sourceUrl ? (
 					<Link
 						className="text-primary-500"
-						href={sourceURL}
+						href={sourceUrl}
 						rel="external noopener noreferrer"
 						target="_blank"
 					>

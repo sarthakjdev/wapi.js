@@ -39,30 +39,28 @@ const VersionHome = async ({ params }: { params: { version: string } }) => {
 
 	const fileContent = await fetchReadMeFileFromGithub()
 
-	return (
-		<div className="prose prose-invert mx-auto max-w-screen-xl">
-			<MDXRemote
-				options={{
-					mdxOptions: {
-						remarkPlugins: [remarkGfm],
-						rehypePlugins: [
-							[
-								rehypeShikiFromHighlighter as any,
-								highlighter,
-								{
-									themes: {
-										light: 'github-light',
-										dark: 'github-dark-dimmed'
-									}
-								}
-							]
-						]
-					}
-				}}
-				source={fileContent}
-			/>
-		</div>
-	)
+	const MDX = await MDXRemote({
+		options: {
+			mdxOptions: {
+				remarkPlugins: [remarkGfm],
+				rehypePlugins: [
+					[
+						rehypeShikiFromHighlighter as any,
+						highlighter,
+						{
+							themes: {
+								light: 'github-light',
+								dark: 'github-dark-dimmed'
+							}
+						}
+					]
+				]
+			}
+		},
+		source: fileContent
+	})
+
+	return <div className="prose prose-invert mx-auto max-w-screen-xl">{MDX}</div>
 }
 
 export default VersionHome
