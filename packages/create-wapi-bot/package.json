@@ -1,0 +1,67 @@
+{
+  "name": "create-wapi-bot",
+  "version": "0.0.0",
+  "description": "a utility to quickly initiate a whatsapp bot",
+  "author": {
+    "name": "Sarthak",
+    "email": "sarthak@softlancer.co",
+    "url": "https://softlancer.co"
+  },
+  "bin": "./bin/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sarthakjdev/wapi.js.git",
+    "directory": "packages/create-wapi-bot"
+  },
+  "files": [
+    "dist",
+    "template"
+  ],
+  "directories": {
+    "bin": "bin",
+    "lib": "src"
+  },
+  "scripts": {
+    "build": "pnpm tsc -p tsconfig.json --pretty",
+    "lint": "pnpm eslint .",
+    "pretty": "pnpm prettier --write \"src/**/*.ts\"",
+    "release": "cliff-jumper"
+  },
+  "bugs": {
+    "url": "https://github.com/sarthakjdev/wapi.js/issues"
+  },
+  "keywords": [
+    "whatsapp",
+    "whatsapp-cloud-api",
+    "whatsapp-chat-bot",
+    "chat-bot",
+    "whatsapp-bot"
+  ],
+  "homepage": "https://www.wapijs.co",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@wapijs/eslint-config": "workspace:*",
+    "@wapijs/prettier-config": "workspace:*",
+    "@wapijs/typescript-config": "workspace:*",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "edit-json-file": "^1.8.0",
+    "eslint": "^8.48.0",
+    "fast-glob": "^3.3.2",
+    "prompts": "^2.4.2",
+    "validate-npm-package-name": "^5.0.1"
+  },
+  "packageManager": "pnpm@8.7.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "devDependencies": {
+    "@favware/cliff-jumper": "^3.0.3",
+    "@types/prompts": "^2.4.9",
+    "@types/validate-npm-package-name": "^4.0.2"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "wapi.js",
+  "packagePath": "packages/wapi.js",
+  "tagTemplate": "{{new-version}}",
+  "identifierBase": false
+}

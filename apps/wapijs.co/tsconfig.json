@@ -1,0 +1,19 @@
+{
+	"extends": "@wapijs/typescript-config/next.base.json",
+	"compilerOptions": {
+		"paths": {
+			"~/*": ["./src/*"],
+			"root/*": ["./*"]
+		}
+	},
+	"include": [
+		"next-env.d.ts",
+		"next.config.js",
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		"tailwind.config.js",
+		".eslintrc.js"
+	],
+	"exclude": ["node_modules"]
+}

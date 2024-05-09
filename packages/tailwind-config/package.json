@@ -1,0 +1,19 @@
+{
+	"name": "@wapijs/tailwind-config",
+	"version": "1.0.0",
+	"private": true,
+	"files": [
+		"tailwind.config.js",
+		"postcss.config.js"
+	],
+	"devDependencies": {
+		"@wapijs/prettier-config": "workspace:*",
+		"autoprefixer": "^10.4.14",
+		"postcss": "^8.4.21",
+		"tailwindcss": "^3.3.1"
+	},
+	"dependencies": {
+		"@headlessui/tailwindcss": "^0.2.0",
+		"@tailwindcss/typography": "^0.5.10"
+	}
+}

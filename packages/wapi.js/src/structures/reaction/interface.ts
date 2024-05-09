@@ -1,8 +1,19 @@
-import { type BaseMessageInterface } from '../message/interface'
+import { type BaseMessageInterface } from "../message/interface";
 
+/**
+ * Represents the interface for a reaction message.
+ * @interface
+ * @extends {BaseMessageInterface}
+ */
 export interface ReactionMessageInterface extends BaseMessageInterface {
-	data: {
-		messageId: string
-		emoji: string
-	}
+  data: {
+    /**
+     * The ID of the message.
+     */
+    messageId: string;
+    /**
+     * The emoji associated with the reaction.
+     */
+    emoji: string;
+  };
 }

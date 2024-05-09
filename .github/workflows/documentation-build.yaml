@@ -1,0 +1,96 @@
+name: Documentation
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "packages/wapi.js/**"
+    tags:
+      - "**"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "The branch, tag or SHA to checkout"
+        required: true
+      ref_type:
+        type: choice
+        description: "Branch or tag"
+        options:
+          - branch
+          - tag
+        required: true
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    environment: Production
+    name: Build & upload documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: User Node.js LTS
+        uses: actions/setup-node@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: false
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Generate docs
+        run: pnpm run doc:gen
+
+      - name: Checkout docs repository
+        uses: actions/checkout@v3
+        with:
+          repository: "sarthakjdev/wapijs-docs-json"
+          token: ${{ secrets.WAPIJS_DOCS_ACCESS_TOKEN }}
+          path: "out"
+
+      - name: Extract package and semver from tag
+        if: ${{ github.ref_type == 'tag' }}
+        id: extract-tag
+        uses: ./format-tag
+        with:
+          tag: ${{ github.ref_name }}
+
+      - name: Move docs to correct directory
+        if: ${{ github.ref_type == 'tag' }}
+        env:
+          PACKAGE: ${{ steps.extract-tag.outputs.package }}
+          SEMVER: ${{ steps.extract-tag.outputs.semver }}
+        run: |
+          mkdir -p "out/wapi.js"
+          mv "packages/wapi.js/docs/docs.json" "out/wapi.js/${SEMVER}.json"
+
+      - name: Move docs to correct directory
+        if: ${{ github.ref_type == 'branch' }}
+        run: |
+          input_string="$GITHUB_REF_NAME"
+          if [[ "$input_string" == *"/"* ]]; then
+              documentation_file_name=$(echo "$input_string" | cut -d'/' -f2)
+              echo "Extracted: $documentation_file_name"
+          else
+              documentation_file_name="$GITHUB_REF_NAME"
+              echo "No slash in the string, nothing to extract."
+          fi
+          mkdir -p "out/wapi.js" 
+          mv "packages/wapi.js/docs/docs.json" "out/wapi.js/${documentation_file_name}.json"
+
+      - name: Commit and push
+        run: |
+          cd out
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .
+          git commit -m "Docs build for ${GITHUB_REF_TYPE} ${GITHUB_REF_NAME}: ${GITHUB_SHA}" || true
+          git push

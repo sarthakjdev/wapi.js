@@ -1,0 +1,13 @@
+{
+  "name": "@wapijs/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "files": [
+    "next.base.json",
+    "node.base.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

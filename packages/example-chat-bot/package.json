@@ -1,0 +1,48 @@
+{
+	"name": "@wapijs/example-chat-bot",
+	"version": "0.0.0",
+	"description": "example whatsapp cloud api chatbot",
+	"private": true,
+	"main": "./dist/index.js",
+	"scripts": {
+		"watch": "pnpm tsc --watch",
+		"dev": "concurrently 'pnpm build:dev' 'nodemon -L'",
+		"build:dev": "node build.mjs --watch",
+		"build:prod": "NODE_ENV=production node ./build.mjs",
+		"lint": "pnpm eslint . --max-warnings=10",
+		"pretty": "pnpm prettier --write \"src/**/*.ts\"",
+		"clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile"
+	},
+	"keywords": [
+		"whatsapp-cloud-api",
+		"whatsapp-chatbot",
+		"whatsapp-api",
+		"typescript",
+		"nodejs",
+		"wapi.js",
+		"wapi.js library"
+	],
+	"authors": [
+		"sarthak@softlancer.co"
+	],
+	"license": "MIT",
+	"devDependencies": {
+		"@esbuild-plugins/tsconfig-paths": "^0.1.2",
+		"@types/node": "^20.10.2",
+		"@vitest/coverage-v8": "^0.34.6",
+		"concurrently": "^8.2.1",
+		"esbuild": "^0.19.8",
+		"esbuild-node-externals": "^1.11.0",
+		"esbuild-plugin-tsc": "^0.4.0",
+		"nodemon": "^3.0.2",
+		"typescript": "5.0.4",
+		"@wapijs/eslint-config": "workspace:*",
+		"@wapijs/prettier-config": "workspace:*",
+		"@wapijs/typescript-config": "workspace:*"
+	},
+	"packageManager": "pnpm@8.7.0",
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"wapi.js": "workspace:*"
+	}
+}
