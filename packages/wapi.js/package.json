@@ -25,10 +25,16 @@
 		"docs:new": "api-extractor run --local",
 		"doc:gen": "docgen -i '*.ts' -c ./docs/index.json -r ./ -o ./docs/docs.json --typescript && pnpm run docs:new"
 	},
-	"keywords": [],
+	"keywords": [
+		"whatsapp",
+		"whatsapp-cloud-api",
+		"whatsapp-chat-bot",
+		"chat-bot",
+		"whatsapp-bot"
+	],
 	"author": {
 		"name": "Sarthak",
-		"email": "contact.sarthakjain@gmail.com",
+		"email": "sarthak@softlancer.co",
 		"url": "https://sarthakjdev.com"
 	},
 	"repository": {
@@ -36,6 +42,10 @@
 		"url": "https://github.com/wapijs/wapi.js.git",
 		"directory": "packages/wapi.js"
 	},
+	"bugs": {
+		"url": "https://www.github.com/sarthakjdev/wapi.js/issues"
+	},
+	"homepage": "https://www.wapijs.co",
 	"license": "Apache-2.0",
 	"devDependencies": {
 		"@types/express": "^4.17.18",
@@ -57,5 +67,12 @@
 		"express": "^4.18.2",
 		"zod": "^3.22.2"
 	},
-	"packageManager": "pnpm@8.7.0"
+	"packageManager": "pnpm@8.7.0",
+	"engines": {
+		"node": ">=18"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
 }
