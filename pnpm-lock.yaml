@@ -411,9 +411,6 @@ importers:
       '@microsoft/api-extractor':
         specifier: ^7.43.1
         version: 7.43.1(@types/node@20.8.7)
-      dayjs:
-        specifier: ^1.11.9
-        version: 1.11.10
       express:
         specifier: ^4.18.2
         version: 4.18.2
@@ -3907,10 +3904,6 @@ packages:
     dependencies:
       '@babel/runtime': 7.24.4
     dev: true
-
-  /dayjs@1.11.10:
-    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
-    dev: false
 
   /debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}

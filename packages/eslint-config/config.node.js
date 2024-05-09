@@ -76,24 +76,6 @@ module.exports = {
     ],
 
     "@typescript-eslint/no-unnecessary-condition": "off",
-    "@typescript-eslint/no-restricted-imports": [
-      "error",
-      {
-        paths: [
-          {
-            name: "use-local-storage-state",
-            message:
-              "Please use useLocalStorage form ~/hooks/use-local-storage instead",
-            allowTypeImports: true,
-          },
-          {
-            name: "dayjs",
-            message: "Please use dayjs from ~/util/dayjs instead.",
-            allowTypeImports: true,
-          },
-        ],
-      },
-    ],
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
     "@typescript-eslint/no-non-null-assertion": "error",
