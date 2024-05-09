@@ -1,13 +1,21 @@
-import { type BaseMessageInterface } from '../message/interface'
-import { type LanguageEnum } from '../message/types'
+import { type BaseMessageInterface } from "../message/interface";
+import { type LanguageEnum } from "../message/types";
 
 /**
- * @interface
+ * Represents the interface for a template message.
+ * @interface TemplateMessageInterface
  * @extends {BaseMessageInterface}
  */
 export interface TemplateMessageInterface extends BaseMessageInterface {
-	data: {
-		templateName: string
-		language: LanguageEnum
-	}
+  data: {
+    /**
+     * The name of the template.
+     */
+    templateName: string;
+    /**
+     * The language of the template.
+     * @type {LanguageEnum}
+     */
+    language: LanguageEnum;
+  };
 }

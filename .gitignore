@@ -10,3 +10,6 @@ dist
 coverage
 .vscode/*
 cache
+.next
+docs.json
+docs.api.json

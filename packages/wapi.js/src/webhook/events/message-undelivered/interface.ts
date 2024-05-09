@@ -1,3 +1,7 @@
-import { type StatusUpdateEventInterface } from '../base/interface'
+import { type StatusUpdateEventInterface } from "../base/interface";
 
-export interface MessageUndeliveredEventInterface extends StatusUpdateEventInterface {}
+/**
+ * Represents the interface for a message undelivered event.
+ * @interface MessageUndeliveredEventInterface
+ */
+export type MessageUndeliveredEventInterface = StatusUpdateEventInterface;

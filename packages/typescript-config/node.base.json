@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "declaration": true,
+    "newLine": "lf",
+    "target": "ESNext",
+    "noImplicitAny": true
+  },
+  "lib": ["ESNext"]
+}

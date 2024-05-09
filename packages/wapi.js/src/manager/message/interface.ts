@@ -1,18 +1,36 @@
-import { type Client } from '../../client'
-import { type BaseMessage } from '../../structures/message'
-import { type BaseManagerInterface } from '../base/interface'
+import { type Client } from "../../client";
+import { type BaseMessage } from "../../structures/message";
+import { type BaseManagerInterface } from "../base/interface";
 
 /**
- * Message manager interface\
+ * Message manager interface
  * @interface
  * @extends {BaseManagerInterface}
  */
 export interface MessageManagerInterface extends BaseManagerInterface {
-	client: Client
-	send<T extends BaseMessage<string>>(props: { message: T; phoneNumber: string }): Promise<string>
-	reply<T extends BaseMessage<string>>(props: {
-		replyToMessageId: string
-		message: T
-		phoneNumber: string
-	}): Promise<string>
+  /**
+   * The client associated with the message manager.
+   */
+  client: Client;
+
+  /**
+   * Sends a message to the specified phone number.
+   * @param props - The properties for sending the message.
+   * @returns A promise that resolves to the message ID.
+   */
+  send<T extends BaseMessage<string>>(props: {
+    message: T;
+    phoneNumber: string;
+  }): Promise<string>;
+
+  /**
+   * Replies to a message with the specified message.
+   * @param props - The properties for replying to the message.
+   * @returns A promise that resolves to the message ID.
+   */
+  reply<T extends BaseMessage<string>>(props: {
+    replyToMessageId: string;
+    message: T;
+    phoneNumber: string;
+  }): Promise<string>;
 }

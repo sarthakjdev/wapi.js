@@ -1,9 +1,14 @@
-import { type StatusUpdateEventInterface } from '../base/interface'
+import { type StatusUpdateEventInterface } from "../base/interface";
 
 /**
- * @interface
+ * Represents the interface for a message failed event.
+ * @interface MessageFailedEventInterface
  * @extends {StatusUpdateEventInterface}
  */
-export interface MessageFailedEventInterface extends StatusUpdateEventInterface {
-	failReason: string
+export interface MessageFailedEventInterface
+  extends StatusUpdateEventInterface {
+  /**
+   * The reason for the message failure.
+   */
+  failReason: string;
 }

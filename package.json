@@ -10,10 +10,12 @@
     "build": "turbo build --concurrency=3",
     "build:esm": "turbo build:esm  --concurrency=3",
     "build:cjs": "turbo build:cjs  --concurrency=3",
-    "lint": "turbo run lint --concurrency=3",
+    "lint": "turbo run lint --concurrency=5",
     "prepare": "husky install",
     "pretty": "turbo pretty --concurrency=3",
-    "clean-install": "turbo run clean-install"
+    "clean-install": "turbo run clean-install",
+    "doc:gen": "turbo run doc:gen",
+    "release": "turbo run release --concurrency=3"
   },
   "keywords": [
     "whatsapp-cloud-api",
@@ -25,7 +27,7 @@
     "wapi.js library"
   ],
   "authors": [
-    "contact.sarthakjain@gmail.com"
+    "sarthak@softlancer.co"
   ],
   "license": "Apache-2.0",
   "repository": {
@@ -54,8 +56,11 @@
     "prettier": "^3.0.3",
     "tsup": "^7.2.0",
     "turbo": "^1.10.13",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
+    "typescript": "5.0.4",
+    "vitest": "^0.34.6",
+    "@wapijs/eslint-config": "workspace:*",
+    "@wapijs/prettier-config": "workspace:*",
+    "@wapijs/typescript-config": "workspace:*"
   },
   "packageManager": "pnpm@8.7.0"
 }

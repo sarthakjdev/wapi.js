@@ -1,12 +1,31 @@
-import { type MessageTypeEnum } from './types'
+import { type MessageTypeEnum } from "./types";
 
+/**
+ * Represents the base message interface.
+ * @interface
+ */
 export interface BaseMessageInterface {
-	type: MessageTypeEnum
-	messaging_product: 'whatsapp'
-	recipient_type: 'individual'
+  /**
+   * The type of the message.
+   * @type {MessageTypeEnum}
+   */
+  type: MessageTypeEnum;
+
+  /**
+   * The messaging product.
+   */
+  messaging_product: "whatsapp";
+
+  /**
+   * The recipient type.
+   */
+  recipient_type: "individual";
 }
 
+/**
+ * Represents the message status enum.
+ */
 export enum MessageStatusEnum {
-	Read = 'read',
-	Send = 'sent'
+  Read = "read",
+  Send = "sent",
 }
