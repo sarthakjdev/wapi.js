@@ -16,6 +16,10 @@
 	}
 }
 
+* {
+	min-width: 0;
+}
+
 body {
 	color: rgb(var(--foreground-rgb));
 }
@@ -42,8 +46,8 @@ html.dark .os-scrollbar-handle:hover {
 	--os-handle-bg-hover: rgba(0, 0, 0, 0.7);
 }
 
-html.dark .shiki,
-html.dark .shiki span {
+html .shiki,
+html .shiki span {
 	color: var(--shiki-dark) !important;
 	/* background-color: var(--shiki-dark-bg) !important; */
 	background-color: transparent !important;
@@ -54,6 +58,22 @@ html.dark .shiki span {
 
 pre {
 	background-color: transparent !important;
+}
+
+pre {
+	padding: 12px 0px;
+	line-height: 1.5;
+	border-radius: 6px;
+	border-width: 1px;
+	border-color: rgb(64, 64, 64) !important;
+}
+
+.prose img {
+	margin: 0;
+}
+
+a > img {
+	display: inline-block;
 }
 
 code {

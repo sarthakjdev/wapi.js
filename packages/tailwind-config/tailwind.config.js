@@ -1,6 +1,7 @@
 const colors = require('tailwindcss/colors')
 const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette')
 const plugin = require('tailwindcss/plugin')
+const typography = require('@tailwindcss/typography')
 
 function addVariablesForColors({ addBase, theme }) {
 	let allColors = flattenColorPalette(theme('colors'))
@@ -87,56 +88,6 @@ module.exports = {
 			}
 		}
 	},
-	boxShadow: {
-		// light
-		'tremor-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-		'tremor-card': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-		'tremor-dropdown': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-		// dark
-		'dark-tremor-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-		'dark-tremor-card': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-		'dark-tremor-dropdown': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
-	},
-	borderRadius: {
-		'tremor-small': '0.375rem',
-		'tremor-default': '0.5rem',
-		'tremor-full': '9999px'
-	},
-	fontSize: {
-		'tremor-label': ['0.75rem'],
-		'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
-		'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],
-		'tremor-metric': ['1.875rem', { lineHeight: '2.25rem' }]
-	},
-	safelist: [
-		{
-			pattern:
-				/^(bg-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-			variants: ['hover', 'ui-selected']
-		},
-		{
-			pattern:
-				/^(text-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-			variants: ['hover', 'ui-selected']
-		},
-		{
-			pattern:
-				/^(border-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-			variants: ['hover', 'ui-selected']
-		},
-		{
-			pattern:
-				/^(ring-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
-		},
-		{
-			pattern:
-				/^(stroke-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
-		},
-		{
-			pattern:
-				/^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
-		}
-	],
 	typography: {
 		DEFAULT: {
 			css: {
@@ -145,10 +96,7 @@ module.exports = {
 					'line-height': '1.5',
 					'border-radius': '6px',
 					'border-width': '1px',
-					'border-color': 'rgb(212, 212, 212)'
-				},
-				'.dark pre': {
-					'border-color': 'rgb(64, 64, 64)'
+					'border-color': 'rgb(64, 64, 64) !important'
 				},
 				code: {
 					'font-size': '1em',
@@ -162,9 +110,6 @@ module.exports = {
 					'text-decoration': 'none'
 				},
 				'a:hover': {
-					color: '#3d48c3'
-				},
-				'.dark a:hover': {
 					color: '#7782fa'
 				},
 				'a > img': {
@@ -209,7 +154,6 @@ module.exports = {
 	},
 	plugins: [
 		require('@headlessui/tailwindcss'),
-		require('@tailwindcss/typography'),
 		addVariablesForColors,
 		plugin(function ({ addUtilities }) {
 			addUtilities({
@@ -224,6 +168,7 @@ module.exports = {
 					'overflow-wrap': 'anywhere'
 				}
 			})
-		})
+		}),
+		typography
 	]
 }

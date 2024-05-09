@@ -1,18 +1,19 @@
+<div align="center">
+<br />
 <p align="center">
-<img src="https://www.wapijs.co/logo.png" alt="wapi.js"  height="300" width="540" />
+<a href="https://wapijs.co"><img src="https://www.wapijs.co/logo.png" alt="wapi.js"  height="200" width="260" /></a>
 </p>
-
-<p align="center">
+<br />
+<p>
   <a href="/"><img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" /></a>
   <a href="https://www.npmjs.com/package/@whatsappjs/Wapi.js"><img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white" /></a>
   <a href=""><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" /></a>
 </p>
+</div>
 
 ## 📌 Status
 
-:warning: Work in progress
-
-This library is currently in beta version and in work in progress state. Report issues [here](https://github.com/sarthakjdev/wapi.js/issues).
+Beta Version - This library is not stable right now. It is currently in beta version. Report issues [here](https://github.com/sarthakjdev/wapi.js/issues).
 
 ## 📖 About
 
@@ -20,19 +21,21 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 
 ### Packages:
 
-- [**wapi.js**]('/packages/wapi.js'): Interact with WhatsApp cloud API efficiently.
+- [**wapi.js**]('/packages/wapi.js'): Interact with WhatsApp cloud API with simple and easy to manage code.
+- [**create-wapi-bot**]('/packages/create-wapi-bot): Start with the development of your whatsapp bot using this starter template utility.
 
 ## ✨ Features
 
 - Object-Oriented Architecture
 - Single Client Model
-- Zod based Schema parsing Capabilities
-- Message Sending Capabilities
-- Event Listener for Notifications
+- Send Messages with least configuration
+- Event Listener for Notifications (support both User and System Notifications)
+- Upload Media to whatsapp servers
+- Reply and React to incoming messages.
 
 ## 💻 Installation
 
-Ensure you have Node.js 16 LTS version to use this library.
+Ensure you have Node.js 18 LTS version to use this library.
 
 ```sh
 npm install wapi.js
@@ -40,11 +43,17 @@ yarn add wapi.js
 pnpm install wapi.js
 ```
 
-> Note: This library is not affiliated with the official WhatsApp Cloud API.
+> Note: This library is not affiliated with the official WhatsApp Cloud API or does not act as any official solution provided the the Meta Inclusive Private Limited, this is just a open source library built for developers to support them in building whatsapp cloud api based chat bots easily.
 
 ## 🚀 Usage
 
-Kickstart your first WhatsApp application with Wapi.js. Check the [User Manual](./USER_MANUAL.md).
+- Kickstart your first WhatsApp application with Wapi.js. Check the [User Manual](./USER_MANUAL.md).
+- You can check out the example whatsapp bot here. [Example Chat bot](./packages/example-chat-bot/)
+- You can get started with the development of your bot with this starter template utility.
+
+```sh
+pnpm create-wapi-bot
+```
 
 ## 🔗 References
 
@@ -87,18 +96,6 @@ import { Client, TextMessage } from 'wapi.js'
 	})
 
 	whatsappClient.initiate()
-
-
-```
-
-## 🧰 Scripts
-
-```sh
-pnpm run build          # Build the project
-pnpm run watch          # Compile in watch mode
-pnpm run clean-install  # Clean install modules
-pnpm run lint           # Check eslint errors
-pnpm run lint:fix       # Fix eslint errors
 ```
 
 ## 🤝 Contribution Guidelines
@@ -117,6 +114,8 @@ Distributed under the Apache 2.0 License. View [LICENSE](./LICENSE).
 
 ## 📞 Contact
 
-[Sarthak Jain](https://sarthakjdev.com)  
-Email: contact.sarthakjain@gmail.com  
-[Twitter](https://twitter.com/sarthakjdev) | [LinkedIn](https://www.linkedin.com/in/sarthakjdev)
+- [Sarthak Jain](https://sarthakjdev.com)
+- Email: sarthak@softlancer.co
+- [Twitter](https://twitter.com/sarthakjdev) | [LinkedIn](https://www.linkedin.com/in/sarthakjdev)
+
+Note: This library is a part of a open source product building initiative by [Softlancer](https://github.com/softlancerhq), and this repository would soon be moved under the same organisation.
