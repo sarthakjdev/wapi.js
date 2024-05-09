@@ -104,6 +104,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.10
         version: 0.5.12(tailwindcss@3.4.3)
+      '@wapijs/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -159,9 +162,6 @@ importers:
       '@wapijs/prettier-config':
         specifier: workspace:*
         version: link:../../packages/prettier-config
-      '@wapijs/tailwind-config':
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
       '@wapijs/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
