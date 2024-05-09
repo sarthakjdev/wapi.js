@@ -27,7 +27,6 @@ export async function fetchDocumentationJsonDataFromSlug(version: string) {
 				join(process.cwd(), '..', '..', 'packages', 'wapi.js', 'docs', 'docs.api.json'),
 				'utf8'
 			)
-
 			try {
 				const parsedJson = JSON.parse(res)
 				return parsedJson
@@ -41,8 +40,7 @@ export async function fetchDocumentationJsonDataFromSlug(version: string) {
 					method: 'GET'
 				}
 			).then(res => res.json())
-
-			console.log(response)
+			console.log({ response })
 			return response
 		}
 	} catch (error) {

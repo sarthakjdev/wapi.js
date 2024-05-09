@@ -5,16 +5,19 @@ import { notFound } from 'next/navigation'
 import { addPackageToModel, fetchDocumentationJsonDataFromSlug } from '~/utils/api-extractor'
 
 export default async function VersionHomeLayout({
-	children
+	children,
+	params
 }: Readonly<{
 	children: React.ReactNode
+	params: { version: string }
 }>) {
-	const documentationData = await fetchDocumentationJsonDataFromSlug('documentation')
-
+	console.log({ params })
+	const documentationData = await fetchDocumentationJsonDataFromSlug(params.version)
+	console.log({ documentationData })
 	const model = new ApiModel()
 	addPackageToModel(model, documentationData)
 
-	const pkg = model.tryGetPackageByName(`wapi.js`)
+	const pkg = model.tryGetPackageByName(`@wapijs/wapi.js`)
 
 	if (!pkg) notFound()
 

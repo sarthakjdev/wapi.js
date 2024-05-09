@@ -13,7 +13,7 @@ async function fetchReadMeFileFromGithub() {
 		return fileContent
 	} else {
 		const response = await fetch(
-			'https://raw.githubusercontent.com/sarthakjdev/wapi.js/master /README.md',
+			'https://raw.githubusercontent.com/sarthakjdev/wapi.js/feat/documentation/README.md',
 			{
 				method: 'GET'
 			}
