@@ -1,20 +1,21 @@
-import { type MessageEventInterface } from '../base/interface'
+import { type MessageEventInterface } from "../base/interface";
 
 /**
  * Represents an interaction message event.
  * @extends {MessageEventInterface}
  */
-export type InteractionMessageEventInterface = MessageEventInterface
+export type InteractionMessageEventInterface = MessageEventInterface;
 
 /**
  * Represents a list interaction message event.
  * @interface ListInteractionMessageEventInterface
  * @extends {InteractionMessageEventInterface}
  */
-export interface ListInteractionMessageEventInterface extends InteractionMessageEventInterface {
-	listId: string
-	title: string
-	description: string
+export interface ListInteractionMessageEventInterface
+  extends InteractionMessageEventInterface {
+  listId: string;
+  title: string;
+  description: string;
 }
 
 /**
@@ -23,9 +24,9 @@ export interface ListInteractionMessageEventInterface extends InteractionMessage
  * @extends {InteractionMessageEventInterface}
  */
 export interface ButtonReplyInteractionMessageEventInterface
-	extends InteractionMessageEventInterface {
-	buttonId: string
-	title: string
+  extends InteractionMessageEventInterface {
+  buttonId: string;
+  title: string;
 }
 
 /**
@@ -34,11 +35,11 @@ export interface ButtonReplyInteractionMessageEventInterface
  * @extends {InteractionMessageEventInterface}
  */
 export interface QuickReplyButtonInteractionEventInterface
-	extends InteractionMessageEventInterface {
-	button: {
-		text: string
-		payload: string
-	}
+  extends InteractionMessageEventInterface {
+  button: {
+    text: string;
+    payload: string;
+  };
 }
 
 /**
@@ -46,8 +47,8 @@ export interface QuickReplyButtonInteractionEventInterface
  * @enum
  */
 export enum AdInteractionSourceTypeEnum {
-	Ad = 'ad',
-	Post = 'post'
+  Ad = "ad",
+  Post = "post",
 }
 
 /**
@@ -55,8 +56,8 @@ export enum AdInteractionSourceTypeEnum {
  * @enum
  */
 export enum AdInteractionSourceMediaTypeEnum {
-	Image = 'image',
-	Video = 'video'
+  Image = "image",
+  Video = "video",
 }
 
 /**
@@ -64,17 +65,18 @@ export enum AdInteractionSourceMediaTypeEnum {
  * @interface
  * @extends {InteractionMessageEventInterface}
  */
-export interface AdInteractionEventInterface extends InteractionMessageEventInterface {
-	text: string
-	source: {
-		url: string
-		id: string
-		type: AdInteractionSourceTypeEnum
-		title: string
-		description: string
-		mediaUrl?: string
-		mediaType: AdInteractionSourceMediaTypeEnum
-		thumbnailUrl: string
-		ctwaClid: string
-	}
+export interface AdInteractionEventInterface
+  extends InteractionMessageEventInterface {
+  text: string;
+  source: {
+    url: string;
+    id: string;
+    type: AdInteractionSourceTypeEnum;
+    title: string;
+    description: string;
+    mediaUrl?: string;
+    mediaType: AdInteractionSourceMediaTypeEnum;
+    thumbnailUrl: string;
+    ctwaClid: string;
+  };
 }

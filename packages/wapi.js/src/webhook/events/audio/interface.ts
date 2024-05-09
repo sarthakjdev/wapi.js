@@ -1,5 +1,5 @@
-import { type AudioMessage } from '../../../structures'
-import { type MediaMessageEventInterface } from '../base/interface'
+import { type AudioMessage } from "../../../structures";
+import { type MediaMessageEventInterface } from "../base/interface";
 
 /**
  * Represents an audio message event.
@@ -7,9 +7,9 @@ import { type MediaMessageEventInterface } from '../base/interface'
  * @extends {MediaMessageEventInterface}
  */
 export interface AudioMessageEventInterface extends MediaMessageEventInterface {
-	/**
-	 * The audio message associated with the event.
-	 * @type {AudioMessage}
-	 */
-	audio: AudioMessage
+  /**
+   * The audio message associated with the event.
+   * @type {AudioMessage}
+   */
+  audio: AudioMessage;
 }

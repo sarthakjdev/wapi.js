@@ -3,18 +3,18 @@
  * @interface UnknownEventInterface
  */
 export interface UnknownEventInterface {
-	/**
-	 * The code associated with the unknown event.
-	 */
-	code: string
+  /**
+   * The code associated with the unknown event.
+   */
+  code: string;
 
-	/**
-	 * The message associated with the unknown event.
-	 */
-	message: string
+  /**
+   * The message associated with the unknown event.
+   */
+  message: string;
 
-	/**
-	 * The title of the unknown event.
-	 */
-	title: string
+  /**
+   * The title of the unknown event.
+   */
+  title: string;
 }

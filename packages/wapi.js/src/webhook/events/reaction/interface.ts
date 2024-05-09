@@ -1,5 +1,5 @@
-import { type ReactionMessage } from '../../../structures'
-import { type MessageEventInterface } from '../base/interface'
+import { type ReactionMessage } from "../../../structures";
+import { type MessageEventInterface } from "../base/interface";
 
 /**
  * Represents the interface for a reaction event.
@@ -7,9 +7,9 @@ import { type MessageEventInterface } from '../base/interface'
  * @extends {MessageEventInterface}
  */
 export interface ReactionEventInterface extends MessageEventInterface {
-	/**
-	 * The reaction message associated with the event.
-	 * @type {ReactionMessage}
-	 */
-	reaction: ReactionMessage
+  /**
+   * The reaction message associated with the event.
+   * @type {ReactionMessage}
+   */
+  reaction: ReactionMessage;
 }

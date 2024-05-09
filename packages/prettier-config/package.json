@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "files": [
-    "config.js"
+    "config.node.js",
+    "config.next.js"
   ],
   "devDependencies": {
     "prettier": "^3.2.5",

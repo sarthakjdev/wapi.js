@@ -1,1 +1,1 @@
-module.exports = require("@wapijs/prettier-config/config.js");
+module.exports = require('@wapijs/prettier-config/config.next')

@@ -1,7 +1,7 @@
-import { type StatusUpdateEventInterface } from '../base/interface'
+import { type StatusUpdateEventInterface } from "../base/interface";
 
 /**
  * Represents the interface for a message read event.
  * @interface MessageReadEventInterface
  */
-export type MessageReadEventInterface = StatusUpdateEventInterface
+export type MessageReadEventInterface = StatusUpdateEventInterface;

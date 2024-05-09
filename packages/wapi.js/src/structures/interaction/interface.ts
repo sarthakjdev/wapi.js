@@ -1,9 +1,9 @@
-import { type z } from 'zod'
-import { type BaseMessageInterface } from '../message/interface'
+import { type z } from "zod";
+import { type BaseMessageInterface } from "../message/interface";
 import {
-	type ProductListInteractiveMessageSection,
-	type ListInteractiveMessageSection
-} from '../../api-request-payload-schema'
+  type ProductListInteractiveMessageSection,
+  type ListInteractiveMessageSection,
+} from "../../api-request-payload-schema";
 
 /**
  * Represents the interface for an interactive message.
@@ -11,11 +11,11 @@ import {
  * @extends {BaseMessageInterface}
  */
 export interface InteractiveMessageInterface extends BaseMessageInterface {
-	interactiveMessageData: {
-		type: InteractiveMessageTypeEnum
-		footerText?: string
-		bodyText: string
-	}
+  interactiveMessageData: {
+    type: InteractiveMessageTypeEnum;
+    footerText?: string;
+    bodyText: string;
+  };
 }
 
 /**
@@ -23,10 +23,11 @@ export interface InteractiveMessageInterface extends BaseMessageInterface {
  * @interface
  * @extends {InteractiveMessageInterface}
  */
-export interface ButtonInteractionMessageInterface extends InteractiveMessageInterface {
-	data: {
-		buttons: { id: string; title: string }[]
-	}
+export interface ButtonInteractionMessageInterface
+  extends InteractiveMessageInterface {
+  data: {
+    buttons: { id: string; title: string }[];
+  };
 }
 
 /**
@@ -34,11 +35,12 @@ export interface ButtonInteractionMessageInterface extends InteractiveMessageInt
  * @interface
  * @extends {InteractiveMessageInterface}
  */
-export interface ListInteractionMessageInterface extends InteractiveMessageInterface {
-	data: {
-		buttonText: string
-		sections: z.infer<typeof ListInteractiveMessageSection>[]
-	}
+export interface ListInteractionMessageInterface
+  extends InteractiveMessageInterface {
+  data: {
+    buttonText: string;
+    sections: z.infer<typeof ListInteractiveMessageSection>[];
+  };
 }
 
 /**
@@ -46,11 +48,12 @@ export interface ListInteractionMessageInterface extends InteractiveMessageInter
  * @interface
  * @extends {InteractiveMessageInterface}
  */
-export interface ProductInteractionMessageInterface extends InteractiveMessageInterface {
-	data: {
-		catalogId: string
-		productRetailerId: string
-	}
+export interface ProductInteractionMessageInterface
+  extends InteractiveMessageInterface {
+  data: {
+    catalogId: string;
+    productRetailerId: string;
+  };
 }
 
 /**
@@ -58,12 +61,13 @@ export interface ProductInteractionMessageInterface extends InteractiveMessageIn
  * @interface
  * @extends {InteractiveMessageInterface}
  */
-export interface ProductListInteractionMessageInterface extends InteractiveMessageInterface {
-	data: {
-		catalogId: string
-		productRetailerId: string
-		sections: z.infer<typeof ProductListInteractiveMessageSection>[]
-	}
+export interface ProductListInteractionMessageInterface
+  extends InteractiveMessageInterface {
+  data: {
+    catalogId: string;
+    productRetailerId: string;
+    sections: z.infer<typeof ProductListInteractiveMessageSection>[];
+  };
 }
 
 /**
@@ -71,10 +75,10 @@ export interface ProductListInteractionMessageInterface extends InteractiveMessa
  * @enum
  */
 export enum InteractiveMessageTypeEnum {
-	Button = 'button',
-	Catalog = 'catalog_message',
-	List = 'list',
-	Product = 'product',
-	ProductList = 'product_list',
-	Flow = 'flow'
+  Button = "button",
+  Catalog = "catalog_message",
+  List = "list",
+  Product = "product",
+  ProductList = "product_list",
+  Flow = "flow",
 }

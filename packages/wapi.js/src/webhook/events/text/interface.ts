@@ -1,5 +1,5 @@
-import { type TextMessage } from '../../../structures'
-import { type MessageEventInterface } from '../base/interface'
+import { type TextMessage } from "../../../structures";
+import { type MessageEventInterface } from "../base/interface";
 
 /**
  * Represents an event interface for a text message.
@@ -7,5 +7,5 @@ import { type MessageEventInterface } from '../base/interface'
  * @extends {MessageEventInterface}
  */
 export interface TextMessageEventInterface extends MessageEventInterface {
-	text: TextMessage
+  text: TextMessage;
 }
