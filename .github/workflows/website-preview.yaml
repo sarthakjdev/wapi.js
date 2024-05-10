@@ -1,4 +1,4 @@
-name: Preview Deploy Documentation
+name: Deploy Preview Documentation
 
 on:
   workflow_dispatch: {}

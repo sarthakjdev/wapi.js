@@ -24,14 +24,8 @@ jobs:
       - name: Build dependencies
         run: pnpm run build
 
-      - name: Extract package and semver from tag
-        id: extract-tag
-        uses: ./format-tag
-        with:
-          tag: ${{ github.ref_name }}
-
-      - name: Publish package
-        run: |
-          pnpm --filter=${{ steps.extract-tag.outputs.subpackage == 'true' && '@wapijs/' || '' }}${{ steps.extract-tag.outputs.package }} publish --provenance --no-git-checks
+      - name: Publish Release
+        uses: zowe-actions/octorelease@v1
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
