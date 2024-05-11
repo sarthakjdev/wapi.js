@@ -1,10 +1,13 @@
-name: Preview Deploy Documentation
+name: Deploy Preview Documentation
 
 on:
   workflow_dispatch: {}
   push:
     branches-ignore:
       - "master"
+    # un-comment this after testing will be done !!
+    # paths:
+    #   - "apps/wapijs.co/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

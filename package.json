@@ -1,6 +1,6 @@
 {
   "name": "wapijs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "wapi.js is a node library built for developing whatsapp cloud API based app in a user friendly way.",
   "private": true,
   "scripts": {
@@ -10,12 +10,11 @@
     "build": "turbo build --concurrency=3",
     "build:esm": "turbo build:esm  --concurrency=3",
     "build:cjs": "turbo build:cjs  --concurrency=3",
-    "lint": "turbo run lint --concurrency=5",
+    "lint": "turbo run lint --concurrency=3",
     "prepare": "husky install",
     "pretty": "turbo pretty --concurrency=3",
     "clean-install": "turbo run clean-install",
-    "doc:gen": "turbo run doc:gen",
-    "release": "turbo run release --concurrency=3"
+    "doc:gen": "turbo run doc:gen"
   },
   "keywords": [
     "whatsapp-cloud-api",
@@ -40,10 +39,14 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@semantic-release/git": "^10.0.1",
     "@types/node": "^20.5.9",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
     "@vitest/coverage-v8": "^0.34.6",
+    "@wapijs/eslint-config": "workspace:*",
+    "@wapijs/prettier-config": "workspace:*",
+    "@wapijs/typescript-config": "workspace:*",
     "concurrently": "^8.2.1",
     "eslint": "^8.48.0",
     "eslint-config-next": "^13.4.19",
@@ -57,10 +60,7 @@
     "tsup": "^7.2.0",
     "turbo": "^1.10.13",
     "typescript": "5.0.4",
-    "vitest": "^0.34.6",
-    "@wapijs/eslint-config": "workspace:*",
-    "@wapijs/prettier-config": "workspace:*",
-    "@wapijs/typescript-config": "workspace:*"
+    "vitest": "^0.34.6"
   },
   "packageManager": "pnpm@8.7.0"
 }
