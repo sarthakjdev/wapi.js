@@ -1,67 +1,79 @@
 {
-  "name": "wapijs",
+  "name": "wapi.js",
   "version": "0.1.0",
-  "description": "wapi.js is a node library built for developing whatsapp cloud API based app in a user friendly way.",
-  "private": true,
+  "description": "a typescript based client library to build whatsapp cloud api based chat bots",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/cjs/index.js"
+    }
+  },
   "scripts": {
-    "watch": "turbo watch --concurrency=3",
-    "test": "turbo test --concurrency=3",
-    "clean": "turbo clean --concurrency=3",
-    "build": "turbo build --concurrency=3",
-    "build:esm": "turbo build:esm  --concurrency=3",
-    "build:cjs": "turbo build:cjs  --concurrency=3",
-    "lint": "turbo run lint --concurrency=3",
-    "prepare": "husky install",
-    "pretty": "turbo pretty --concurrency=3",
-    "clean-install": "turbo run clean-install",
-    "doc:gen": "turbo run doc:gen"
+    "watch": "concurrently -n esm,cjs \"pnpm tsc -p tsconfig.json --watch\" \"pnpm tsc -p tsconfig-cjs.json --watch\"  ",
+    "test": "vitest run",
+    "clean": "rm -rf ./dist",
+    "build:cjs": "pnpm tsc -p tsconfig-cjs.json --pretty",
+    "build:esm": "pnpm tsc -p tsconfig.json --pretty",
+    "build": "pnpm run clean && concurrently -n esm,cjs \"pnpm run build:esm\" \"pnpm run build:cjs\"",
+    "lint": "pnpm eslint . --max-warnings=20",
+    "pretty": "pnpm prettier --write \"src/**/*.ts\"",
+    "clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
+    "release": "cliff-jumper",
+    "docs:new": "api-extractor run --local",
+    "doc:gen": "docgen -i '*.ts' -c ./docs/index.json -r ./ -o ./docs/docs.json --typescript && pnpm run docs:new"
   },
   "keywords": [
+    "whatsapp",
     "whatsapp-cloud-api",
-    "whatsapp-chatbot",
-    "whatsapp-api",
-    "typescript",
-    "nodejs",
-    "wapi.js",
-    "wapi.js library"
+    "whatsapp-chat-bot",
+    "chat-bot",
+    "whatsapp-bot"
   ],
-  "authors": [
-    "sarthak@softlancer.co"
-  ],
-  "license": "Apache-2.0",
+  "author": {
+    "name": "Sarthak",
+    "email": "sarthak@softlancer.co",
+    "url": "https://sarthakjdev.com"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sarthakjdev/wapi.js.git"
+    "url": "https://github.com/sarthakjdev/wapi.js.git",
+    "directory": "packages/wapi.js"
   },
   "bugs": {
-    "url": "https://github.com/wapijs/wapi.js/issues"
+    "url": "https://www.github.com/sarthakjdev/wapi.js/issues"
   },
+  "homepage": "https://www.wapijs.co",
+  "license": "Apache-2.0",
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
-    "@commitlint/config-conventional": "^17.7.0",
-    "@semantic-release/git": "^10.0.1",
-    "@types/node": "^20.5.9",
-    "@typescript-eslint/eslint-plugin": "^6.6.0",
-    "@typescript-eslint/parser": "^6.6.0",
-    "@vitest/coverage-v8": "^0.34.6",
+    "@favware/cliff-jumper": "^3.0.3",
+    "@types/express": "^4.17.18",
     "@wapijs/eslint-config": "workspace:*",
     "@wapijs/prettier-config": "workspace:*",
     "@wapijs/typescript-config": "workspace:*",
     "concurrently": "^8.2.1",
-    "eslint": "^8.48.0",
-    "eslint-config-next": "^13.4.19",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-import-resolver-typescript": "^3.6.0",
-    "eslint-nibble": "^8.1.0",
-    "eslint-plugin-import": "^2.28.1",
-    "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "semantic-release": "^23.1.1",
+    "ts-enum-utils": "^1.0.3",
     "tsup": "^7.2.0",
-    "turbo": "^1.10.13",
-    "typescript": "5.0.4",
+    "typescript": "^5.0.4",
     "vitest": "^0.34.6"
   },
-  "packageManager": "pnpm@8.7.0"
+  "dependencies": {
+    "@discordjs/docgen": "^0.12.1",
+    "@microsoft/api-extractor": "^7.43.1",
+    "express": "^4.18.2",
+    "zod": "^3.22.2"
+  },
+  "packageManager": "pnpm@8.7.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }
