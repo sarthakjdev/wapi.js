@@ -17,6 +17,8 @@ jobs:
       issues: write
       pull-requests: write
       id-token: write
+    env:
+      HUSKY: 0
     steps:
       - name: Checkout
         uses: actions/checkout@v3
