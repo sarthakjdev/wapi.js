@@ -21,21 +21,21 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 
 ### Packages:
 
-- [**wapi.js**]('/packages/wapi.js'): Interact with WhatsApp cloud API with simple and easy to manage code.
-- [**create-wapi-bot**]('/packages/create-wapi-bot): Start with the development of your whatsapp bot using this starter template utility.
+- [**wapi.js**]('/packages/wapi.js'): Interact with WhatsApp cloud API with simple and easy-to-manage code.
+- [**create-wapi-bot**]('/packages/create-wapi-bot): Start with the development of your WhatsApp bot using this starter template utility.
 
 ## ✨ Features
 
 - Object-Oriented Architecture
 - Single Client Model
-- Send Messages with least configuration
+- Send Messages with the least configuration
 - Event Listener for Notifications (support both User and System Notifications)
-- Upload Media to whatsapp servers
+- Upload Media to WhatsApp servers
 - Reply and React to incoming messages.
 
 ## 💻 Installation
 
-Ensure you have Node.js 18 LTS version to use this library.
+Ensure you have the Node.js 18 LTS version to use this library.
 
 ```sh
 npm install wapi.js
@@ -48,7 +48,7 @@ pnpm install wapi.js
 ## 🚀 Usage
 
 - Kickstart your first WhatsApp application with Wapi.js. Check the [User Manual](./USER_MANUAL.md).
-- You can check out the example whatsapp bot here. [Example Chat bot](./packages/example-chat-bot/)
+- You can check out the example WhatsApp bot here. [Example Chatbot](./packages/example-chat-bot/)
 - You can get started with the development of your bot with this starter template utility.
 
 ```sh
@@ -118,4 +118,4 @@ Distributed under the Apache 2.0 License. View [LICENSE](./LICENSE).
 - Email: sarthak@softlancer.co
 - [Twitter](https://twitter.com/sarthakjdev) | [LinkedIn](https://www.linkedin.com/in/sarthakjdev)
 
-Note: This library is a part of a open source product building initiative by [Softlancer](https://github.com/softlancerhq), and this repository would soon be moved under the same organisation.
+Note: This library is part of an open-source product-building initiative by [Softlancer](https://github.com/softlancerhq), and this repository will soon be moved under the same organization.
