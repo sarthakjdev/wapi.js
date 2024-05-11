@@ -1,12 +1,8 @@
-name: Extract API Documentation
+name: Documentation build
 on:
-  push:
-    branches:
-      - "master"
-    paths:
-      - "packages/wapi.js/**"
-    tags:
-      - "**"
+  release:
+    types:
+      - created
   workflow_dispatch:
     inputs:
       ref:
@@ -24,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-upload-docs:
     environment: Production
     name: Build & upload documentation
     runs-on: ubuntu-latest
@@ -56,7 +52,7 @@ jobs:
           token: ${{ secrets.WAPIJS_DOCS_ACCESS_TOKEN }}
           path: "out"
 
-      - name: Extract package and semver from tag
+      - name: Extract package and semantic version from release tag
         if: ${{ github.ref_type == 'tag' }}
         id: extract-tag
         uses: ./format-tag
@@ -94,3 +90,46 @@ jobs:
           git add .
           git commit -m "Docs build for ${GITHUB_REF_TYPE} ${GITHUB_REF_NAME}: ${GITHUB_SHA}" || true
           git push
+
+  deploy-docutmentation:
+    environment: Production
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: User Node.js LTS
+        uses: actions/setup-node@v2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Install Vercel CLI
+        run: pnpm -g add vercel@canary
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: apps/wapijs.co
+
+      - name: Build
+        run: pnpm run build
+        working-directory: apps/wapijs.co
+
+      - name: Trigger Production Deployment
+        run: vercel deploy -y --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
+
+      - name: Deployment Failure Alert
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: "production deployment failed, check [HERE](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          SLACK_TITLE: "🚨🚨🚨 [WAPIJS.CO] MASTER BRANCH DEPLOYMENT FAILED 🚨🚨🚨"
+          SLACK_USERNAME: sarthakjdev
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

@@ -5,6 +5,9 @@ on:
   push:
     branches-ignore:
       - "master"
+    # un-comment this after testing will be done !!
+    # paths:
+    #   - "apps/wapijs.co/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
