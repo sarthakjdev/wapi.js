@@ -9,7 +9,7 @@
 		"dev": "concurrently 'pnpm build:dev' 'nodemon -L'",
 		"build:dev": "node build.mjs --watch",
 		"build:prod": "NODE_ENV=production node ./build.mjs",
-		"lint": "pnpm eslint . --max-warnings=10",
+		"lint": "pnpm eslint .",
 		"pretty": "pnpm prettier --write \"src/**/*.ts\"",
 		"clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile"
 	},

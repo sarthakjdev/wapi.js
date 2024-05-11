@@ -10,12 +10,11 @@
     "build": "turbo build --concurrency=3",
     "build:esm": "turbo build:esm  --concurrency=3",
     "build:cjs": "turbo build:cjs  --concurrency=3",
-    "lint": "turbo run lint --concurrency=5",
+    "lint": "turbo run lint --concurrency=3",
     "prepare": "husky install",
     "pretty": "turbo pretty --concurrency=3",
     "clean-install": "turbo run clean-install",
-    "doc:gen": "turbo run doc:gen",
-    "release": "turbo run release --concurrency=3"
+    "doc:gen": "turbo run doc:gen"
   },
   "keywords": [
     "whatsapp-cloud-api",
