@@ -1,5 +1,5 @@
 {
   "extends": "@wapijs/typescript-config/node.base.json",
-  "include": ["*.ts"],
+  "include": ["*.ts", "lint-staged.config.js", "release.config.js"],
   "exclude": ["packages", "apps", "node_modules", "dist", "build"]
 }

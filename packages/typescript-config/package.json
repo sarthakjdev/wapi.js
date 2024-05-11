@@ -1,6 +1,6 @@
 {
   "name": "@wapijs/typescript-config",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "files": [
@@ -8,6 +8,6 @@
     "node.base.json"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   }
 }

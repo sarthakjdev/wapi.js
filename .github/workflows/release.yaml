@@ -1,18 +1,29 @@
-name: Publish Release
+name: Release
 on:
-  release:
-    types: [released]
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write # because we want our workflow to update the package json of the packages with the latest version number
+
 jobs:
-  npm-publish:
-    name: npm publish
+  release:
+    environment: Production
+    name: Release
     runs-on: ubuntu-latest
     permissions:
+      contents: write
+      issues: write
+      pull-requests: write
       id-token: write
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Install node.js v18
+      - name: Setup node.js v18
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -21,11 +32,14 @@ jobs:
       - name: Install dependencies
         uses: pnpm i --prod --frozen-lockfile --ignore-scripts
 
-      - name: Build dependencies
-        run: pnpm run build
+      - name: Build the packages
+        run: pnpm build
 
-      - name: Publish Release
-        uses: zowe-actions/octorelease@v1
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
+
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+        run: npx semantic-release

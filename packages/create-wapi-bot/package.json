@@ -1,6 +1,6 @@
 {
   "name": "create-wapi-bot",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "a utility to quickly initiate a whatsapp bot",
   "author": {
     "name": "Sarthak",
@@ -55,13 +55,13 @@
   "engines": {
     "node": ">=18"
   },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "devDependencies": {
     "@favware/cliff-jumper": "^3.0.3",
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }
