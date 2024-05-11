@@ -31,7 +31,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wapijs/wapi.js.git"
+    "url": "https://github.com/sarthakjdev/wapi.js.git"
   },
   "bugs": {
     "url": "https://github.com/wapijs/wapi.js/issues"
@@ -57,6 +57,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
+    "semantic-release": "^23.1.1",
     "tsup": "^7.2.0",
     "turbo": "^1.10.13",
     "typescript": "5.0.4",
