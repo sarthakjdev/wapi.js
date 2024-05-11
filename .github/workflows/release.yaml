@@ -29,6 +29,11 @@ jobs:
           node-version: 18
           registry-url: https://registry.npmjs.org/
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: false
+
       - name: Install dependencies
         run: pnpm i --prod --frozen-lockfile --ignore-scripts
 
