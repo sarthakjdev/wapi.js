@@ -47,4 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+          NPM_USERNAME: "sarthakdev"
+          NPM_PASSWORD: ${{ secrets.NPM_PASSWORD }}
+          NPM_EMAIL: "contact.sarthakjain@gmail.com"
         run: pnpm semantic-release
