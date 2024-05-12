@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-undef
 module.exports = {
+  extends: "semantic-release-monorepo",
   plugins: [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
