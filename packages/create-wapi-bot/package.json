@@ -1,5 +1,5 @@
 {
-  "name": "create-wapi-bot",
+  "name": "@wapijs/create-wapi-bot",
   "version": "0.1.0",
   "description": "a utility to quickly initiate a whatsapp bot",
   "author": {
@@ -7,7 +7,7 @@
     "email": "sarthak@softlancer.co",
     "url": "https://softlancer.co"
   },
-  "bin": "./bin/index.js",
+  "bin": "./dist/bin/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/sarthakjdev/wapi.js.git",

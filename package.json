@@ -23,6 +23,7 @@
     "whatsapp-api",
     "typescript",
     "nodejs",
+    "@wapijs/wapi.js",
     "wapi.js",
     "wapi.js library"
   ],

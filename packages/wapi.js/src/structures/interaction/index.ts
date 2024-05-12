@@ -158,21 +158,21 @@ export class ButtonInteractionMessage
                       text: this.interactiveMessageData.header.text,
                     }
                   : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Document
-                  ? {
-                      type: HeaderTypeEnum.Document,
-                      document: this.interactiveMessageData.header.document,
-                    }
-                  : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Image
-                  ? {
-                      type: HeaderTypeEnum.Image,
-                      image: this.interactiveMessageData.header.image,
-                    }
-                  : {
-                      type: HeaderTypeEnum.Video,
-                      video: this.interactiveMessageData.header.video,
-                    }),
+                      HeaderTypeEnum.Document
+                    ? {
+                        type: HeaderTypeEnum.Document,
+                        document: this.interactiveMessageData.header.document,
+                      }
+                    : this.interactiveMessageData.header.type ===
+                        HeaderTypeEnum.Image
+                      ? {
+                          type: HeaderTypeEnum.Image,
+                          image: this.interactiveMessageData.header.image,
+                        }
+                      : {
+                          type: HeaderTypeEnum.Video,
+                          video: this.interactiveMessageData.header.video,
+                        }),
               },
             }
           : {}),
@@ -285,21 +285,21 @@ export class ListInteractionMessage
                       text: this.interactiveMessageData.header.text,
                     }
                   : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Document
-                  ? {
-                      type: HeaderTypeEnum.Document,
-                      document: this.interactiveMessageData.header.document,
-                    }
-                  : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Image
-                  ? {
-                      type: HeaderTypeEnum.Image,
-                      image: this.interactiveMessageData.header.image,
-                    }
-                  : {
-                      type: HeaderTypeEnum.Video,
-                      video: this.interactiveMessageData.header.video,
-                    }),
+                      HeaderTypeEnum.Document
+                    ? {
+                        type: HeaderTypeEnum.Document,
+                        document: this.interactiveMessageData.header.document,
+                      }
+                    : this.interactiveMessageData.header.type ===
+                        HeaderTypeEnum.Image
+                      ? {
+                          type: HeaderTypeEnum.Image,
+                          image: this.interactiveMessageData.header.image,
+                        }
+                      : {
+                          type: HeaderTypeEnum.Video,
+                          video: this.interactiveMessageData.header.video,
+                        }),
               },
             }
           : {}),
@@ -412,21 +412,21 @@ export class ProductInteractionMessage
                       text: this.interactiveMessageData.header.text,
                     }
                   : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Document
-                  ? {
-                      type: HeaderTypeEnum.Document,
-                      document: this.interactiveMessageData.header.document,
-                    }
-                  : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Image
-                  ? {
-                      type: HeaderTypeEnum.Image,
-                      image: this.interactiveMessageData.header.image,
-                    }
-                  : {
-                      type: HeaderTypeEnum.Video,
-                      video: this.interactiveMessageData.header.video,
-                    }),
+                      HeaderTypeEnum.Document
+                    ? {
+                        type: HeaderTypeEnum.Document,
+                        document: this.interactiveMessageData.header.document,
+                      }
+                    : this.interactiveMessageData.header.type ===
+                        HeaderTypeEnum.Image
+                      ? {
+                          type: HeaderTypeEnum.Image,
+                          image: this.interactiveMessageData.header.image,
+                        }
+                      : {
+                          type: HeaderTypeEnum.Video,
+                          video: this.interactiveMessageData.header.video,
+                        }),
               },
             }
           : {}),
@@ -547,20 +547,20 @@ export class ProductListInteractionMessage
                 text: this.interactiveMessageData.header.text,
               }
             : this.interactiveMessageData.header.type ===
-              HeaderTypeEnum.Document
-            ? {
-                type: HeaderTypeEnum.Document,
-                document: this.interactiveMessageData.header.document,
-              }
-            : this.interactiveMessageData.header.type === HeaderTypeEnum.Image
-            ? {
-                type: HeaderTypeEnum.Image,
-                image: this.interactiveMessageData.header.image,
-              }
-            : {
-                type: HeaderTypeEnum.Video,
-                video: this.interactiveMessageData.header.video,
-              }),
+                HeaderTypeEnum.Document
+              ? {
+                  type: HeaderTypeEnum.Document,
+                  document: this.interactiveMessageData.header.document,
+                }
+              : this.interactiveMessageData.header.type === HeaderTypeEnum.Image
+                ? {
+                    type: HeaderTypeEnum.Image,
+                    image: this.interactiveMessageData.header.image,
+                  }
+                : {
+                    type: HeaderTypeEnum.Video,
+                    video: this.interactiveMessageData.header.video,
+                  }),
         },
         body: {
           text: this.interactiveMessageData.bodyText,

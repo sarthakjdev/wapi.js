@@ -18,7 +18,7 @@
 		"whatsapp-api",
 		"typescript",
 		"nodejs",
-		"wapi.js",
+		"@wapijs/wapi.js",
 		"wapi.js library"
 	],
 	"authors": [
@@ -42,7 +42,7 @@
 	"packageManager": "pnpm@8.7.0",
 	"dependencies": {
 		"dotenv": "^16.3.1",
-		"wapi.js": "workspace:*"
+		"@wapijs/wapi.js": "workspace:*"
 	},
 	"publishConfig": {
 		"access": "restricted"

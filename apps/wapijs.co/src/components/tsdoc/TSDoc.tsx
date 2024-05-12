@@ -151,7 +151,7 @@ export function TSDoc({
 										<ExampleBlock key={idx}>
 											{createNode(block.content)}
 										</ExampleBlock>
-								  ))
+									))
 								: null}
 							{comment.seeBlocks.length ? (
 								<SeeBlock>
