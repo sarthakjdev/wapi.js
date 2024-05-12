@@ -263,8 +263,8 @@ importers:
   packages/example-chat-bot:
     dependencies:
       '@wapijs/wapi.js':
-        specifier: workspace:*
-        version: link:../wapi.js
+        specifier: 0.0.1
+        version: 0.0.1(@types/node@20.12.11)(typescript@5.0.4)
       dotenv:
         specifier: ^16.3.1
         version: 16.4.5
@@ -719,6 +719,19 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+
+  /@discordjs/docgen@0.12.1(typescript@5.0.4):
+    resolution: {integrity: sha512-Hwrzm9GWlu38kYIiZURh2kWYaj/qJcMzYud32UfXWKiGT7KdmdnRoL+ozt24VxN/Vo8ZySe2yCwqxJ6gFra59w==}
+    engines: {node: '>=16.9.0'}
+    hasBin: true
+    dependencies:
+      commander: 9.5.0
+      jsdoc-to-markdown: 7.1.1
+      tslib: 2.6.2
+      typedoc: 0.23.28(typescript@5.0.4)
+    transitivePeerDependencies:
+      - typescript
+    dev: false
 
   /@discordjs/docgen@0.12.1(typescript@5.4.5):
     resolution: {integrity: sha512-Hwrzm9GWlu38kYIiZURh2kWYaj/qJcMzYud32UfXWKiGT7KdmdnRoL+ozt24VxN/Vo8ZySe2yCwqxJ6gFra59w==}
@@ -3080,6 +3093,20 @@ packages:
       loupe: 2.3.7
       pretty-format: 29.7.0
     dev: true
+
+  /@wapijs/wapi.js@0.0.1(@types/node@20.12.11)(typescript@5.0.4):
+    resolution: {integrity: sha512-37YqDsxo0gtFEB72ez5NPK+lQ1MTSqOLVttne1tJXcmaJeO38VISv4I3ZmX6ZTam5L2cDNd8pdBCS8mDPxiY7w==}
+    engines: {node: '>=18'}
+    dependencies:
+      '@discordjs/docgen': 0.12.1(typescript@5.0.4)
+      '@microsoft/api-extractor': 7.43.4(@types/node@20.12.11)
+      express: 4.19.2
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - '@types/node'
+      - supports-color
+      - typescript
+    dev: false
 
   /@xobotyi/scrollbar-width@1.9.5:
     resolution: {integrity: sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==}
@@ -10912,6 +10939,20 @@ packages:
       typed-array-buffer: 1.0.2
       typed-array-byte-offset: 1.0.2
     dev: true
+
+  /typedoc@0.23.28(typescript@5.0.4):
+    resolution: {integrity: sha512-9x1+hZWTHEQcGoP7qFmlo4unUoVJLB0H/8vfO/7wqTnZxg4kPuji9y3uRzEu0ZKez63OJAUmiGhUrtukC6Uj3w==}
+    engines: {node: '>= 14.14'}
+    hasBin: true
+    peerDependencies:
+      typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x
+    dependencies:
+      lunr: 2.3.9
+      marked: 4.3.0
+      minimatch: 7.4.6
+      shiki: 0.14.7
+      typescript: 5.0.4
+    dev: false
 
   /typedoc@0.23.28(typescript@5.4.5):
     resolution: {integrity: sha512-9x1+hZWTHEQcGoP7qFmlo4unUoVJLB0H/8vfO/7wqTnZxg4kPuji9y3uRzEu0ZKez63OJAUmiGhUrtukC6Uj3w==}
