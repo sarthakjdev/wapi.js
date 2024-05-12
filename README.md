@@ -1,7 +1,7 @@
 <div align="center">
 <br />
 <p align="center">
-<a href="https://wapijs.co"><img src="https://www.wapijs.co/logo.png" alt="@wapijs/wapi.js"  height="200" width="360" /></a>
+<a href="https://wapijs.co"><img src="https://www.wapijs.co/assets/logo/logo-light.svg" alt="@wapijs/wapi.js"  height="200" width="360" /></a>
 </p>
 <br />
 <p>
