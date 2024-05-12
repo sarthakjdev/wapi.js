@@ -1,6 +1,5 @@
 {
   "name": "@wapijs/prettier-config",
-  "version": "0.1.0",
   "private": true,
   "files": [
     "config.node.js",

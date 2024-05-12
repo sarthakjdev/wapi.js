@@ -1,6 +1,5 @@
 {
 	"name": "@wapijs/example-chat-bot",
-	"version": "0.1.0",
 	"description": "example whatsapp cloud api chatbot",
 	"private": true,
 	"main": "./dist/index.js",
