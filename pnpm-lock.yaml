@@ -262,12 +262,12 @@ importers:
 
   packages/example-chat-bot:
     dependencies:
+      '@wapijs/wapi.js':
+        specifier: workspace:*
+        version: link:../wapi.js
       dotenv:
         specifier: ^16.3.1
         version: 16.4.5
-      wapi.js:
-        specifier: workspace:*
-        version: link:../wapi.js
     devDependencies:
       '@esbuild-plugins/tsconfig-paths':
         specifier: ^0.1.2
