@@ -7,6 +7,10 @@ on:
 permissions:
   contents: write # because we want our workflow to update the package json of the packages with the latest version number
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   release:
     environment: Production
