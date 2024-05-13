@@ -21,5 +21,3 @@ export interface BaseMessageInterface {
    */
   recipient_type: "individual";
 }
-
-

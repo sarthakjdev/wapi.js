@@ -11,7 +11,8 @@ import { type WhatsappCloudApiRequestPayloadSchemaType } from "../../api-request
  * @abstract
  */
 export abstract class BaseMessage<T extends string>
-  implements BaseMessageInterface {
+  implements BaseMessageInterface
+{
   type: MessageTypeEnum;
   messaging_product: "whatsapp";
   recipient_type: "individual";
@@ -38,10 +39,7 @@ export abstract class BaseMessage<T extends string>
    * @returns The parsed data.
    * @throws An error if the parsing fails.
    */
-  protected parseConstructorPayload(
-    schema: ZodSchema<any>,
-    payload: any,
-  ) {
+  protected parseConstructorPayload(schema: ZodSchema<any>, payload: any) {
     const response = schema.safeParse(payload);
     if (!response.success) {
       throw new Error(

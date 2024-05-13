@@ -1,6 +1,6 @@
 import { type Client } from "../../client";
 import { type BaseMessage } from "../../structures/message";
-import { MessageStatusEnum } from "../../webhook/type";
+import { type MessageStatusEnum } from "../../webhook/type";
 import { type BaseManagerInterface } from "../base/interface";
 
 /**
@@ -36,9 +36,8 @@ export interface MessageManagerInterface extends BaseManagerInterface {
   }): Promise<MessageResponse>;
 }
 
-
 export type MessageResponse = {
-  status: MessageStatusEnum,
-  id: string,
-  receiverPhoneNumber: string
-}
+  status: MessageStatusEnum;
+  id: string;
+  receiverPhoneNumber: string;
+};

@@ -2,7 +2,10 @@ import { type Client } from "../../client";
 import { type BaseMessage } from "../../structures/message";
 import { MessageStatusEnum } from "../../webhook/type";
 import { BaseManager } from "../base";
-import { MessageResponse, type MessageManagerInterface } from "./interface";
+import {
+  type MessageResponse,
+  type MessageManagerInterface,
+} from "./interface";
 
 /**
  * Manager to handle outgoing messages for wapi.
@@ -12,7 +15,8 @@ import { MessageResponse, type MessageManagerInterface } from "./interface";
  */
 export class MessageManager
   extends BaseManager
-  implements MessageManagerInterface {
+  implements MessageManagerInterface
+{
   client: Client;
   constructor(props: { client: Client }) {
     super(props.client);
@@ -63,13 +67,12 @@ export class MessageManager
       method: "POST",
     });
 
-
-    console.log({ response: JSON.stringify(response) })
+    console.log({ response: JSON.stringify(response) });
 
     return {
       id: response.messages[0].id,
       receiverPhoneNumber: props.phoneNumber,
-      status: MessageStatusEnum.Sent
+      status: MessageStatusEnum.Sent,
     };
   }
 }

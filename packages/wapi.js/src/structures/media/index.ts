@@ -30,12 +30,14 @@ import { type WhatsappCloudApiRequestPayloadSchemaType } from "../../api-request
  */
 export class AudioMessage
   extends BaseMessage<MessageTypeEnum.Audio>
-  implements AudioMessageInterface {
+  implements AudioMessageInterface
+{
   data: z.infer<
     typeof MetaAudioMediaObjectSchemaType | typeof ExternalAudioMediaObjectType
   >;
 
-  private readonly _constructorPayloadSchema = MetaAudioMediaObjectSchemaType.or(ExternalAudioMediaObjectType)
+  private readonly _constructorPayloadSchema =
+    MetaAudioMediaObjectSchemaType.or(ExternalAudioMediaObjectType);
 
   /**
    * Creates a new instance of the AudioMessage class.
@@ -50,7 +52,7 @@ export class AudioMessage
     >,
   ) {
     super({ type: MessageTypeEnum.Audio });
-    this.parseConstructorPayload(this._constructorPayloadSchema, params)
+    this.parseConstructorPayload(this._constructorPayloadSchema, params);
     this.data = params;
   }
 
@@ -94,7 +96,8 @@ export class AudioMessage
  */
 export class VideoMessage
   extends BaseMessage<MessageTypeEnum.Video>
-  implements VideoMessageInterface {
+  implements VideoMessageInterface
+{
   data: z.infer<
     typeof MetaVideoMediaObjectSchemaType | typeof ExternalVideoMediaObjectType
   >;
@@ -156,7 +159,8 @@ export class VideoMessage
  */
 export class ImageMessage
   extends BaseMessage<MessageTypeEnum.Image>
-  implements ImageMessageInterface {
+  implements ImageMessageInterface
+{
   data: z.infer<
     typeof MetaImageMediaObjectSchemaType | typeof ExternalImageMediaObjectType
   >;
@@ -218,7 +222,8 @@ export class ImageMessage
  */
 export class StickerMessage
   extends BaseMessage<MessageTypeEnum.Sticker>
-  implements StickerMessageInterface {
+  implements StickerMessageInterface
+{
   data: z.infer<
     | typeof MetaStickerMediaObjectSchemaType
     | typeof ExternalStickerMediaObjectType
@@ -280,7 +285,8 @@ export class StickerMessage
  */
 export class DocumentMessage
   extends BaseMessage<MessageTypeEnum.Document>
-  implements DocumentMessageInterface {
+  implements DocumentMessageInterface
+{
   data: z.infer<
     | typeof MetaDocumentMediaObjectSchemaType
     | typeof ExternalDocumentMediaObjectSchemaType

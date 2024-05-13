@@ -12,14 +12,14 @@ import { z } from "zod";
  */
 export class TextMessage
   extends BaseMessage<"text">
-  implements TextMessageInterface {
+  implements TextMessageInterface
+{
   readonly data: { text: string; allowPreview?: true };
-
 
   private readonly _constructorPayloadSchema = z.object({
     text: z.string(),
-    allowPreview: z.boolean().optional()
-  })
+    allowPreview: z.boolean().optional(),
+  });
 
   /**
    * Creates a new instance of the TextMessage class.
@@ -30,7 +30,7 @@ export class TextMessage
    */
   constructor(params: { text: string; allowPreview?: true }) {
     super({ type: MessageTypeEnum.Text });
-    this.parseConstructorPayload(this._constructorPayloadSchema, params)
+    this.parseConstructorPayload(this._constructorPayloadSchema, params);
     this.data = {
       text: params.text,
       allowPreview: params.allowPreview,
