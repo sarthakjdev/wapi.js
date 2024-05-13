@@ -189,15 +189,6 @@ importers:
 
   packages/create-wapi-bot:
     dependencies:
-      '@wapijs/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@wapijs/prettier-config':
-        specifier: workspace:*
-        version: link:../prettier-config
-      '@wapijs/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
       chalk:
         specifier: ^5.3.0
         version: 5.3.0
@@ -226,6 +217,15 @@ importers:
       '@types/validate-npm-package-name':
         specifier: ^4.0.2
         version: 4.0.2
+      '@wapijs/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@wapijs/prettier-config':
+        specifier: workspace:*
+        version: link:../prettier-config
+      '@wapijs/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
 
   packages/eslint-config:
     devDependencies:

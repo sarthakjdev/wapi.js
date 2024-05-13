@@ -1,4 +1,4 @@
-import { Client } from 'wapi.js'
+import { Client } from '@wapijs/wapi.js'
 import {
 	WHATSAPP_API_ACCESS_TOKEN,
 	WHATSAPP_BUSINESS_ACCOUNT_ID,

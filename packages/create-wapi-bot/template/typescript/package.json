@@ -11,7 +11,7 @@
 		"deploy": "node --require dotenv/config src/util/deploy.js"
 	},
 	"dependencies": {
-		"@wapijs/wapi.js": "^0.0.1",
+		"@wapijs/wapi.js": "^0.0.2",
 		"dotenv": "^16.3.1"
 	},
 	"devDependencies": {

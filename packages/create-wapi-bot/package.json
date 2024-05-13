@@ -40,9 +40,6 @@
   "homepage": "https://www.wapijs.co",
   "license": "Apache-2.0",
   "dependencies": {
-    "@wapijs/eslint-config": "workspace:*",
-    "@wapijs/prettier-config": "workspace:*",
-    "@wapijs/typescript-config": "workspace:*",
     "chalk": "^5.3.0",
     "commander": "^12.0.0",
     "edit-json-file": "^1.8.0",
@@ -57,7 +54,10 @@
   },
   "devDependencies": {
     "@types/prompts": "^2.4.9",
-    "@types/validate-npm-package-name": "^4.0.2"
+    "@types/validate-npm-package-name": "^4.0.2",
+    "@wapijs/eslint-config": "workspace:*",
+    "@wapijs/prettier-config": "workspace:*",
+    "@wapijs/typescript-config": "workspace:*"
   },
   "publishConfig": {
     "access": "public",
