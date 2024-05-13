@@ -26,7 +26,7 @@ import { type UnknownEvent } from "./events/unknown";
 
 /**
  * Enum representing the types of notification events
- * @enum
+ * @enum {string}
  */
 export enum NotificationEventTypeEnum {
   TextMessage = "TextMessage",
@@ -57,7 +57,7 @@ export enum NotificationEventTypeEnum {
 
 /**
  * Enum representing the types of notification message
- * @enum
+ * @enum {string}
  */
 export enum NotificationMessageTypeEnum {
   Contacts = "contacts",
@@ -78,7 +78,7 @@ export enum NotificationMessageTypeEnum {
 
 /**
  * Enum representing the types of interaction notification
- * @enum
+ * @enum {string}
  */
 export enum InteractionNotificationTypeEnum {
   ListReply = "list_reply",
@@ -87,7 +87,7 @@ export enum InteractionNotificationTypeEnum {
 
 /**
  * Enum representing the status of a message
- * @enum
+ * @enum {string}
  */
 export enum MessageStatusEnum {
   Sent = "sent",
@@ -98,7 +98,7 @@ export enum MessageStatusEnum {
 
 /**
  * Enum representing the category of a message status
- * @enum
+ * @enum {string}
  */
 export enum MessageStatusCategoryEnum {
   Authentication = "authentication",
@@ -110,7 +110,7 @@ export enum MessageStatusCategoryEnum {
 
 /**
  * Enum representing the types of system notifications
- * @enum
+ * @enum {string}
  */
 export enum SystemNotificationTypeEnum {
   CustomerNumberChange = "user_changed_number",

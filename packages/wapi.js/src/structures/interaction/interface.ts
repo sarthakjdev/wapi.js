@@ -72,7 +72,7 @@ export interface ProductListInteractionMessageInterface
 
 /**
  * Represents the enum for interactive message types.
- * @enum
+ * @enum {string}
  */
 export enum InteractiveMessageTypeEnum {
   Button = "button",

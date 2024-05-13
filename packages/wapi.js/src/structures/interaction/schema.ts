@@ -9,6 +9,10 @@ import {
   MetaVideoMediaObjectSchemaType,
 } from "../media/schema";
 
+/**
+ * Enum representing the header types.
+ * @enum {string}
+ */
 export enum HeaderTypeEnum {
   Text = "text",
   Video = "video",

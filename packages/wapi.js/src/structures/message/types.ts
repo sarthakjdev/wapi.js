@@ -1,5 +1,6 @@
 /**
  * Enum representing the types of messages.
+ * @enum {string}
  */
 export enum MessageTypeEnum {
   Text = "text",
@@ -17,6 +18,7 @@ export enum MessageTypeEnum {
 
 /**
  * Enum representing the language codes.
+ * @enum {string}
  */
 export enum LanguageEnum {
   Afrikaans = "af",
@@ -94,6 +96,7 @@ export enum LanguageEnum {
 
 /**
  * Enum representing the types of components in a template message.
+ * @enum {string}
  */
 export enum TemplateMessageComponentTypeEnum {
   Header = "header",
@@ -103,6 +106,7 @@ export enum TemplateMessageComponentTypeEnum {
 
 /**
  * Enum representing the types of button components in a template message.
+ * @enum {string}
  */
 export enum TemplateMessageButtonComponentTypeEnum {
   QuickReply = "quick_reply",

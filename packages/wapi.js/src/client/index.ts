@@ -9,10 +9,10 @@ import { MessageManager } from "../manager/message";
 import { type WapiEventDataMap } from "../webhook/type";
 
 /**
+ * The main client to build a whatsapp bot instance
  * @implements {ClientInterface}
  * @extends {EventEmitter}
  * @class Client
- * @classdesc The main client to build a whatsapp bot instance
  */
 export class Client extends EventEmitter implements ClientInterface {
   /**

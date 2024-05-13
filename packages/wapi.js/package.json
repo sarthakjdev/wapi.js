@@ -21,8 +21,7 @@
     "lint": "pnpm eslint . --max-warnings=20",
     "pretty": "pnpm prettier --write \"src/**/*.ts\"",
     "clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
-    "docs:new": "api-extractor run --local",
-    "doc:gen": "docgen -i '*.ts' -c ./docs/index.json -r ./ -o ./docs/docs.json --typescript && pnpm run docs:new"
+    "doc:gen": "api-extractor run --local"
   },
   "keywords": [
     "whatsapp",
@@ -57,7 +56,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@discordjs/docgen": "^0.12.1",
     "@microsoft/api-extractor": "^7.43.1",
     "express": "^4.18.2",
     "zod": "^3.22.2"
