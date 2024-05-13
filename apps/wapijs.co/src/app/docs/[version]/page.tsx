@@ -6,6 +6,7 @@ import { IS_DEVELOPMENT } from '~/constant'
 import { join } from 'node:path'
 import { readFile } from 'node:fs/promises'
 import getWasm from 'shiki/wasm'
+import { fetchVersions } from '~/reusable-function'
 
 async function fetchReadMeFileFromGithub() {
 	if (IS_DEVELOPMENT) {
@@ -13,13 +14,18 @@ async function fetchReadMeFileFromGithub() {
 		return fileContent
 	} else {
 		const response = await fetch(
-			'https://raw.githubusercontent.com/sarthakjdev/wapi.js/feat/documentation/README.md',
+			'https://raw.githubusercontent.com/sarthakjdev/wapi.js/master/README.md',
 			{
 				method: 'GET'
 			}
 		).then(res => res.text())
 		return response
 	}
+}
+
+export async function generateStaticParams() {
+	const allVersionOfPackage = await fetchVersions()
+	return allVersionOfPackage.flatMap(async version => ({ version: version.version }))
 }
 
 const VersionHome = async ({ params }: { params: { version: string } }) => {

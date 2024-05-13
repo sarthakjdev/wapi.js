@@ -5,7 +5,8 @@ import {
 	type ApiItem,
 	type ApiTypeAlias,
 	type ApiFunction,
-	ApiItemKind
+	ApiItemKind,
+	ApiModel
 } from '@microsoft/api-extractor-model'
 import { notFound } from 'next/navigation'
 import { Class } from '~/components/documentation-item/class'
@@ -13,44 +14,12 @@ import { Interface } from '~/components/documentation-item/interface'
 import { TypeAlias } from '~/components/documentation-item/type-alias'
 import { Enum } from '~/components/documentation-item/enum'
 import { Function } from '~/components/documentation-item/function'
-import { getMember } from '~/utils/api-extractor'
-
-// function resolveMemberSearchParams(packageName: string, member?: ApiItem) {
-// 	const params = new URLSearchParams({
-// 		pkg: packageName,
-// 		kind: member?.kind ?? '',
-// 		name: member?.displayName ?? ''
-// 	})
-
-// 	switch (member?.kind) {
-// 		case ApiItemKind.Interface:
-// 		case ApiItemKind.Class: {
-// 			const typedMember = member as ApiItemContainerMixin
-
-// 			const properties = typedMember.members.filter(member =>
-// 				[ApiItemKind.Property, ApiItemKind.PropertySignature].includes(member.kind)
-// 			) as (ApiProperty | ApiPropertySignature)[]
-// 			const methods = typedMember.members.filter(member =>
-// 				[ApiItemKind.Method, ApiItemKind.Method].includes(member.kind)
-// 			) as (ApiMethod | ApiMethodSignature)[]
-
-// 			params.append('methods', methods.length.toString())
-// 			params.append('props', properties.length.toString())
-// 			break
-// 		}
-
-// 		case ApiItemKind.Enum: {
-// 			const typedMember = member as ApiEnum
-// 			params.append('members', typedMember.members.length.toString())
-// 			break
-// 		}
-
-// 		default:
-// 			break
-// 	}
-
-// 	return params
-// }
+import {
+	addPackageToModel,
+	fetchDocumentationJsonDataFromSlug,
+	getMember
+} from '~/utils/api-extractor'
+import { fetchVersions, resolveItemUri } from '~/reusable-function'
 
 function Member({ member }: { readonly member?: ApiItem }) {
 	if (!member?.kind) {
@@ -73,6 +42,23 @@ function Member({ member }: { readonly member?: ApiItem }) {
 		default:
 			return <div>Cannot render that item type</div>
 	}
+}
+
+export async function generateStaticParams() {
+	const allVersionOfPackage = await fetchVersions()
+	const allStaticParams = await Promise.all(
+		allVersionOfPackage.flatMap(async version => {
+			const documentationData = await fetchDocumentationJsonDataFromSlug(version.version)
+			const model = new ApiModel()
+			addPackageToModel(model, documentationData)
+			const pkg = model.tryGetPackageByName(`@wapijs/wapi.js`)
+			return pkg?.members[0].members.map(item => ({
+				item: resolveItemUri(item),
+				version: version.version
+			}))
+		})
+	)
+	return allStaticParams
 }
 
 export default async function Page({ params }: { params: { version: string; item: string } }) {

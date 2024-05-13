@@ -2,8 +2,11 @@
 
 import { CustomSelect } from '@wapijs/ui'
 import { useRouter } from 'next/navigation'
+import { type fetchVersions } from '~/reusable-function'
 
-const VersionSelector = () => {
+const VersionSelector: React.FC<{
+	versions: ReturnType<typeof fetchVersions>
+}> = ({ versions }) => {
 	const router = useRouter()
 
 	return (
@@ -13,13 +16,11 @@ const VersionSelector = () => {
 				onChangeHandler={e => {
 					router.push(`/docs/${e.target.value}`)
 				}}
-				options={[
-					{
-						label: 'master',
-						value: 'master'
-					}
-				]}
-				defaultValue="main"
+				options={versions.map(v => ({
+					label: v.version,
+					value: v.version
+				}))}
+				defaultValue="master"
 			/>
 		</div>
 	)

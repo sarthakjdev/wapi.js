@@ -10,6 +10,7 @@ import { ItemLink } from '~/components/item-link'
 import { DisclosureSection } from '@wapijs/ui'
 import { METHOD_SEPARATOR, OVERLOAD_SEPARATOR } from '~/constant'
 import VersionSelector from '../version-selector'
+import { fetchVersions } from '~/reusable-function'
 
 export function resolveItemURI(item: ApiItem): string {
 	return !item.parent || item.parent.kind === ApiItemKind.EntryPoint
@@ -128,10 +129,11 @@ export function Sidebar({ members }: { readonly members: SidebarSectionItemData[
 	// const segment = useSelectedLayoutSegment()
 	// const [isOpen, setIsOpen] = useState(true)
 	const groupItems = groupMembers(members)
+	const versions = fetchVersions()
 
 	return (
 		<div className="flex min-w-[26rem] flex-col gap-3 p-3">
-			<VersionSelector />
+			<VersionSelector versions={versions} />
 			{(Object.keys(groupItems) as (keyof GroupedMembers)[])
 				.filter(group => groupItems[group].length)
 				.map((group, idx) => (

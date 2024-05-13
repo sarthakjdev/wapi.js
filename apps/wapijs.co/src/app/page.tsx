@@ -7,7 +7,7 @@ export default function Home() {
 		<main className="my-auto flex min-h-screen flex-row items-center justify-center gap-5 pl-10">
 			<div className="flex flex-1 flex-col gap-6">
 				<div className="mx-auto">
-					<ClipboardCopy textToBeCopied="pnpm i wapi.js" />
+					<ClipboardCopy textToBeCopied="pnpm i @wapijs/wapi.js" />
 				</div>
 				<div className="flex flex-col items-center justify-center gap-5">
 					<h1 className="mx-auto flex max-w-5xl flex-col gap-2 text-center text-4xl font-bold leading-relaxed sm:text-5xl md:text-7xl">

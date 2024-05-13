@@ -4,8 +4,6 @@ import { type NextRequest } from 'next/server'
 export async function middleware(request: NextRequest) {
 	const url = new URL(request.url)
 
-	console.log('url.pathname', url.host)
-
 	switch (url.pathname) {
 		case '/docs': {
 			const latestVersion = await fetch('https://api.npms.io/v2/package/wapi.js')

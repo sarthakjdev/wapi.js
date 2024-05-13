@@ -1,5 +1,5 @@
 import { type ApiItem, ApiItemKind } from '@microsoft/api-extractor-model'
-import { METHOD_SEPARATOR, OVERLOAD_SEPARATOR } from './constant'
+import { IS_DEVELOPMENT, METHOD_SEPARATOR, OVERLOAD_SEPARATOR } from './constant'
 import { VscSymbolClass } from '@react-icons/all-files/vsc/VscSymbolClass'
 import { VscSymbolEnum } from '@react-icons/all-files/vsc/VscSymbolEnum'
 import { VscSymbolInterface } from '@react-icons/all-files/vsc/VscSymbolInterface'
@@ -29,4 +29,12 @@ export function getItemIconByKind(kind: ApiItemKind) {
 		default:
 			return <VscSymbolMethod />
 	}
+}
+
+export function fetchVersions() {
+	if (IS_DEVELOPMENT) {
+		return [{ version: 'master' }]
+	}
+
+	return ['master'].map(v => ({ version: v }))
 }

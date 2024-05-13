@@ -13,7 +13,6 @@ export default async function VersionHomeLayout({
 }>) {
 	console.log({ params })
 	const documentationData = await fetchDocumentationJsonDataFromSlug(params.version)
-	console.log({ documentationData })
 	const model = new ApiModel()
 	addPackageToModel(model, documentationData)
 
