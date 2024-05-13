@@ -61,7 +61,6 @@
     "prettier": "^3.0.3",
     "semantic-release": "^22.0.12",
     "semantic-release-monorepo": "^8.0.2",
-    "tsup": "^7.2.0",
     "turbo": "^1.10.13",
     "typescript": "5.0.4"
   },
