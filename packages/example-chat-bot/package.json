@@ -40,7 +40,7 @@
 	},
 	"packageManager": "pnpm@8.7.0",
 	"dependencies": {
-		"@wapijs/wapi.js": "0.0.1",
+		"@wapijs/wapi.js": "0.0.2",
 		"dotenv": "^16.3.1"
 	},
 	"publishConfig": {

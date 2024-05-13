@@ -257,7 +257,7 @@ importers:
   packages/example-chat-bot:
     dependencies:
       '@wapijs/wapi.js':
-        specifier: 0.0.1
+        specifier: 0.0.2
         version: link:../wapi.js
       dotenv:
         specifier: ^16.3.1
