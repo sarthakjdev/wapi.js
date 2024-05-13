@@ -53,7 +53,7 @@
     "concurrently": "^8.2.1",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "typescript": "^5.0.4"
+    "typescript": "5.4.5"
   },
   "dependencies": {
     "@microsoft/api-extractor": "^7.43.1",
