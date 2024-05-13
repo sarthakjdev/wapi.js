@@ -24,7 +24,6 @@
 	"authors": [
 		"sarthak@softlancer.co"
 	],
-	"license": "MIT",
 	"devDependencies": {
 		"@esbuild-plugins/tsconfig-paths": "^0.1.2",
 		"@types/node": "^20.10.2",
