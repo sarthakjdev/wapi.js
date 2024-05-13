@@ -1,4 +1,5 @@
 import { type Client } from "../../../client";
+import { MessageResponse } from "../../../manager";
 import { ReactionMessage } from "../../../structures";
 import { type BaseMessage } from "../../../structures/message";
 import {
@@ -29,8 +30,7 @@ export class BaseEvent implements BaseEventInterface {
  */
 export abstract class MessageEvent
   extends BaseEvent
-  implements MessageEventInterface
-{
+  implements MessageEventInterface {
   messageId: string;
   context: MessageContext;
   timestamp: number;
@@ -72,19 +72,20 @@ export abstract class MessageEvent
    */
   async reply<T extends BaseMessage<string>>(props: {
     message: T;
-  }): Promise<void> {
+  }): Promise<MessageResponse> {
     if (!this.context.from) {
       throw new Error(
         "No context message id found while replying to message!!",
       );
     }
 
-    // inject the context here this time
-    await this.client.message.reply({
+    const response = await this.client.message.reply({
       message: props.message,
       phoneNumber: this.context.from,
       replyToMessageId: this.messageId,
     });
+
+    return response
   }
 
   /**
@@ -138,8 +139,7 @@ export abstract class MessageEvent
  */
 export abstract class MediaMessageEvent
   extends MessageEvent
-  implements MediaMessageEventInterface
-{
+  implements MediaMessageEventInterface {
   mediaId: string;
   mimeType: string;
   sha256: string;
@@ -198,8 +198,7 @@ export abstract class MediaMessageEvent
  */
 export abstract class StatusUpdateEvent
   extends BaseEvent
-  implements StatusUpdateEventInterface
-{
+  implements StatusUpdateEventInterface {
   context: MessageContext;
   timestamp: number;
 

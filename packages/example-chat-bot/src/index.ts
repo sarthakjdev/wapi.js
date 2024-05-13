@@ -1,20 +1,34 @@
 
 import { whatsappClient } from "./utils/client";
-import { TextMessage } from '@wapijs/wapi.js'
+import { AudioMessage, TextMessage } from '@wapijs/wapi.js'
 
-async function init() {
+function init() {
     whatsappClient.on('Ready', () => {
         console.log('Client is ready')
     })
 
     whatsappClient.on('TextMessage', async (message) => {
         console.log('Text Message')
-        await message.reply({
+        const response = await message.reply({
             message: new TextMessage({
                 text: 'Hello, World!'
             })
         })
+        const audioResponse = await message.reply({
+            message: new AudioMessage({
+                link: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+            })
+        })
+
+        console.log({ audioResponse })
+
+
+
+        console.log(response)
     })
+
+
+
 
 
 
@@ -24,3 +38,5 @@ async function init() {
 
     whatsappClient.initiate()
 }
+
+init()
