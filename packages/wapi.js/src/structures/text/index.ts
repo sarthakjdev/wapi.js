@@ -2,7 +2,7 @@ import { type TextMessageInterface } from "./interface";
 import { MessageTypeEnum } from "../message/types";
 import { BaseMessage } from "../message";
 import { type WhatsappCloudApiRequestPayloadSchemaType } from "../../api-request-payload-schema";
-import { type z } from "zod";
+import { z } from "zod";
 
 /**
  * Represents a text message in WhatsApp.
@@ -16,6 +16,11 @@ export class TextMessage
 {
   readonly data: { text: string; allowPreview?: true };
 
+  private readonly _constructorPayloadSchema = z.object({
+    text: z.string(),
+    allowPreview: z.boolean().optional(),
+  });
+
   /**
    * Creates a new instance of the TextMessage class.
    * @constructor
@@ -25,6 +30,7 @@ export class TextMessage
    */
   constructor(params: { text: string; allowPreview?: true }) {
     super({ type: MessageTypeEnum.Text });
+    this.parseConstructorPayload(this._constructorPayloadSchema, params);
     this.data = {
       text: params.text,
       allowPreview: params.allowPreview,

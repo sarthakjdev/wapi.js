@@ -1,6 +1,0 @@
-{
-  "name": "create-wapi-bot",
-  "packagePath": "packages/create-wapi-bot",
-  "tagTemplate": "{{new-version}}",
-  "identifierBase": false
-}

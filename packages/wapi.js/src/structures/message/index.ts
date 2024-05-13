@@ -39,10 +39,7 @@ export abstract class BaseMessage<T extends string>
    * @returns The parsed data.
    * @throws An error if the parsing fails.
    */
-  protected static parseConstructorPayload(
-    schema: ZodSchema<any>,
-    payload: any,
-  ) {
+  protected parseConstructorPayload(schema: ZodSchema<any>, payload: any) {
     const response = schema.safeParse(payload);
     if (!response.success) {
       throw new Error(

@@ -10,7 +10,7 @@
 		"start": "node --require dotenv/config src/index.js"
 	},
 	"dependencies": {
-		"@wapijs/wapi.js": "^14.14.1",
+		"@wapijs/wapi.js": "^0.0.1",
 		"dotenv": "^16.3.1"
 	},
 	"devDependencies": {

@@ -7,8 +7,8 @@ import {
   type DocumentMessageInterface,
 } from "./interface";
 import {
-  type MetaAudioMediaObjectSchemaType,
-  type ExternalAudioMediaObjectType,
+  MetaAudioMediaObjectSchemaType,
+  ExternalAudioMediaObjectType,
   type ExternalVideoMediaObjectType,
   type MetaVideoMediaObjectSchemaType,
   type MetaImageMediaObjectSchemaType,
@@ -36,6 +36,9 @@ export class AudioMessage
     typeof MetaAudioMediaObjectSchemaType | typeof ExternalAudioMediaObjectType
   >;
 
+  private readonly _constructorPayloadSchema =
+    MetaAudioMediaObjectSchemaType.or(ExternalAudioMediaObjectType);
+
   /**
    * Creates a new instance of the AudioMessage class.
    * @constructor
@@ -49,6 +52,7 @@ export class AudioMessage
     >,
   ) {
     super({ type: MessageTypeEnum.Audio });
+    this.parseConstructorPayload(this._constructorPayloadSchema, params);
     this.data = params;
   }
 

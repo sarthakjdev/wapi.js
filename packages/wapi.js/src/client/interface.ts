@@ -51,7 +51,7 @@ export interface ClientInterface {
   ): boolean;
   /**
    * Registers a listener for the specified event.
-   * @param eventName - The name of the event.
+   * @param {T} eventName - The name of the event.
    * @param listener - The listener function to be called when the event is triggered.
    * @returns Returns the current instance of the ClientInterface.
    */

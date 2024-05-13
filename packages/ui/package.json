@@ -19,8 +19,7 @@
 		"@wapijs/typescript-config": "workspace:*",
 		"eslint": "^8.57.0",
 		"react": "^18.3.0",
-		"tsup": "^8.0.2",
-		"typescript": "5.0.4"
+		"typescript": "5.4.5"
 	},
 	"dependencies": {
 		"@headlessui/react": "^1.7.19",

@@ -1,5 +1,6 @@
 node_modules
 *.env
+.env.dev
 errors.log
 .turbo
 build/**
@@ -13,4 +14,4 @@ cache
 .next
 docs.json
 docs.api.json
-
+docs/**

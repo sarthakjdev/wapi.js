@@ -1,7 +1,11 @@
 import { type Client } from "../../client";
 import { type BaseMessage } from "../../structures/message";
+import { MessageStatusEnum } from "../../webhook/type";
 import { BaseManager } from "../base";
-import { type MessageManagerInterface } from "./interface";
+import {
+  type MessageResponse,
+  type MessageManagerInterface,
+} from "./interface";
 
 /**
  * Manager to handle outgoing messages for wapi.
@@ -51,7 +55,7 @@ export class MessageManager
     replyToMessageId: string;
     message: T;
     phoneNumber: string;
-  }): Promise<string> {
+  }): Promise<MessageResponse> {
     const response = await this.client.requester.requestCloudApi({
       path: `/${this.client.phoneNumberId}/messages`,
       body: JSON.stringify(
@@ -63,6 +67,12 @@ export class MessageManager
       method: "POST",
     });
 
-    return response;
+    console.log({ response: JSON.stringify(response) });
+
+    return {
+      id: response.messages[0].id,
+      receiverPhoneNumber: props.phoneNumber,
+      status: MessageStatusEnum.Sent,
+    };
   }
 }

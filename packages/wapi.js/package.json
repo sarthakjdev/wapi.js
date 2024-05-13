@@ -14,7 +14,6 @@
   },
   "scripts": {
     "watch": "concurrently -n esm,cjs \"pnpm tsc -p tsconfig.json --watch\" \"pnpm tsc -p tsconfig-cjs.json --watch\"  ",
-    "test": "vitest run",
     "clean": "rm -rf ./dist",
     "build:cjs": "pnpm tsc -p tsconfig-cjs.json --pretty",
     "build:esm": "pnpm tsc -p tsconfig.json --pretty",
@@ -22,9 +21,7 @@
     "lint": "pnpm eslint . --max-warnings=20",
     "pretty": "pnpm prettier --write \"src/**/*.ts\"",
     "clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
-    "release": "cliff-jumper",
-    "docs:new": "api-extractor run --local",
-    "doc:gen": "docgen -i '*.ts' -c ./docs/index.json -r ./ -o ./docs/docs.json --typescript && pnpm run docs:new"
+    "doc:gen": "api-extractor run --local"
   },
   "keywords": [
     "whatsapp",
@@ -49,7 +46,6 @@
   "homepage": "https://www.wapijs.co",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@favware/cliff-jumper": "^3.0.3",
     "@types/express": "^4.17.18",
     "@wapijs/eslint-config": "workspace:*",
     "@wapijs/prettier-config": "workspace:*",
@@ -57,13 +53,9 @@
     "concurrently": "^8.2.1",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "ts-enum-utils": "^1.0.3",
-    "tsup": "^7.2.0",
-    "typescript": "^5.0.4",
-    "vitest": "^0.34.6"
+    "typescript": "5.4.5"
   },
   "dependencies": {
-    "@discordjs/docgen": "^0.12.1",
     "@microsoft/api-extractor": "^7.43.1",
     "express": "^4.18.2",
     "zod": "^3.22.2"

@@ -13,6 +13,7 @@ concurrency:
 
 jobs:
   release:
+    if: '!contains(github.event.commits.*.message, "[skip release]")'
     environment: Production
     name: Release
     runs-on: ubuntu-latest

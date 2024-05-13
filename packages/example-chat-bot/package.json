@@ -24,11 +24,9 @@
 	"authors": [
 		"sarthak@softlancer.co"
 	],
-	"license": "MIT",
 	"devDependencies": {
 		"@esbuild-plugins/tsconfig-paths": "^0.1.2",
 		"@types/node": "^20.10.2",
-		"@vitest/coverage-v8": "^0.34.6",
 		"@wapijs/eslint-config": "workspace:*",
 		"@wapijs/prettier-config": "workspace:*",
 		"@wapijs/typescript-config": "workspace:*",
@@ -37,11 +35,11 @@
 		"esbuild-node-externals": "^1.11.0",
 		"esbuild-plugin-tsc": "^0.4.0",
 		"nodemon": "^3.0.2",
-		"typescript": "5.0.4"
+		"typescript": "5.4.5"
 	},
 	"packageManager": "pnpm@8.7.0",
 	"dependencies": {
-		"@wapijs/wapi.js": "0.0.1",
+		"@wapijs/wapi.js": "0.0.2",
 		"dotenv": "^16.3.1"
 	},
 	"publishConfig": {

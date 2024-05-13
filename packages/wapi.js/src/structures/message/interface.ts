@@ -21,11 +21,3 @@ export interface BaseMessageInterface {
    */
   recipient_type: "individual";
 }
-
-/**
- * Represents the message status enum.
- */
-export enum MessageStatusEnum {
-  Read = "read",
-  Send = "sent",
-}

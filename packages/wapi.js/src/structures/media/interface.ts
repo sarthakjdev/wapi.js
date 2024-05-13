@@ -15,8 +15,7 @@ import {
 
 /**
  * Enum representing the media types.
- * @enum
- * @readonly
+ * @enum {string}
  */
 export enum MediaTypeEnum {
   Audio = "audio",

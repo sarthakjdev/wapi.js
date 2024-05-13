@@ -44,7 +44,7 @@ export interface QuickReplyButtonInteractionEventInterface
 
 /**
  * Represents an ad interaction source type.
- * @enum
+ * @enum {string}
  */
 export enum AdInteractionSourceTypeEnum {
   Ad = "ad",
@@ -53,7 +53,7 @@ export enum AdInteractionSourceTypeEnum {
 
 /**
  * Represents an ad interaction source media type.
- * @enum
+ * @enum {string}
  */
 export enum AdInteractionSourceMediaTypeEnum {
   Image = "image",

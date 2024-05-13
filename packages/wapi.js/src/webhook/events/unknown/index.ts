@@ -3,7 +3,7 @@ import { type UnknownEventInterface } from "./interface";
 /**
  * Represents an unknown event.
  * @class UnknownEvent
- * @implements UnknownEventInterface
+ * @implements {UnknownEventInterface}
  */
 export class UnknownEvent implements UnknownEventInterface {
   /**

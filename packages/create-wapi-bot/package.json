@@ -1,5 +1,5 @@
 {
-  "name": "@wapijs/create-wapi-bot",
+  "name": "create-wapi-bot",
   "version": "0.0.2",
   "description": "a utility to quickly initiate a whatsapp bot",
   "author": {
@@ -24,8 +24,7 @@
   "scripts": {
     "build": "pnpm tsc -p tsconfig.json --pretty",
     "lint": "pnpm eslint .",
-    "pretty": "pnpm prettier --write \"src/**/*.ts\"",
-    "release": "cliff-jumper"
+    "pretty": "pnpm prettier --write \"src/**/*.ts\""
   },
   "bugs": {
     "url": "https://github.com/sarthakjdev/wapi.js/issues"
@@ -40,9 +39,6 @@
   "homepage": "https://www.wapijs.co",
   "license": "Apache-2.0",
   "dependencies": {
-    "@wapijs/eslint-config": "workspace:*",
-    "@wapijs/prettier-config": "workspace:*",
-    "@wapijs/typescript-config": "workspace:*",
     "chalk": "^5.3.0",
     "commander": "^12.0.0",
     "edit-json-file": "^1.8.0",
@@ -56,9 +52,11 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@favware/cliff-jumper": "^3.0.3",
     "@types/prompts": "^2.4.9",
-    "@types/validate-npm-package-name": "^4.0.2"
+    "@types/validate-npm-package-name": "^4.0.2",
+    "@wapijs/eslint-config": "workspace:*",
+    "@wapijs/prettier-config": "workspace:*",
+    "@wapijs/typescript-config": "workspace:*"
   },
   "publishConfig": {
     "access": "public",

@@ -1,4 +1,5 @@
 import { type Client } from "../../../client";
+import { type MessageResponse } from "../../../manager";
 import { ReactionMessage } from "../../../structures";
 import { type BaseMessage } from "../../../structures/message";
 import {
@@ -72,19 +73,20 @@ export abstract class MessageEvent
    */
   async reply<T extends BaseMessage<string>>(props: {
     message: T;
-  }): Promise<void> {
+  }): Promise<MessageResponse> {
     if (!this.context.from) {
       throw new Error(
         "No context message id found while replying to message!!",
       );
     }
 
-    // inject the context here this time
-    await this.client.message.reply({
+    const response = await this.client.message.reply({
       message: props.message,
       phoneNumber: this.context.from,
       replyToMessageId: this.messageId,
     });
+
+    return response;
   }
 
   /**
