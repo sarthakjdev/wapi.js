@@ -1,9 +1,5 @@
 name: Documentation build
 on:
-  # trigger this workflow to generate master branch documentation
-  push:
-    branches:
-      - master
   # trigger this workflow to generate documentation for new version release
   release:
     types:
