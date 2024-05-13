@@ -24,8 +24,7 @@
   "scripts": {
     "build": "pnpm tsc -p tsconfig.json --pretty",
     "lint": "pnpm eslint .",
-    "pretty": "pnpm prettier --write \"src/**/*.ts\"",
-    "release": "cliff-jumper"
+    "pretty": "pnpm prettier --write \"src/**/*.ts\""
   },
   "bugs": {
     "url": "https://github.com/sarthakjdev/wapi.js/issues"

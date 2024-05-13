@@ -21,7 +21,6 @@
     "lint": "pnpm eslint . --max-warnings=20",
     "pretty": "pnpm prettier --write \"src/**/*.ts\"",
     "clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
-    "release": "cliff-jumper",
     "docs:new": "api-extractor run --local",
     "doc:gen": "docgen -i '*.ts' -c ./docs/index.json -r ./ -o ./docs/docs.json --typescript && pnpm run docs:new"
   },
