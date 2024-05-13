@@ -75,7 +75,7 @@ jobs:
           SEMVER: ${{ steps.extract-tag.outputs.semver }}
         run: |
           mkdir -p "out/wapi.js"
-          mv "packages/wapi.js/docs/docs.json" "out/wapi.js/${SEMVER}.json"
+          mv "packages/wapi.js/docs/docs.api.json" "out/wapi.js/${SEMVER}.json"
 
       - name: Move docs to correct directory
         if: ${{ github.ref_type == 'branch' }}
@@ -89,7 +89,7 @@ jobs:
               echo "No slash in the string, nothing to extract."
           fi
           mkdir -p "out/wapi.js" 
-          mv "packages/wapi.js/docs/docs.json" "out/wapi.js/${documentation_file_name}.json"
+          mv "packages/wapi.js/docs/docs.api.json" "out/wapi.js/${documentation_file_name}.json"
 
       - name: Commit and push
         run: |
