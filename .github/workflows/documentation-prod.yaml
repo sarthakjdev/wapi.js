@@ -1,8 +1,14 @@
 name: Documentation build
 on:
+  # trigger this workflow to generate master branch documentation
+  push:
+    branches:
+      - master
+  # trigger this workflow to generate documentation for new version release
   release:
     types:
       - created
+  # manual workflow dispatch
   workflow_dispatch:
     inputs:
       ref:
@@ -15,6 +21,7 @@ on:
           - branch
           - tag
         required: true
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
@@ -30,6 +37,8 @@ jobs:
 
       - name: User Node.js LTS
         uses: actions/setup-node@v2
+        with:
+          node-version: 20
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2.2.4
