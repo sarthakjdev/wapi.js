@@ -103,6 +103,7 @@ jobs:
   deploy-docutmentation:
     environment: Production
     timeout-minutes: 15
+    needs: build-and-upload-docs
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
