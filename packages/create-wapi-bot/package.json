@@ -1,5 +1,5 @@
 {
-  "name": "@wapijs/create-wapi-bot",
+  "name": "create-wapi-bot",
   "version": "0.0.1",
   "description": "a utility to quickly initiate a whatsapp bot",
   "author": {
@@ -56,7 +56,6 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@favware/cliff-jumper": "^3.0.3",
     "@types/prompts": "^2.4.9",
     "@types/validate-npm-package-name": "^4.0.2"
   },

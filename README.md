@@ -21,8 +21,8 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 
 ### Packages:
 
-- [**wapi.js**]('/packages/wapi.js'): Interact with WhatsApp cloud API with simple and easy-to-manage code.
-- [**create-wapi-bot**]('/packages/create-wapi-bot): Start with the development of your WhatsApp bot using this starter template utility.
+- [**@wapijs/wapi.js**]('/packages/wapi.js'): Interact with WhatsApp cloud API with simple and easy-to-manage code.
+- [**@wapijs/create-wapi-bot**]('/packages/create-wapi-bot): Start with the development of your WhatsApp bot using this starter template utility.
 
 ## ✨ Features
 
@@ -38,9 +38,9 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 Ensure you have the Node.js 18 LTS version to use this library.
 
 ```sh
-npm install wapi.js
-yarn add wapi.js
-pnpm install wapi.js
+npm install @wapijs/wapi.js
+yarn add @wapijs/wapi.js
+pnpm install @wapijs/wapi.js
 ```
 
 > Note: This library is not affiliated with the official WhatsApp Cloud API or does not act as any official solution provided the the Meta Inclusive Private Limited, this is just a open source library built for developers to support them in building whatsapp cloud api based chat bots easily.

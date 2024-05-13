@@ -14,7 +14,6 @@
   },
   "scripts": {
     "watch": "concurrently -n esm,cjs \"pnpm tsc -p tsconfig.json --watch\" \"pnpm tsc -p tsconfig-cjs.json --watch\"  ",
-    "test": "vitest run",
     "clean": "rm -rf ./dist",
     "build:cjs": "pnpm tsc -p tsconfig-cjs.json --pretty",
     "build:esm": "pnpm tsc -p tsconfig.json --pretty",
@@ -49,7 +48,6 @@
   "homepage": "https://www.wapijs.co",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@favware/cliff-jumper": "^3.0.3",
     "@types/express": "^4.17.18",
     "@wapijs/eslint-config": "workspace:*",
     "@wapijs/prettier-config": "workspace:*",
@@ -57,10 +55,7 @@
     "concurrently": "^8.2.1",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "ts-enum-utils": "^1.0.3",
-    "tsup": "^7.2.0",
-    "typescript": "^5.0.4",
-    "vitest": "^0.34.6"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "@discordjs/docgen": "^0.12.1",
