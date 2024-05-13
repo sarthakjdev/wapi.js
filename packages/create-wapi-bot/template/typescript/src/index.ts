@@ -1,5 +1,5 @@
 import { whatsappClient } from "./utils/client.js"
-import { TextMessage } from 'wapi.js'
+import { TextMessage } from '@wapijs/wapi.js'
 import { readdir } from 'node:fs/promises'
 
 
