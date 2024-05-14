@@ -1,5 +1,5 @@
 import { whatsappClient } from './utils/client'
-import { AudioMessage, ListInteractionMessage, TextMessage } from '@wapijs/wapi.js'
+import { ListInteractionMessage, TextMessage } from '@wapijs/wapi.js'
 
 function init() {
 	whatsappClient.on('Ready', () => {
@@ -7,59 +7,56 @@ function init() {
 	})
 
 	const faq = {
-		"What is wapijs": [
+		'What is wapijs': [
 			{
-				question: "What is wapi.js?",
-				answer: "wapi.js is a Tyepscript library for building WhatsApp chatbots."
+				question: 'What is wapi.js?',
+				answer: 'wapi.js is a Tyepscript library for building WhatsApp chatbots.'
 			},
 			{
-				question: "Main features of wapi.js?",
-				answer: "Object-oriented design, single client, easy messaging, event handling, media upload."
+				question: 'Main features of wapi.js?',
+				answer: 'Object-oriented design, single client, easy messaging, event handling, media upload.'
 			},
 			{
-				question: "Can I build AI chatbots with wapi.js?  ewfjbesjkfbewjfgbjwekfknwekjnfwefwefwef",
+				question:
+					'Can I build AI chatbots with wapi.js?',
 				answer: "wapi.js itself doesn't have AI, but you can integrate with NLU services."
-			},
+			}
 		],
-		"Getting Started": [
+		'Getting Started': [
 			{
-				question: "How do I get started with wapi.js?",
-				answer: "Check out the docs at https://wapijs.co/docs and use the \"create-wapi-bot\" template."
+				question: 'How do I get started with wapi.js?',
+				answer: 'Check out the docs at https://wapijs.co/docs and use the "create-wapi-bot" template.'
 			},
 			{
-				question: "Is wapi.js easy to learn?",
-				answer: "Yes, designed for all levels. Docs and examples help you get started quickly."
-			},
+				question: 'Is wapi.js easy to learn?',
+				answer: 'Yes, designed for all levels. Docs and examples help you get started quickly.'
+			}
 		],
-		"Capabilities": [
+		Capabilities: [
 			{
-				question: "What kind of chatbots can I build?",
-				answer: "Customer support, marketing, notifications, and more! Leverage WhatsApp Business API."
+				question: 'What kind of chatbots can I build?',
+				answer: 'Customer support, marketing, notifications, and more! Leverage WhatsApp Business API.'
 			},
 			{
-				question: "Can I integrate wapi.js with other systems?",
-				answer: "Absolutely! Integrate with existing backend system."
+				question: 'Can I integrate wapi.js with other systems?',
+				answer: 'Absolutely! Integrate with existing backend system.'
 			},
 			{
-				question: "Are there examples of chatbots built with wapi.js?",
+				question: 'Are there examples of chatbots built with wapi.js?',
 				answer: "It's in beta, so not many yet. Be among the first to build and share yours!"
 			}
 		],
-		"Help & Support": [
+		'Help & Support': [
 			{
-				question: "Is wapi.js free and open-source?",
+				question: 'Is wapi.js free and open-source?',
 				answer: "Yes, it's completely free and open-source under the Apache 2.0 License."
 			},
 			{
-				question: "Where can I get help or support for wapi.js?",
-				answer: "Create an issue on our GitHub repository: https://github.com/sarthakjdev/wapi.js/issues."
-			},
+				question: 'Where can I get help or support for wapi.js?',
+				answer: 'Create an issue on our GitHub repository: https://github.com/sarthakjdev/wapi.js/issues.'
+			}
 		]
 	}
-
-
-
-
 
 	const listMessage = new ListInteractionMessage({
 		bodyText: 'Welcome to Wapi.js',
@@ -97,7 +94,7 @@ function init() {
 		}
 	})
 
-	whatsappClient.on('ListInteraction', async (message) => {
+	whatsappClient.on('ListInteraction', async message => {
 		console.log('List Interaction', message)
 
 		// it would be something like : section-1-question-1
@@ -116,7 +113,6 @@ function init() {
 				text: answerToReply
 			})
 		})
-
 	})
 
 	whatsappClient.on('Error', error => {

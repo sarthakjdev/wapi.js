@@ -1,11 +1,12 @@
+import { z } from "zod";
 import { type Client } from "../../client";
 import { type BaseMessage } from "../../structures/message";
 import { MessageStatusEnum } from "../../webhook/type";
 import { BaseManager } from "../base";
 import {
-  type MessageResponse,
   type MessageManagerInterface,
 } from "./interface";
+import { WapiMessageResponseSchemaType } from "../../client/schema";
 
 /**
  * Manager to handle outgoing messages for wapi.
@@ -15,8 +16,7 @@ import {
  */
 export class MessageManager
   extends BaseManager
-  implements MessageManagerInterface
-{
+  implements MessageManagerInterface {
   client: Client;
   constructor(props: { client: Client }) {
     super(props.client);
@@ -33,7 +33,7 @@ export class MessageManager
   async send<T extends BaseMessage<string>>(props: {
     message: T;
     phoneNumber: string;
-  }): Promise<string> {
+  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
     const response = await this.client.requester.requestCloudApi({
       path: `/${this.client.phoneNumberId}/messages`,
       body: JSON.stringify(props.message.toJson({ to: props.phoneNumber })),
@@ -55,7 +55,7 @@ export class MessageManager
     replyToMessageId: string;
     message: T;
     phoneNumber: string;
-  }): Promise<MessageResponse> {
+  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
     const response = await this.client.requester.requestCloudApi({
       path: `/${this.client.phoneNumberId}/messages`,
       body: JSON.stringify(
@@ -67,10 +67,6 @@ export class MessageManager
       method: "POST",
     });
 
-    return {
-      id: response.messages[0].id,
-      receiverPhoneNumber: props.phoneNumber,
-      status: MessageStatusEnum.Sent,
-    };
+    return response
   }
 }

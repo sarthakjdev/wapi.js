@@ -1,5 +1,6 @@
+import { z } from "zod";
 import { type Client } from "../../../client";
-import { type MessageResponse } from "../../../manager";
+import { WapiMessageResponseSchemaType } from "../../../client/schema";
 import { ReactionMessage } from "../../../structures";
 import { type BaseMessage } from "../../../structures/message";
 import {
@@ -30,8 +31,7 @@ export class BaseEvent implements BaseEventInterface {
  */
 export abstract class MessageEvent
   extends BaseEvent
-  implements MessageEventInterface
-{
+  implements MessageEventInterface {
   messageId: string;
   context: MessageContext;
   timestamp: number;
@@ -73,7 +73,7 @@ export abstract class MessageEvent
    */
   async reply<T extends BaseMessage<string>>(props: {
     message: T;
-  }): Promise<MessageResponse> {
+  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
     if (!this.context.from) {
       throw new Error(
         "No context message id found while replying to message!!",
@@ -128,6 +128,7 @@ export abstract class MessageEvent
       method: "POST",
     });
 
+    // ! TODO: here return a boolean may be @sarthakjdev
     return response;
   }
 }
@@ -140,8 +141,7 @@ export abstract class MessageEvent
  */
 export abstract class MediaMessageEvent
   extends MessageEvent
-  implements MediaMessageEventInterface
-{
+  implements MediaMessageEventInterface {
   mediaId: string;
   mimeType: string;
   sha256: string;
@@ -200,8 +200,7 @@ export abstract class MediaMessageEvent
  */
 export abstract class StatusUpdateEvent
   extends BaseEvent
-  implements StatusUpdateEventInterface
-{
+  implements StatusUpdateEventInterface {
   context: MessageContext;
   timestamp: number;
 

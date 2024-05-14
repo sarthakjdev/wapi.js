@@ -343,7 +343,12 @@ export const ListInteractiveMessageSection = z.object({
     z.object({
       id: z.string(),
       title: z.string(),
-      description: z.string().max(72, "Max length of a row description in list interaction message, can be 72 only"),
+      description: z
+        .string()
+        .max(
+          72,
+          "Max length of a row description in list interaction message, can be 72 only",
+        ),
     }),
   ),
 });

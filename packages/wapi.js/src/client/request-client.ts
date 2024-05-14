@@ -1,8 +1,14 @@
+import { z } from "zod";
 import { type Client } from "./index";
 import {
   type RequestClientInterface,
   type RequestClientConfigOptions,
 } from "./interface";
+import {
+  CloudApiResponseSchemaType,
+  WapiMessageResponseSchemaType,
+} from "./schema";
+import { MessageStatusEnum } from "../webhook/type";
 
 /**
  * Request client used to communicate with WhatsApp Cloud API using HTTP requests.
@@ -61,10 +67,9 @@ export class RequestClient implements RequestClientInterface {
     path: string;
     body?: string;
     method?: "GET" | "POST" | "DELETE";
-  }): Promise<any> {
+  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
     try {
       const requestUrl = this.getRequestUrl();
-
       const response = await fetch(`${requestUrl}${path}`, {
         method: method,
         body,
@@ -76,13 +81,49 @@ export class RequestClient implements RequestClientInterface {
       });
 
       const responseBody = await response.json();
-
-      // !TODO: fix types here
-      return responseBody;
+      const parsedResponse = CloudApiResponseSchemaType.safeParse(responseBody);
+      if (parsedResponse.success) {
+        const responseData = parsedResponse.data;
+        if (
+          responseData &&
+          typeof responseData === "object" &&
+          "error" in responseData
+        ) {
+          // api returned errored response
+          return {
+            status: "error",
+            error: {
+              description: responseData.error.error_data.details,
+              title: responseData.error.message,
+              errorCode: responseData.error.code,
+              errorSubCode: responseData.error.error_subcode,
+            },
+          };
+        } else {
+          return {
+            status: "success",
+            data: {
+              messageId: responseData.messages[0].id,
+              receiverPhoneNumber: responseData.contacts[0].input,
+              senderPhoneNumber: responseData.contacts[0].wa_id,
+              status: MessageStatusEnum.Sent,
+            },
+          };
+        }
+      } else {
+        throw new Error('Failed to parse response, Report to sarthak@softlancer.co urgently. or raise an issue on github.')
+      }
     } catch (error) {
-      console.log({ error });
       if (error instanceof Error) this.client.emit("Error", error);
-      return null;
+      return {
+        status: "error",
+        error: {
+          title: "Request Error",
+          description: error instanceof Error ? error.message : "",
+          errorCode: "",
+          errorSubCode: "",
+        },
+      };
     }
   }
 }
