@@ -37,7 +37,7 @@
 		"nodemon": "^3.0.2",
 		"typescript": "5.4.5"
 	},
-	"packageManager": "pnpm@8.7.0",
+	"packageManager": "pnpm@9.1.0",
 	"dependencies": {
 		"@wapijs/wapi.js": "workspace:*",
 		"dotenv": "^16.3.1"
