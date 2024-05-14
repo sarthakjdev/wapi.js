@@ -5,6 +5,8 @@ import { type Webhook } from "../webhook";
 import { type MessageManager } from "../manager/message";
 import { type Client } from "./index";
 import { type RequestClient } from "./request-client";
+import { type z } from "zod";
+import { type WapiMessageResponseSchemaType } from "./schema";
 
 /**
  * Represents the interface for the Wapi client.
@@ -115,7 +117,7 @@ export interface RequestClientInterface {
     path: string;
     body: string;
     method: "GET" | "POST" | "DELETE";
-  }): Promise<void>;
+  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>>;
 }
 
 /**

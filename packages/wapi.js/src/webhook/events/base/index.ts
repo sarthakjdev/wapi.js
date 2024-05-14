@@ -1,5 +1,6 @@
+import { type z } from "zod";
 import { type Client } from "../../../client";
-import { type MessageResponse } from "../../../manager";
+import { type WapiMessageResponseSchemaType } from "../../../client/schema";
 import { ReactionMessage } from "../../../structures";
 import { type BaseMessage } from "../../../structures/message";
 import {
@@ -73,7 +74,7 @@ export abstract class MessageEvent
    */
   async reply<T extends BaseMessage<string>>(props: {
     message: T;
-  }): Promise<MessageResponse> {
+  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
     if (!this.context.from) {
       throw new Error(
         "No context message id found while replying to message!!",
@@ -128,6 +129,7 @@ export abstract class MessageEvent
       method: "POST",
     });
 
+    // ! TODO: here return a boolean may be @sarthakjdev
     return response;
   }
 }
