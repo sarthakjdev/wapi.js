@@ -13,4 +13,4 @@ outputs:
     description: 'The semver string that was extracted from this tag'
 runs:
   using: node20
-  main: ../../dist/formatTag/index.js
+  main: ./index.js
