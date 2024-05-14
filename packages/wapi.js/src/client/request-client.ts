@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { type z } from "zod";
 import { type Client } from "./index";
 import {
   type RequestClientInterface,
@@ -6,7 +6,7 @@ import {
 } from "./interface";
 import {
   CloudApiResponseSchemaType,
-  WapiMessageResponseSchemaType,
+  type WapiMessageResponseSchemaType,
 } from "./schema";
 import { MessageStatusEnum } from "../webhook/type";
 
@@ -111,7 +111,9 @@ export class RequestClient implements RequestClientInterface {
           };
         }
       } else {
-        throw new Error('Failed to parse response, Report to sarthak@softlancer.co urgently. or raise an issue on github.')
+        throw new Error(
+          "Failed to parse response, Report to sarthak@softlancer.co urgently. or raise an issue on github.",
+        );
       }
     } catch (error) {
       if (error instanceof Error) this.client.emit("Error", error);
@@ -120,7 +122,7 @@ export class RequestClient implements RequestClientInterface {
         error: {
           title: "Request Error",
           description: error instanceof Error ? error.message : "",
-          errorCode: "",
+          errorCode: 0,
           errorSubCode: "",
         },
       };

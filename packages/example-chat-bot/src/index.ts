@@ -48,7 +48,7 @@ function init() {
 		],
 		'Help & Support': [
 			{
-				question: 'Is wapi.js free and open-source?',
+				question: 'Is wapi.js free and open-source? qwerrqwrf3r3r32r23r23r23r23r2rqrqrerere23re23r23re',
 				answer: "Yes, it's completely free and open-source under the Apache 2.0 License."
 			},
 			{
@@ -84,7 +84,6 @@ function init() {
 				message: listMessage,
 				phoneNumber: message.context.from
 			})
-			console.log({ response: JSON.stringify(response) })
 		} else {
 			await message.reply({
 				message: new TextMessage({
@@ -102,8 +101,6 @@ function init() {
 
 		const sectionIndex = parseInt(messageListId.split('-')[1]) - 1
 		const questionIndex = parseInt(messageListId.split('-')[3]) - 1
-
-		console.log({ messageListId, sectionIndex, questionIndex })
 
 		// @ts-ignore
 		const answerToReply = faq[Object.keys(faq)[sectionIndex]][questionIndex].answer

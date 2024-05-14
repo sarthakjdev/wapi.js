@@ -1,12 +1,9 @@
-import { z } from "zod";
+import { type z } from "zod";
 import { type Client } from "../../client";
 import { type BaseMessage } from "../../structures/message";
-import { MessageStatusEnum } from "../../webhook/type";
 import { BaseManager } from "../base";
-import {
-  type MessageManagerInterface,
-} from "./interface";
-import { WapiMessageResponseSchemaType } from "../../client/schema";
+import { type MessageManagerInterface } from "./interface";
+import { type WapiMessageResponseSchemaType } from "../../client/schema";
 
 /**
  * Manager to handle outgoing messages for wapi.
@@ -16,7 +13,8 @@ import { WapiMessageResponseSchemaType } from "../../client/schema";
  */
 export class MessageManager
   extends BaseManager
-  implements MessageManagerInterface {
+  implements MessageManagerInterface
+{
   client: Client;
   constructor(props: { client: Client }) {
     super(props.client);
@@ -67,6 +65,6 @@ export class MessageManager
       method: "POST",
     });
 
-    return response
+    return response;
   }
 }

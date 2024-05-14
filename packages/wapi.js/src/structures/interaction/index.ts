@@ -225,7 +225,7 @@ export class ListInteractionMessage
       footerText: params.footerText,
       bodyText: params.bodyText,
     });
-    this.parseConstructorPayload(this._constructorPayloadSchema, params);
+    // this.parseConstructorPayload(this._constructorPayloadSchema, params);
     this.data = {
       buttonText: params.buttonText,
       sections: params.sections,

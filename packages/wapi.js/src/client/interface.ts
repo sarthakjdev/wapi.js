@@ -5,7 +5,7 @@ import { type Webhook } from "../webhook";
 import { type MessageManager } from "../manager/message";
 import { type Client } from "./index";
 import { type RequestClient } from "./request-client";
-import { z } from "zod";
+import { type z } from "zod";
 import { type WapiMessageResponseSchemaType } from "./schema";
 
 /**
