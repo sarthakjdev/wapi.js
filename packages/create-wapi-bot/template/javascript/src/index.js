@@ -13,12 +13,11 @@ function loadEventListeners() {
 
 async function init() {
   loadEventListeners();
-  await client.initiate();
-  // send a message to a number
   await whatsappClient.message.send({
     message: new TextMessage({ text: "hello, world!" }),
     phoneNumber: "<replace-me>",
   });
+  client.initiate();
 }
 
 process.on("unhandledRejection", (error) => {

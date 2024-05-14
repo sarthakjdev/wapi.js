@@ -11,13 +11,12 @@ async function loadEventListeners() {
 
 async function init() {
     loadEventListeners()
-    await whatsappClient.initiate()
-
     // send a message to a number
     await whatsappClient.message.send({
         message: new TextMessage({ text: 'hello, world!' }),
         phoneNumber: '<replace-me>'
     })
+    await whatsappClient.initiate()
 }
 
 init().catch(error => console.error(error))
