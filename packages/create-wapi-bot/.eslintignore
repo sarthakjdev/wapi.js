@@ -2,3 +2,4 @@ template/
 .eslintrc.js
 dist/
 build/
+node_modules/
