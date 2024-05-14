@@ -67,8 +67,6 @@ export class MessageManager
       method: "POST",
     });
 
-    console.log({ response: JSON.stringify(response) });
-
     return {
       id: response.messages[0].id,
       receiverPhoneNumber: props.phoneNumber,

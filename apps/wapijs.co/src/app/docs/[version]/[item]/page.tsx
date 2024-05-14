@@ -45,7 +45,7 @@ function Member({ member }: { readonly member?: ApiItem }) {
 }
 
 export async function generateStaticParams() {
-	const allVersionOfPackage = await fetchVersions()
+	const allVersionOfPackage = fetchVersions()
 	const allStaticParams = await Promise.all(
 		allVersionOfPackage.flatMap(async version => {
 			const documentationData = await fetchDocumentationJsonDataFromSlug(version.version)

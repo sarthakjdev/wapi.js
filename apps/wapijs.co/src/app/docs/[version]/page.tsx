@@ -24,7 +24,7 @@ async function fetchReadMeFileFromGithub() {
 }
 
 export async function generateStaticParams() {
-	const allVersionOfPackage = await fetchVersions()
+	const allVersionOfPackage = fetchVersions()
 	return allVersionOfPackage.flatMap(async version => ({ version: version.version }))
 }
 
@@ -45,28 +45,30 @@ const VersionHome = async ({ params }: { params: { version: string } }) => {
 
 	const fileContent = await fetchReadMeFileFromGithub()
 
-	const MDX = await MDXRemote({
-		options: {
-			mdxOptions: {
-				remarkPlugins: [remarkGfm],
-				rehypePlugins: [
-					[
-						rehypeShikiFromHighlighter as any,
-						highlighter,
-						{
-							themes: {
-								light: 'github-light',
-								dark: 'github-dark-dimmed'
-							}
-						}
-					]
-				]
-			}
-		},
-		source: fileContent
-	})
-
-	return <div className="prose prose-invert mx-auto max-w-screen-xl">{MDX}</div>
+	return (
+		<div className="prose prose-invert mx-auto max-w-screen-xl">
+			<MDXRemote
+				options={{
+					mdxOptions: {
+						remarkPlugins: [remarkGfm],
+						rehypePlugins: [
+							[
+								rehypeShikiFromHighlighter as any,
+								highlighter,
+								{
+									themes: {
+										light: 'github-light',
+										dark: 'github-dark-dimmed'
+									}
+								}
+							]
+						]
+					}
+				}}
+				source={fileContent}
+			/>
+		</div>
+	)
 }
 
 export default VersionHome

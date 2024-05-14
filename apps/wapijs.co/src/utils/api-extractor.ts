@@ -40,7 +40,6 @@ export async function fetchDocumentationJsonDataFromSlug(version: string) {
 					method: 'GET'
 				}
 			).then(res => res.json())
-			console.log({ response })
 			return response
 		}
 	} catch (error) {
