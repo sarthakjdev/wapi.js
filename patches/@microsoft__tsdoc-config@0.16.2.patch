@@ -1,5 +1,5 @@
 diff --git a/lib/TSDocConfigFile.js b/lib/TSDocConfigFile.js
-index caf3515d60fd386c5909db5a0aa8b4180b10d602..99bd39b4ecc686f72f6a4dd2f28bfda0a9a22a6b 100644
+index caf3515d60fd386c5909db5a0aa8b4180b10d602..e60df390738de6d7082347462f2b42633dcd9edb 100644
 --- a/lib/TSDocConfigFile.js
 +++ b/lib/TSDocConfigFile.js
 @@ -1,26 +1,46 @@
@@ -67,7 +67,7 @@ index caf3515d60fd386c5909db5a0aa8b4180b10d602..99bd39b4ecc686f72f6a4dd2f28bfda0
  Object.defineProperty(exports, "__esModule", { value: true });
  exports.TSDocConfigFile = void 0;
  const tsdoc_1 = require("@microsoft/tsdoc");
-@@ -31,10 +51,12 @@ const ajv_1 = __importDefault(require("ajv"));
+@@ -31,10 +51,15 @@ const ajv_1 = __importDefault(require("ajv"));
  const jju = __importStar(require("jju"));
  const ajv = new ajv_1.default({ verbose: true });
  function initializeSchemaValidator() {
@@ -75,16 +75,19 @@ index caf3515d60fd386c5909db5a0aa8b4180b10d602..99bd39b4ecc686f72f6a4dd2f28bfda0
 -    const jsonSchemaContent = fs.readFileSync(jsonSchemaPath).toString();
 -    const jsonSchema = jju.parse(jsonSchemaContent, { mode: 'cjson' });
 -    return ajv.compile(jsonSchema);
-+  const jsonSchemaPath = resolve.sync("../schemas/tsdoc.schema.json", {
-+    basedir: __dirname,
-+  });
++  const jsonSchemaPath = resolve.sync(
++    "node_modules/@microsoft/tsdoc-config/schemas/tsdoc.schema.json",
++    {
++      basedir: __dirname,
++    }
++  );
 +  const jsonSchemaContent = fs.readFileSync(jsonSchemaPath).toString();
 +  const jsonSchema = jju.parse(jsonSchemaContent, { mode: "cjson" });
 +  return ajv.compile(jsonSchema);
  }
  // Warning: AJV has a fairly strange API.  Each time this function is called, the function  object's
  // properties get overwritten with the results of the latest validation.  Thus we need to be careful
-@@ -46,638 +68,656 @@ const tsdocSchemaValidator = initializeSchemaValidator();
+@@ -46,638 +71,656 @@ const tsdocSchemaValidator = initializeSchemaValidator();
   * @public
   */
  class TSDocConfigFile {
