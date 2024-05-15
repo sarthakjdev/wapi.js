@@ -4,10 +4,9 @@
 	"scripts": {
 		"dev": "NODE_ENV=development next dev",
 		"build": "NODE_ENV=production  next build",
-		"start": "NODE_ENV=production  next start",
+		"start": "NODE_ENV=production node_modules/next/dist/bin/next start ",
 		"lint": "next lint",
-		"pretty": "pnpm prettier --write \"src/**/*.{ts,tsx,css}\"",
-		"postinstall": "pnpm add @microsoft/tsdoc --save"
+		"pretty": "pnpm prettier --write \"src/**/*.{ts,tsx,css}\""
 	},
 	"dependencies": {
 		"@headlessui/tailwindcss": "^0.2.0",
