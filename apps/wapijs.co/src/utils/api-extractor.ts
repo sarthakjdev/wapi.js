@@ -189,9 +189,9 @@ export function parametersString(item: ApiDocumentedItem & ApiParameterListMixin
 }
 
 export function addPackageToModel(model: ApiModel, data: any) {
-	const nodeModulesPath = path.join(process.cwd(), 'node_modules');
-	const files = readdirSync(nodeModulesPath);
-	console.log("node_modules:", files);
+	const nodeModulesPath = path.join(process.cwd(), 'node_modules')
+	const files = readdirSync(nodeModulesPath)
+	console.log('node_modules:', files)
 	const tsdocConfiguration = new TSDocConfiguration()
 	const tsdocConfigFile = TSDocConfigFile.loadFromObject(data.metadata.tsdocConfig)
 	tsdocConfigFile.configureParser(tsdocConfiguration)
