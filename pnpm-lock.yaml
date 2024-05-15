@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   '@microsoft/tsdoc-config@0.16.2':
-    hash: izqxbkx67zhancvlaryfv4r7hu
+    hash: fbrhds4pfv5d2ie5aolb6q2rxi
     path: patches/@microsoft__tsdoc-config@0.16.2.patch
 
 importers:
@@ -105,7 +105,7 @@ importers:
         version: 0.14.2
       '@microsoft/tsdoc-config':
         specifier: ^0.16.2
-        version: 0.16.2(patch_hash=izqxbkx67zhancvlaryfv4r7hu)
+        version: 0.16.2(patch_hash=fbrhds4pfv5d2ie5aolb6q2rxi)
       '@react-icons/all-files':
         specifier: ^4.1.0
         version: 4.1.0(react@18.3.1)
@@ -1066,7 +1066,7 @@ packages:
     resolution: {integrity: sha512-4/5gbW9zazr7hHHdv32QoCFDQl4vsrMOFp7g9k/uIQR2mn7AqQVN6NvNOAnFi1xwCM6X3K1BN1ZWf9ARF5hUmA==}
     dependencies:
       '@microsoft/tsdoc': 0.14.2
-      '@microsoft/tsdoc-config': 0.16.2(patch_hash=izqxbkx67zhancvlaryfv4r7hu)
+      '@microsoft/tsdoc-config': 0.16.2(patch_hash=fbrhds4pfv5d2ie5aolb6q2rxi)
       '@rushstack/node-core-library': 4.2.1(@types/node@20.12.12)
     transitivePeerDependencies:
       - '@types/node'
@@ -1077,7 +1077,7 @@ packages:
     dependencies:
       '@microsoft/api-extractor-model': 7.28.16(@types/node@20.12.12)
       '@microsoft/tsdoc': 0.14.2
-      '@microsoft/tsdoc-config': 0.16.2(patch_hash=izqxbkx67zhancvlaryfv4r7hu)
+      '@microsoft/tsdoc-config': 0.16.2(patch_hash=fbrhds4pfv5d2ie5aolb6q2rxi)
       '@rushstack/node-core-library': 4.2.1(@types/node@20.12.12)
       '@rushstack/rig-package': 0.5.2
       '@rushstack/terminal': 0.10.3(@types/node@20.12.12)
@@ -1091,7 +1091,7 @@ packages:
     transitivePeerDependencies:
       - '@types/node'
 
-  /@microsoft/tsdoc-config@0.16.2(patch_hash=izqxbkx67zhancvlaryfv4r7hu):
+  /@microsoft/tsdoc-config@0.16.2(patch_hash=fbrhds4pfv5d2ie5aolb6q2rxi):
     resolution: {integrity: sha512-OGiIzzoBLgWWR0UdRJX98oYO+XKGf7tiK4Zk6tQ/E4IJqGCe7dvkTvgDZV5cFJUzLGDOjeAXrnZoA6QkVySuxw==}
     dependencies:
       '@microsoft/tsdoc': 0.14.2

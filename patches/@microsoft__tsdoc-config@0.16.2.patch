@@ -1,5 +1,5 @@
 diff --git a/lib/TSDocConfigFile.js b/lib/TSDocConfigFile.js
-index caf3515d60fd386c5909db5a0aa8b4180b10d602..e60df390738de6d7082347462f2b42633dcd9edb 100644
+index caf3515d60fd386c5909db5a0aa8b4180b10d602..9b4c3134e094d60af9c3aa95c8feee72ff21a245 100644
 --- a/lib/TSDocConfigFile.js
 +++ b/lib/TSDocConfigFile.js
 @@ -1,26 +1,46 @@
@@ -67,7 +67,7 @@ index caf3515d60fd386c5909db5a0aa8b4180b10d602..e60df390738de6d7082347462f2b4263
  Object.defineProperty(exports, "__esModule", { value: true });
  exports.TSDocConfigFile = void 0;
  const tsdoc_1 = require("@microsoft/tsdoc");
-@@ -31,10 +51,15 @@ const ajv_1 = __importDefault(require("ajv"));
+@@ -31,10 +51,101 @@ const ajv_1 = __importDefault(require("ajv"));
  const jju = __importStar(require("jju"));
  const ajv = new ajv_1.default({ verbose: true });
  function initializeSchemaValidator() {
@@ -75,19 +75,105 @@ index caf3515d60fd386c5909db5a0aa8b4180b10d602..e60df390738de6d7082347462f2b4263
 -    const jsonSchemaContent = fs.readFileSync(jsonSchemaPath).toString();
 -    const jsonSchema = jju.parse(jsonSchemaContent, { mode: 'cjson' });
 -    return ajv.compile(jsonSchema);
-+  const jsonSchemaPath = resolve.sync(
-+    "node_modules/@microsoft/tsdoc-config/schemas/tsdoc.schema.json",
-+    {
-+      basedir: __dirname,
-+    }
-+  );
-+  const jsonSchemaContent = fs.readFileSync(jsonSchemaPath).toString();
++  const jsonSchemaContent = JSON.stringify({
++    title: "TSDoc Configuration",
++    description: "Describes the TSDoc configuration for a TypeScript project",
++    type: "object",
++    properties: {
++      $schema: {
++        description:
++          "Part of the JSON Schema standard, this optional keyword declares the URL of the schema that the file conforms to. Editors may download the schema and use it to perform syntax highlighting.",
++        type: "string",
++      },
++
++      extends: {
++        description:
++          'Optionally specifies one or more JSON config files that will be combined with this file.  This provides a way for standard settings to be shared across multiple projects.  Important: The "extends" paths are resolved using NodeJS module resolution, so a path to a local file MUST be prefixed with "./".',
++        type: "array",
++        items: {
++          type: "string",
++        },
++      },
++
++      noStandardTags: {
++        description:
++          'By default, the config file loader will predefine all of the standardized TSDoc tags.  To disable this and start with a completely empty configuration, set "noStandardTags"=true.',
++        type: "boolean",
++      },
++
++      tagDefinitions: {
++        description:
++          "Additional tags to support when parsing documentation comments with TSDoc.",
++        type: "array",
++        items: {
++          $ref: "#/definitions/tsdocTagDefinition",
++        },
++      },
++
++      supportedHtmlElements: {
++        description:
++          'The HTML element names that are supported in this configuration. Used in conjunction with the "reportUnsupportedHtmlElements" setting.',
++        type: "array",
++        items: {
++          type: "string",
++          pattern: "^[a-zA-Z0-9-]+$",
++        },
++      },
++
++      reportUnsupportedHtmlElements: {
++        description:
++          'Whether an error should be reported when an unsupported HTML element is encountered in a doc comment. Defaults to "true" if the "supportedHtmlElements" field is present in this file, "false" if not.',
++        type: "boolean",
++      },
++
++      supportForTags: {
++        description:
++          'A collection of key/value pairs.  The key is a TSDoc tag name (e.g. "@myTag") that must be defined in this configuration.  The value is a boolean indicating whether the tag is supported.  The TSDoc parser may report warnings when unsupported tags are encountered.  If "supportForTags" is specified for at least one tag, then the "reportUnsupportedTags" validation check is enabled by default.',
++        type: "object",
++        patternProperties: {
++          "@[a-zA-Z][a-zA-Z0-9]*$": {
++            type: "boolean",
++          },
++        },
++        additionalItems: false,
++      },
++    },
++    required: ["$schema"],
++    additionalProperties: false,
++
++    definitions: {
++      tsdocTagDefinition: {
++        description: "Configuration for a custom supported TSDoc tag.",
++        type: "object",
++        properties: {
++          tagName: {
++            description:
++              "Name of the custom tag. TSDoc tag names start with an at-sign (@) followed by ASCII letters using camelCase capitalization.",
++            type: "string",
++          },
++          syntaxKind: {
++            description:
++              'Syntax kind of the custom tag. "inline" means that this tag can appear inside other documentation sections (example: {@link}). "block" means that this tag starts a new documentation section (example: @remarks). "modifier" means that this tag\'s presence indicates an aspect of the associated API item (example: @internal).',
++            type: "string",
++            enum: ["inline", "block", "modifier"],
++          },
++          allowMultiple: {
++            description:
++              "If true, then this tag may appear multiple times in a doc comment. By default, a tag may only appear once.",
++            type: "boolean",
++          },
++        },
++        required: ["tagName", "syntaxKind"],
++        additionalProperties: false,
++      },
++    },
++  });
 +  const jsonSchema = jju.parse(jsonSchemaContent, { mode: "cjson" });
 +  return ajv.compile(jsonSchema);
  }
  // Warning: AJV has a fairly strange API.  Each time this function is called, the function  object's
  // properties get overwritten with the results of the latest validation.  Thus we need to be careful
-@@ -46,638 +71,656 @@ const tsdocSchemaValidator = initializeSchemaValidator();
+@@ -46,638 +157,656 @@ const tsdocSchemaValidator = initializeSchemaValidator();
   * @public
   */
  class TSDocConfigFile {
@@ -1371,92 +1457,3 @@ index caf3515d60fd386c5909db5a0aa8b4180b10d602..e60df390738de6d7082347462f2b4263
 +TSDocConfigFile.CURRENT_SCHEMA_URL =
 +  "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json";
  //# sourceMappingURL=TSDocConfigFile.js.map
-diff --git a/schemas/tsdoc.schema.json b/schemas/tsdoc.schema.json
-new file mode 100644
-index 0000000000000000000000000000000000000000..0772841c96668662a1ef75cc30ee2879cfde7b56
---- /dev/null
-+++ b/schemas/tsdoc.schema.json
-@@ -0,0 +1,83 @@
-+{
-+  "title": "TSDoc Configuration",
-+  "description": "Describes the TSDoc configuration for a TypeScript project",
-+  "type": "object",
-+  "properties": {
-+    "$schema": {
-+      "description": "Part of the JSON Schema standard, this optional keyword declares the URL of the schema that the file conforms to. Editors may download the schema and use it to perform syntax highlighting.",
-+      "type": "string"
-+    },
-+
-+    "extends": {
-+      "description": "Optionally specifies one or more JSON config files that will be combined with this file.  This provides a way for standard settings to be shared across multiple projects.  Important: The \"extends\" paths are resolved using NodeJS module resolution, so a path to a local file MUST be prefixed with \"./\".",
-+      "type": "array",
-+      "items": {
-+        "type": "string"
-+      }
-+    },
-+
-+    "noStandardTags": {
-+      "description": "By default, the config file loader will predefine all of the standardized TSDoc tags.  To disable this and start with a completely empty configuration, set \"noStandardTags\"=true.",
-+      "type": "boolean"
-+    },
-+
-+    "tagDefinitions": {
-+      "description": "Additional tags to support when parsing documentation comments with TSDoc.",
-+      "type": "array",
-+      "items": {
-+        "$ref": "#/definitions/tsdocTagDefinition"
-+      }
-+    },
-+
-+    "supportedHtmlElements": {
-+      "description": "The HTML element names that are supported in this configuration. Used in conjunction with the \"reportUnsupportedHtmlElements\" setting.",
-+      "type": "array",
-+      "items": {
-+        "type": "string",
-+        "pattern": "^[a-zA-Z0-9-]+$"
-+      }
-+    },
-+
-+    "reportUnsupportedHtmlElements": {
-+      "description": "Whether an error should be reported when an unsupported HTML element is encountered in a doc comment. Defaults to \"true\" if the \"supportedHtmlElements\" field is present in this file, \"false\" if not.",
-+      "type": "boolean"
-+    },
-+
-+    "supportForTags": {
-+      "description": "A collection of key/value pairs.  The key is a TSDoc tag name (e.g. \"@myTag\") that must be defined in this configuration.  The value is a boolean indicating whether the tag is supported.  The TSDoc parser may report warnings when unsupported tags are encountered.  If \"supportForTags\" is specified for at least one tag, then the \"reportUnsupportedTags\" validation check is enabled by default.",
-+      "type": "object",
-+      "patternProperties": {
-+        "@[a-zA-Z][a-zA-Z0-9]*$": {
-+          "type": "boolean"
-+        }
-+      },
-+      "additionalItems": false
-+    }
-+  },
-+  "required": ["$schema"],
-+  "additionalProperties": false,
-+
-+  "definitions": {
-+    "tsdocTagDefinition": {
-+      "description": "Configuration for a custom supported TSDoc tag.",
-+      "type": "object",
-+      "properties": {
-+        "tagName": {
-+          "description": "Name of the custom tag. TSDoc tag names start with an at-sign (@) followed by ASCII letters using camelCase capitalization.",
-+          "type": "string"
-+        },
-+        "syntaxKind": {
-+          "description": "Syntax kind of the custom tag. \"inline\" means that this tag can appear inside other documentation sections (example: {@link}). \"block\" means that this tag starts a new documentation section (example: @remarks). \"modifier\" means that this tag's presence indicates an aspect of the associated API item (example: @internal).",
-+          "type": "string",
-+          "enum": ["inline", "block", "modifier"]
-+        },
-+        "allowMultiple": {
-+          "description": "If true, then this tag may appear multiple times in a doc comment. By default, a tag may only appear once.",
-+          "type": "boolean"
-+        }
-+      },
-+      "required": ["tagName", "syntaxKind"],
-+      "additionalProperties": false
-+    }
-+  }
-+}
