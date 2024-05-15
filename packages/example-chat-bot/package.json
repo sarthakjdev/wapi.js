@@ -41,8 +41,5 @@
 	"dependencies": {
 		"@wapijs/wapi.js": "workspace:*",
 		"dotenv": "^16.3.1"
-	},
-	"publishConfig": {
-		"access": "restricted"
 	}
 }
