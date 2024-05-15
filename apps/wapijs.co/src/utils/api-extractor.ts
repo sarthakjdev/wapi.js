@@ -18,7 +18,8 @@ import { type ResolvedParameter } from '~/types'
 import { TSDocConfiguration } from '@microsoft/tsdoc'
 import { TSDocConfigFile } from '@microsoft/tsdoc-config'
 import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import path, { join } from 'node:path'
+import { readdirSync } from 'node:fs'
 
 export async function fetchDocumentationJsonDataFromSlug(version: string) {
 	try {
@@ -43,7 +44,7 @@ export async function fetchDocumentationJsonDataFromSlug(version: string) {
 			return response
 		}
 	} catch (error) {
-		console.log(error)
+		console.error(error)
 		return null
 	}
 }
@@ -188,6 +189,9 @@ export function parametersString(item: ApiDocumentedItem & ApiParameterListMixin
 }
 
 export function addPackageToModel(model: ApiModel, data: any) {
+	const nodeModulesPath = path.join(process.cwd(), 'node_modules')
+	const files = readdirSync(nodeModulesPath)
+	console.log('node_modules:', files)
 	const tsdocConfiguration = new TSDocConfiguration()
 	const tsdocConfigFile = TSDocConfigFile.loadFromObject(data.metadata.tsdocConfig)
 	tsdocConfigFile.configureParser(tsdocConfiguration)

@@ -13,8 +13,7 @@ import { type WapiMessageResponseSchemaType } from "../../client/schema";
  */
 export class MessageManager
   extends BaseManager
-  implements MessageManagerInterface
-{
+  implements MessageManagerInterface {
   client: Client;
   constructor(props: { client: Client }) {
     super(props.client);
