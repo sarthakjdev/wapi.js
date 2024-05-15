@@ -6,7 +6,8 @@
 		"build": "NODE_ENV=production  next build",
 		"start": "NODE_ENV=production  next start",
 		"lint": "next lint",
-		"pretty": "pnpm prettier --write \"src/**/*.{ts,tsx,css}\""
+		"pretty": "pnpm prettier --write \"src/**/*.{ts,tsx,css}\"",
+		"postinstall": "pnpm add @microsoft/tsdoc --save"
 	},
 	"dependencies": {
 		"@headlessui/tailwindcss": "^0.2.0",
