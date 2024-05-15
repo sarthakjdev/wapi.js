@@ -8,6 +8,9 @@ import { readFile } from 'node:fs/promises'
 import getWasm from 'shiki/wasm'
 import { fetchVersions } from '~/reusable-function'
 
+export const revalidate = 60 * 60 * 24 * 30
+export const dynamicParams = true
+
 async function fetchReadMeFileFromGithub() {
 	if (IS_DEVELOPMENT) {
 		const fileContent = await readFile(join(process.cwd(), '..', '..', 'README.md'), 'utf8')
