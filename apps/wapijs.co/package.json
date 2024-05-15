@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "NODE_ENV=development next dev",
 		"build": "NODE_ENV=production  next build",
-		"start": "NODE_ENV=production node_modules/next/dist/bin/next start ",
+		"start": "NODE_ENV=production next start ",
 		"lint": "next lint",
 		"pretty": "pnpm prettier --write \"src/**/*.{ts,tsx,css}\""
 	},
@@ -42,5 +42,10 @@
 		"@wapijs/prettier-config": "workspace:*",
 		"@wapijs/typescript-config": "workspace:*",
 		"typescript": "5.4.5"
+	},
+	"pnpm": {
+		"patchedDependencies": {
+			"@microsoft/tsdoc-config@0.16.2": "patches/@microsoft__tsdoc-config@0.16.2.patch"
+		}
 	}
 }
