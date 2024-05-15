@@ -3,7 +3,10 @@
 	"compilerOptions": {
 		"paths": {
 			"~/*": ["./src/*"],
-			"root/*": ["./*"]
+			"root/*": ["./*"],
+			"@microsoft/tsdoc/schemas/tsdoc.schema.json": [
+				"./node_modules/@microsoft/tsdoc/schemas/tsdoc.schema.json"
+			]
 		}
 	},
 	"include": [
