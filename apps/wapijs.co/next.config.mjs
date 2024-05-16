@@ -1,9 +1,20 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-	reactStrictMode: true,
-	compiler: {
-		removeConsole: process.env.NODE_ENV === 'production'
-	}
-}
+
+import BundleAnalyzerPlugin from '@next/bundle-analyzer'
+import { withContentlayer } from 'next-contentlayer'
+
+const withBundleAnalyzer = BundleAnalyzerPlugin({
+	enabled: process.env.ANALYZE === 'true'
+})
+
+const nextConfig = withBundleAnalyzer(
+	withContentlayer({
+		reactStrictMode: true,
+		compiler: {
+			removeConsole: process.env.NODE_ENV === 'production'
+		},
+		poweredByHeader: false
+	})
+)
 
 export default nextConfig

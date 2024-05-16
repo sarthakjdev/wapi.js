@@ -3,8 +3,10 @@
 	"compilerOptions": {
 		"paths": {
 			"~/*": ["./src/*"],
-			"root/*": ["./*"]
-		}
+			"root/*": ["./*"],
+			"contentlayer/generated/*": ["./.contentlayer/generated/*"]
+		},
+		"baseUrl": "."
 	},
 	"include": [
 		"next-env.d.ts",
@@ -15,6 +17,6 @@
 		"tailwind.config.js",
 		"prettier.config.js",
 		".eslintrc.js"
-	],
+, "contentlayer.config.js"	],
 	"exclude": ["node_modules"]
 }
