@@ -4,6 +4,9 @@ import { resolveItemUri } from '~/reusable-function'
 import { notFound } from 'next/navigation'
 import { addPackageToModel, fetchDocumentationJsonDataFromSlug } from '~/utils/api-extractor'
 
+export const revalidate = 60 * 60 * 24 * 30
+export const dynamicParams = true
+
 export default async function VersionHomeLayout({
 	children,
 	params

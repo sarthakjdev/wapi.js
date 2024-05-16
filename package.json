@@ -41,6 +41,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@microsoft/api-extractor": "^7.43.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.0.3",
     "@types/node": "^20.5.9",
@@ -64,5 +65,10 @@
     "turbo": "^1.10.13",
     "typescript": "5.4.5"
   },
-  "packageManager": "pnpm@9.1.0"
+  "packageManager": "pnpm@9.1.0",
+  "pnpm": {
+    "patchedDependencies": {
+      "@microsoft/tsdoc-config@0.16.2": "patches/@microsoft__tsdoc-config@0.16.2.patch"
+    }
+  }
 }

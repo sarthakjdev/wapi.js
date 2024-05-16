@@ -41,19 +41,18 @@
       }
     }
   },
-
   "apiReport": {
     "enabled": false
   },
+
   "docModel": {
     "enabled": true,
     "apiJsonFilePath": "<projectFolder>/docs/docs.api.json"
   },
   "dtsRollup": {
-    "enabled": false,
+    "enabled": true,
     "untrimmedFilePath": "<projectFolder>/dist/esm/index.d.ts"
   },
-  "tsdocMetadata": {},
   "newlineKind": "lf",
   "messages": {
     "compilerMessageReporting": {
