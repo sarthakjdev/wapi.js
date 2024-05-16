@@ -1,14 +1,9 @@
-import { type z } from "zod";
 import { type Client } from "./index";
 import {
   type RequestClientInterface,
   type RequestClientConfigOptions,
 } from "./interface";
-import {
-  CloudApiResponseSchemaType,
-  type WapiMessageResponseSchemaType,
-} from "./schema";
-import { MessageStatusEnum } from "../webhook/type";
+import { type CloudApiRequesterResourceTypeToResponseTypeMap } from "./schema";
 
 /**
  * Request client used to communicate with WhatsApp Cloud API using HTTP requests.
@@ -59,7 +54,9 @@ export class RequestClient implements RequestClientInterface {
    * @param {'GET' | 'POST' | 'DELETE'} [options.method='POST'] - The request method.
    * @returns {Promise<any>} A promise that resolves to the response body.
    */
-  async requestCloudApi({
+  async requestCloudApi<
+    T extends keyof CloudApiRequesterResourceTypeToResponseTypeMap,
+  >({
     body,
     path,
     method = "POST",
@@ -67,7 +64,7 @@ export class RequestClient implements RequestClientInterface {
     path: string;
     body?: string;
     method?: "GET" | "POST" | "DELETE";
-  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
+  }): Promise<CloudApiRequesterResourceTypeToResponseTypeMap[T]> {
     try {
       const requestUrl = this.getRequestUrl();
       const response = await fetch(`${requestUrl}${path}`, {
@@ -81,51 +78,11 @@ export class RequestClient implements RequestClientInterface {
       });
 
       const responseBody = await response.json();
-      const parsedResponse = CloudApiResponseSchemaType.safeParse(responseBody);
-      if (parsedResponse.success) {
-        const responseData = parsedResponse.data;
-        if (
-          responseData &&
-          typeof responseData === "object" &&
-          "error" in responseData
-        ) {
-          // api returned errored response
-          return {
-            status: "error",
-            error: {
-              description: responseData.error.error_data.details,
-              title: responseData.error.message,
-              errorCode: responseData.error.code,
-              errorSubCode: responseData.error.error_subcode,
-            },
-          };
-        } else {
-          return {
-            status: "success",
-            data: {
-              messageId: responseData.messages[0].id,
-              receiverPhoneNumber: responseData.contacts[0].input,
-              senderPhoneNumber: responseData.contacts[0].wa_id,
-              status: MessageStatusEnum.Sent,
-            },
-          };
-        }
-      } else {
-        throw new Error(
-          "Failed to parse response, Report to sarthak@softlancer.co urgently. or raise an issue on github.",
-        );
-      }
+
+      return responseBody as CloudApiRequesterResourceTypeToResponseTypeMap[T];
     } catch (error) {
       if (error instanceof Error) this.client.emit("Error", error);
-      return {
-        status: "error",
-        error: {
-          title: "Request Error",
-          description: error instanceof Error ? error.message : "",
-          errorCode: 0,
-          errorSubCode: "",
-        },
-      };
+      throw error;
     }
   }
 }

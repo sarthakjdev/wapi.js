@@ -3,7 +3,12 @@ import { type Client } from "../../client";
 import { type BaseMessage } from "../../structures/message";
 import { BaseManager } from "../base";
 import { type MessageManagerInterface } from "./interface";
-import { type WapiMessageResponseSchemaType } from "../../client/schema";
+import {
+  type CloudApiRequestResourceType,
+  CloudApiResponseSchemaType,
+} from "../../client/schema";
+import { MessageStatusEnum } from "../../webhook/type";
+import { type MessageResponseSchemaType } from "./schema";
 
 /**
  * Manager to handle outgoing messages for wapi.
@@ -13,7 +18,8 @@ import { type WapiMessageResponseSchemaType } from "../../client/schema";
  */
 export class MessageManager
   extends BaseManager
-  implements MessageManagerInterface {
+  implements MessageManagerInterface
+{
   client: Client;
   constructor(props: { client: Client }) {
     super(props.client);
@@ -30,14 +36,51 @@ export class MessageManager
   async send<T extends BaseMessage<string>>(props: {
     message: T;
     phoneNumber: string;
-  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
-    const response = await this.client.requester.requestCloudApi({
-      path: `/${this.client.phoneNumberId}/messages`,
-      body: JSON.stringify(props.message.toJson({ to: props.phoneNumber })),
-      method: "POST",
-    });
+  }): Promise<z.infer<typeof MessageResponseSchemaType>> {
+    const response =
+      await this.client.requester.requestCloudApi<CloudApiRequestResourceType.Message>(
+        {
+          path: `/${this.client.phoneNumberId}/messages`,
+          body: JSON.stringify(props.message.toJson({ to: props.phoneNumber })),
+          method: "POST",
+        },
+      );
 
-    return response;
+    const parsedResponse = CloudApiResponseSchemaType.safeParse(response);
+    if (parsedResponse.success) {
+      const responseData = parsedResponse.data;
+
+      if (
+        responseData &&
+        typeof responseData === "object" &&
+        "error" in responseData
+      ) {
+        // api returned errored response
+        return {
+          status: "error",
+          error: {
+            description: responseData.error.error_data.details,
+            title: responseData.error.message,
+            errorCode: responseData.error.code,
+            errorSubCode: responseData.error.error_subcode,
+          },
+        };
+      } else {
+        return {
+          status: "success",
+          data: {
+            messageId: responseData.messages[0].id,
+            receiverPhoneNumber: responseData.contacts[0].input,
+            senderPhoneNumber: responseData.contacts[0].wa_id,
+            status: MessageStatusEnum.Sent,
+          },
+        };
+      }
+    } else {
+      throw new Error(
+        "Failed to parse response, Report to sarthak@softlancer.co urgently. or raise an issue on github.",
+      );
+    }
   }
 
   /**
@@ -52,18 +95,54 @@ export class MessageManager
     replyToMessageId: string;
     message: T;
     phoneNumber: string;
-  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
-    const response = await this.client.requester.requestCloudApi({
-      path: `/${this.client.phoneNumberId}/messages`,
-      body: JSON.stringify(
-        props.message.toJson({
-          to: props.phoneNumber,
-          replyToMessageId: props.replyToMessageId,
-        }),
-      ),
-      method: "POST",
-    });
+  }): Promise<z.infer<typeof MessageResponseSchemaType>> {
+    const response =
+      await this.client.requester.requestCloudApi<CloudApiRequestResourceType.Message>(
+        {
+          path: `/${this.client.phoneNumberId}/messages`,
+          body: JSON.stringify(
+            props.message.toJson({
+              to: props.phoneNumber,
+              replyToMessageId: props.replyToMessageId,
+            }),
+          ),
+          method: "POST",
+        },
+      );
 
-    return response;
+    const parsedResponse = CloudApiResponseSchemaType.safeParse(response);
+    if (parsedResponse.success) {
+      const responseData = parsedResponse.data;
+      if (
+        responseData &&
+        typeof responseData === "object" &&
+        "error" in responseData
+      ) {
+        // api returned errored response
+        return {
+          status: "error",
+          error: {
+            description: responseData.error.error_data.details,
+            title: responseData.error.message,
+            errorCode: responseData.error.code,
+            errorSubCode: responseData.error.error_subcode,
+          },
+        };
+      } else {
+        return {
+          status: "success",
+          data: {
+            messageId: responseData.messages[0].id,
+            receiverPhoneNumber: responseData.contacts[0].input,
+            senderPhoneNumber: responseData.contacts[0].wa_id,
+            status: MessageStatusEnum.Sent,
+          },
+        };
+      }
+    } else {
+      throw new Error(
+        "Failed to parse response, Report to sarthak@softlancer.co urgently. or raise an issue on github.",
+      );
+    }
   }
 }

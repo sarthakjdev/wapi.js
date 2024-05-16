@@ -1,6 +1,6 @@
 import { type z } from "zod";
 import { type BaseManagerInterface } from "../base/interface";
-import { type GetMediaUrlResponseBodySchemaType } from "./schema";
+import { type CloudApiGetMediaUrlRequestSuccessResponseSchemaType } from "../../client/schema";
 
 /**
  * Media manager interface
@@ -15,7 +15,9 @@ export interface MediaManagerInterface extends BaseManagerInterface {
    */
   getUrl: (
     mediaId: string,
-  ) => Promise<z.infer<typeof GetMediaUrlResponseBodySchemaType>>;
+  ) => Promise<
+    z.infer<typeof CloudApiGetMediaUrlRequestSuccessResponseSchemaType>
+  >;
 
   /**
    * Upload a media file
