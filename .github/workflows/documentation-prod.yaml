@@ -60,7 +60,7 @@ jobs:
       - name: Extract package and semantic version from release tag
         if: ${{ github.ref_type == 'tag' }}
         id: extract-tag
-        uses: ./format-tag/action.yaml
+        uses: ./format-tag
         with:
           tag: ${{ github.ref_name }}
 
