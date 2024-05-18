@@ -39,7 +39,7 @@ export default function Home() {
 
 			<div className="flex h-screen max-w-4xl flex-1  items-center bg-secondary-950 px-4">
 				<video autoPlay={true} loop={true} muted className="rounded-xl">
-					<source src="/assets/library-usage-flow.mp4" />
+					<source src="https://res.cloudinary.com/dm4zlrwhs/video/upload/v1716021568/library-usage-flow_qvvig8.mp4" />
 				</video>
 			</div>
 		</main>
