@@ -57,11 +57,12 @@ export async function createWhatsappBot(options: {
   }
 
   console.log(`Creating ${directoryName} in ${chalk.green(root)}.`);
+
+  // ! TODO: support DENO
   const deno = packageManagerInUse === PackageManagerEnum.Deno;
   await cp(
     new URL(
-      `../template/${deno ? "Deno" : isTypescriptEnabled ? "typeScript" : "javaScript"
-      }`,
+      path.resolve(`./template/${deno ? "Deno" : isTypescriptEnabled ? "typeScript" : 'javaScript'}`),
       import.meta.url,
     ),
     root,
@@ -70,6 +71,7 @@ export async function createWhatsappBot(options: {
     },
   );
 
+  // ! TODO: support Bun
   const bun = packageManagerInUse === PackageManagerEnum.Bun;
   if (bun) {
     await cp(
