@@ -1,10 +1,13 @@
 {
   "extends": "@wapijs/typescript-config/node.base.json",
-  "include": ["src/", "*.ts", "./.eslintrc.js", "template", "bin"],
+  "include": ["src/", "*.ts", "./.eslintrc.js", "bin"],
   "exclude": ["template/"],
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "dist",
+    "target": "ES2022",
+    "lib": ["ES2022"],
     "resolveJsonModule": true
   }
 }
