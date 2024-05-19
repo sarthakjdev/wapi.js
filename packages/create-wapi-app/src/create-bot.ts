@@ -62,7 +62,7 @@ export async function createWhatsappBot(options: {
   const deno = packageManagerInUse === PackageManagerEnum.Deno;
   await cp(
     new URL(
-      path.resolve(`./template/${deno ? "Deno" : isTypescriptEnabled ? "typescript" : 'javascript'}`),
+      `../../template/${deno ? "Deno" : isTypescriptEnabled ? "typescript" : 'javascript'}`,
       import.meta.url,
     ),
     root,
