@@ -8,7 +8,7 @@ export default function Home() {
 		<main className="my-auto flex min-h-screen flex-row items-center justify-center gap-5 pl-10">
 			<div className="flex flex-1 flex-col gap-6">
 				<div
-					className="flex w-fit flex-row mx-auto items-center justify-center gap-5 py-4"
+					className="mx-auto flex w-fit flex-row items-center justify-center gap-5 py-4"
 					id="launch-banners"
 				>
 					<div className="flex-1">

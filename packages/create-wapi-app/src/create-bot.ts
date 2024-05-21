@@ -15,7 +15,7 @@ import chalk from "chalk";
 import { installPackages } from "./reusable-function.js";
 import { PackageManagerEnum } from "./type.js";
 
-const glob = fastGlob.glob
+const glob = fastGlob.glob;
 
 export async function createWhatsappBot(options: {
   directory: string;
@@ -62,7 +62,7 @@ export async function createWhatsappBot(options: {
   const deno = packageManagerInUse === PackageManagerEnum.Deno;
   await cp(
     new URL(
-      `../../template/${deno ? "Deno" : isTypescriptEnabled ? "typescript" : 'javascript'}`,
+      `../../template/${deno ? "Deno" : isTypescriptEnabled ? "typescript" : "javascript"}`,
       import.meta.url,
     ),
     root,
@@ -76,7 +76,8 @@ export async function createWhatsappBot(options: {
   if (bun) {
     await cp(
       new URL(
-        `../template/Bun/${isTypescriptEnabled ? "typescript" : "javascript"
+        `../template/Bun/${
+          isTypescriptEnabled ? "typescript" : "javascript"
         }/package.json`,
         import.meta.url,
       ),

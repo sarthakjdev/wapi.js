@@ -3,13 +3,13 @@ import { metaDescription } from '~/constant'
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {
-		name: 'Softlancer',
-		short_name: 'Softlancer',
+		name: 'Wapi.js',
+		short_name: 'Wapi',
 		description: metaDescription,
 		start_url: '/',
 		display: 'standalone',
 		background_color: '#fff',
-		theme_color: '#f16232',
+		theme_color: '#25D366',
 		icons: [
 			{
 				src: '/favicon.ico',
