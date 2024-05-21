@@ -1,6 +1,6 @@
 {
   "name": "create-wapi-app",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "a utility to quickly initiate a whatsapp bot",
   "type": "module",
   "author": {
