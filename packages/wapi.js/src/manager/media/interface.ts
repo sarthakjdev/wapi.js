@@ -1,6 +1,7 @@
 import { type z } from "zod";
 import { type BaseManagerInterface } from "../base/interface";
 import { type CloudApiGetMediaUrlRequestSuccessResponseSchemaType } from "../../client/schema";
+import { MediaTypeEnum, MediaUploadResponseSchemaType } from "./schema";
 
 /**
  * Media manager interface
@@ -26,7 +27,10 @@ export interface MediaManagerInterface extends BaseManagerInterface {
    * @param {string} params.mediaType - The type of the media file
    * @returns {Promise<string>} The ID of the uploaded media file
    */
-  upload: (params: { filePath: string; mediaType: string }) => Promise<string>;
+  upload: (params: {
+    filePath: string;
+    mediaType: MediaTypeEnum;
+  }) => Promise<z.infer<typeof MediaUploadResponseSchemaType>>;
 
   /**
    * Delete a media file by its ID
