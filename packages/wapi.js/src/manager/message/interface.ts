@@ -2,7 +2,8 @@ import { type z } from "zod";
 import { type Client } from "../../client";
 import { type BaseMessage } from "../../structures/message";
 import { type BaseManagerInterface } from "../base/interface";
-import { type WapiMessageResponseSchemaType } from "../../client/schema";
+import { type MessageResponseSchemaType } from "./schema";
+
 
 /**
  * Message manager interface
@@ -23,7 +24,7 @@ export interface MessageManagerInterface extends BaseManagerInterface {
   send<T extends BaseMessage<string>>(props: {
     message: T;
     phoneNumber: string;
-  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>>;
+  }): Promise<z.infer<typeof MessageResponseSchemaType>>;
 
   /**
    * Replies to a message with the specified message.
@@ -34,5 +35,5 @@ export interface MessageManagerInterface extends BaseManagerInterface {
     replyToMessageId: string;
     message: T;
     phoneNumber: string;
-  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>>;
+  }): Promise<z.infer<typeof MessageResponseSchemaType>>;
 }
