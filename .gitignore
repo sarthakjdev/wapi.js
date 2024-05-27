@@ -16,3 +16,4 @@ docs.json
 docs.api.json
 docs/**
 temp/**
+.DS_Store
