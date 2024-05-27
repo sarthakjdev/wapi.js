@@ -1,7 +1,6 @@
 import { EventEmitter } from "node:events";
 
 import { Webhook } from "../webhook";
-import { PhoneNumberManager } from "../manager/phone";
 import { MediaManager } from "../manager/media";
 import { RequestClient } from "./request-client";
 import { ClientStatusEnum, type ClientInterface } from "./interface";
@@ -15,13 +14,6 @@ import { type WapiEventDataMap } from "../webhook/type";
  * @class Client
  */
 export class Client extends EventEmitter implements ClientInterface {
-  /**
-   * Phone number manager to verify phone numbers for your
-   * @type {PhoneNumberManager}
-   * @memberof Client
-   */
-  phone: PhoneNumberManager;
-
   /**
    * 	Media manager to upload, get and media via whatsapp cloud api
    * 	@type {MediaManager}
@@ -110,7 +102,6 @@ export class Client extends EventEmitter implements ClientInterface {
       webhookEndpoint: params.webhookEndpoint,
       port: params.port,
     });
-    this.phone = new PhoneNumberManager({ client: this });
     this.media = new MediaManager({
       client: this,
     });

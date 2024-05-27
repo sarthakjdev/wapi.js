@@ -1,5 +1,4 @@
 import { type WapiEventDataMap } from "../webhook/type";
-import { type PhoneNumberManager } from "../manager/phone";
 import { type MediaManager } from "../manager/media";
 import { type Webhook } from "../webhook";
 import { type MessageManager } from "../manager/message";
@@ -11,10 +10,6 @@ import { type CloudApiRequesterResourceTypeToResponseTypeMap } from "./schema";
  * @interface ClientInterface
  */
 export interface ClientInterface {
-  /**
-   * The phone number manager.
-   */
-  phone: PhoneNumberManager;
   /**
    * The media manager.
    */

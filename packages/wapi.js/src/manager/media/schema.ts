@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { MessageStatusEnum } from "../../webhook/type";
 import { ErrorSchemaType } from "../message/schema";
 
 export enum MediaTypeEnum {
@@ -24,10 +23,6 @@ export enum MediaTypeEnum {
   JPEG = "image/jpeg",
   PNG = "image/png",
   WEBP = "image/webp",
-
-  // Sticker
-  ANIMATED_STICKER = "image/webp",
-  STATIC_STICKER = "image/webp",
 
   // Video
   _3GPP = "video/3gp",

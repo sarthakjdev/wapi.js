@@ -31,7 +31,8 @@ export class BaseEvent implements BaseEventInterface {
  */
 export abstract class MessageEvent
   extends BaseEvent
-  implements MessageEventInterface {
+  implements MessageEventInterface
+{
   messageId: string;
   context: MessageContext;
   timestamp: number;
@@ -141,7 +142,8 @@ export abstract class MessageEvent
  */
 export abstract class MediaMessageEvent
   extends MessageEvent
-  implements MediaMessageEventInterface {
+  implements MediaMessageEventInterface
+{
   mediaId: string;
   mimeType: string;
   sha256: string;
@@ -200,7 +202,8 @@ export abstract class MediaMessageEvent
  */
 export abstract class StatusUpdateEvent
   extends BaseEvent
-  implements StatusUpdateEventInterface {
+  implements StatusUpdateEventInterface
+{
   context: MessageContext;
   timestamp: number;
 

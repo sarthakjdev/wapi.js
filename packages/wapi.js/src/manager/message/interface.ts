@@ -4,7 +4,6 @@ import { type BaseMessage } from "../../structures/message";
 import { type BaseManagerInterface } from "../base/interface";
 import { type MessageResponseSchemaType } from "./schema";
 
-
 /**
  * Message manager interface
  * @interface

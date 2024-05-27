@@ -1,5 +1,6 @@
 import { whatsappClient } from './utils/client'
 import { ListInteractionMessage, TextMessage } from '@wapijs/wapi.js'
+import path from 'node:path'
 
 function init() {
 	whatsappClient.on('Ready', () => {
@@ -48,7 +49,7 @@ function init() {
 		'Help & Support': [
 			{
 				question:
-					'Is wapi.js free and open-source? qwerrqwrf3r3r32r23r23r23r23r2rqrqrerere23re23r23re',
+					'Is wapi.js free and open-source?',
 				answer: "Yes, it's completely free and open-source under the Apache 2.0 License."
 			},
 			{
@@ -77,13 +78,28 @@ function init() {
 		})
 	})
 
+	whatsappClient.on('Error', (error) => {
+		console.log('Error', error.message)
+	})
+
 	whatsappClient.on('TextMessage', async message => {
 		console.log('Text Message')
 		if (message.text.data.text.toLowerCase() === 'hello') {
-			await message.client.message.send({
+			const response = await message.client.message.send({
 				message: listMessage,
 				phoneNumber: message.context.from
 			})
+
+
+			console.log({ response })
+
+		} else if (message.text.data.text.toLowerCase() === 'media') {
+			const response = await message.client.media.upload({
+				filePath: '../src/media.png'
+			})
+
+			console.log({ response })
+
 		} else {
 			await message.reply({
 				message: new TextMessage({

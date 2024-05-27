@@ -7,7 +7,8 @@ import {
   CloudApiResponseSchemaType,
   type CloudApiRequestResourceType,
 } from "../../client/schema";
-import { MediaTypeEnum, MediaUploadResponseSchemaType } from "./schema";
+import { type MediaUploadResponseSchemaType } from "./schema";
+import { lookup } from "mime-types";
 
 /**
  * Manager to handle media.
@@ -90,9 +91,16 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
    */
   async upload(params: {
     filePath: string;
-    mediaType: MediaTypeEnum;
   }): Promise<z.infer<typeof MediaUploadResponseSchemaType>> {
-    console.log({ params });
+    console.log({ params })
+
+    const mimeType = lookup(params.filePath);
+
+    console.log({ params, mimeType })
+
+    if (!mimeType) {
+      throw new Error("Invalid file path or type");
+    }
 
     const response =
       await this.client.requester.requestCloudApi<CloudApiRequestResourceType.Media>(
@@ -100,12 +108,14 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
           path: `/${this.client.phoneNumberId}/media`,
           body: JSON.stringify({
             file: params.filePath,
-            type: params.mediaType,
+            type: mimeType,
             messaging_product: "whatsapp",
           }),
           method: "POST",
         },
       );
+
+    console.log({ response });
 
     const parsedResponse = CloudApiResponseSchemaType.safeParse(response);
     if (parsedResponse.success) {
