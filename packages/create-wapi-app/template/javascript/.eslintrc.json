@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc.json",
+  "root": true,
+  "extends": ["neon/common", "neon/node", "neon/prettier"],
+  "ignorePatterns": ["**/dist/*"],
+  "rules": {
+    "import/extensions": 0
+  }
+}

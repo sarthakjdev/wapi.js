@@ -1,11 +1,43 @@
 import { Button, ClipboardCopy } from '@wapijs/ui'
 import Link from 'next/link'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
+import Image from 'next/image'
 
 export default function Home() {
 	return (
 		<main className="my-auto flex min-h-screen flex-row items-center justify-center gap-5 pl-10">
 			<div className="flex flex-1 flex-col gap-6">
+				<div
+					className="mx-auto flex w-fit flex-row items-center justify-center gap-5 py-4"
+					id="launch-banners"
+				>
+					<div className="flex-1">
+						<Link
+							href={'https://peerlist.io/sarthakjdev/project/wapijs'}
+							target="_blank"
+						>
+							<Image
+								src={'/assets/peerlist-launch.svg'}
+								height={48}
+								width={160}
+								alt="peerlist-laucnh-batch"
+							/>
+						</Link>
+					</div>
+					<div className="flex-1">
+						<Link
+							href="https://www.producthunt.com/posts/wapi-js?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-wapi&#0045;js"
+							target="_blank"
+						>
+							<Image
+								src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=458125&theme=light"
+								alt="Wapi&#0046;js - build&#0032;WhatsApp&#0032;business&#0032;apps&#0032;easily&#0032;and&#0032;faster | Product Hunt"
+								width="180"
+								height="39"
+							/>
+						</Link>
+					</div>
+				</div>
 				<div className="mx-auto">
 					<ClipboardCopy textToBeCopied="pnpm i @wapijs/wapi.js" />
 				</div>
@@ -39,7 +71,7 @@ export default function Home() {
 
 			<div className="flex h-screen max-w-4xl flex-1  items-center bg-secondary-950 px-4">
 				<video autoPlay={true} loop={true} muted className="rounded-xl">
-					<source src="/assets/library-usage-flow.mp4" />
+					<source src="https://res.cloudinary.com/dm4zlrwhs/video/upload/v1716021568/library-usage-flow_qvvig8.mp4" />
 				</video>
 			</div>
 		</main>

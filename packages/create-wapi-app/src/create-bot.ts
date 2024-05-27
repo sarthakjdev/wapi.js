@@ -10,10 +10,12 @@ import {
 import path from "node:path";
 import process from "node:process";
 import { URL } from "node:url";
-import { glob } from "fast-glob";
+import fastGlob from "fast-glob";
 import chalk from "chalk";
-import { installPackages } from "./reusable-function";
+import { installPackages } from "./reusable-function.js";
 import { PackageManagerEnum } from "./type.js";
+
+const glob = fastGlob.glob;
 
 export async function createWhatsappBot(options: {
   directory: string;
@@ -55,12 +57,12 @@ export async function createWhatsappBot(options: {
   }
 
   console.log(`Creating ${directoryName} in ${chalk.green(root)}.`);
+
+  // ! TODO: support DENO
   const deno = packageManagerInUse === PackageManagerEnum.Deno;
   await cp(
     new URL(
-      `../template/${
-        deno ? "Deno" : isTypescriptEnabled ? "typeScript" : "javaScript"
-      }`,
+      `../../template/${deno ? "Deno" : isTypescriptEnabled ? "typescript" : "javascript"}`,
       import.meta.url,
     ),
     root,
@@ -69,12 +71,13 @@ export async function createWhatsappBot(options: {
     },
   );
 
+  // ! TODO: support Bun
   const bun = packageManagerInUse === PackageManagerEnum.Bun;
   if (bun) {
     await cp(
       new URL(
         `../template/Bun/${
-          isTypescriptEnabled ? "typeScript" : "javaScript"
+          isTypescriptEnabled ? "typescript" : "javascript"
         }/package.json`,
         import.meta.url,
       ),

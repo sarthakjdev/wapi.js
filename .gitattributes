@@ -1,5 +1,6 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
 * text eol=lf
+*.mp4
 
 # Text files to be normalized and converted to native line endings on checkout.
 *.ts text

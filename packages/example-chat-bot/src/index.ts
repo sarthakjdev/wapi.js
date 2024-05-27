@@ -24,7 +24,7 @@ function init() {
 		'Getting Started': [
 			{
 				question: 'How do I get started with wapi.js?',
-				answer: 'Check out the docs at https://wapijs.co/docs and use the "create-wapi-bot" template.'
+				answer: 'Check out the docs at https://wapijs.co/docs and use the "create-wapi-app" template.'
 			},
 			{
 				question: 'Is wapi.js easy to learn?',

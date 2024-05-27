@@ -47,7 +47,7 @@ pnpm install @wapijs/wapi.js
 - You can get started with the development of your bot with this starter template utility.
 
 ```sh
-pnpm create-wapi-bot
+pnpm create-wapi-app
 ```
 
 ## 🔗 References

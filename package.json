@@ -15,7 +15,7 @@
     "pretty": "turbo pretty --concurrency=3",
     "clean-install": "turbo run clean-install",
     "doc:gen": "turbo run doc:gen",
-    "semantic-release": "pnpm --filter \"create-wapi-bot\" --filter \"wapi.js\"   -r --workspace-concurrency=1 exec -- npx --no-install semantic-release -e semantic-release-monorepo"
+    "semantic-release": "pnpm --filter \"create-wapi-app\" --filter \"wapi.js\"   -r --workspace-concurrency=1 exec -- npx --no-install semantic-release -e semantic-release-monorepo"
   },
   "keywords": [
     "whatsapp-cloud-api",
