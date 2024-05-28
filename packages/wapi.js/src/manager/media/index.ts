@@ -107,8 +107,7 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
         {
           path: `/${this.client.phoneNumberId}/media`,
           body: JSON.stringify({
-            file: params.filePath,
-            type: mimeType,
+            file: `@${params.filePath};type=${mimeType}`,
             messaging_product: "whatsapp",
           }),
           method: "POST",

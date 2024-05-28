@@ -95,7 +95,7 @@ function init() {
 
 		} else if (message.text.data.text.toLowerCase() === 'media') {
 			const response = await message.client.media.upload({
-				filePath: '../src/media.png'
+				filePath: path.resolve(__dirname, '../src/media.png')
 			})
 
 			console.log({ response })
