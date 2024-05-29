@@ -1,4 +1,3 @@
-import * as EventEmitter from "events";
 import { type Client } from "../client";
 import { WhatsappApiNotificationPayloadSchemaType } from "./schema";
 import * as express from "express";

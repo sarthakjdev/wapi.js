@@ -1,5 +1,3 @@
-import type EventEmitter from "events";
-
 /**
  * Represents the interface for a Webhook.
  * @interface WebhookInterface
