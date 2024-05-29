@@ -89,17 +89,7 @@ function init() {
 				message: listMessage,
 				phoneNumber: message.context.from
 			})
-
-
 			console.log({ response })
-
-		} else if (message.text.data.text.toLowerCase() === 'media') {
-			const response = await message.client.media.upload({
-				filePath: path.resolve(__dirname, '../src/media.png')
-			})
-
-			console.log({ response })
-
 		} else {
 			await message.reply({
 				message: new TextMessage({
@@ -126,10 +116,6 @@ function init() {
 				text: answerToReply
 			})
 		})
-	})
-
-	whatsappClient.on('Error', error => {
-		console.error(error)
 	})
 
 	whatsappClient.initiate()

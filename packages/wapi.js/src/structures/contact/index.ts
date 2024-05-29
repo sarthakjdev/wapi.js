@@ -132,8 +132,7 @@ export class Contact {
  */
 export class ContactMessage
   extends BaseMessage<"contacts">
-  implements ContactMessageInterface
-{
+  implements ContactMessageInterface {
   contacts: Contact[];
 
   /**
