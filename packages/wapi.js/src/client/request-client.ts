@@ -68,7 +68,6 @@ export class RequestClient implements RequestClientInterface {
     try {
       const requestUrl = this.getRequestUrl();
 
-
       const response = await fetch(`${requestUrl}${path}`, {
         method: method,
         body,

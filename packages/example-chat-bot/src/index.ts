@@ -1,6 +1,5 @@
 import { whatsappClient } from './utils/client'
 import { ListInteractionMessage, TextMessage } from '@wapijs/wapi.js'
-import path from 'node:path'
 
 function init() {
 	whatsappClient.on('Ready', () => {
@@ -48,8 +47,7 @@ function init() {
 		],
 		'Help & Support': [
 			{
-				question:
-					'Is wapi.js free and open-source?',
+				question: 'Is wapi.js free and open-source?',
 				answer: "Yes, it's completely free and open-source under the Apache 2.0 License."
 			},
 			{
@@ -78,7 +76,7 @@ function init() {
 		})
 	})
 
-	whatsappClient.on('Error', (error) => {
+	whatsappClient.on('Error', error => {
 		console.log('Error', error.message)
 	})
 

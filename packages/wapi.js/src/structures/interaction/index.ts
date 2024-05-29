@@ -31,7 +31,8 @@ import {
  */
 abstract class InteractiveMessage
   extends BaseMessage<MessageTypeEnum.Interactive>
-  implements InteractiveMessageInterface {
+  implements InteractiveMessageInterface
+{
   readonly interactiveMessageData: {
     type: InteractiveMessageTypeEnum;
     footerText?: string;
@@ -70,7 +71,8 @@ abstract class InteractiveMessage
  */
 export class ButtonInteractionMessage
   extends InteractiveMessage
-  implements ButtonInteractionMessageInterface {
+  implements ButtonInteractionMessageInterface
+{
   data: {
     buttons: { id: string; title: string }[];
   };
@@ -102,7 +104,7 @@ export class ButtonInteractionMessage
   /**
    * Adds a header to the message.
    */
-  addHeader() { }
+  addHeader() {}
 
   /**
    * Adds a footer to the message.
@@ -148,31 +150,31 @@ export class ButtonInteractionMessage
         },
         ...(this.interactiveMessageData.header
           ? {
-            header: {
-              ...(this.interactiveMessageData.header.type ===
+              header: {
+                ...(this.interactiveMessageData.header.type ===
                 HeaderTypeEnum.Text
-                ? {
-                  type: HeaderTypeEnum.Text,
-                  text: this.interactiveMessageData.header.text,
-                }
-                : this.interactiveMessageData.header.type ===
-                  HeaderTypeEnum.Document
                   ? {
-                    type: HeaderTypeEnum.Document,
-                    document: this.interactiveMessageData.header.document,
-                  }
-                  : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Image
-                    ? {
-                      type: HeaderTypeEnum.Image,
-                      image: this.interactiveMessageData.header.image,
+                      type: HeaderTypeEnum.Text,
+                      text: this.interactiveMessageData.header.text,
                     }
-                    : {
-                      type: HeaderTypeEnum.Video,
-                      video: this.interactiveMessageData.header.video,
-                    }),
-            },
-          }
+                  : this.interactiveMessageData.header.type ===
+                      HeaderTypeEnum.Document
+                    ? {
+                        type: HeaderTypeEnum.Document,
+                        document: this.interactiveMessageData.header.document,
+                      }
+                    : this.interactiveMessageData.header.type ===
+                        HeaderTypeEnum.Image
+                      ? {
+                          type: HeaderTypeEnum.Image,
+                          image: this.interactiveMessageData.header.image,
+                        }
+                      : {
+                          type: HeaderTypeEnum.Video,
+                          video: this.interactiveMessageData.header.video,
+                        }),
+              },
+            }
           : {}),
         type: InteractiveMessageTypeEnum.Button,
       },
@@ -188,7 +190,8 @@ export class ButtonInteractionMessage
  */
 export class ListInteractionMessage
   extends InteractiveMessage
-  implements ListInteractionMessageInterface {
+  implements ListInteractionMessageInterface
+{
   data: {
     buttonText: string;
     sections: z.infer<typeof ListInteractiveMessageSection>[];
@@ -240,7 +243,7 @@ export class ListInteractionMessage
   /**
    * Adds a header to the message.
    */
-  addHeader() { }
+  addHeader() {}
 
   /**
    * Adds a footer to the message.
@@ -282,38 +285,38 @@ export class ListInteractionMessage
         },
         ...(this.interactiveMessageData.header
           ? {
-            header: {
-              ...(this.interactiveMessageData.header.type ===
+              header: {
+                ...(this.interactiveMessageData.header.type ===
                 HeaderTypeEnum.Text
-                ? {
-                  type: HeaderTypeEnum.Text,
-                  text: this.interactiveMessageData.header.text,
-                }
-                : this.interactiveMessageData.header.type ===
-                  HeaderTypeEnum.Document
                   ? {
-                    type: HeaderTypeEnum.Document,
-                    document: this.interactiveMessageData.header.document,
-                  }
-                  : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Image
-                    ? {
-                      type: HeaderTypeEnum.Image,
-                      image: this.interactiveMessageData.header.image,
+                      type: HeaderTypeEnum.Text,
+                      text: this.interactiveMessageData.header.text,
                     }
-                    : {
-                      type: HeaderTypeEnum.Video,
-                      video: this.interactiveMessageData.header.video,
-                    }),
-            },
-          }
+                  : this.interactiveMessageData.header.type ===
+                      HeaderTypeEnum.Document
+                    ? {
+                        type: HeaderTypeEnum.Document,
+                        document: this.interactiveMessageData.header.document,
+                      }
+                    : this.interactiveMessageData.header.type ===
+                        HeaderTypeEnum.Image
+                      ? {
+                          type: HeaderTypeEnum.Image,
+                          image: this.interactiveMessageData.header.image,
+                        }
+                      : {
+                          type: HeaderTypeEnum.Video,
+                          video: this.interactiveMessageData.header.video,
+                        }),
+              },
+            }
           : {}),
         ...(this.interactiveMessageData.footerText
           ? {
-            footer: {
-              text: this.interactiveMessageData.footerText,
-            },
-          }
+              footer: {
+                text: this.interactiveMessageData.footerText,
+              },
+            }
           : {}),
       },
     };
@@ -328,7 +331,8 @@ export class ListInteractionMessage
  */
 export class ProductInteractionMessage
   extends InteractiveMessage
-  implements ProductInteractionMessageInterface {
+  implements ProductInteractionMessageInterface
+{
   data: {
     catalogId: string;
     productRetailerId: string;
@@ -366,7 +370,7 @@ export class ProductInteractionMessage
   /**
    * Adds a header to the message.
    */
-  addHeader() { }
+  addHeader() {}
 
   /**
    * Adds a footer to the message.
@@ -408,38 +412,38 @@ export class ProductInteractionMessage
         },
         ...(this.interactiveMessageData.header
           ? {
-            header: {
-              ...(this.interactiveMessageData.header.type ===
+              header: {
+                ...(this.interactiveMessageData.header.type ===
                 HeaderTypeEnum.Text
-                ? {
-                  type: HeaderTypeEnum.Text,
-                  text: this.interactiveMessageData.header.text,
-                }
-                : this.interactiveMessageData.header.type ===
-                  HeaderTypeEnum.Document
                   ? {
-                    type: HeaderTypeEnum.Document,
-                    document: this.interactiveMessageData.header.document,
-                  }
-                  : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Image
-                    ? {
-                      type: HeaderTypeEnum.Image,
-                      image: this.interactiveMessageData.header.image,
+                      type: HeaderTypeEnum.Text,
+                      text: this.interactiveMessageData.header.text,
                     }
-                    : {
-                      type: HeaderTypeEnum.Video,
-                      video: this.interactiveMessageData.header.video,
-                    }),
-            },
-          }
+                  : this.interactiveMessageData.header.type ===
+                      HeaderTypeEnum.Document
+                    ? {
+                        type: HeaderTypeEnum.Document,
+                        document: this.interactiveMessageData.header.document,
+                      }
+                    : this.interactiveMessageData.header.type ===
+                        HeaderTypeEnum.Image
+                      ? {
+                          type: HeaderTypeEnum.Image,
+                          image: this.interactiveMessageData.header.image,
+                        }
+                      : {
+                          type: HeaderTypeEnum.Video,
+                          video: this.interactiveMessageData.header.video,
+                        }),
+              },
+            }
           : {}),
         ...(this.interactiveMessageData.footerText
           ? {
-            footer: {
-              text: this.interactiveMessageData.footerText,
-            },
-          }
+              footer: {
+                text: this.interactiveMessageData.footerText,
+              },
+            }
           : {}),
       },
     };
@@ -454,7 +458,8 @@ export class ProductInteractionMessage
  */
 export class ProductListInteractionMessage
   extends InteractiveMessage
-  implements ProductListInteractionMessageInterface {
+  implements ProductListInteractionMessageInterface
+{
   data: {
     catalogId: string;
     productRetailerId: string;
@@ -546,34 +551,34 @@ export class ProductListInteractionMessage
         header: {
           ...(this.interactiveMessageData.header.type === HeaderTypeEnum.Text
             ? {
-              type: HeaderTypeEnum.Text,
-              text: this.interactiveMessageData.header.text,
-            }
-            : this.interactiveMessageData.header.type ===
-              HeaderTypeEnum.Document
-              ? {
-                type: HeaderTypeEnum.Document,
-                document: this.interactiveMessageData.header.document,
+                type: HeaderTypeEnum.Text,
+                text: this.interactiveMessageData.header.text,
               }
+            : this.interactiveMessageData.header.type ===
+                HeaderTypeEnum.Document
+              ? {
+                  type: HeaderTypeEnum.Document,
+                  document: this.interactiveMessageData.header.document,
+                }
               : this.interactiveMessageData.header.type === HeaderTypeEnum.Image
                 ? {
-                  type: HeaderTypeEnum.Image,
-                  image: this.interactiveMessageData.header.image,
-                }
+                    type: HeaderTypeEnum.Image,
+                    image: this.interactiveMessageData.header.image,
+                  }
                 : {
-                  type: HeaderTypeEnum.Video,
-                  video: this.interactiveMessageData.header.video,
-                }),
+                    type: HeaderTypeEnum.Video,
+                    video: this.interactiveMessageData.header.video,
+                  }),
         },
         body: {
           text: this.interactiveMessageData.bodyText,
         },
         ...(this.interactiveMessageData.footerText
           ? {
-            footer: {
-              text: this.interactiveMessageData.footerText,
-            },
-          }
+              footer: {
+                text: this.interactiveMessageData.footerText,
+              },
+            }
           : {}),
       },
     };
