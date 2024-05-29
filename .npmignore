@@ -28,4 +28,5 @@
 #--------------------------------------------
 
 # (Add your project-specific overrides here)
-!/template/**  
+!/template/**
+node_modules

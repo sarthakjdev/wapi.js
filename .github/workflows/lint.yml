@@ -1,12 +1,16 @@
-name: Check Build
+name: Build and Lint
 
 on:
   push:
     branches-ignore:
       - "master"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  lint-and-build:
+  build-and-lint:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -25,6 +29,12 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
+
+      # need to build before lint check because packages is using interlinked workspace dependencies
+      - name: Build the packages
+        id: build
+        if: ${{ success() && !failure() }}
+        run: pnpm build
 
       - name: Lint
         id: lint
@@ -51,31 +61,3 @@ jobs:
               } else {
                   throw new Error('Pull request data not found')
               }
-
-      - name: Build the packages
-        id: build
-        if: ${{ success() && !failure() }}
-        run: pnpm build
-
-      - name: Build Failed
-        if: ${{ failure() && !steps.lint.outcome == 'failure' }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { data: pullRequestData } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  commit_sha: context.payload.after
-              })
-
-            if(pullRequestData[0]){
-               await github.rest.issues.createComment({
-                    issue_number: pullRequestData[0].number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: `#### ❌ Build failed:
-            `
-                })
-            } else {
-              throw new Error('Pull request data not found')
-            }

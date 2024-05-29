@@ -1,11 +1,9 @@
-import type EventEmitter from "events";
-
 /**
  * Represents the interface for a Webhook.
  * @interface WebhookInterface
  * @extends {EventEmitter}
  */
-export interface WebhookInterface extends EventEmitter {
+export interface WebhookInterface {
   /**
    * Gets the endpoint of the webhook.
    * @returns The endpoint URL.

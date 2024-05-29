@@ -1,5 +1,5 @@
 template/
-.eslintrc.js
+.eslintrc.json
 dist/
 build/
 node_modules/

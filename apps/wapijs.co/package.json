@@ -17,6 +17,7 @@
 		"@microsoft/tsdoc": "^0.14.2",
 		"@microsoft/tsdoc-config": "^0.16.2",
 		"@next/bundle-analyzer": "^14.2.3",
+		"@next/third-parties": "^14.2.3",
 		"@react-icons/all-files": "^4.1.0",
 		"@shikijs/rehype": "^1.4.0",
 		"@tailwindcss/typography": "^0.5.10",

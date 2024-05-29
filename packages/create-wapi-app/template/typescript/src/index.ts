@@ -1,12 +1,13 @@
 import { whatsappClient } from "./utils/client.js"
-import { TextMessage } from '@wapijs/wapi.js'
+import { TextMessage, type WapiEventDataMap } from '@wapijs/wapi.js'
 import { readdir } from 'node:fs/promises'
 
 
 async function loadEventListeners() {
-    (await readdir(`${__dirname}/src/events/`))
+    const events = await readdir(`${__dirname}/events/`)
+    events
         .filter((file) => file.endsWith('.js'))
-        .map((file) => whatsappClient.on(file.split('.js')[0], require(`${__dirname}/events/${file}`)))
+        .map((file) => whatsappClient.on(file.split('.js')[0] as keyof WapiEventDataMap, require(`${__dirname}/events/${file}`).default))
 }
 
 async function init() {
@@ -24,6 +25,7 @@ init().catch(error => console.error(error))
 process.on('unhandledRejection', (error) => {
     console.error('Unhandled promise rejection:', error)
 })
+
 
 
 

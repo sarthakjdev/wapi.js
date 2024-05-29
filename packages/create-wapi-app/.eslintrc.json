@@ -1,0 +1,3 @@
+{
+  "extends": ["@wapijs/eslint-config/config.node.js"]
+}
