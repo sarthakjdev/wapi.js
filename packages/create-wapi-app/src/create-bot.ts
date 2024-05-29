@@ -10,12 +10,10 @@ import {
 import path from "node:path";
 import process from "node:process";
 import { URL } from "node:url";
-import fastGlob from "fast-glob";
+import { glob } from "fast-glob";
 import chalk from "chalk";
 import { installPackages } from "./reusable-function.js";
 import { PackageManagerEnum } from "./type.js";
-
-const glob = fastGlob.glob;
 
 export async function createWhatsappBot(options: {
   directory: string;

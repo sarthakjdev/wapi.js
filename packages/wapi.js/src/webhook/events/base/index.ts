@@ -1,6 +1,5 @@
 import { type z } from "zod";
 import { type Client } from "../../../client";
-import { type WapiMessageResponseSchemaType } from "../../../client/schema";
 import { ReactionMessage } from "../../../structures";
 import { type BaseMessage } from "../../../structures/message";
 import {
@@ -10,6 +9,7 @@ import {
   type MessageContext,
   type MediaMessageEventInterface,
 } from "./interface";
+import { type MessageResponseSchemaType } from "../../../manager/message/schema";
 
 /**
  * Represents the base event for webhook events.
@@ -74,7 +74,7 @@ export abstract class MessageEvent
    */
   async reply<T extends BaseMessage<string>>(props: {
     message: T;
-  }): Promise<z.infer<typeof WapiMessageResponseSchemaType>> {
+  }): Promise<z.infer<typeof MessageResponseSchemaType>> {
     if (!this.context.from) {
       throw new Error(
         "No context message id found while replying to message!!",

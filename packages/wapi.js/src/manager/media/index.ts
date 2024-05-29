@@ -2,7 +2,10 @@ import { type z } from "zod";
 import { type Client } from "../../client";
 import { BaseManager } from "../base";
 import { type MediaManagerInterface } from "./interface";
-import { GetMediaUrlResponseBodySchemaType } from "./schema";
+import {
+  CloudApiGetMediaUrlRequestSuccessResponseSchemaType,
+  type CloudApiRequestResourceType,
+} from "../../client/schema";
 
 /**
  * Manager to handle media.
@@ -32,14 +35,19 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
    */
   async getUrl(
     mediaId: string,
-  ): Promise<z.infer<typeof GetMediaUrlResponseBodySchemaType>> {
-    const response = await this.client.requester.requestCloudApi({
-      path: `/${mediaId}`,
-      method: "GET",
-    });
+  ): Promise<
+    z.infer<typeof CloudApiGetMediaUrlRequestSuccessResponseSchemaType>
+  > {
+    const response =
+      await this.client.requester.requestCloudApi<CloudApiRequestResourceType.Media>(
+        {
+          path: `/${mediaId}`,
+          method: "GET",
+        },
+      );
 
     const parsedResponse =
-      GetMediaUrlResponseBodySchemaType.safeParse(response);
+      CloudApiGetMediaUrlRequestSuccessResponseSchemaType.safeParse(response);
 
     if (parsedResponse.success) {
       return parsedResponse.data;
@@ -55,36 +63,18 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
    * @returns {Promise<boolean>} - A promise that resolves to true if the media is deleted successfully.
    */
   async delete(mediaId: string): Promise<boolean> {
-    const response = await this.client.requester.requestCloudApi({
-      path: `/${mediaId}`,
-      method: "DELETE",
-    });
-    console.log(response);
+    const response =
+      await this.client.requester.requestCloudApi<CloudApiRequestResourceType.Media>(
+        {
+          path: `/${mediaId}`,
+          method: "DELETE",
+        },
+      );
 
-    // TODO: Acknowledge the response here and then resolve the promise
-    return true;
-  }
-
-  /**
-   * Upload media to WhatsApp.
-   * @param {Object} params - The parameters for uploading media.
-   * @param {string} params.filePath - The file path of the media to upload.
-   * @param {string} params.mediaType - The type of the media.
-   * @memberof MediaManager
-   * @returns {Promise<string>} - A promise that resolves to the media ID of the uploaded media.
-   */
-  async upload(params: {
-    filePath: string;
-    mediaType: string;
-  }): Promise<string> {
-    await Promise.resolve();
-
-    console.log({ params });
-
-    return "";
-
-    // TODO: The messaging_product property would always be WhatsApp in this case, so send it in the request
-
-    // TODO: Sanitize the path here and then check if the file path exists
+    if ("success" in response) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

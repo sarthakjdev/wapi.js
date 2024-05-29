@@ -7,3 +7,4 @@ errors.log
 .eslintrc.js
 packages/**
 apps/**
+template/**

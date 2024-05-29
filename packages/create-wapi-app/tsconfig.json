@@ -1,6 +1,6 @@
 {
   "extends": "@wapijs/typescript-config/node.base.json",
-  "include": ["src/", "*.ts", "./.eslintrc.js", "bin"],
+  "include": ["src/", "*.ts", ".eslintrc.js", "bin"],
   "exclude": ["template/"],
   "compilerOptions": {
     "module": "NodeNext",
