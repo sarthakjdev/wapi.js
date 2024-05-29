@@ -4,11 +4,8 @@ import { BaseManager } from "../base";
 import { type MediaManagerInterface } from "./interface";
 import {
   CloudApiGetMediaUrlRequestSuccessResponseSchemaType,
-  CloudApiResponseSchemaType,
   type CloudApiRequestResourceType,
 } from "../../client/schema";
-import { type MediaUploadResponseSchemaType } from "./schema";
-
 
 /**
  * Manager to handle media.

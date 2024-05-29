@@ -1,7 +1,6 @@
 import { type z } from "zod";
 import { type BaseManagerInterface } from "../base/interface";
 import { type CloudApiGetMediaUrlRequestSuccessResponseSchemaType } from "../../client/schema";
-import { type MediaUploadResponseSchemaType } from "./schema";
 
 /**
  * Media manager interface

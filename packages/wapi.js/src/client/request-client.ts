@@ -68,7 +68,7 @@ export class RequestClient implements RequestClientInterface {
     try {
       const requestUrl = this.getRequestUrl();
 
-      console.log({ requestUrl, path, body })
+      console.log({ requestUrl, path, body });
 
       const response = await fetch(`${requestUrl}${path}`, {
         method: method,
@@ -78,12 +78,11 @@ export class RequestClient implements RequestClientInterface {
           Authorization: `Bearer ${this.accessToken}`,
           "User-Agent": this.userAgent,
         },
-
       });
 
       const responseBody = await response.json();
 
-      console.log({ responseCode: response.status })
+      console.log({ responseCode: response.status });
 
       return responseBody as CloudApiRequesterResourceTypeToResponseTypeMap[T];
     } catch (error) {
