@@ -1,4 +1,4 @@
-name: Check Build
+name: Build and Lint
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "master"
 
 jobs:
-  lint-and-build:
+  build-and-lint:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
