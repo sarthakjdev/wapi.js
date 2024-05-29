@@ -8,7 +8,7 @@ import {
   type CloudApiRequestResourceType,
 } from "../../client/schema";
 import { type MediaUploadResponseSchemaType } from "./schema";
-import { lookup } from "mime-types";
+
 
 /**
  * Manager to handle media.
@@ -78,79 +78,6 @@ export class MediaManager extends BaseManager implements MediaManagerInterface {
       return true;
     } else {
       return false;
-    }
-  }
-
-  /**
-   * Upload media to WhatsApp.
-   * @param {Object} params - The parameters for uploading media.
-   * @param {string} params.filePath - The file path of the media to upload. This can either be a local file path or a source url of a downloadable media asset.
-   * @param {string} params.mediaType - The type of the media.
-   * @memberof MediaManager
-   * @returns {Promise<string>} - A promise that resolves to the media ID of the uploaded media.
-   */
-  async upload(params: {
-    filePath: string;
-  }): Promise<z.infer<typeof MediaUploadResponseSchemaType>> {
-    console.log({ params })
-
-    const mimeType = lookup(params.filePath);
-
-    console.log({ params, mimeType })
-
-    if (!mimeType) {
-      throw new Error("Invalid file path or type");
-    }
-
-    const response =
-      await this.client.requester.requestCloudApi<CloudApiRequestResourceType.Media>(
-        {
-          path: `/${this.client.phoneNumberId}/media`,
-          body: JSON.stringify({
-            file: `@${params.filePath};type=${mimeType}`,
-            messaging_product: "whatsapp",
-          }),
-          method: "POST",
-        },
-      );
-
-    console.log({ response });
-
-    const parsedResponse = CloudApiResponseSchemaType.safeParse(response);
-    if (parsedResponse.success) {
-      const responseData = parsedResponse.data;
-
-      if (
-        responseData &&
-        typeof responseData === "object" &&
-        "id" in responseData
-      ) {
-        // api returned errored response
-        return {
-          status: "success",
-          data: {
-            mediaId: responseData.id as string,
-          },
-        };
-      } else if (typeof responseData === "object" && "error" in responseData) {
-        return {
-          status: "error",
-          error: {
-            description: responseData.error.error_data.details,
-            title: responseData.error.message,
-            errorCode: responseData.error.code,
-            errorSubCode: responseData.error.error_subcode,
-          },
-        };
-      } else {
-        throw new Error(
-          "Failed to parse response, Report to sarthak@softlancer.co urgently. or raise an issue on github.",
-        );
-      }
-    } else {
-      throw new Error(
-        "Failed to parse response, Report to sarthak@softlancer.co urgently. or raise an issue on github.",
-      );
     }
   }
 }
