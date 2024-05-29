@@ -60,7 +60,7 @@ import { type WebhookInterface } from "./interface";
  * @extends {EventEmitter}
  * @implements {WebhookInterface}
  */
-export class Webhook extends EventEmitter implements WebhookInterface {
+export class Webhook implements WebhookInterface {
   private endpoint: string;
   private port = 3000;
   private server: Express;
@@ -83,7 +83,6 @@ export class Webhook extends EventEmitter implements WebhookInterface {
     webhookEndpoint: string;
     port: number;
   }) {
-    super();
     this.client = params.client;
     this.endpoint = params.webhookEndpoint;
     this.webhookSecret = params.webhookSecret;
