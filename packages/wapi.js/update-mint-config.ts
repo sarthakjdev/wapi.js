@@ -83,7 +83,10 @@ async function processDirectory(
         pages: await processDirectory(fullPath),
       });
     } else if (entry.isFile() && entry.name.endsWith(".mdx")) {
-      pages.push(relativePath);
+      if (entry.name.toLowerCase() === "api-reference/readme.mdx") {
+        continue;
+      }
+      pages.push(relativePath.replace(/\.mdx$/, ""));
     }
   }
 
