@@ -1,0 +1,118 @@
+[**Wapi.js Docs**](../README.mdx) • **Docs**
+
+***
+
+[Wapi.js Docs](../globals.mdx) / MessageUndeliveredEvent
+
+# Class: MessageUndeliveredEvent
+
+Represents a message undelivered event.
+This event occurs when a message fails to be delivered to the recipient.
+
+## Implements
+
+## Extends
+
+- [`StatusUpdateEvent`](StatusUpdateEvent.mdx)
+
+## Implements
+
+- [`MessageUndeliveredEventInterface`](../type-aliases/MessageUndeliveredEventInterface.mdx)
+
+## Constructors
+
+### new MessageUndeliveredEvent()
+
+> **new MessageUndeliveredEvent**(`params`): [`MessageUndeliveredEvent`](MessageUndeliveredEvent.mdx)
+
+Creates a new instance of the MessageUndeliveredEvent class.
+
+#### Parameters
+
+• **params**
+
+The parameters for creating the event.
+
+• **params.client**: [`Client`](Client.mdx)
+
+The client instance.
+
+• **params.data**
+
+The data for the event.
+
+• **params.data.from**: `string`
+
+• **params.data.timestamp**: `string`
+
+#### Returns
+
+[`MessageUndeliveredEvent`](MessageUndeliveredEvent.mdx)
+
+#### Overrides
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`constructor`](StatusUpdateEvent.mdx#constructors)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/message-undelivered/index.ts:24](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/message-undelivered/index.ts#L24)
+
+## Properties
+
+### client
+
+> **client**: [`Client`](Client.mdx)
+
+The client instance associated with the event.
+
+#### Implementation of
+
+`MessageUndeliveredEventInterface.client`
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`client`](StatusUpdateEvent.mdx#client)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:20](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/base/index.ts#L20)
+
+***
+
+### context
+
+> **context**: [`MessageContext`](../type-aliases/MessageContext.mdx)
+
+The context of the status update.
+
+#### Implementation of
+
+`MessageUndeliveredEventInterface.context`
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`context`](StatusUpdateEvent.mdx#context)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:207](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/base/index.ts#L207)
+
+***
+
+### timestamp
+
+> **timestamp**: `number`
+
+The timestamp of the status update.
+
+#### Implementation of
+
+`MessageUndeliveredEventInterface.timestamp`
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`timestamp`](StatusUpdateEvent.mdx#timestamp)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:208](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/base/index.ts#L208)

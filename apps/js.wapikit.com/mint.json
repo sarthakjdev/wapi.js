@@ -1,0 +1,187 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Wapi.js",
+  "logo": {
+    "light": "/logo/logo.svg",
+    "dark": "/logo/logo.svg"
+  },
+  "metadata": {
+    "title": "Wapi.js",
+    "description": "Wapi.js is a JavaScript module, written in TypeScript, designed to interact with the WhatsApp cloud API in a user-friendly manner.",
+    "author": "Sarthak Jain <sarthak@softlancer.co>"
+  },
+  "search": {
+    "prompt": "Search documentation..."
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373",
+    "anchors": {
+      "from": "#0D9373",
+      "to": "#07C983"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "sarthak@softlancer.co"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Github",
+    "url": "https://github.com/sarthakjdev/wapi.js"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Community",
+      "icon": "slack",
+      "url": "https://slack.com/wapikit"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Guide",
+      "pages": [
+        "guide/introduction",
+        "guide/quickstart"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/README.mdx",
+        {
+          "group": "classes",
+          "pages": [
+            "api-reference/classes/AdInteractionEvent.mdx",
+            "api-reference/classes/AudioMessage.mdx",
+            "api-reference/classes/AudioMessageEvent.mdx",
+            "api-reference/classes/BaseEvent.mdx",
+            "api-reference/classes/ButtonInteractionMessage.mdx",
+            "api-reference/classes/Client.mdx",
+            "api-reference/classes/Contact.mdx",
+            "api-reference/classes/ContactMessage.mdx",
+            "api-reference/classes/ContactMessageEvent.mdx",
+            "api-reference/classes/CustomerIdentityChangeEvent.mdx",
+            "api-reference/classes/CustomerNumberChangeEvent.mdx",
+            "api-reference/classes/DocumentMessage.mdx",
+            "api-reference/classes/DocumentMessageEvent.mdx",
+            "api-reference/classes/ImageMessage.mdx",
+            "api-reference/classes/ImageMessageEvent.mdx",
+            "api-reference/classes/InteractionEvent.mdx",
+            "api-reference/classes/ListInteractionEvent.mdx",
+            "api-reference/classes/ListInteractionMessage.mdx",
+            "api-reference/classes/LocationMessage.mdx",
+            "api-reference/classes/LocationMessageEvent.mdx",
+            "api-reference/classes/MediaMessageEvent.mdx",
+            "api-reference/classes/MessageDeliveryEvent.mdx",
+            "api-reference/classes/MessageEvent.mdx",
+            "api-reference/classes/MessageFailedEvent.mdx",
+            "api-reference/classes/MessageReadEvent.mdx",
+            "api-reference/classes/MessageSentEvent.mdx",
+            "api-reference/classes/MessageUndeliveredEvent.mdx",
+            "api-reference/classes/OrderMessageEvent.mdx",
+            "api-reference/classes/ProductInquiryEvent.mdx",
+            "api-reference/classes/ProductInteractionMessage.mdx",
+            "api-reference/classes/ProductListInteractionMessage.mdx",
+            "api-reference/classes/QuickReplyButtonInteractionEvent.mdx",
+            "api-reference/classes/ReactionEvent.mdx",
+            "api-reference/classes/ReactionMessage.mdx",
+            "api-reference/classes/ReplyButtonInteractionEvent.mdx",
+            "api-reference/classes/StatusUpdateEvent.mdx",
+            "api-reference/classes/StickerMessage.mdx",
+            "api-reference/classes/StickerMessageEvent.mdx",
+            "api-reference/classes/TextMessage.mdx",
+            "api-reference/classes/TextMessageEvent.mdx",
+            "api-reference/classes/UnknownEvent.mdx",
+            "api-reference/classes/VideoMessage.mdx",
+            "api-reference/classes/VideoMessageEvent.mdx"
+          ]
+        },
+        {
+          "group": "enumerations",
+          "pages": [
+            "api-reference/enumerations/AdInteractionSourceMediaTypeEnum.mdx",
+            "api-reference/enumerations/AdInteractionSourceTypeEnum.mdx",
+            "api-reference/enumerations/InteractionNotificationTypeEnum.mdx",
+            "api-reference/enumerations/InteractiveMessageTypeEnum.mdx",
+            "api-reference/enumerations/MediaTypeEnum.mdx",
+            "api-reference/enumerations/MessageStatusCategoryEnum.mdx",
+            "api-reference/enumerations/MessageStatusEnum.mdx",
+            "api-reference/enumerations/NotificationEventTypeEnum.mdx",
+            "api-reference/enumerations/NotificationMessageTypeEnum.mdx",
+            "api-reference/enumerations/SystemNotificationTypeEnum.mdx"
+          ]
+        },
+        "api-reference/globals.mdx",
+        {
+          "group": "interfaces",
+          "pages": [
+            "api-reference/interfaces/AdInteractionEventInterface.mdx",
+            "api-reference/interfaces/AudioMessageEventInterface.mdx",
+            "api-reference/interfaces/AudioMessageInterface.mdx",
+            "api-reference/interfaces/BaseEventInterface.mdx",
+            "api-reference/interfaces/ButtonInteractionMessageInterface.mdx",
+            "api-reference/interfaces/ButtonReplyInteractionMessageEventInterface.mdx",
+            "api-reference/interfaces/ContactMessageEventInterface.mdx",
+            "api-reference/interfaces/CustomerIdentityChangeEventInterface.mdx",
+            "api-reference/interfaces/CustomerNumberChangeEventInterface.mdx",
+            "api-reference/interfaces/DocumentMessageEventInterface.mdx",
+            "api-reference/interfaces/DocumentMessageInterface.mdx",
+            "api-reference/interfaces/ImageMessageEventInterface.mdx",
+            "api-reference/interfaces/ImageMessageInterface.mdx",
+            "api-reference/interfaces/InteractiveMessageInterface.mdx",
+            "api-reference/interfaces/ListInteractionMessageEventInterface.mdx",
+            "api-reference/interfaces/ListInteractionMessageInterface.mdx",
+            "api-reference/interfaces/LocationMessageEventInterface.mdx",
+            "api-reference/interfaces/LocationMessageInterface.mdx",
+            "api-reference/interfaces/MediaMessageEventInterface.mdx",
+            "api-reference/interfaces/MediaMessageInterface.mdx",
+            "api-reference/interfaces/MessageEventInterface.mdx",
+            "api-reference/interfaces/MessageFailedEventInterface.mdx",
+            "api-reference/interfaces/OrderMessageEventInterface.mdx",
+            "api-reference/interfaces/ProductInquiryEventInterface.mdx",
+            "api-reference/interfaces/ProductInteractionMessageInterface.mdx",
+            "api-reference/interfaces/ProductListInteractionMessageInterface.mdx",
+            "api-reference/interfaces/QuickReplyButtonInteractionEventInterface.mdx",
+            "api-reference/interfaces/ReactionEventInterface.mdx",
+            "api-reference/interfaces/ReactionMessageInterface.mdx",
+            "api-reference/interfaces/StatusUpdateEventInterface.mdx",
+            "api-reference/interfaces/StickerMessageEventInterface.mdx",
+            "api-reference/interfaces/StickerMessageInterface.mdx",
+            "api-reference/interfaces/TextMessageEventInterface.mdx",
+            "api-reference/interfaces/TextMessageInterface.mdx",
+            "api-reference/interfaces/UnknownEventInterface.mdx",
+            "api-reference/interfaces/VideoMessageEventInterface.mdx",
+            "api-reference/interfaces/VideoMessageInterface.mdx"
+          ]
+        },
+        {
+          "group": "type-aliases",
+          "pages": [
+            "api-reference/type-aliases/InteractionMessageEventInterface.mdx",
+            "api-reference/type-aliases/MessageContext.mdx",
+            "api-reference/type-aliases/MessageDeliveryEventInterface.mdx",
+            "api-reference/type-aliases/MessageReadEventInterface.mdx",
+            "api-reference/type-aliases/MessageSentEventInterface.mdx",
+            "api-reference/type-aliases/MessageUndeliveredEventInterface.mdx",
+            "api-reference/type-aliases/WapiEventDataMap.mdx"
+          ]
+        }
+      ]
+    }
+  ],
+  "footerSocials": {
+    "x": "https://x.com/wpaikit",
+    "github": "https://github.com/sarthakjdev/wapikit",
+    "linkedin": "https://www.linkedin.com/company/softlancer"
+  }
+}

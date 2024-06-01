@@ -1,0 +1,231 @@
+[**Wapi.js Docs**](../README.mdx) • **Docs**
+
+***
+
+[Wapi.js Docs](../globals.mdx) / ImageMessage
+
+# Class: ImageMessage
+
+Represents an image message.
+
+## Implements
+
+## Extends
+
+- `BaseMessage`\<`MessageTypeEnum.Image`\>
+
+## Implements
+
+- [`ImageMessageInterface`](../interfaces/ImageMessageInterface.mdx)
+
+## Constructors
+
+### new ImageMessage()
+
+> **new ImageMessage**(`params`): [`ImageMessage`](ImageMessage.mdx)
+
+Creates a new instance of the ImageMessage class.
+
+#### Parameters
+
+• **params**: `object` \| `object`
+
+The parameters to initialize the image message.
+
+#### Returns
+
+[`ImageMessage`](ImageMessage.mdx)
+
+#### Overrides
+
+`BaseMessage<MessageTypeEnum.Image>.constructor`
+
+#### Memberof
+
+ImageMessage
+
+#### Source
+
+[packages/wapi.js/src/structures/media/index.ts:174](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/structures/media/index.ts#L174)
+
+## Properties
+
+### data
+
+> **data**: `object` \| `object`
+
+#### Implementation of
+
+[`ImageMessageInterface`](../interfaces/ImageMessageInterface.mdx).[`data`](../interfaces/ImageMessageInterface.mdx#data)
+
+#### Source
+
+[packages/wapi.js/src/structures/media/index.ts:164](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/structures/media/index.ts#L164)
+
+***
+
+### messaging\_product
+
+> **messaging\_product**: `"whatsapp"`
+
+The messaging product.
+
+#### Implementation of
+
+[`ImageMessageInterface`](../interfaces/ImageMessageInterface.mdx).[`messaging_product`](../interfaces/ImageMessageInterface.mdx#messaging_product)
+
+#### Inherited from
+
+`BaseMessage.messaging_product`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:17](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/structures/message/index.ts#L17)
+
+***
+
+### recipient\_type
+
+> **recipient\_type**: `"individual"`
+
+The recipient type.
+
+#### Implementation of
+
+[`ImageMessageInterface`](../interfaces/ImageMessageInterface.mdx).[`recipient_type`](../interfaces/ImageMessageInterface.mdx#recipient_type)
+
+#### Inherited from
+
+`BaseMessage.recipient_type`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:18](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/structures/message/index.ts#L18)
+
+***
+
+### type
+
+> **type**: `MessageTypeEnum`
+
+The type of the message.
+
+#### Implementation of
+
+[`ImageMessageInterface`](../interfaces/ImageMessageInterface.mdx).[`type`](../interfaces/ImageMessageInterface.mdx#type)
+
+#### Inherited from
+
+`BaseMessage.type`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:16](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/structures/message/index.ts#L16)
+
+## Methods
+
+### parseConstructorPayload()
+
+> `protected` **parseConstructorPayload**(`schema`, `payload`): `any`
+
+Parses the constructor payload using the provided schema.
+
+#### Parameters
+
+• **schema**: `ZodType`\<`any`, `ZodTypeDef`, `any`\>
+
+The Zod schema used for parsing the payload.
+
+• **payload**: `any`
+
+The payload to be parsed.
+
+#### Returns
+
+`any`
+
+The parsed data.
+
+#### Inherited from
+
+`BaseMessage.parseConstructorPayload`
+
+#### Throws
+
+An error if the parsing fails.
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:42](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/structures/message/index.ts#L42)
+
+***
+
+### toJson()
+
+> **toJson**(`params`): `object`
+
+Converts the image message to the WhatsApp Cloud API payload.
+
+#### Parameters
+
+• **params**
+
+The parameters for the WhatsApp Cloud API payload.
+
+• **params.replyToMessageId?**: `string`
+
+The ID of the message being replied to.
+
+• **params.to**: `string`
+
+The recipient of the message.
+
+#### Returns
+
+`object`
+
+- The WhatsApp Cloud API payload for the image message.
+
+##### biz\_opaque\_callback\_data?
+
+> `optional` **biz\_opaque\_callback\_data**: `string`
+
+##### context?
+
+> `optional` **context**: `object`
+
+##### context.message\_id
+
+> **message\_id**: `string`
+
+##### image
+
+> **image**: `object` \| `object`
+
+##### messaging\_product
+
+> **messaging\_product**: `"whatsapp"`
+
+##### recipient\_type
+
+> **recipient\_type**: `"individual"`
+
+##### to
+
+> **to**: `string`
+
+##### type
+
+> **type**: `Image`
+
+#### Overrides
+
+`BaseMessage.toJson`
+
+#### Memberof
+
+ImageMessage
+
+#### Source
+
+[packages/wapi.js/src/structures/media/index.ts:192](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/structures/media/index.ts#L192)

@@ -1,0 +1,125 @@
+[**Wapi.js Docs**](../README.mdx) • **Docs**
+
+***
+
+[Wapi.js Docs](../globals.mdx) / MessageFailedEvent
+
+# Class: MessageFailedEvent
+
+## Implements
+
+## Extends
+
+- [`StatusUpdateEvent`](StatusUpdateEvent.mdx)
+
+## Implements
+
+- [`MessageFailedEventInterface`](../interfaces/MessageFailedEventInterface.mdx)
+
+## Constructors
+
+### new MessageFailedEvent()
+
+> **new MessageFailedEvent**(`params`): [`MessageFailedEvent`](MessageFailedEvent.mdx)
+
+#### Parameters
+
+• **params**
+
+• **params.client**: [`Client`](Client.mdx)
+
+• **params.data**
+
+• **params.data.failReason**: `string`
+
+• **params.data.from**: `string`
+
+• **params.data.timestamp**: `string`
+
+#### Returns
+
+[`MessageFailedEvent`](MessageFailedEvent.mdx)
+
+#### Overrides
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`constructor`](StatusUpdateEvent.mdx#constructors)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/message-failed/index.ts:15](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/message-failed/index.ts#L15)
+
+## Properties
+
+### client
+
+> **client**: [`Client`](Client.mdx)
+
+The client instance associated with the event.
+
+#### Implementation of
+
+[`MessageFailedEventInterface`](../interfaces/MessageFailedEventInterface.mdx).[`client`](../interfaces/MessageFailedEventInterface.mdx#client)
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`client`](StatusUpdateEvent.mdx#client)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:20](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/base/index.ts#L20)
+
+***
+
+### context
+
+> **context**: [`MessageContext`](../type-aliases/MessageContext.mdx)
+
+The context of the status update.
+
+#### Implementation of
+
+[`MessageFailedEventInterface`](../interfaces/MessageFailedEventInterface.mdx).[`context`](../interfaces/MessageFailedEventInterface.mdx#context)
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`context`](StatusUpdateEvent.mdx#context)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:207](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/base/index.ts#L207)
+
+***
+
+### failReason
+
+> **failReason**: `string`
+
+The reason for the message failure.
+
+#### Implementation of
+
+[`MessageFailedEventInterface`](../interfaces/MessageFailedEventInterface.mdx).[`failReason`](../interfaces/MessageFailedEventInterface.mdx#failreason)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/message-failed/index.ts:14](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/message-failed/index.ts#L14)
+
+***
+
+### timestamp
+
+> **timestamp**: `number`
+
+The timestamp of the status update.
+
+#### Implementation of
+
+[`MessageFailedEventInterface`](../interfaces/MessageFailedEventInterface.mdx).[`timestamp`](../interfaces/MessageFailedEventInterface.mdx#timestamp)
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`timestamp`](StatusUpdateEvent.mdx#timestamp)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:208](https://github.com/sarthakjdev/wapi.js/blob/13b0ae8a179e1d2ead89d348fa5b05387c8fc977/packages/wapi.js/src/webhook/events/base/index.ts#L208)
