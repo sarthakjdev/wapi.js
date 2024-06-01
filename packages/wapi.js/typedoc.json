@@ -8,6 +8,10 @@
   "emit": "both",
   "readme": "./README.md",
   "out": "../../apps/js.wapikit.com/api-reference",
+  "sourceLinkTemplate": "https://github.com/sarthakjdev/wapi.js/{path}?at={gitRevision}#line={line}",
+  "sourceLinkExternal": true,
+  "cname": "js.wapijs.com",
   "hideGenerator": true,
-  "searchInComments": true
+  "searchInComments": true,
+  "hidePageTitle": true
 }

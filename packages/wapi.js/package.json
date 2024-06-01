@@ -21,7 +21,7 @@
     "lint": "pnpm eslint . --max-warnings=20",
     "pretty": "pnpm prettier --write \"src/**/*.ts\"",
     "clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
-    "doc:gen": "pnpm build && api-extractor run --local --diagnostics && pnpm typedoc ./index.ts && rm -rf ./docs && pnpm npx tsx ./update-mint-config.ts"
+    "doc:gen": "pnpm build && api-extractor run --local && pnpm typedoc ./index.ts && rm -rf ./docs && pnpm npx tsx ./update-mint-config.ts"
   },
   "keywords": [
     "whatsapp",
