@@ -25,39 +25,21 @@ async function updateMintJson() {
     const apiDocGroup = mintData.navigation.find(
       (item) => item.group === "API Documentation",
     );
-    const getStartedGroup = mintData.navigation.find(
+    const guideGroup = mintData.navigation.find(
       (item) => item.group === "Guide",
     );
 
-    if (!apiDocGroup || !getStartedGroup) {
+    if (!apiDocGroup || !guideGroup) {
       throw new Error(
         "API Documentation or Guide group not found in mint.json",
       );
     }
 
-    // Handle "Get Started" group (add "development.mdx" if it exists)
-    try {
-      await fs.access(path.join(docsDir, "development.mdx")); // Check if the file exists
-      getStartedGroup.pages.push("development.mdx");
-    } catch (err) {
-      // File doesn't exist, do nothing
-    }
+    guideGroup.pages = await processDirectory(path.join(docsDir, "guide"));
 
-    // Process the "api-reference" directory for "API Documentation" group
     apiDocGroup.pages = await processDirectory(
       path.join(docsDir, "api-reference"),
     );
-
-    // Process the "essentials" directory (if it exists)
-    try {
-      await fs.access(path.join(docsDir, "essentials"));
-      mintData.navigation.push({
-        group: "Essentials",
-        pages: await processDirectory(path.join(docsDir, "essentials")),
-      });
-    } catch (err) {
-      // File doesn't exist, do nothing
-    }
 
     // Write the updated mint.json
     await fs.writeFile(mintJsonPath, JSON.stringify(mintData, null, 2));
@@ -79,7 +61,7 @@ async function processDirectory(
 
     if (entry.isDirectory()) {
       pages.push({
-        group: entry.name,
+        group: entry.name.split("-").join(" "),
         pages: await processDirectory(fullPath),
       });
     } else if (entry.isFile() && entry.name.endsWith(".mdx")) {
@@ -90,7 +72,15 @@ async function processDirectory(
     }
   }
 
-  return pages;
+  return pages.sort((a, b) => {
+    if (typeof a === "string" && typeof b === "object") {
+      return -1; // String before group
+    } else if (typeof a === "object" && typeof b === "string") {
+      return 1; // Group after string
+    } else {
+      return 0; // No change if both are the same type (shouldn't happen in this scenario)
+    }
+  });
 }
 
 updateMintJson();

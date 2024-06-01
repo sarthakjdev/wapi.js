@@ -44,14 +44,19 @@
   ],
   "anchors": [
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://slack.com/wapikit"
-    },
-    {
       "name": "Support",
       "icon": "envelope",
       "url": "mailto:sarthak@softlancer.co"
+    },
+    {
+      "name": "NPM",
+      "icon": "code",
+      "url": "https://www.npmjs.com/package/@wapijs/wapi.js"
+    },
+    {
+      "name": "Community",
+      "icon": "slack",
+      "url": "https://slack.com/wapikit"
     }
   ],
   "navigation": [
@@ -59,7 +64,23 @@
       "group": "Guide",
       "pages": [
         "guide/introduction",
-        "guide/quickstart"
+        "guide/quickstart",
+        {
+          "group": "installation and preparations",
+          "pages": [
+            "guide/installation-and-preparations/creating-application",
+            "guide/installation-and-preparations/setup-node",
+            "guide/installation-and-preparations/using-typescript"
+          ]
+        },
+        {
+          "group": "whatsapp api setup",
+          "pages": [
+            "guide/whatsapp-api-setup/configuring-webhook",
+            "guide/whatsapp-api-setup/creating-business-app",
+            "guide/whatsapp-api-setup/getting-api-key"
+          ]
+        }
       ]
     },
     {
@@ -172,7 +193,7 @@
           ]
         },
         {
-          "group": "type-aliases",
+          "group": "type aliases",
           "pages": [
             "api-reference/type-aliases/InteractionMessageEventInterface",
             "api-reference/type-aliases/MessageContext",
