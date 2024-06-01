@@ -1,5 +1,4 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
 # lint the commit as per the config defined in .commitlintrc.json
 pnpm commitlint --edit $1
