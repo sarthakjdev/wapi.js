@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
+  "entryPoints": ["./index.ts"],
+  "name": "Wapi.js Docs",
+  "plugin": ["typedoc-plugin-zod", "typedoc-plugin-markdown"],
+  "fileExtension": ".mdx",
+  "json": "./docs/api.json",
+  "emit": "both",
+  "readme": "./README.md",
+  "out": "../../apps/js.wapikit.com/api-reference",
+  "hideGenerator": true,
+  "searchInComments": true
+}

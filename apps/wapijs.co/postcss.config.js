@@ -1,1 +1,0 @@
-module.exports = require("@wapijs/tailwind-config/postcss.config.js")

@@ -171,7 +171,6 @@ export class Client extends EventEmitter implements ClientInterface {
   get uptime() {
     return this.readyAtTimeStamp && Date.now() - this.readyAtTimeStamp * 1000;
   }
-
   /**
    * Function to update the initial access token given at the point of client creations
    * @param {string} accessToken
