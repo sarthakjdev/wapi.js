@@ -44,9 +44,9 @@
   ],
   "anchors": [
     {
-      "name": "Support",
-      "icon": "envelope",
-      "url": "mailto:sarthak@softlancer.co"
+      "name": "Star us on GitHub",
+      "icon": "github",
+      "url": "https://github.com/sarthakjdev/wapi.js"
     },
     {
       "name": "NPM",
@@ -66,21 +66,34 @@
         "guide/introduction",
         "guide/quickstart",
         {
-          "group": "installation and preparations",
+          "group": "Installation and Preparations",
           "pages": [
-            "guide/installation-and-preparations/creating-application",
             "guide/installation-and-preparations/setup-node",
+            "guide/installation-and-preparations/creating-application",
             "guide/installation-and-preparations/using-typescript"
           ]
         },
         {
-          "group": "whatsapp api setup",
+          "group": "Whatsapp API setup",
           "pages": [
-            "guide/whatsapp-api-setup/configuring-webhook",
             "guide/whatsapp-api-setup/creating-business-app",
-            "guide/whatsapp-api-setup/getting-api-key"
+            "guide/whatsapp-api-setup/getting-api-key",
+            "guide/whatsapp-api-setup/configuring-webhook"
           ]
-        }
+        },
+        {
+          "group": "Building your application",
+          "pages": [
+            "guide/building-your-application/creating-wapi-client",
+            "guide/building-your-application/building-message-components",
+            "guide/building-your-application/sending-messages",
+            "guide/building-your-application/event-handling",
+            "guide/building-your-application/replying-and-reacting",
+            "guide/building-your-application/handling-media"
+          ]
+        },
+        "guide/contributing",
+        "guide/contact"
       ]
     },
     {

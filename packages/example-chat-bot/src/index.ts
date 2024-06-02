@@ -97,6 +97,8 @@ function init() {
 		}
 	})
 
+
+
 	whatsappClient.on('ListInteraction', async message => {
 		console.log('List Interaction', message)
 

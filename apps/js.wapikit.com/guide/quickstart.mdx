@@ -1,0 +1,81 @@
+---
+title: Quick Start Guide
+description: 'Welcome to the home of your new documentation'
+---
+
+## 
+
+
+<CardGroup cols={2}>
+  <Card
+    title="Listen to events"
+    icon="palette"
+    href="/guide/building-your-application/event-handling"
+  >
+    Checkout the available events and how to listen to them
+  </Card>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference"
+  >
+	Checkout the typescript code API reference documentation here.
+  </Card>
+  <Card
+    title="Build Message Components"
+    icon="screwdriver-wrench"
+    href="/guide/building-your-application/building-message-components"
+  >
+    Build interactive features and designs to guide your users
+  </Card>
+  <Card
+    title="Get Inspiration"
+    icon="stars"
+    href="https://github.com/sarthakjdev/wapi.js/tree/master/packages/example-chat-bot"
+  >
+    Check out a example chat bot here
+  </Card>
+</CardGroup>
+
+
+
+## Initiating a Wapi.js project
+
+
+### Chat bot
+
+The first step to build a wapi.js based chat bot is to create a new node.js project. You can quickly setup a new project using the utility NPM package provided with the wapi.js SDK only, run the following command in your terminal to setup the project: 
+
+```bash
+pnpm create-wapi-app my-whatsapp-bot
+```
+
+<Check>Once you run this command, you would be asked a couple of questions like the name of the project and whether you want to use typescript or javascript for this project. Once you answer them, you project will start to setup and once done. You can navigate to the project directory and start building your chat bot.</Check>
+
+### Other use cases
+
+You can also use the wapi.js SDK to integrate the whatsapp business API with your existing backend. To do so, you can install the wapi.js SDK using the following command:
+
+<Tabs>
+  <Tab title="pnpm">
+    ```bash
+    pnpm add @wapijs/wapi.js
+    ```
+  </Tab>
+  <Tab title="yarn">
+  ```bash
+    yarn add @wapijs/wapi.js
+    ```
+  </Tab>
+  <Tab title="npm">
+  ```bash
+    npm install @wapi/wapi.js
+    ```
+  </Tab>
+</Tabs>
+
+
+
+
+## Setting up the project
+
