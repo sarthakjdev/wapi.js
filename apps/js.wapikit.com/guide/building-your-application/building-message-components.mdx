@@ -20,6 +20,8 @@ Wapi.js SDK provides a simaple and easy to use classes architecture to build mes
 - [Product Message](#product-message)
 - [Product List Message](#product-list-message)
 
+<Note>In all the media messages which includes image, document, audio, video and sticker, either we will have to use the Id of media, or a publicly accessible hosted media Url.</Note>
+
 <Tip> With the rapidly changing whatsapp business platform features and offerings, we try our best to be in sync with the new features provided by the API. If you think we are missing upon any of the available type of message support. You can open a github issue [here](https://github.com/sarthakjdev/wapi.js/issues) or direclty [contact](/guide/contact) the maintainer of the project.</Tip>
 
 ### Text Message
@@ -28,6 +30,11 @@ Text message is the most basic message component that you can send to a user. Yo
 
 ```typescript
 
+import { TextMessage } from '@wapijs/wapi.js'
+
+const textMessage = new TextMessage({
+    text: 'Please say "hello" to proceed.'
+})
 
 ```
 
@@ -36,6 +43,13 @@ Text message is the most basic message component that you can send to a user. Yo
 Image message is a message component that you can use to send images to a user. You can create a image message using the following code:
 
 ```typescript
+
+import { ImageMessage } from '@wapijs/wapi.js'
+
+const imageMessage = new ImageMessage({
+    link: 'https://example.com/image.jpg',
+    caption: 'This is a caption for the image.'
+})
 ```
 
 ### Video Message
@@ -43,6 +57,14 @@ Image message is a message component that you can use to send images to a user. 
 Video message is a message component that you can use to send videos to a user. You can create a video message using the following code:
 
 ```typescript
+
+import { VideoMessage } from '@wapijs/wapi.js'
+
+const videoMessage = new VideoMessage({
+	link: 'https://example.com/video.mp4',
+	caption: 'This is a caption for the video.'
+})
+
 ```
 
 ### Audio Message
@@ -50,6 +72,12 @@ Video message is a message component that you can use to send videos to a user. 
 Audio message is a message component that you can use to send audio files to a user. You can create a audio message using the following code:
 
 ```typescript
+
+import { AudioMessage } from '@wapijs/wapi.js'
+
+const audioMessage = new AudioMessage({
+	link: 'https://example.com/audio.mp3',
+})
 ```
 
 ### Document Message
@@ -57,6 +85,13 @@ Audio message is a message component that you can use to send audio files to a u
 Document message is a message component that you can use to send documents to a user. You can create a document message using the following code:
 
 ```typescript
+import { DocumentMessage } from '@wapijs/wapi.js'
+
+const documentMessage = new DocumentMessage({
+	link: 'https://example.com/image.jpg',
+	caption: 'This is a caption for the image.'
+})
+
 ```
 
 ### Location Message
@@ -64,20 +99,67 @@ Document message is a message component that you can use to send documents to a 
 Location message is a message component that you can use to send location to a user. You can create a location message using the following code:
 
 ```typescript
+import { LocationMessage } from '@wapijs/wapi.js'
+
+const locationMessage = new LocationMessage({
+	latitude: 37.7749,
+	longitude: -122.4194,
+	name: 'San Francisco',
+	address: 'San Francisco, CA, USA'
+})
 ```
 
 ### Contact Message
 
 Contact message is a message component that you can use to send contact details to a user. You can create a contact message using the following code:
 
-```typescript
-```
-
-### Reply Message
-
-Reply message is a message component that you can use to send a reply to a message. You can create a reply message using the following code:
+<Info>In order to build a contact message, you need to use multiple classes provided to build, multiple components ofq the contact message. Now this has been done for ease of use and to provide a more structured way to build the contact message.</Info>
 
 ```typescript
+import { Contact, ContactMessage } from '@wapijs/wapi.js'
+
+const contact = new Contact({
+		name: {
+			last_name: 'Doe',
+			formatted_name: 'John Doe'
+		}
+	})
+
+    // optional
+	contact.addAddress({
+		city: 'San Francisco',
+		country: 'USA',
+		street: '123 Main Street',
+		type: 'HOME',
+		country_code: 'US',
+		state: 'CA'
+	})
+
+    // optional
+	contact.addEmail({
+		type: 'HOME',
+		email: 'sathak@softlancer.co'
+	})
+
+    // optional
+	contact.addPhone({
+		type: 'CELL',
+		phone: '+1234567890'
+	})
+
+    // optional
+	contact.addUrl({
+		type: 'HOME',
+		url: 'https://softlancer.co'
+	})
+
+	const contactMessage = new ContactMessage({
+		contacts: [contact]
+	})
+
+    // add contact to the existing contact message
+	contactMessage.addContact(anotherContact)
+
 ```
 
 ### Reaction Message

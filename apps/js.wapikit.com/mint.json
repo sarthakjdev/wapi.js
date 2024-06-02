@@ -62,6 +62,7 @@
   "navigation": [
     {
       "group": "Guide",
+      "iconType": "regular",
       "pages": [
         "guide/introduction",
         "guide/quickstart",
