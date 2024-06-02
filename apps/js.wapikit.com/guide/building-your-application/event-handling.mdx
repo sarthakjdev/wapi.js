@@ -13,6 +13,15 @@ You can listen to events using the `on` method available on the [client](api-ref
 ```typescript
 // assuming you have already initiated the client,
 
+
+whatsappClient.on('Ready', async () => {
+        console.log("Client is ready to receive messages.")
+})
+
+whatsappClient.on('Error', async error => {
+        console.errpr("An error occured.", error)
+})
+
 whatsappClient.on('TextMessage', async message => {
         await message.reply({
             message: new TextMessage({
@@ -20,6 +29,16 @@ whatsappClient.on('TextMessage', async message => {
             })
         })
 })
+
+whatsappClient.on('AudioMessage', async message => {
+        await message.reply({
+            message: new TextMessage({
+                text: 'This is a reply.'
+            })
+        })
+})
+
+// and so on for other message types...
 
 ```
 
@@ -54,6 +73,9 @@ The SDK supports the following events out of the box to make it easy to handle b
 
 ### System Events
 
+- [Client Ready Event](/api-reference/classes/ClientReadyEvent)
+- [Client Error Event](/api-reference/classes/ClientErrorEvent)
+- [Client Warning Event](/api-reference/classes/ClientWarningEvent)
 - [Message Delivered Event](/api-reference/classes/MessageDeliveredEvent)
 - [Message Read Event](/api-reference/classes/MessageReadEvent)
 - [Message Sent Event](/api-reference/classes/MessageSentEvent)

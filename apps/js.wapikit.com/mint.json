@@ -2,8 +2,9 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Wapi.js",
   "logo": {
-    "light": "/logo/logo.svg",
-    "dark": "/logo/logo.svg"
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
+    "href": "/"
   },
   "metadata": {
     "title": "Wapi.js",
