@@ -19,7 +19,7 @@
 		"typescript",
 		"nodejs",
 		"@wapijs/wapi.js",
-		"wapi.js library"
+		"wapi.js SDK"
 	],
 	"authors": [
 		"sarthak@softlancer.co"

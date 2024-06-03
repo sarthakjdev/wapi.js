@@ -10,7 +10,7 @@ function init() {
 		'What is wapijs': [
 			{
 				question: 'What is wapi.js?',
-				answer: 'wapi.js is a Tyepscript library for building WhatsApp chatbots.'
+				answer: 'wapi.js is a Tyepscript SDK for building WhatsApp chatbots.'
 			},
 			{
 				question: 'Main features of wapi.js?',

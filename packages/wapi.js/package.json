@@ -1,7 +1,7 @@
 {
   "name": "@wapijs/wapi.js",
   "version": "0.0.8",
-  "description": "a typescript based client library to build whatsapp cloud api based chat bots",
+  "description": "a typescript based client SDK to build whatsapp cloud api based chat bots",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/cjs/index.js",
