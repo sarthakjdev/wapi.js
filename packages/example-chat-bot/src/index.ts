@@ -1,5 +1,5 @@
 import { whatsappClient } from './utils/client'
-import { AudioMessage, Contact, ContactMessage, DocumentMessage, ImageMessage, ListInteractionMessage, LocationMessage, TextMessage, VideoMessage } from '@wapijs/wapi.js'
+import { ButtonInteractionMessage, ListInteractionMessage, TextMessage } from '@wapijs/wapi.js'
 
 function init() {
 	whatsappClient.on('Ready', () => {

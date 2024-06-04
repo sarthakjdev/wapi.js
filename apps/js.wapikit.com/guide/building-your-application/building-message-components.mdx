@@ -167,6 +167,11 @@ const contact = new Contact({
 Reaction message is a message component that you can use to send a reaction to a message. You can create a reaction message using the following code:
 
 ```typescript
+import { ReactionMessage } from '@wapijs/wapi.js'
+const reactionMessage = new ReactionMessage({
+		reaction: '✅',
+		messageId: 'message-id'
+	})
 ```
 
 ### List Message
@@ -174,20 +179,41 @@ Reaction message is a message component that you can use to send a reaction to a
 List message is a message component that you can use to send a list of items to a user. You can create a list message using the following code:
 
 ```typescript
+import { ListInteractionMessage } from '@wapijs/wapi.js'
+
+const listMessage = new ListInteractionMessage({
+		bodyText: 'Welcome to Wapi.js',
+		buttonText: 'Ask questions',
+		footerText: 'Beta version',
+		sections: [
+			{
+				rows: [
+					{
+						description: 'row description',
+						id: `row-1`,
+						title: `row title`
+					}
+				],
+				title: 'section title'
+			}
+		]
+	})
 ```
 
-### QuickReply ButtonMessage
-
-QuickReply ButtonMessage is a message component that you can use to send a quick reply button to a user. You can create a quick reply button message using the following code:
-
-```typescript
-```
-
-### Button Message
+### Button Interactive Message
 
 Button message is a message component that you can use to send a button to a user. You can create a button message using the following code:
 
 ```typescript
+import { ButtonInteractionMessage } from '@wapijs/wapi.js'
+const buttonMessage = new ButtonInteractionMessage({
+		bodyText: 'Welcome to Wapi.js',
+		buttons: [{
+			id: 'I am a button',
+			title: 'Click me'
+		}],
+		footerText: 'Beta version'
+})
 ```
 
 ### Product Message
@@ -195,12 +221,21 @@ Button message is a message component that you can use to send a button to a use
 Product message is a message component that you can use to send a product to a user. You can create a product message using the following code:
 
 ```typescript
-```
 
+```
 
 ### Product List Message
 
 Product List message is a message component that you can use to send a list of products to a user. You can create a product list message using the following code:
+
+```typescript
+```
+
+### Temaplate Message
+
+Template message is a message component that you can use to send a template to a user. You can create a template message using the following code:
+
+<Note>You need to get your template approved before sending a template message to users. You can check the template message approval documentation [here](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines/).</Note>
 
 ```typescript
 ```

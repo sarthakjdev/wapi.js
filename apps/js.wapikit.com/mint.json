@@ -95,9 +95,10 @@
             "guide/building-your-application/handling-media"
           ]
         },
+        "guide/wapijs-sdk-scope",
+        "guide/references",
         "guide/contributing",
-        "guide/contact",
-        "guide/references"
+        "guide/contact"
       ]
     },
     {
