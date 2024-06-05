@@ -15,6 +15,7 @@ Officially Whatsapp supports uploading of media via API, getting Media Url from 
 You can get the media Url from media Id using the `getMediaUrl` method available on the [client](api-reference/classes/Client) class media manager. Here is an example of how you can get the media Url:
 
 ```typescript
+	await whatsappClient.media.getUrl('mediaId')
 ```
 
 
@@ -23,4 +24,5 @@ You can get the media Url from media Id using the `getMediaUrl` method available
 You can delete a media using the `deleteMedia` method available on the [client](api-reference/classes/Client) class media manager. Here is an example of how you can delete the media:
 
 ```typescript
+	await whatsappClient.media.delete('mediaId')
 ```

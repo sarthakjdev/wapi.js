@@ -60,11 +60,11 @@ The SDK supports the following events out of the box to make it easy to handle b
 - [Contact Message Event](/api-reference/classes/ContactMessageEvent)
 - [Reaction Message Event](/api-reference/classes/ReactionMessageEvent)
 - [Sticker Event](/api-reference/classes/StickerMessageEvent)
-- [Quick Reply Button Interaction Event]()
-- [Ad Interaction Event]()
-- [Product Inquiry Event]()
-- [Reply Button Interaction Event]()
-- [List Interaction Event]()
+- [Quick Reply Button Interaction Event](api-reference/interfaces/QuickReplyButtonInteractionEvent)
+- [Ad Interaction Event](/api-reference/classes/AdInteractionEvent)
+- [Product Inquiry Event](/api-reference/classes/ProductInquiryEvent)
+- [Reply Button Interaction Event](/api-reference/classes/ReplyButtonInteractionEvent)
+- [List Interaction Event](/api-reference/classes/ListInteractionEvent)
 
 <Card title="Important" icon="code" iconType="duotone" color="#ca8b04">
   Each of the events mentioned above has a couple of utility methods available like `reply`, `react` etc. which can be used to reply or react to the incoming messages.
@@ -73,9 +73,8 @@ The SDK supports the following events out of the box to make it easy to handle b
 
 ### System Events
 
-- [Client Ready Event](/api-reference/classes/ClientReadyEvent)
-- [Client Error Event](/api-reference/classes/ClientErrorEvent)
-- [Client Warning Event](/api-reference/classes/ClientWarningEvent)
+- Client Ready Event
+- Client Error Event
 - [Message Delivered Event](/api-reference/classes/MessageDeliveredEvent)
 - [Message Read Event](/api-reference/classes/MessageReadEvent)
 - [Message Sent Event](/api-reference/classes/MessageSentEvent)
