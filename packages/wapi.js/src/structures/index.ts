@@ -22,11 +22,5 @@ export * from "./media/interface";
 export * from "./reaction/index";
 export * from "./reaction/interface";
 
-export * from "./reaction/index";
-export * from "./reaction/interface";
-
-export * from "./reaction/index";
-export * from "./reaction/interface";
-
 export * from "./template/index";
 export * from "./template/interface";
