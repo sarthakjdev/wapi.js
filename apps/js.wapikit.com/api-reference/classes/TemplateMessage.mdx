@@ -1,0 +1,263 @@
+[Wapi.js Docs](../README.mdx) / TemplateMessage
+
+# Class: TemplateMessage
+
+Represents a template message.
+
+## Extends
+
+- `BaseMessage`\<`MessageTypeEnum.Template`\>
+
+## Implements
+
+- [`TemplateMessageInterface`](../interfaces/TemplateMessageInterface.mdx)
+
+## Constructors
+
+### new TemplateMessage()
+
+> **new TemplateMessage**(`params`): [`TemplateMessage`](TemplateMessage.mdx)
+
+#### Parameters
+
+• **params**
+
+The template message data.
+
+• **params.language**: `LanguageEnum`
+
+• **params.templateName**: `string`
+
+#### Returns
+
+[`TemplateMessage`](TemplateMessage.mdx)
+
+#### Overrides
+
+`BaseMessage<MessageTypeEnum.Template>.constructor`
+
+#### Memberof
+
+TemplateMessage
+
+#### Source
+
+[packages/wapi.js/src/structures/template/index.ts:115](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/template/index.ts#L115)
+
+## Properties
+
+### data
+
+> **data**: `object`
+
+#### language
+
+> **language**: `LanguageEnum`
+
+#### templateName
+
+> **templateName**: `string`
+
+#### Implementation of
+
+[`TemplateMessageInterface`](../interfaces/TemplateMessageInterface.mdx).[`data`](../interfaces/TemplateMessageInterface.mdx#data)
+
+#### Source
+
+[packages/wapi.js/src/structures/template/index.ts:105](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/template/index.ts#L105)
+
+***
+
+### messaging\_product
+
+> **messaging\_product**: `"whatsapp"`
+
+The messaging product.
+
+#### Implementation of
+
+[`TemplateMessageInterface`](../interfaces/TemplateMessageInterface.mdx).[`messaging_product`](../interfaces/TemplateMessageInterface.mdx#messaging_product)
+
+#### Inherited from
+
+`BaseMessage.messaging_product`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:17](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L17)
+
+***
+
+### recipient\_type
+
+> **recipient\_type**: `"individual"`
+
+The recipient type.
+
+#### Implementation of
+
+[`TemplateMessageInterface`](../interfaces/TemplateMessageInterface.mdx).[`recipient_type`](../interfaces/TemplateMessageInterface.mdx#recipient_type)
+
+#### Inherited from
+
+`BaseMessage.recipient_type`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:18](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L18)
+
+***
+
+### type
+
+> **type**: `MessageTypeEnum`
+
+The type of the message.
+
+#### Implementation of
+
+[`TemplateMessageInterface`](../interfaces/TemplateMessageInterface.mdx).[`type`](../interfaces/TemplateMessageInterface.mdx#type)
+
+#### Inherited from
+
+`BaseMessage.type`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:16](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L16)
+
+## Methods
+
+### addComponent()
+
+> **addComponent**(): `void`
+
+Adds a component to the template message.
+
+#### Returns
+
+`void`
+
+#### Source
+
+[packages/wapi.js/src/structures/template/index.ts:126](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/template/index.ts#L126)
+
+***
+
+### parseConstructorPayload()
+
+> `protected` **parseConstructorPayload**(`schema`, `payload`): `any`
+
+Parses the constructor payload using the provided schema.
+
+#### Parameters
+
+• **schema**: `ZodType`\<`any`, `ZodTypeDef`, `any`\>
+
+The Zod schema used for parsing the payload.
+
+• **payload**: `any`
+
+The payload to be parsed.
+
+#### Returns
+
+`any`
+
+The parsed data.
+
+#### Inherited from
+
+`BaseMessage.parseConstructorPayload`
+
+#### Throws
+
+An error if the parsing fails.
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:42](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L42)
+
+***
+
+### toJson()
+
+> **toJson**(`params`): `object`
+
+Converts the template message to a JSON object.
+
+#### Parameters
+
+• **params**
+
+The parameters for the JSON object.
+
+• **params.replyToMessageId?**: `string`
+
+• **params.to**: `string`
+
+#### Returns
+
+`object`
+
+The JSON object representing the template message.
+
+##### biz\_opaque\_callback\_data?
+
+> `optional` **biz\_opaque\_callback\_data**: `string`
+
+##### context?
+
+> `optional` **context**: `object`
+
+##### context.message\_id
+
+> **message\_id**: `string`
+
+##### messaging\_product
+
+> **messaging\_product**: `"whatsapp"`
+
+##### recipient\_type
+
+> **recipient\_type**: `"individual"`
+
+##### template
+
+> **template**: `object`
+
+##### template.components?
+
+> `optional` **components**: (`object` \| `object` \| `object`)[]
+
+##### template.language
+
+> **language**: `object`
+
+##### template.language.code
+
+> **code**: `LanguageEnum`
+
+##### template.language.policy
+
+> **policy**: `"deterministic"`
+
+##### template.name
+
+> **name**: `string`
+
+##### to
+
+> **to**: `string`
+
+##### type
+
+> **type**: `Template`
+
+#### Overrides
+
+`BaseMessage.toJson`
+
+#### Source
+
+[packages/wapi.js/src/structures/template/index.ts:135](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/template/index.ts#L135)

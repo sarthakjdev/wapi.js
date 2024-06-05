@@ -1,0 +1,256 @@
+[Wapi.js Docs](../README.mdx) / InteractiveMessage
+
+# Class: `abstract` InteractiveMessage
+
+Represents an interactive message.
+
+## Implements
+
+## Abstract
+
+## Extends
+
+- `BaseMessage`\<`MessageTypeEnum.Interactive`\>
+
+## Extended by
+
+- [`ButtonInteractionMessage`](ButtonInteractionMessage.mdx)
+- [`ListInteractionMessage`](ListInteractionMessage.mdx)
+- [`ProductMessage`](ProductMessage.mdx)
+- [`ProductListMessage`](ProductListMessage.mdx)
+
+## Implements
+
+- [`InteractiveMessageInterface`](../interfaces/InteractiveMessageInterface.mdx)
+
+## Constructors
+
+### new InteractiveMessage()
+
+> **new InteractiveMessage**(`params`): [`InteractiveMessage`](InteractiveMessage.mdx)
+
+Creates an instance of InteractiveMessage.
+
+#### Parameters
+
+• **params**
+
+The parameters for creating the interactive message.
+
+• **params.bodyText**: `string`
+
+The body text of the interactive message.
+
+• **params.footerText?**: `string`
+
+The footer text of the interactive message.
+
+• **params.type**: [`InteractiveMessageTypeEnum`](../enumerations/InteractiveMessageTypeEnum.mdx)
+
+The type of the interactive message.
+
+#### Returns
+
+[`InteractiveMessage`](InteractiveMessage.mdx)
+
+#### Overrides
+
+`BaseMessage<MessageTypeEnum.Interactive>.constructor`
+
+#### Memberof
+
+InteractiveMessage
+
+#### Source
+
+[packages/wapi.js/src/structures/interaction/index.ts:47](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/interaction/index.ts#L47)
+
+## Properties
+
+### interactiveMessageData
+
+> `readonly` **interactiveMessageData**: `object`
+
+#### bodyText
+
+> **bodyText**: `string`
+
+#### footerText?
+
+> `optional` **footerText**: `string`
+
+#### header?
+
+> `optional` **header**: `object` \| `object` \| `object` \| `object`
+
+#### type
+
+> **type**: [`InteractiveMessageTypeEnum`](../enumerations/InteractiveMessageTypeEnum.mdx)
+
+#### Implementation of
+
+[`InteractiveMessageInterface`](../interfaces/InteractiveMessageInterface.mdx).[`interactiveMessageData`](../interfaces/InteractiveMessageInterface.mdx#interactivemessagedata)
+
+#### Source
+
+[packages/wapi.js/src/structures/interaction/index.ts:31](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/interaction/index.ts#L31)
+
+***
+
+### messaging\_product
+
+> **messaging\_product**: `"whatsapp"`
+
+The messaging product.
+
+#### Implementation of
+
+[`InteractiveMessageInterface`](../interfaces/InteractiveMessageInterface.mdx).[`messaging_product`](../interfaces/InteractiveMessageInterface.mdx#messaging_product)
+
+#### Inherited from
+
+`BaseMessage.messaging_product`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:17](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L17)
+
+***
+
+### recipient\_type
+
+> **recipient\_type**: `"individual"`
+
+The recipient type.
+
+#### Implementation of
+
+[`InteractiveMessageInterface`](../interfaces/InteractiveMessageInterface.mdx).[`recipient_type`](../interfaces/InteractiveMessageInterface.mdx#recipient_type)
+
+#### Inherited from
+
+`BaseMessage.recipient_type`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:18](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L18)
+
+***
+
+### type
+
+> **type**: `MessageTypeEnum`
+
+The type of the message.
+
+#### Implementation of
+
+[`InteractiveMessageInterface`](../interfaces/InteractiveMessageInterface.mdx).[`type`](../interfaces/InteractiveMessageInterface.mdx#type-1)
+
+#### Inherited from
+
+`BaseMessage.type`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:16](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L16)
+
+## Methods
+
+### parseConstructorPayload()
+
+> `protected` **parseConstructorPayload**(`schema`, `payload`): `any`
+
+Parses the constructor payload using the provided schema.
+
+#### Parameters
+
+• **schema**: `ZodType`\<`any`, `ZodTypeDef`, `any`\>
+
+The Zod schema used for parsing the payload.
+
+• **payload**: `any`
+
+The payload to be parsed.
+
+#### Returns
+
+`any`
+
+The parsed data.
+
+#### Inherited from
+
+`BaseMessage.parseConstructorPayload`
+
+#### Throws
+
+An error if the parsing fails.
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:42](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L42)
+
+***
+
+### toJson()
+
+> `abstract` **toJson**(`params`): `object`
+
+Converts the message object to JSON format.
+
+#### Parameters
+
+• **params**
+
+The parameters required for converting the message to JSON.
+
+• **params.replyToMessageId?**: `string`
+
+• **params.to**: `string`
+
+#### Returns
+
+`object`
+
+The JSON representation of the message.
+
+##### biz\_opaque\_callback\_data?
+
+> `optional` **biz\_opaque\_callback\_data**: `string`
+
+##### context?
+
+> `optional` **context**: `object`
+
+##### context.message\_id
+
+> **message\_id**: `string`
+
+##### interactive
+
+> **interactive**: `object` \| `object` \| `object` \| `object` \| `object` \| `object`
+
+##### messaging\_product
+
+> **messaging\_product**: `"whatsapp"`
+
+##### recipient\_type
+
+> **recipient\_type**: `"individual"`
+
+##### to
+
+> **to**: `string`
+
+##### type
+
+> **type**: `Interactive`
+
+#### Inherited from
+
+`BaseMessage.toJson`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:25](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L25)
