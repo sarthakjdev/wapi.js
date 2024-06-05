@@ -81,7 +81,8 @@
             "guide/whatsapp-api-setup/understanding-whatsapp-business-platform",
             "guide/whatsapp-api-setup/creating-business-app",
             "guide/whatsapp-api-setup/getting-api-key",
-            "guide/whatsapp-api-setup/configuring-webhook"
+            "guide/whatsapp-api-setup/configuring-webhook",
+            "guide/whatsapp-api-setup/account-verification"
           ]
         },
         {
