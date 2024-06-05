@@ -72,6 +72,7 @@ async function processDirectory(
     }
   }
 
+
   return pages.sort((a, b) => {
     if (typeof a === "string" && typeof b === "object") {
       return -1; // String before group
