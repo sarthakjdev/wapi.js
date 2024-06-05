@@ -71,8 +71,7 @@
           "group": "Installation and Preparations",
           "pages": [
             "guide/installation-and-preparations/setup-node",
-            "guide/installation-and-preparations/creating-application",
-            "guide/installation-and-preparations/using-typescript"
+            "guide/installation-and-preparations/creating-application"
           ]
         },
         {

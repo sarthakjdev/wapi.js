@@ -221,7 +221,14 @@ const buttonMessage = new ButtonInteractionMessage({
 Product message is a message component that you can use to send a product to a user. You can create a product message using the following code:
 
 ```typescript
-
+import { ProductMessage } from '@wapijs/wapi.js'
+const productMessage = new ProductMessage({
+	bodyText: 'Hii, I am a product.',
+	buttonText: 'Buy',
+	catalogId: '123',
+	productRetailerId: '123',
+	footerText: 'Beta version',
+})
 ```
 
 ### Product List Message
@@ -229,6 +236,27 @@ Product message is a message component that you can use to send a product to a u
 Product List message is a message component that you can use to send a list of products to a user. You can create a product list message using the following code:
 
 ```typescript
+import { ProductListMessage, ProductListSection, Product, HeaderTypeEnum } from '@wapijs/wapi.js'
+const productListMessage = new ProductListMessage({
+		bodyText: 'Welcome to Wapi.js',
+		buttonText: 'Buy',
+		footerText: 'Beta version',
+		catalogId: '123',
+		productRetailerId: '123',
+		header: {
+			text: 'Products',
+			type: HeaderTypeEnum.Text
+		},
+		sections: [
+			new ProductListSection([new Product('123')], 'Section 1'),
+		]
+	})
+
+	const section = new ProductListSection([], 'Section 2')
+
+	section.addProduct(new Product('123'))
+
+	productListMessage.addSection(section)
 ```
 
 ### Temaplate Message

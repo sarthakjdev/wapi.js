@@ -47,7 +47,7 @@ import { OrderMessageEvent } from "./events/order";
 import { UnknownEvent } from "./events/unknown";
 import { CustomerIdentityChangeEvent } from "./events/customer-identity-changed";
 import { CustomerNumberChangeEvent } from "./events/customer-number-changed";
-import { Order, ProductItem } from "../structures/order";
+import { Order, OrderedProductItem } from "../structures/order";
 import { StickerMessageEvent } from "./events/sticker";
 import { LocationMessageEvent } from "./events/location";
 import { ProductInquiryEvent } from "./events/product-inquiry";
@@ -492,7 +492,7 @@ export class Webhook implements WebhookInterface {
                             catalogId: message.order.catalog_id,
                             productItems: message.order.product_items.map(
                               (item) =>
-                                new ProductItem({
+                                new OrderedProductItem({
                                   currency: item.currency,
                                   itemPrice: item.item_price,
                                   productRetailerId: item.product_retailer_id,

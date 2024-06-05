@@ -1,5 +1,6 @@
 import { whatsappClient } from './utils/client'
-import { ButtonInteractionMessage, ListInteractionMessage, TextMessage } from '@wapijs/wapi.js'
+import { ButtonInteractionMessage, ListInteractionMessage, Product, ProductListMessage, ProductListSection, ProductMessage, TextMessage } from '@wapijs/wapi.js'
+import { HeaderTypeEnum } from '@wapijs/wapi.js/dist/cjs/src/structures/interaction/schema'
 
 function init() {
 	whatsappClient.on('Ready', () => {
@@ -96,8 +97,6 @@ function init() {
 			})
 		}
 	})
-
-
 
 	whatsappClient.on('ListInteraction', async message => {
 		console.log('List Interaction', message)

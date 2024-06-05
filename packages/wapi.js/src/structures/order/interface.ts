@@ -2,7 +2,7 @@
  * Represents the interface for a product item.
  * @interface
  */
-export interface ProductItemInterface {
+export interface OrderedProductItemInterface {
   /**
    * The retailer ID of the product.
    */
@@ -38,13 +38,13 @@ export interface OrderInterface {
   text: string;
   /**
    * The array of product items in the order.
-   * @type {ProductItemInterface[]}
+   * @type {OrderedProductItemInterface[]}
    */
-  productItems: ProductItemInterface[];
+  productItems: OrderedProductItemInterface[];
   /**
    * Adds a product item to the order.
-   * @param {ProductItemInterface} product - The product item to add.
+   * @param {OrderedProductItemInterface} product - The product item to add.
    * @returns {void}
    */
-  addProductItem: (product: ProductItemInterface) => void;
+  addProductItem: (product: OrderedProductItemInterface) => void;
 }

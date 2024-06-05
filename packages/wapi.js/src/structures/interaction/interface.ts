@@ -1,9 +1,6 @@
 import { type z } from "zod";
 import { type BaseMessageInterface } from "../message/interface";
-import {
-  type ProductListInteractiveMessageSection,
-  type ListInteractiveMessageSection,
-} from "../../api-request-payload-schema";
+import { type ListInteractiveMessageSection } from "../../api-request-payload-schema";
 
 /**
  * Represents the interface for an interactive message.
@@ -40,33 +37,6 @@ export interface ListInteractionMessageInterface
   data: {
     buttonText: string;
     sections: z.infer<typeof ListInteractiveMessageSection>[];
-  };
-}
-
-/**
- * Represents the interface for a product interaction message.
- * @interface
- * @extends {InteractiveMessageInterface}
- */
-export interface ProductInteractionMessageInterface
-  extends InteractiveMessageInterface {
-  data: {
-    catalogId: string;
-    productRetailerId: string;
-  };
-}
-
-/**
- * Represents the interface for a product list interaction message.
- * @interface
- * @extends {InteractiveMessageInterface}
- */
-export interface ProductListInteractionMessageInterface
-  extends InteractiveMessageInterface {
-  data: {
-    catalogId: string;
-    productRetailerId: string;
-    sections: z.infer<typeof ProductListInteractiveMessageSection>[];
   };
 }
 

@@ -1,4 +1,7 @@
-import { type ProductItemInterface, type OrderInterface } from "./interface";
+import {
+  type OrderedProductItemInterface as OrderedProductItemInterface,
+  type OrderInterface,
+} from "./interface";
 
 /**
  * Represents an order.
@@ -7,19 +10,19 @@ import { type ProductItemInterface, type OrderInterface } from "./interface";
  */
 export class Order implements OrderInterface {
   catalogId: string;
-  productItems: ProductItem[];
+  productItems: OrderedProductItem[];
   text: string;
 
   /**
    * Creates a new Order instance.
    * @param {Object} params - The parameters for creating an Order.
    * @param {string} params.catalogId - The catalog ID of the order.
-   * @param {ProductItem[]} params.productItems - The product items in the order.
+   * @param {OrderedProductItem[]} params.productItems - The product items in the order.
    * @param {string} params.text - The text associated with the order.
    */
   constructor(params: {
     catalogId: string;
-    productItems: ProductItem[];
+    productItems: OrderedProductItem[];
     text: string;
   }) {
     this.productItems = params.productItems;
@@ -29,9 +32,9 @@ export class Order implements OrderInterface {
 
   /**
    * Adds a product item to the order.
-   * @param {ProductItem} product - The product item to add.
+   * @param {OrderedProductItem} product - The product item to add.
    */
-  addProductItem(product: ProductItem) {
+  addProductItem(product: OrderedProductItem) {
     this.productItems.push(product);
   }
 }
@@ -39,9 +42,9 @@ export class Order implements OrderInterface {
 /**
  * Represents a product item.
  * @class
- * @implements {ProductItemInterface}
+ * @implements {OrderedProductItemInterface}
  */
-export class ProductItem implements ProductItemInterface {
+export class OrderedProductItem implements OrderedProductItemInterface {
   currency: string;
   itemPrice: string;
   productRetailerId: string;
