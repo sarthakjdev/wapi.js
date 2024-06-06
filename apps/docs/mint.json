@@ -8,7 +8,7 @@
   },
   "metadata": {
     "title": "Wapi.js",
-    "description": "Wapi.js is a JavaScript module, written in TypeScript, designed to interact with the WhatsApp cloud API in a user-friendly manner.",
+    "description": "Wapi.js is a node.js SDK built for developing WhatsApp Business platform apps with ease and faster",
     "author": "Sarthak Jain <sarthak@softlancer.co>"
   },
   "search": {
@@ -29,8 +29,8 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "sarthak@softlancer.co"
+      "name": "Report Bug",
+      "url": "https://github.com/sarthakjdev/wapi.js/issues/new"
     }
   ],
   "topbarCtaButton": {
