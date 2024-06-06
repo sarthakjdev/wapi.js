@@ -1,7 +1,7 @@
 {
   "name": "wapijs",
   "version": "0.0.1",
-  "description": "wapi.js is a node library built for developing whatsapp cloud API based app in a user friendly way.",
+  "description": "wapi.js is a node SDK built for developing whatsapp cloud API based app in a user friendly way.",
   "private": true,
   "scripts": {
     "watch": "turbo watch --concurrency=3",
@@ -25,7 +25,8 @@
     "nodejs",
     "@wapijs/wapi.js",
     "wapi.js",
-    "wapi.js library"
+    "wapi.js SDK",
+    "software-development-kit"
   ],
   "authors": [
     "sarthak@softlancer.co"

@@ -1,7 +1,7 @@
 <div align="center">
 <br />
 <p align="center">
-<a href="https://wapijs.co"><img src="https://www.wapijs.co/assets/logo/logo-light.svg" alt="@wapijs/wapi.js"  height="200" width="360" /></a>
+<a href="https://wapijs.co"><img src="https://media.discordapp.net/attachments/1046394448088674371/1247281980111061054/wapijs_banner.png?ex=665f755d&is=665e23dd&hm=b0f47091e442022d562ee535c8fefdf1d9006db11e09ea5d380186ab4a40a97a&=&format=webp&quality=lossless&width=2261&height=1034" alt="@wapijs/wapi.js" /></a>
 </p>
 <br />
 <p>
@@ -13,7 +13,7 @@
 
 ## 📌 Status
 
-Beta Version - This library is not stable right now. It is currently in beta version. Report issues [here](https://github.com/sarthakjdev/wapi.js/issues).
+Beta Version - This SDK is not stable right now. It is currently in beta version. Report issues [here](https://github.com/sarthakjdev/wapi.js/issues).
 
 ## 📖 About
 
@@ -35,7 +35,7 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 
 ## 💻 Installation
 
-Ensure you have the Node.js 18 LTS version to use this library.
+Ensure you have the Node.js 18 LTS version to use this SDK.
 
 ```sh
 npm install @wapijs/wapi.js
@@ -43,7 +43,7 @@ yarn add @wapijs/wapi.js
 pnpm install @wapijs/wapi.js
 ```
 
-> Note: This library is not affiliated with the official WhatsApp Cloud API or does not act as any official solution provided the the Meta Inclusive Private Limited, this is just a open source library built for developers to support them in building whatsapp cloud api based chat bots easily.
+> Note: This SDK is not affiliated with the official WhatsApp Cloud API or does not act as any official solution provided the the Meta Inclusive Private Limited, this is just a open source SDK built for developers to support them in building whatsapp cloud api based chat bots easily.
 
 ## 🚀 Usage
 
@@ -81,7 +81,7 @@ import { Client, TextMessage } from 'wapi.js'
 	})
 
 	await whatsappClient.message.send({
-		message: new TextMessage({ text: 'hiii, this is wapijs library' }),
+		message: new TextMessage({ text: 'hiii, this is wapijs SDK' }),
 		phoneNumber: 'XXXXXXXXXX'
 	})
 
@@ -91,12 +91,18 @@ import { Client, TextMessage } from 'wapi.js'
 
 	whatsappClient.on('TextMessage', async (message) => {
 		message.reply({
-			message: new TextMessage({ text: 'hiii, this is wapijs library' }),,
+			message: new TextMessage({ text: 'hiii, this is wapijs SDK' }),,
 		})
 	})
 
 	whatsappClient.initiate()
 ```
+
+## Upcoming features:
+
+- [Interactive Address Message Support](https://developers.facebook.com/docs/whatsapp/cloud-api/messages/address-messages)
+- [Business Management API Support](https://developers.facebook.com/docs/whatsapp/business-management-api)
+-
 
 ## 🤝 Contribution Guidelines
 
@@ -118,4 +124,4 @@ Distributed under the Apache 2.0 License. View [LICENSE](./LICENSE).
 - Email: sarthak@softlancer.co
 - [Twitter](https://twitter.com/sarthakjdev) | [LinkedIn](https://www.linkedin.com/in/sarthakjdev)
 
-Note: This library is part of an open-source product-building initiative by [Softlancer](https://github.com/softlancerhq), and this repository will soon be moved under the same organization.
+Note: This SDK is part of an open-source product-building initiative by [Softlancer](https://github.com/softlancerhq), and this repository will soon be moved under the same organization.

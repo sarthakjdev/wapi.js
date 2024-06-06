@@ -1,0 +1,19 @@
+{
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
+  "entryPoints": ["./index.ts"],
+  "name": "Wapi.js Docs",
+  "plugin": ["typedoc-plugin-zod", "typedoc-plugin-markdown"],
+  "fileExtension": ".mdx",
+  "mergeReadme": true,
+  "json": "./docs/api.json",
+  "emit": "both",
+  "readme": "none",
+  "out": "../../apps/js.wapikit.com/api-reference",
+  "sourceLinkTemplate": "https://github.com/sarthakjdev/wapi.js/blob/{gitRevision}/{path}#L{line}",
+  "sourceLinkExternal": true,
+  "cname": "js.wapijs.com",
+  "hideGenerator": true,
+  "searchInComments": true,
+  "hidePageHeader": true,
+  "excludePrivate": true
+}

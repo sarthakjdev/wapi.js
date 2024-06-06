@@ -1,8 +1,9 @@
 {
-	"extends": "@wapijs/typescript-config/node.base.json",
-	"include": ["src/", "*.ts", "./.eslintrc.js"],
-	"compilerOptions": {
-		"module": "ESNext",
-		"outDir": "dist/esm"
-	}
+  "extends": "@wapijs/typescript-config/node.base.json",
+  "include": ["src/", "*.ts", "./.eslintrc.js"],
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "outDir": "dist/esm"
+  }
 }

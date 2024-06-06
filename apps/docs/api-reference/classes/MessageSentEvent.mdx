@@ -1,0 +1,113 @@
+[Wapi.js Docs](../README.mdx) / MessageSentEvent
+
+# Class: MessageSentEvent
+
+Represents an event that is triggered when a message is sent.
+
+## Implements
+
+## Extends
+
+- [`StatusUpdateEvent`](StatusUpdateEvent.mdx)
+
+## Implements
+
+- [`MessageSentEventInterface`](../type-aliases/MessageSentEventInterface.mdx)
+
+## Constructors
+
+### new MessageSentEvent()
+
+> **new MessageSentEvent**(`params`): [`MessageSentEvent`](MessageSentEvent.mdx)
+
+Creates a new instance of the MessageSentEvent class.
+
+#### Parameters
+
+• **params**
+
+The parameters required to create the event.
+
+• **params.client**: [`Client`](Client.mdx)
+
+The client object.
+
+• **params.data**
+
+The data associated with the event.
+
+• **params.data.from**: `string`
+
+• **params.data.timestamp**: `string`
+
+#### Returns
+
+[`MessageSentEvent`](MessageSentEvent.mdx)
+
+#### Overrides
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`constructor`](StatusUpdateEvent.mdx#constructors)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/message-sent/index.ts:23](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/message-sent/index.ts#L23)
+
+## Properties
+
+### client
+
+> **client**: [`Client`](Client.mdx)
+
+The client instance associated with the event.
+
+#### Implementation of
+
+`MessageSentEventInterface.client`
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`client`](StatusUpdateEvent.mdx#client)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:20](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L20)
+
+***
+
+### context
+
+> **context**: [`MessageContext`](../type-aliases/MessageContext.mdx)
+
+The context of the status update.
+
+#### Implementation of
+
+`MessageSentEventInterface.context`
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`context`](StatusUpdateEvent.mdx#context)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:207](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L207)
+
+***
+
+### timestamp
+
+> **timestamp**: `number`
+
+The timestamp of the status update.
+
+#### Implementation of
+
+`MessageSentEventInterface.timestamp`
+
+#### Inherited from
+
+[`StatusUpdateEvent`](StatusUpdateEvent.mdx).[`timestamp`](StatusUpdateEvent.mdx#timestamp)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:208](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L208)

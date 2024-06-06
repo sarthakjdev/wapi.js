@@ -1,7 +1,7 @@
 {
   "name": "@wapijs/wapi.js",
   "version": "0.0.8",
-  "description": "a typescript based client library to build whatsapp cloud api based chat bots",
+  "description": "a typescript based client SDK to build whatsapp cloud api based chat bots",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/cjs/index.js",
@@ -21,7 +21,7 @@
     "lint": "pnpm eslint . --max-warnings=20",
     "pretty": "pnpm prettier --write \"src/**/*.ts\"",
     "clean-install": "rm -rf ./node_modules && pnpm install --frozen-lockfile",
-    "doc:gen": "api-extractor run --local --diagnostics"
+    "doc:gen": "pnpm build && api-extractor run --local && pnpm typedoc ./index.ts && rm -rf ./docs && pnpm npx tsx ./update-mint-config.ts"
   },
   "keywords": [
     "whatsapp",
@@ -53,6 +53,8 @@
     "concurrently": "^8.2.1",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
+    "typedoc-plugin-markdown": "^4.0.3",
+    "typedoc-plugin-zod": "^1.1.2",
     "typescript": "5.4.5"
   },
   "dependencies": {

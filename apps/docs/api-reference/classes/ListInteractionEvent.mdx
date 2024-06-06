@@ -1,0 +1,301 @@
+[Wapi.js Docs](../README.mdx) / ListInteractionEvent
+
+# Class: ListInteractionEvent
+
+Represents a list interaction event.
+
+## Implements
+
+## Extends
+
+- [`InteractionEvent`](InteractionEvent.mdx)
+
+## Implements
+
+- [`ListInteractionMessageEventInterface`](../interfaces/ListInteractionMessageEventInterface.mdx)
+
+## Constructors
+
+### new ListInteractionEvent()
+
+> **new ListInteractionEvent**(`params`): [`ListInteractionEvent`](ListInteractionEvent.mdx)
+
+Creates a new instance of ListInteractionEvent.
+
+#### Parameters
+
+• **params**
+
+The parameters for creating the ListInteractionEvent.
+
+• **params.client**: [`Client`](Client.mdx)
+
+The client object.
+
+• **params.data**
+
+The data object.
+
+• **params.data.description**: `string`
+
+• **params.data.from**: `string`
+
+• **params.data.isForwarded**: `boolean`
+
+• **params.data.listId**: `string`
+
+• **params.data.messageId**: `string`
+
+• **params.data.timestamp**: `string`
+
+• **params.data.title**: `string`
+
+#### Returns
+
+[`ListInteractionEvent`](ListInteractionEvent.mdx)
+
+#### Overrides
+
+[`InteractionEvent`](InteractionEvent.mdx).[`constructor`](InteractionEvent.mdx#constructors)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/interaction/index.ts:79](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/interaction/index.ts#L79)
+
+## Properties
+
+### client
+
+> **client**: [`Client`](Client.mdx)
+
+The client instance associated with the event.
+
+#### Implementation of
+
+[`ListInteractionMessageEventInterface`](../interfaces/ListInteractionMessageEventInterface.mdx).[`client`](../interfaces/ListInteractionMessageEventInterface.mdx#client)
+
+#### Inherited from
+
+[`InteractionEvent`](InteractionEvent.mdx).[`client`](InteractionEvent.mdx#client)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:20](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L20)
+
+***
+
+### context
+
+> **context**: [`MessageContext`](../type-aliases/MessageContext.mdx)
+
+The context of the message.
+
+#### Implementation of
+
+[`ListInteractionMessageEventInterface`](../interfaces/ListInteractionMessageEventInterface.mdx).[`context`](../interfaces/ListInteractionMessageEventInterface.mdx#context)
+
+#### Inherited from
+
+[`InteractionEvent`](InteractionEvent.mdx).[`context`](InteractionEvent.mdx#context)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:37](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L37)
+
+***
+
+### description
+
+> **description**: `string`
+
+#### Implementation of
+
+[`ListInteractionMessageEventInterface`](../interfaces/ListInteractionMessageEventInterface.mdx).[`description`](../interfaces/ListInteractionMessageEventInterface.mdx#description)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/interaction/index.ts:64](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/interaction/index.ts#L64)
+
+***
+
+### isForwarded
+
+> **isForwarded**: `boolean`
+
+#### Inherited from
+
+[`InteractionEvent`](InteractionEvent.mdx).[`isForwarded`](InteractionEvent.mdx#isforwarded)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:39](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L39)
+
+***
+
+### listId
+
+> **listId**: `string`
+
+#### Implementation of
+
+[`ListInteractionMessageEventInterface`](../interfaces/ListInteractionMessageEventInterface.mdx).[`listId`](../interfaces/ListInteractionMessageEventInterface.mdx#listid)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/interaction/index.ts:63](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/interaction/index.ts#L63)
+
+***
+
+### messageId
+
+> **messageId**: `string`
+
+The ID of the message.
+
+#### Implementation of
+
+[`ListInteractionMessageEventInterface`](../interfaces/ListInteractionMessageEventInterface.mdx).[`messageId`](../interfaces/ListInteractionMessageEventInterface.mdx#messageid)
+
+#### Inherited from
+
+[`InteractionEvent`](InteractionEvent.mdx).[`messageId`](InteractionEvent.mdx#messageid)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:36](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L36)
+
+***
+
+### timestamp
+
+> **timestamp**: `number`
+
+The timestamp of the message.
+
+#### Implementation of
+
+[`ListInteractionMessageEventInterface`](../interfaces/ListInteractionMessageEventInterface.mdx).[`timestamp`](../interfaces/ListInteractionMessageEventInterface.mdx#timestamp)
+
+#### Inherited from
+
+[`InteractionEvent`](InteractionEvent.mdx).[`timestamp`](InteractionEvent.mdx#timestamp)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:38](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L38)
+
+***
+
+### title
+
+> **title**: `string`
+
+#### Implementation of
+
+[`ListInteractionMessageEventInterface`](../interfaces/ListInteractionMessageEventInterface.mdx).[`title`](../interfaces/ListInteractionMessageEventInterface.mdx#title)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/interaction/index.ts:62](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/interaction/index.ts#L62)
+
+## Methods
+
+### react()
+
+> **react**(`params`): `Promise`\<`object` \| `object`\>
+
+Reacts to the message with an emoji.
+
+#### Parameters
+
+• **params**
+
+The parameters for the reaction.
+
+• **params.emoji**: `string`
+
+The emoji to react with.
+
+• **params.phoneNumber**: `string`
+
+The phone number of the sender.
+
+#### Returns
+
+`Promise`\<`object` \| `object`\>
+
+- A promise that resolves with the reaction response.
+
+#### Inherited from
+
+[`InteractionEvent`](InteractionEvent.mdx).[`react`](InteractionEvent.mdx#react)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:100](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L100)
+
+***
+
+### read()
+
+> **read**(): `Promise`\<`object` \| `object` \| `object` \| `object` \| `object`\>
+
+Marks the message as read.
+
+#### Returns
+
+`Promise`\<`object` \| `object` \| `object` \| `object` \| `object`\>
+
+- A promise that resolves with the read response.
+
+#### Inherited from
+
+[`InteractionEvent`](InteractionEvent.mdx).[`read`](InteractionEvent.mdx#read)
+
+#### Memberof
+
+MessageEvent
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:121](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L121)
+
+***
+
+### reply()
+
+> **reply**\<`T`\>(`props`): `Promise`\<`object` \| `object`\>
+
+Sends a reply to the message.
+
+#### Type parameters
+
+• **T** *extends* `BaseMessage`\<`string`\>
+
+#### Parameters
+
+• **props**
+
+The properties for the reply.
+
+• **props.message**: `T`
+
+The message to send as a reply.
+
+#### Returns
+
+`Promise`\<`object` \| `object`\>
+
+- A promise that resolves when the reply is sent.
+
+#### Inherited from
+
+[`InteractionEvent`](InteractionEvent.mdx).[`reply`](InteractionEvent.mdx#reply)
+
+#### Throws
+
+- If the context message ID is not found.
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:75](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L75)

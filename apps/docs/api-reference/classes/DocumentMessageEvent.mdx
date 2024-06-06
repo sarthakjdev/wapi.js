@@ -1,0 +1,363 @@
+[Wapi.js Docs](../README.mdx) / DocumentMessageEvent
+
+# Class: DocumentMessageEvent
+
+Represents an event that occurs when a document message is received.
+
+## Implements
+
+## Extends
+
+- [`MediaMessageEvent`](MediaMessageEvent.mdx)
+
+## Implements
+
+- [`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx)
+
+## Constructors
+
+### new DocumentMessageEvent()
+
+> **new DocumentMessageEvent**(`params`): [`DocumentMessageEvent`](DocumentMessageEvent.mdx)
+
+Creates a new instance of DocumentMessageEvent.
+
+#### Parameters
+
+• **params**
+
+The parameters for creating the event.
+
+• **params.client**: [`Client`](Client.mdx)
+
+The client associated with the event.
+
+• **params.data**
+
+The data associated with the event.
+
+• **params.data.document**: [`DocumentMessage`](DocumentMessage.mdx)
+
+• **params.data.from**: `string`
+
+• **params.data.isForwarded**: `boolean`
+
+• **params.data.mediaId**: `string`
+
+• **params.data.messageId**: `string`
+
+• **params.data.mimeType**: `string`
+
+• **params.data.sha256**: `string`
+
+• **params.data.timestamp**: `string`
+
+#### Returns
+
+[`DocumentMessageEvent`](DocumentMessageEvent.mdx)
+
+#### Overrides
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`constructor`](MediaMessageEvent.mdx#constructors)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/document/index.ts:35](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/document/index.ts#L35)
+
+## Properties
+
+### client
+
+> **client**: [`Client`](Client.mdx)
+
+The client instance associated with the event.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`client`](../interfaces/DocumentMessageEventInterface.mdx#client)
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`client`](MediaMessageEvent.mdx#client)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:20](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L20)
+
+***
+
+### context
+
+> **context**: [`MessageContext`](../type-aliases/MessageContext.mdx)
+
+The context of the message.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`context`](../interfaces/DocumentMessageEventInterface.mdx#context)
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`context`](MediaMessageEvent.mdx#context)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:37](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L37)
+
+***
+
+### document
+
+> **document**: [`DocumentMessage`](DocumentMessage.mdx)
+
+The document message associated with the event.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`document`](../interfaces/DocumentMessageEventInterface.mdx#document)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/document/index.ts:19](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/document/index.ts#L19)
+
+***
+
+### isForwarded
+
+> **isForwarded**: `boolean`
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`isForwarded`](MediaMessageEvent.mdx#isforwarded)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:39](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L39)
+
+***
+
+### mediaId
+
+> **mediaId**: `string`
+
+The ID of the media.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`mediaId`](../interfaces/DocumentMessageEventInterface.mdx#mediaid)
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`mediaId`](MediaMessageEvent.mdx#mediaid)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:147](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L147)
+
+***
+
+### messageId
+
+> **messageId**: `string`
+
+The ID of the message.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`messageId`](../interfaces/DocumentMessageEventInterface.mdx#messageid)
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`messageId`](MediaMessageEvent.mdx#messageid)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:36](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L36)
+
+***
+
+### mimeType
+
+> **mimeType**: `string`
+
+The MIME type of the media.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`mimeType`](../interfaces/DocumentMessageEventInterface.mdx#mimetype)
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`mimeType`](MediaMessageEvent.mdx#mimetype)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:148](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L148)
+
+***
+
+### sha256
+
+> **sha256**: `string`
+
+The SHA256 hash of the media.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`sha256`](../interfaces/DocumentMessageEventInterface.mdx#sha256)
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`sha256`](MediaMessageEvent.mdx#sha256)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:149](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L149)
+
+***
+
+### timestamp
+
+> **timestamp**: `number`
+
+The timestamp of the message.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`timestamp`](../interfaces/DocumentMessageEventInterface.mdx#timestamp)
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`timestamp`](MediaMessageEvent.mdx#timestamp)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:38](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L38)
+
+## Methods
+
+### getUrl()
+
+> **getUrl**(): `Promise`\<`string`\>
+
+Gets the URL of the media.
+
+#### Returns
+
+`Promise`\<`string`\>
+
+- A promise that resolves with the URL of the media.
+
+#### Implementation of
+
+[`DocumentMessageEventInterface`](../interfaces/DocumentMessageEventInterface.mdx).[`getUrl`](../interfaces/DocumentMessageEventInterface.mdx#geturl)
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`getUrl`](MediaMessageEvent.mdx#geturl)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:191](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L191)
+
+***
+
+### react()
+
+> **react**(`params`): `Promise`\<`object` \| `object`\>
+
+Reacts to the message with an emoji.
+
+#### Parameters
+
+• **params**
+
+The parameters for the reaction.
+
+• **params.emoji**: `string`
+
+The emoji to react with.
+
+• **params.phoneNumber**: `string`
+
+The phone number of the sender.
+
+#### Returns
+
+`Promise`\<`object` \| `object`\>
+
+- A promise that resolves with the reaction response.
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`react`](MediaMessageEvent.mdx#react)
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:100](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L100)
+
+***
+
+### read()
+
+> **read**(): `Promise`\<`object` \| `object` \| `object` \| `object` \| `object`\>
+
+Marks the message as read.
+
+#### Returns
+
+`Promise`\<`object` \| `object` \| `object` \| `object` \| `object`\>
+
+- A promise that resolves with the read response.
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`read`](MediaMessageEvent.mdx#read)
+
+#### Memberof
+
+MessageEvent
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:121](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L121)
+
+***
+
+### reply()
+
+> **reply**\<`T`\>(`props`): `Promise`\<`object` \| `object`\>
+
+Sends a reply to the message.
+
+#### Type parameters
+
+• **T** *extends* `BaseMessage`\<`string`\>
+
+#### Parameters
+
+• **props**
+
+The properties for the reply.
+
+• **props.message**: `T`
+
+The message to send as a reply.
+
+#### Returns
+
+`Promise`\<`object` \| `object`\>
+
+- A promise that resolves when the reply is sent.
+
+#### Inherited from
+
+[`MediaMessageEvent`](MediaMessageEvent.mdx).[`reply`](MediaMessageEvent.mdx#reply)
+
+#### Throws
+
+- If the context message ID is not found.
+
+#### Source
+
+[packages/wapi.js/src/webhook/events/base/index.ts:75](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/webhook/events/base/index.ts#L75)

@@ -1,0 +1,85 @@
+---
+title: Handle Events
+description: Learn how to handle events using the Wapi.js SDK
+---
+
+Wapi.js SDK implements Node.js native EventEmitter class to implment event handling.
+
+
+## Listen to Events: 
+
+You can listen to events using the `on` method available on the [client](api-reference/classes/Client) class. Here is an example of how you can listen to incoming messages and reply/react to them:
+
+```typescript
+// assuming you have already initiated the client,
+
+
+whatsappClient.on('Ready', async () => {
+        console.log("Client is ready to receive messages.")
+})
+
+whatsappClient.on('Error', async error => {
+        console.errpr("An error occured.", error)
+})
+
+whatsappClient.on('TextMessage', async message => {
+        await message.reply({
+            message: new TextMessage({
+                text: 'This is a reply.'
+            })
+        })
+})
+
+whatsappClient.on('AudioMessage', async message => {
+        await message.reply({
+            message: new TextMessage({
+                text: 'This is a reply.'
+            })
+        })
+})
+
+// and so on for other message types...
+
+```
+
+
+## Exposed Events
+
+The SDK supports the following events out of the box to make it easy to handle both the user and system events: 
+
+<Note>There is no messaging or system event handling differences in the SDK, here they are just bifurcated for the educational puposes.</Note>
+
+### Messaging Events:
+
+- [Text Message Event](/api-reference/classes/TextMessageEvent)
+- [Image Message Event](/api-reference/classes/ImageMessageEvent)
+- [Video Message Event](/api-reference/classes/VideoMessageEvent)
+- [Audio Message Event](/api-reference/classes/AudioMessageEvent)
+- [Document Message Event](/api-reference/classes/DocumentMessageEvent)
+- [Location Message Event](/api-reference/classes/LocationMessageEvent)
+- [Contact Message Event](/api-reference/classes/ContactMessageEvent)
+- [Reaction Message Event](/api-reference/classes/ReactionMessageEvent)
+- [Sticker Event](/api-reference/classes/StickerMessageEvent)
+- [Quick Reply Button Interaction Event](api-reference/interfaces/QuickReplyButtonInteractionEvent)
+- [Ad Interaction Event](/api-reference/classes/AdInteractionEvent)
+- [Product Inquiry Event](/api-reference/classes/ProductInquiryEvent)
+- [Reply Button Interaction Event](/api-reference/classes/ReplyButtonInteractionEvent)
+- [List Interaction Event](/api-reference/classes/ListInteractionEvent)
+
+<Card title="Important" icon="code" iconType="duotone" color="#ca8b04">
+  Each of the events mentioned above has a couple of utility methods available like `reply`, `react` etc. which can be used to reply or react to the incoming messages.
+</Card>
+
+
+### System Events
+
+- Client Ready Event
+- Client Error Event
+- [Message Delivered Event](/api-reference/classes/MessageDeliveredEvent)
+- [Message Read Event](/api-reference/classes/MessageReadEvent)
+- [Message Sent Event](/api-reference/classes/MessageSentEvent)
+- [Message Failed Event](/api-reference/classes/MessageReceivedEvent)
+- [Message Undelivered Event](/api-reference/classes/MessageUndeliveredEvent)
+- [Customer Identity Changed Event](/api-reference/classes/CustomerIdentityChangedEvent)
+- [Customer Number Changed Event](/api-reference/classes/CustomerNumberChangedEvent)
+

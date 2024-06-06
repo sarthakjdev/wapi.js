@@ -1,0 +1,227 @@
+[Wapi.js Docs](../README.mdx) / VideoMessage
+
+# Class: VideoMessage
+
+Represents a video message.
+
+## Implements
+
+## Extends
+
+- `BaseMessage`\<`MessageTypeEnum.Video`\>
+
+## Implements
+
+- [`VideoMessageInterface`](../interfaces/VideoMessageInterface.mdx)
+
+## Constructors
+
+### new VideoMessage()
+
+> **new VideoMessage**(`params`): [`VideoMessage`](VideoMessage.mdx)
+
+Creates a new instance of the VideoMessage class.
+
+#### Parameters
+
+• **params**: `object` \| `object`
+
+The parameters to initialize the video message.
+
+#### Returns
+
+[`VideoMessage`](VideoMessage.mdx)
+
+#### Overrides
+
+`BaseMessage<MessageTypeEnum.Video>.constructor`
+
+#### Memberof
+
+VideoMessage
+
+#### Source
+
+[packages/wapi.js/src/structures/media/index.ts:111](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/media/index.ts#L111)
+
+## Properties
+
+### data
+
+> **data**: `object` \| `object`
+
+#### Implementation of
+
+[`VideoMessageInterface`](../interfaces/VideoMessageInterface.mdx).[`data`](../interfaces/VideoMessageInterface.mdx#data)
+
+#### Source
+
+[packages/wapi.js/src/structures/media/index.ts:101](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/media/index.ts#L101)
+
+***
+
+### messaging\_product
+
+> **messaging\_product**: `"whatsapp"`
+
+The messaging product.
+
+#### Implementation of
+
+[`VideoMessageInterface`](../interfaces/VideoMessageInterface.mdx).[`messaging_product`](../interfaces/VideoMessageInterface.mdx#messaging_product)
+
+#### Inherited from
+
+`BaseMessage.messaging_product`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:17](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L17)
+
+***
+
+### recipient\_type
+
+> **recipient\_type**: `"individual"`
+
+The recipient type.
+
+#### Implementation of
+
+[`VideoMessageInterface`](../interfaces/VideoMessageInterface.mdx).[`recipient_type`](../interfaces/VideoMessageInterface.mdx#recipient_type)
+
+#### Inherited from
+
+`BaseMessage.recipient_type`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:18](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L18)
+
+***
+
+### type
+
+> **type**: `MessageTypeEnum`
+
+The type of the message.
+
+#### Implementation of
+
+[`VideoMessageInterface`](../interfaces/VideoMessageInterface.mdx).[`type`](../interfaces/VideoMessageInterface.mdx#type)
+
+#### Inherited from
+
+`BaseMessage.type`
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:16](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L16)
+
+## Methods
+
+### parseConstructorPayload()
+
+> `protected` **parseConstructorPayload**(`schema`, `payload`): `any`
+
+Parses the constructor payload using the provided schema.
+
+#### Parameters
+
+• **schema**: `ZodType`\<`any`, `ZodTypeDef`, `any`\>
+
+The Zod schema used for parsing the payload.
+
+• **payload**: `any`
+
+The payload to be parsed.
+
+#### Returns
+
+`any`
+
+The parsed data.
+
+#### Inherited from
+
+`BaseMessage.parseConstructorPayload`
+
+#### Throws
+
+An error if the parsing fails.
+
+#### Source
+
+[packages/wapi.js/src/structures/message/index.ts:42](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/message/index.ts#L42)
+
+***
+
+### toJson()
+
+> **toJson**(`params`): `object`
+
+Converts the video message to the WhatsApp Cloud API payload.
+
+#### Parameters
+
+• **params**
+
+The parameters for the WhatsApp Cloud API payload.
+
+• **params.replyToMessageId?**: `string`
+
+The ID of the message being replied to.
+
+• **params.to**: `string`
+
+The recipient of the message.
+
+#### Returns
+
+`object`
+
+- The WhatsApp Cloud API payload for the video message.
+
+##### biz\_opaque\_callback\_data?
+
+> `optional` **biz\_opaque\_callback\_data**: `string`
+
+##### context?
+
+> `optional` **context**: `object`
+
+##### context.message\_id
+
+> **message\_id**: `string`
+
+##### messaging\_product
+
+> **messaging\_product**: `"whatsapp"`
+
+##### recipient\_type
+
+> **recipient\_type**: `"individual"`
+
+##### to
+
+> **to**: `string`
+
+##### type
+
+> **type**: `Video`
+
+##### video
+
+> **video**: `object` \| `object`
+
+#### Overrides
+
+`BaseMessage.toJson`
+
+#### Memberof
+
+VideoMessage
+
+#### Source
+
+[packages/wapi.js/src/structures/media/index.ts:129](https://github.com/sarthakjdev/wapi.js/blob/1b066ed4efaf997a4bb012da51514dfcb4165da6/packages/wapi.js/src/structures/media/index.ts#L129)
