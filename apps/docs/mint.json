@@ -14,6 +14,11 @@
   "search": {
     "prompt": "Search documentation..."
   },
+  "feedback": {
+    "raiseIssue": true,
+    "suggestEdit": true,
+    "thumbsRating": true
+  },
   "primaryTab": {
     "name": "Guide"
   },
@@ -62,42 +67,34 @@
   ],
   "navigation": [
     {
-      "group": "Guide",
-      "iconType": "regular",
+      "group": "Quick Start",
+      "pages": ["guide/introduction", "guide/quickstart"]
+    },
+    {
+      "group": "Installation and Preparations",
       "pages": [
-        "guide/introduction",
-        "guide/quickstart",
-        {
-          "group": "Installation and Preparations",
-          "pages": [
-            "guide/installation-and-preparations/setup-node",
-            "guide/installation-and-preparations/creating-application"
-          ]
-        },
-        {
-          "group": "Whatsapp API setup",
-          "pages": [
-            "guide/whatsapp-api-setup/understanding-whatsapp-business-platform",
-            "guide/whatsapp-api-setup/creating-business-app",
-            "guide/whatsapp-api-setup/getting-api-key",
-            "guide/whatsapp-api-setup/configuring-webhook"
-          ]
-        },
-        {
-          "group": "Building your application",
-          "pages": [
-            "guide/building-your-application/creating-wapi-client",
-            "guide/building-your-application/building-message-components",
-            "guide/building-your-application/sending-messages",
-            "guide/building-your-application/event-handling",
-            "guide/building-your-application/replying-and-reacting",
-            "guide/building-your-application/handling-media"
-          ]
-        },
-        "guide/wapijs-sdk-scope",
-        "guide/references",
-        "guide/contributing",
-        "guide/contact"
+        "guide/installation-and-preparations/setup-node",
+        "guide/installation-and-preparations/creating-application"
+      ]
+    },
+    {
+      "group": "Whatsapp API setup",
+      "pages": [
+        "guide/whatsapp-api-setup/understanding-whatsapp-business-platform",
+        "guide/whatsapp-api-setup/creating-business-app",
+        "guide/whatsapp-api-setup/getting-api-key",
+        "guide/whatsapp-api-setup/configuring-webhook"
+      ]
+    },
+    {
+      "group": "Building your application",
+      "pages": [
+        "guide/building-your-application/creating-wapi-client",
+        "guide/building-your-application/building-message-components",
+        "guide/building-your-application/sending-messages",
+        "guide/building-your-application/event-handling",
+        "guide/building-your-application/replying-and-reacting",
+        "guide/building-your-application/handling-media"
       ]
     },
     {
@@ -231,6 +228,15 @@
             "api-reference/type-aliases/WapiEventDataMap"
           ]
         }
+      ]
+    },
+    {
+      "group": "Addional Resources",
+      "pages": [
+        "guide/wapijs-sdk-scope",
+        "guide/references",
+        "guide/contributing",
+        "guide/contact"
       ]
     }
   ],
