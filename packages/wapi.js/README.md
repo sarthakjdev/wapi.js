@@ -13,15 +13,15 @@
 
 Visit the documentation of the SDK [here](https://javascript.wapikit.com)
 
-## 📌 Status
+## Status
 
 Beta Version - This SDK is not stable right now. It is currently in beta version. Report issues [here](https://github.com/sarthakjdev/wapi.js/issues).
 
-## 📖 About
+## About
 
 Wapi.js is a JavaScript module, written in TypeScript, designed to interact with the WhatsApp cloud API in a user-friendly manner.
 
-## ✨ Features
+## Features
 
 - Object-Oriented Architecture
 - Single Client Model
@@ -30,7 +30,7 @@ Wapi.js is a JavaScript module, written in TypeScript, designed to interact with
 - Upload Media to WhatsApp servers
 - Reply and React to incoming messages.
 
-## 💻 Installation
+## Installation
 
 Ensure you have the Node.js 18 LTS version to use this SDK.
 
@@ -42,7 +42,7 @@ pnpm install @wapijs/wapi.js
 
 > Note: This SDK is not affiliated with the official WhatsApp Cloud API or does not act as any official solution provided the the Meta Inclusive Private Limited, this is just a open source SDK built for developers to support them in building whatsapp cloud api based chat bots easily.
 
-## 🚀 Usage
+## Usage
 
 - Kickstart your first WhatsApp application with Wapi.js. Check the [User Manual](./USER_MANUAL.md).
 - You can check out the example WhatsApp bot here. [Example Chatbot](./packages/example-chat-bot/)
@@ -52,7 +52,7 @@ pnpm install @wapijs/wapi.js
 pnpm create-wapi-app
 ```
 
-## 🔗 References
+## References
 
 - **Message Structures**: Refer to the WhatsApp Docs [here](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages).
 
@@ -95,7 +95,7 @@ import { Client, TextMessage } from 'wapi.js'
 - [Interactive Address Message Support](https://developers.facebook.com/docs/whatsapp/cloud-api/messages/address-messages)
 - [Business Management API Support](https://developers.facebook.com/docs/whatsapp/business-management-api)
 
-## 🤝 Contribution Guidelines
+## Contribution Guidelines
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -105,11 +105,11 @@ import { Client, TextMessage } from 'wapi.js'
 
 For detailed guidelines, check [Contributing.md](./CONTRIBUTING.md).
 
-## 📜 License
+## License
 
 Distributed under the AGPL 3.0 License. View [LICENSE](./LICENSE).
 
-## 📞 Contact
+## Contact
 
 - [Sarthak Jain](https://sarthakjdev.com)
 - Email: sarthak@softlancer.co
