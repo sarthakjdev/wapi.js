@@ -17,7 +17,8 @@ import { HeaderTypeEnum } from "../interaction/schema";
  */
 export class ProductMessage
   extends InteractiveMessage
-  implements ProductMessageMessageInterface {
+  implements ProductMessageMessageInterface
+{
   data: {
     catalogId: string;
     productRetailerId: string;
@@ -55,7 +56,7 @@ export class ProductMessage
   /**
    * Adds a header to the message.
    */
-  addHeader() { }
+  addHeader() {}
 
   /**
    * Adds a footer to the message.
@@ -97,38 +98,38 @@ export class ProductMessage
         },
         ...(this.interactiveMessageData.header
           ? {
-            header: {
-              ...(this.interactiveMessageData.header.type ===
+              header: {
+                ...(this.interactiveMessageData.header.type ===
                 HeaderTypeEnum.Text
-                ? {
-                  type: HeaderTypeEnum.Text,
-                  text: this.interactiveMessageData.header.text,
-                }
-                : this.interactiveMessageData.header.type ===
-                  HeaderTypeEnum.Document
                   ? {
-                    type: HeaderTypeEnum.Document,
-                    document: this.interactiveMessageData.header.document,
-                  }
-                  : this.interactiveMessageData.header.type ===
-                    HeaderTypeEnum.Image
-                    ? {
-                      type: HeaderTypeEnum.Image,
-                      image: this.interactiveMessageData.header.image,
+                      type: HeaderTypeEnum.Text,
+                      text: this.interactiveMessageData.header.text,
                     }
-                    : {
-                      type: HeaderTypeEnum.Video,
-                      video: this.interactiveMessageData.header.video,
-                    }),
-            },
-          }
+                  : this.interactiveMessageData.header.type ===
+                      HeaderTypeEnum.Document
+                    ? {
+                        type: HeaderTypeEnum.Document,
+                        document: this.interactiveMessageData.header.document,
+                      }
+                    : this.interactiveMessageData.header.type ===
+                        HeaderTypeEnum.Image
+                      ? {
+                          type: HeaderTypeEnum.Image,
+                          image: this.interactiveMessageData.header.image,
+                        }
+                      : {
+                          type: HeaderTypeEnum.Video,
+                          video: this.interactiveMessageData.header.video,
+                        }),
+              },
+            }
           : {}),
         ...(this.interactiveMessageData.footerText
           ? {
-            footer: {
-              text: this.interactiveMessageData.footerText,
-            },
-          }
+              footer: {
+                text: this.interactiveMessageData.footerText,
+              },
+            }
           : {}),
       },
     };
