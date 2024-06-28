@@ -48,7 +48,7 @@ function init() {
 		'Help & Support': [
 			{
 				question: 'Is wapi.js free and open-source?',
-				answer: "Yes, it's completely free and open-source under the Apache 2.0 License."
+				answer: "Yes, it's completely free and open-source under the AGPL 3.0 License."
 			},
 			{
 				question: 'Where can I get help or support for wapi.js?',
