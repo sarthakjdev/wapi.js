@@ -37,7 +37,7 @@
     "chat-bot",
     "whatsapp-bot"
   ],
-  "homepage": "https://www.wapijs.co",
+  "homepage": "https://javascript.wapikit.com",
   "license": "Apache-2.0",
   "dependencies": {
     "chalk": "^5.3.0",

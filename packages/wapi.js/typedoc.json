@@ -11,7 +11,7 @@
   "out": "../../apps/js.wapikit.com/api-reference",
   "sourceLinkTemplate": "https://github.com/sarthakjdev/wapi.js/blob/{gitRevision}/{path}#L{line}",
   "sourceLinkExternal": true,
-  "cname": "js.wapijs.com",
+  "cname": "javascript.wapikit.com",
   "hideGenerator": true,
   "searchInComments": true,
   "hidePageHeader": true,

@@ -43,7 +43,7 @@
   "bugs": {
     "url": "https://www.github.com/sarthakjdev/wapi.js/issues"
   },
-  "homepage": "https://www.wapijs.co",
+  "homepage": "https://javascript.wapikit.com",
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/express": "^4.17.18",
