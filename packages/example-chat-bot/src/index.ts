@@ -24,7 +24,7 @@ function init() {
 		'Getting Started': [
 			{
 				question: 'How do I get started with wapi.js?',
-				answer: 'Check out the docs at https://wapijs.co/docs and use the "create-wapi-app" template.'
+				answer: 'Check out the docs at https://javascript.wapikit.com/ and use the "create-wapi-app" template.'
 			},
 			{
 				question: 'Is wapi.js easy to learn?',
@@ -48,7 +48,7 @@ function init() {
 		'Help & Support': [
 			{
 				question: 'Is wapi.js free and open-source?',
-				answer: "Yes, it's completely free and open-source under the Apache 2.0 License."
+				answer: "Yes, it's completely free and open-source under the AGPL 3.0 License."
 			},
 			{
 				question: 'Where can I get help or support for wapi.js?',

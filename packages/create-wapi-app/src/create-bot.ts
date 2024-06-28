@@ -74,8 +74,7 @@ export async function createWhatsappBot(options: {
   if (bun) {
     await cp(
       new URL(
-        `../template/Bun/${
-          isTypescriptEnabled ? "typescript" : "javascript"
+        `../template/Bun/${isTypescriptEnabled ? "typescript" : "javascript"
         }/package.json`,
         import.meta.url,
       ),
@@ -139,7 +138,7 @@ export async function createWhatsappBot(options: {
   console.log();
   console.log(
     chalk.green(
-      `Setup done!! You can visit the documentation here https://wapijs.co, to smoothly build your bot.`,
+      `Setup done!! You can visit the documentation here https://javascript.wapikit.com, to smoothly build your bot.`,
     ),
   );
 }

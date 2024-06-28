@@ -1,15 +1,17 @@
 <div align="center">
 <br />
 <p align="center">
-<a href="https://wapijs.co"><img src="https://media.discordapp.net/attachments/1046394448088674371/1247281980111061054/wapijs_banner.png?ex=6662c11d&is=66616f9d&hm=d930fdb0c01a9651a9197c9226209ac1ab2dfdf099b4faf198613b13aaf88721&=&format=webp&quality=lossless&width=2261&height=1034" alt="@wapijs/wapi.js" /></a>
+<a href="https://javascript.wapikit.com"><img src="https://mintlify.s3-us-west-1.amazonaws.com/na-730c8179/assets/banner.svg" alt="@wapijs/wapi.js" /></a>
 </p>
 <br />
 <p>
   <a href="/"><img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" /></a>
-  <a href="https://www.npmjs.com/package/@whatsappjs/Wapi.js"><img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white" /></a>
+  <a href="https://www.npmjs.com/package/@wapijs/wapi.js"><img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white" /></a>
   <a href=""><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" /></a>
 </p>
 </div>
+
+Visit the documentation of the SDK [here](https://javascript.wapikit.com)
 
 ## 📌 Status
 
@@ -61,11 +63,6 @@ pnpm create-wapi-app
 
 - **Notification Payloads**: Details can be found [here](https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components).
 
-## 🔗 Other Links
-
-- [Website](https://wapijs.co)
-- [Documentation](https://wapijs.co/docs)
-
 ## Example Usage
 
 ```typescript
@@ -116,7 +113,7 @@ For detailed guidelines, check [Contributing.md](./CONTRIBUTING.md).
 
 ## 📜 License
 
-Distributed under the Apache 2.0 License. View [LICENSE](./LICENSE).
+Distributed under the AGPL 3.0 License. View [LICENSE](./LICENSE).
 
 ## 📞 Contact
 

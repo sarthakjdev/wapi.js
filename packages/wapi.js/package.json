@@ -43,8 +43,8 @@
   "bugs": {
     "url": "https://www.github.com/sarthakjdev/wapi.js/issues"
   },
-  "homepage": "https://www.wapijs.co",
-  "license": "Apache-2.0",
+  "homepage": "https://javascript.wapikit.com",
+  "license": "AGPL-3.0",
   "devDependencies": {
     "@types/express": "^4.17.18",
     "@wapijs/eslint-config": "workspace:*",
